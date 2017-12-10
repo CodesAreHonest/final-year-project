@@ -58,7 +58,7 @@ The purpose of files contain in repository are explained in table below:
 
 | File Name        | Description | 
 | ------------- |:-------------:|
-| import-csv-psql.go        | This program import 300 rows of data from different datasets into PostgreSQL database | 
+| import-csv-psql.go        | This program import 300 rows of data from different raw CSV datasets into PostgreSQL database | 
 | sequential-psql.go        | This program read 300 rows of data **sequentially** from different tables contain in PostgreSQL database      | 
 | concurrent-psql.go        | This program read 300 rows of data **concurrently** from different tables contain in PostgreSQL database      | 
 | sequential-read-csv.go    | This program read 300 rows of data **sequentially** from different raw CSV datasets contain in same node      | 
@@ -75,7 +75,7 @@ $ git clone https://github.com/CodesAreHonest/fyp1-sequential-vs-concurrent.git
 
 3. Change directory into the cloned src file and verified the contains file: 
 ```
-$ cd ~/fyp1-sequential-vs-concurrent/src/FUP1/
+$ cd ~/fyp1-sequential-vs-concurrent/src/FYP1/
 $ ls -l 
 -rw-rw-r-- 1 yinghua yinghua 5487 Sep 17 23:25 concurrent-psql.go
 -rw-rw-r-- 1 yinghua yinghua 3585 Dec  8 13:50 concurrent-read-csv.go
