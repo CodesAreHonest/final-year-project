@@ -1,5 +1,5 @@
-Final Year Project 
-===================
+Final Year Project Phase 1 
+==========================
 
 > The project focus on utilize **concurrent programming concepts** of **Go programming language** to process big data from raw **Comma Separate Value (CSV) file** and **PostgreSQL database**. A **performance comparison** is conducted between sequential programming and concurrent programming with Go programming language in data parsing and processing. 
 
@@ -8,7 +8,7 @@ Final Year Project
 Table Of Contents 
 =================
 
-  * [Final Year Project](#final-year-project)
+  * [Final Year Project Phase 1](#final-year-project-phase-1)
   * [Table Of Contents](#table-of-contents)
   * [Introduction](#introduction)
   * [Getting Started](#getting-started) 
@@ -50,6 +50,8 @@ The documentation contains:-
 6. Results and Findings 
 7. Comparison Discussion and Recommendations  
 
+Download the document **[HERE](https://github.com/CodesAreHonest/fyp1-sequential-vs-concurrent/blob/master/doc/FYP1.pdf)**
+
 File Description
 -----------------  
 The purpose of files contain in repository are explained in table below: 
@@ -64,7 +66,7 @@ The purpose of files contain in repository are explained in table below:
 
 Infrastructure Setup and Installation 
 -------------------------------------
-1. Install Go Programming Language into computer according to the [Golang Official Documentation](https://golang.org/doc/install)  
+1. Install Go Programming Language according to the [Golang Official Documentation](https://golang.org/doc/install).  
 
 2. Clone the sourcecode with Git: 
 ```sh 
