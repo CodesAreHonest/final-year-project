@@ -10,7 +10,7 @@ import (
 	// We don't really need gorm, but it's a fast coding shorthand to throw random structs to a DB
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
+//	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	_ "github.com/lib/pq"
 )
 
