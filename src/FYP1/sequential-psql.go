@@ -46,8 +46,6 @@ func retrieveCompanyData() {
 	fmt.Println("Start retrieve company data from database ... ")
 	start := time.Now()
 
-	time.Sleep(time.Second * 2)
-
 	rows, err := db.Query("SELECT c.companyname, c.companynumber, c.companycategory, c.companystatus, c.countryoforigin FROM companydata AS c ORDER BY c.companynumber limit 100;")
 	checkErr(err, "Query Company DB rows")
 
@@ -78,8 +76,6 @@ func retrievePostcodeData() {
 	fmt.Println("Start retrieve postcode data from database ... ")
 	start := time.Now()
 
-	time.Sleep(time.Second * 2)
-
 	rows, err := db.Query("SELECT postcode1, postcode2, date_introduce, usertype, position_quality FROM go_nspl LIMIT 50")
 	checkErr(err, "Query Postcode DB rows")
 
@@ -109,8 +105,6 @@ func retrieveSubjectData() {
 
 	fmt.Println("Start retrieve LEO data from database ... ")
 	start := time.Now()
-
-	time.Sleep(time.Second * 2)
 
 	rows, err := db.Query("SELECT ukprn, providername, region, subject, sex FROM go_subject LIMIT 50")
 	checkErr(err, "Query subject DB rows")
