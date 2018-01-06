@@ -1,4 +1,4 @@
--- File: 01_yinghua_create_leo_table.sql
+-- File: 01_yinghua_create_raw_leo_table.sql
 -- Date: Tue Aug 29 01:08:44 MYT 2017
 -- Author: Chai Ying Hua 
 -- Version: 1.1 
