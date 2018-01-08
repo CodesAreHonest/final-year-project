@@ -95,14 +95,14 @@ create table leo (
 	leo_polar_id			int NULL,
 	leo_pr_att_id			int NULL,
 
-	FOREIGN KEY (leo_detail_id) REFERENCES leo_detail (leo_detail_id) ON DELETE RESTRICT,
-	FOREIGN KEY (leo_grads_id) REFERENCES leo_graduation (leo_grads_id) ON DELETE RESTRICT,
-	FOREIGN KEY (leo_match_id) REFERENCES leo_match (leo_match_id) ON DELETE RESTRICT,
-	FOREIGN KEY (leo_uncaptured_id) REFERENCES leo_uncaptured (leo_uncaptured_id) ON DELETE RESTRICT, 
-	FOREIGN KEY (leo_sust_emp_id) REFERENCES leo_sustain_employment (leo_sust_emp_id) ON DELETE RESTRICT,
-	FOREIGN KEY (leo_earning_id) REFERENCES leo_earning (leo_earning_id) ON DELETE RESTRICT,
-	FOREIGN KEY (leo_polar_id) REFERENCES leo_polar (leo_polar_id) ON DELETE RESTRICT,
-	FOREIGN KEY (leo_pr_att_id) REFERENCES leo_prior_attainment (leo_pr_att_id) ON DELETE RESTRICT 
+	FOREIGN KEY (leo_detail_id) REFERENCES leo_detail (leo_detail_id) ON DELETE CASCADE,
+	FOREIGN KEY (leo_grads_id) REFERENCES leo_graduation (leo_grads_id) ON DELETE CASCADE,
+	FOREIGN KEY (leo_match_id) REFERENCES leo_match (leo_match_id) ON DELETE CASCADE,
+	FOREIGN KEY (leo_uncaptured_id) REFERENCES leo_uncaptured (leo_uncaptured_id) ON DELETE CASCADE, 
+	FOREIGN KEY (leo_sust_emp_id) REFERENCES leo_sustain_employment (leo_sust_emp_id) ON DELETE CASCADE,
+	FOREIGN KEY (leo_earning_id) REFERENCES leo_earning (leo_earning_id) ON DELETE CASCADE,
+	FOREIGN KEY (leo_polar_id) REFERENCES leo_polar (leo_polar_id) ON DELETE CASCADE,
+	FOREIGN KEY (leo_pr_att_id) REFERENCES leo_prior_attainment (leo_pr_att_id) ON DELETE CASCADE 
 
 );
 
