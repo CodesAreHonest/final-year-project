@@ -146,8 +146,8 @@ create table postcode_county (
 
 create table postcode_cartesian_coordinate (
 	pos_cart_coordinate_id	 	INT DEFAULT NEXTVAL ('seq_cart_coordinate_id'), 
-	pos_easting			INT NULL DEFAULT '0',
-	pos_northing			INT NULL DEFAULT '0',
+	pos_easting			INT NULL DEFAULT 0,
+	pos_northing			INT NULL DEFAULT 0,
 	PRIMARY KEY (pos_cart_coordinate_id) 
 ); 
 

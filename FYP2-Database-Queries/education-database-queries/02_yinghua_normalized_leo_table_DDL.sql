@@ -6,8 +6,10 @@
 -- ======================================
 -- 
 --  	1. Drop previous created table in proper order. 
---	2. Create table in reverse order for main table to reference foreign key. 
---	3. Check all the tables. 
+--	2. Create sequence in proper order. 
+--	3. Drop sequence in reverse order. 
+-- 	4. Create table in reverse order for main table to reference foreign key
+--	5. Check all the tables. 
 -- ======================================
 
 -- DROP TABLE IN PROPER ORDER 
@@ -131,5 +133,4 @@ create table leo (
 
 -- CHECK ALL THE TABLES 
 \dt
-
 
