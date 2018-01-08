@@ -6,9 +6,11 @@
 -- DESCRIPTION:
 -- =======================================================
 --
---    1. Drop all normalized company table in reverse order. 
---    2. Create all normalized table in proper order. 
---    3. Check whether all tables are created. 
+--  	1. Drop previous created table in proper order. 
+--	2. Create sequence in proper order. 
+--	3. Drop sequence in reverse order. 
+-- 	4. Create table in reverse order for main table to reference foreign key
+--	5. Check all the tables. 
 -- ========================================================
 
 -- DROP TABLE IN REVERSE ORDER 
@@ -29,26 +31,58 @@ DROP TABLE company_detail		CASCADE;
 DROP TABLE company			CASCADE;
 
 
+-- DROP SEQUENCE IN PROPER ORDER 
+DROP SEQUENCE seq_company_id;
+DROP SEQUENCE seq_detail_id;
+DROP SEQUENCE seq_category_id;
+DROP SEQUENCE seq_status_id;
+DROP SEQUENCE seq_address_id;
+DROP SEQUENCE seq_conf_stmt_id;
+DROP SEQUENCE seq_pn_id;
+DROP SEQUENCE seq_acc_id;
+DROP SEQUENCE seq_acc_category_id;
+DROP SEQUENCE seq_return_id;
+DROP SEQUENCE seq_mort_id;
+DROP SEQUENCE seq_sic_id;
+DROP SEQUENCE seq_partnership_id;
+DROP SEQUENCE seq_uri_id;
+
+-- DROP SEQUENCE IN PROPER ORDER 
+CREATE SEQUENCE seq_uri_id 		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_partnership_id	MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_sic_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_mort_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_return_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_acc_category_id	MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_acc_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_pn_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_conf_stmt_id	MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_address_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_status_id	 	MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_category_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_detail_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_company_id		MINVALUE 1 INCREMENT 1; 
+
 -- CREATE TABLE IN PROPER ORDER 
 CREATE TABLE company_uri (
-	com_uri_id 			SERIAL PRIMARY KEY,
+	com_uri_id 			INT DEFAULT NEXTVAL ('seq_uri_id') PRIMARY KEY,
 	com_uri 			VARCHAR(47) NOT NULL
 ); 
 
 CREATE TABLE company_partnership (
-	com_partnership_id 		SERIAL PRIMARY KEY, 
+	com_partnership_id 		INT DEFAULT NEXTVAL ('seq_partnership_id') PRIMARY KEY, 
 	com_num_genpartners 		INT NOT NULL,
 	com_num_limpartners		INT NOT NULL
 ); 
 
 CREATE TABLE company_siccodes ( 
-	com_sic_id 			SERIAL PRIMARY KEY, 
+	com_sic_id 			INT DEFAULT NEXTVAL ('seq_sic_id') PRIMARY KEY, 
 	com_timeth_change		INT NULL DEFAULT 0,
 	com_siccode 			VARCHAR(170) NOT NULL
 );
 
 CREATE TABLE company_mortgages ( 
-	com_mort_id 			SERIAL PRIMARY KEY, 
+	com_mort_id 			INT DEFAULT NEXTVAL ('seq_mort_id') PRIMARY KEY, 
 	com_num_mortchanges		INT NOT NULL,
 	com_num_mortoutstanding		INT NOT NULL,
 	com_num_mortpartsatisfied	INT NOT NULL,
@@ -56,18 +90,18 @@ CREATE TABLE company_mortgages (
 );
 
 CREATE TABLE company_returns ( 
-	com_return_id 			SERIAL PRIMARY KEY, 
+	com_return_id 			INT DEFAULT NEXTVAL ('seq_return_id') PRIMARY KEY, 
 	com_return_nextduedate		DATE NULL DEFAULT NULL,
 	com_num_mortoutstanding		DATE NULL DEFAULT NULL 
 );
 
 CREATE TABLE company_account_category (
-	com_acc_category_id 		SERIAL PRIMARY KEY, 
+	com_acc_category_id 		INT DEFAULT NEXTVAL ('seq_acc_category_id') PRIMARY KEY, 
 	com_acc_category 		VARCHAR(100) NULL DEFAULT 'No Category'
 );
 
 CREATE TABLE company_account ( 
-	com_acc_id 			SERIAL PRIMARY KEY, 
+	com_acc_id 			INT DEFAULT NEXTVAL ('seq_acc_id') PRIMARY KEY, 
 	com_acc_refday			INT NULL DEFAULT 0,
 	com_acc_refmonth		INT NULL DEFAULT 0,
 	com_acc_nextduedate 		DATE NULL DEFAULT NULL, 
@@ -76,20 +110,20 @@ CREATE TABLE company_account (
 ); 
 
 CREATE TABLE company_previousname (
-	com_pn_id 			SERIAL PRIMARY KEY, 
+	com_pn_id 			INT DEFAULT NEXTVAL ('seq_pn_id') PRIMARY KEY, 
 	com_timeth_change		INT NOT NULL DEFAULT 0,
 	com_pn_name 			VARCHAR(160) NOT NULL DEFAULT 'No previous name',
 	com_date_change			DATE NULL
 ); 
 
 CREATE TABLE company_conf_stmt (
-	com_conf_stmt_id	 	SERIAL PRIMARY KEY, 
+	com_conf_stmt_id	 	INT DEFAULT NEXTVAL ('seq_conf_stmt_id') PRIMARY KEY, 
 	com_conf_stmt_id_nextduedate	DATE NULL DEFAULT NULL,
 	com_conf_stmt_id_lastmadeupdate DATE NULL DEFAULT NULL
 );
 
 CREATE TABLE company_address (
-	com_address_id			SERIAL       PRIMARY KEY, 
+	com_address_id			INT DEFAULT NEXTVAL ('seq_address_id') PRIMARY KEY, 
 	com_careof			VARCHAR(100) NULL DEFAULT 'Unregistered',
 	com_pobox 			VARCHAR(10)  NULL DEFAULT 'Unregistered', 
 	com_addressline1		VARCHAR(300) NULL DEFAULT 'No address line 1', 
@@ -101,22 +135,22 @@ CREATE TABLE company_address (
 );
 
 CREATE TABLE company_countryoforigin ( 
-	com_countryoforigin_id 		SERIAL      PRIMARY KEY, 
+	com_countryoforigin_id 		INT DEFAULT NEXTVAL ('seq_countryoforigin_id')  PRIMARY KEY, 
 	com_countryoforigin 		VARCHAR(50) NOT NULL DEFAULT 'Undefined'
 ); 
 
 CREATE TABLE company_status ( 
-	com_status_id	 		SERIAL      PRIMARY KEY, 
+	com_status_id	 		INT DEFAULT NEXTVAL ('seq_status_id') PRIMARY KEY, 
 	com_status 			VARCHAR(70) NOT NULL DEFAULT 'Undefined'
 );
 
 CREATE TABLE company_category ( 
-	com_category_id		 	SERIAL       PRIMARY KEY, 
+	com_category_id		 	INT DEFAULT NEXTVAL ('seq_category_id') PRIMARY KEY, 
 	com_category 			VARCHAR(100) NOT NULL DEFAULT 'Undefined'
 ); 
 
 CREATE TABLE company_detail ( 
-	com_detail_id	 		SERIAL       PRIMARY KEY,
+	com_detail_id	 		INT DEFAULT NEXTVAL ('seq_detail_id') PRIMARY KEY,
 	com_name			VARCHAR(160) NULL DEFAULT 'No company name', 
 	com_number 			INT	     NOT NULL, 
 	com_address_id			INT	     REFERENCES company_address (com_address_id), 
@@ -126,6 +160,7 @@ CREATE TABLE company_detail (
 );
 
 CREATE TABLE company ( 
+	company_id			INT DEFAULT NEXTVAL ('seq_company_id') PRIMARY KEY,
 	com_detail_id  			INT REFERENCES company_detail (com_detail_id), 
 	com_dissolutiondate     	DATE NOT NULL, 
 	com_incorporationdate		DATE NOT NULL, 
@@ -136,9 +171,7 @@ CREATE TABLE company (
 	com_partnership_id		INT REFERENCES company_partnership (com_partnership_id),
 	com_uri_id			INT REFERENCES company_uri (com_uri_id),
 	com_pn_id			INT REFERENCES company_previousname (com_pn_id),
-	com_conf_stmt_id		INT REFERENCES company_conf_stmt (com_conf_stmt_id),
-
-	PRIMARY KEY (com_detail_id) 
+	com_conf_stmt_id		INT REFERENCES company_conf_stmt (com_conf_stmt_id)
 );
 
 
