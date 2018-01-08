@@ -20,24 +20,47 @@ drop table leo_uncaptured CASCADE;
 drop table leo_match CASCADE;
 drop table leo_graduation CASCADE;
 drop table leo_detail CASCADE;
+drop table leo CASCADE;
+
+-- DROP SEQUENCE IN PROPER ORDER 
+DROP SEQUENCE seq_leo_id;
+DROP SEQUENCE seq_leo_detail_id;
+DROP SEQUENCE seq_grads_id;
+DROP SEQUENCE seq_match_id;
+DROP SEQUENCE seq_uncaptured_id;
+DROP SEQUENCE seq_sust_emp_id;
+DROP SEQUENCE seq_earning_id;
+DROP SEQUENCE seq_polar_id;
+DROP SEQUENCE seq_pr_att_id;
+
+-- CREATE SEQUENCE IN REVERSE ORDER 
+CREATE SEQUENCE seq_pr_att_id 		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_polar_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_earning_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_sust_emp_id 	MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_uncaptured_id 	MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_match_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_grads_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_leo_detail_id	MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_leo_id		MINVALUE 1 INCREMENT 1;
 
 -- CREATE TABLE IN REVERSE ORDER 
 create table leo_prior_attainment (
-	leo_pr_att_id 		SERIAL,
+	leo_pr_att_id 		INT DEFAULT NEXTVAL ('seq_pr_att_id'),
 	leo_pr_att_band 	varchar(20) NOT NULL, 
 	leo_pr_att_included 	varchar(20) NOT NULL, 
 	PRIMARY KEY (leo_pr_att_id)
 );
 
 create table leo_polar (
-	leo_polar_id 		SERIAL,
+	leo_polar_id 		INT DEFAULT NEXTVAL ('seq_polar_id'),
 	leo_polar_grp_one 	varchar(20) NOT NULL, 
 	leo_polar_grp_included 	varchar(20) NOT NULL, 
 	PRIMARY KEY (leo_polar_id)
 );
 
 create table leo_earning (
-	leo_earning_id 		SERIAL, 
+	leo_earning_id 		INT DEFAULT NEXTVAL ('seq_earning_id'), 
 	leo_earning_include 	varchar(20) NOT NULL, 
 	leo_lower_ann_earn 	varchar(20) NOT NULL, 
 	leo_median_ann_earn 	varchar(20) NOT NULL, 
@@ -46,7 +69,7 @@ create table leo_earning (
 );
 
 create table leo_sustain_employment (
-	leo_sust_emp_id 		SERIAL, 
+	leo_sust_emp_id 		INT DEFAULT NEXTVAL ('seq_sust_emp_id'), 
 	leo_sust_emp_only 		varchar(20) NOT NULL, 
 	leo_sust_emp	 		varchar(20) NOT NULL, 
 	leo_sust_emp_fs_or_both 	varchar(20) NOT NULL, 
@@ -54,27 +77,27 @@ create table leo_sustain_employment (
 );
 
 create table leo_uncaptured (
-	leo_uncaptured_id 		SERIAL, 
+	leo_uncaptured_id 		INT DEFAULT NEXTVAL ('seq_uncaptured_id'), 
 	leo_activitynotcaptured 	varchar(20) NOT NULL, 
 	leo_no_sust_dest	 	varchar(20) NOT NULL,  
 	PRIMARY KEY (leo_uncaptured_id) 
 );
 
 create table leo_match (
-	leo_match_id	 		SERIAL, 
+	leo_match_id	 		INT DEFAULT NEXTVAL ('seq_match_id'), 
 	leo_unmatched 			varchar(20) NOT NULL, 
 	leo_matched	 		varchar(20) NOT NULL,
 	PRIMARY KEY (leo_match_id)
 );
 
 create table leo_graduation (
-	leo_grads_id	 		SERIAL, 
+	leo_grads_id	 		INT DEFAULT NEXTVAL ('seq_grads_id'), 
 	leo_grad 			varchar(10) NOT NULL, 
 	PRIMARY KEY (leo_grads_id) 
 );
 
 create table leo_detail (
-	leo_detail_id		 	SERIAL, 
+	leo_detail_id		 	INT DEFAULT NEXTVAL ('seq_leo_detail_id'), 
 	leo_ukprn 			int 		NOT NULL, 
 	leo_providername 		varchar(100) 	NOT NULL, 
 	leo_region 			varchar(50) 	NOT NULL, 
@@ -85,7 +108,7 @@ create table leo_detail (
 );
 
 create table leo (
-	leo_id				SERIAL PRIMARY KEY,
+	leo_id				INT DEFAULT NEXTVAL ('seq_leo_id'),
 	leo_detail_id 			int NULL,
 	leo_grads_id 			int NULL,
 	leo_match_id 			int NULL,
