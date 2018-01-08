@@ -63,7 +63,7 @@ create table leo_uncaptured (
 create table leo_match (
 	leo_match_id	 		SERIAL, 
 	leo_unmatched 			varchar(20) NOT NULL, 
-	leo_match	 		varchar(20) NOT NULL,
+	leo_matched	 		varchar(20) NOT NULL,
 	PRIMARY KEY (leo_match_id)
 );
 
@@ -74,35 +74,35 @@ create table leo_graduation (
 );
 
 create table leo_detail (
-	leo_id		 		SERIAL, 
+	leo_detail_id		 	SERIAL, 
 	leo_ukprn 			int 		NOT NULL, 
 	leo_providername 		varchar(100) 	NOT NULL, 
 	leo_region 			varchar(50) 	NOT NULL, 
 	leo_subject 			varchar(50) 	NOT NULL, 
 	leo_sex 			varchar(30) 	NOT NULL, 
 	leo_yearaftergraduation		int 		NOT NULL, 
-	PRIMARY KEY (leo_id)
+	PRIMARY KEY (leo_detail_id)
 );
 
 create table leo (
-	leo_id 				int NOT NULL,
-	leo_grads_id 			int NOT NULL,
-	leo_match_id 			int NOT NULL,
-	leo_uncaptured_id		int NOT NULL, 
-	leo_sust_emp_id 		int NOT NULL,
-	leo_earning_id			int NOT NULL,
-	leo_polar_id			int NOT NULL,
-	leo_pr_att_id			int NOT NULL,
-	PRIMARY KEY (leo_id),
+	leo_id				SERIAL PRIMARY KEY,
+	leo_detail_id 			int NULL,
+	leo_grads_id 			int NULL,
+	leo_match_id 			int NULL,
+	leo_uncaptured_id		int NULL, 
+	leo_sust_emp_id 		int NULL,
+	leo_earning_id			int NULL,
+	leo_polar_id			int NULL,
+	leo_pr_att_id			int NULL,
 
-	FOREIGN KEY (leo_id) REFERENCES leo_detail (leo_id) ON DELETE RESTRICT,
+	FOREIGN KEY (leo_detail_id) REFERENCES leo_detail (leo_detail_id) ON DELETE RESTRICT,
 	FOREIGN KEY (leo_grads_id) REFERENCES leo_graduation (leo_grads_id) ON DELETE RESTRICT,
 	FOREIGN KEY (leo_match_id) REFERENCES leo_match (leo_match_id) ON DELETE RESTRICT,
 	FOREIGN KEY (leo_uncaptured_id) REFERENCES leo_uncaptured (leo_uncaptured_id) ON DELETE RESTRICT, 
 	FOREIGN KEY (leo_sust_emp_id) REFERENCES leo_sustain_employment (leo_sust_emp_id) ON DELETE RESTRICT,
 	FOREIGN KEY (leo_earning_id) REFERENCES leo_earning (leo_earning_id) ON DELETE RESTRICT,
 	FOREIGN KEY (leo_polar_id) REFERENCES leo_polar (leo_polar_id) ON DELETE RESTRICT,
-	FOREIGN KEY (leo_pr_att_id) REFERENCES leo_prior_attainment (leo_pr_att_id)
+	FOREIGN KEY (leo_pr_att_id) REFERENCES leo_prior_attainment (leo_pr_att_id) ON DELETE RESTRICT 
 
 );
 
