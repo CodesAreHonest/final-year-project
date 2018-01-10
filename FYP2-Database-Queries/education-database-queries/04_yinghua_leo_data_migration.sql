@@ -1,10 +1,21 @@
+-- File: 04_yinghua_leo_data_migration.sql
+-- Date: Mon Dec 10 1:55 MYT 2017
+-- Author: Chai Ying Hua 
+-- Version: 1.0 
+-- Database: psql (PostgreSQL) 9.5.10
+-- ======================================
+-- (Version 1.0 Change: 10 Dec 2017) 
+--  	1. Delete all LEO table data. 
+--	2. Migrate all data from raw table into normalized table. 
+-- ======================================
+
+-- DELETE ALL LEO DATA 
 DELETE FROM leo WHERE TRUE;
 
 ----------------------------------------
 -- LEO TABLE INSERTION 
 -- ROW COUNTS: 32706		<- SAME COUNT WITH RAWDATA
 ----------------------------------------
-
 INSERT INTO leo (leo_detail_id, leo_grads_id, leo_match_id, leo_uncaptured_id, leo_sust_emp_id, leo_earning_id, leo_polar_id, leo_pr_att_id)
 	SELECT leo_detail_id, leo_grads_id, leo_match_id, leo_uncaptured_id, leo_sust_emp_id, leo_earning_id, leo_polar_id, leo_pr_att_id
 	FROM leo_rawdata AS rawdata
@@ -39,6 +50,9 @@ INSERT INTO leo (leo_detail_id, leo_grads_id, leo_match_id, leo_uncaptured_id, l
 		ON      pa.leo_pr_att_band 		= rawdata.prattband
 		AND     pa.leo_pr_att_included          = rawdata.prattincluded;
 
+leo_detail 10007825 | Guildhall School of Music and Drama | London     
+leo_gradudation 115 
+leo_sust_emp_id  63.7              | 85.8         | 95.6
 
 
 

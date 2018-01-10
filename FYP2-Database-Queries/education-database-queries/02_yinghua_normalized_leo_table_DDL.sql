@@ -13,9 +13,10 @@
 -- ======================================
 
 -- DROP TABLE IN PROPER ORDER 
-drop table leo CASCADE; 
-drop table leo_polar CASCADE;
+
+
 drop table leo_prior_attainment CASCADE; 
+drop table leo_polar CASCADE;
 drop table leo_earning CASCADE;
 drop table leo_sustain_employment CASCADE;
 drop table leo_uncaptured CASCADE; 
