@@ -23,23 +23,26 @@ DROP TABLE postcode_ward CASCADE;
 DROP TABLE postcode_local_authority_county CASCADE;
 DROP TABLE postcode_county CASCADE;
 DROP TABLE postcode_cartesian_coordinate CASCADE;
+DROP TABLE postcode_format CASCADE;
 DROP TABLE postcode_detail CASCADE;
+DROP TABLE postcode	 CASCADE;
 
 -- DROP SEQUENCE IN PROPER ORDER 
-DROP SEQUENCE seq_pos_id;
-DROP SEQUENCE seq_cart_coordinate_id;
-DROP SEQUENCE seq_county_id;
-DROP SEQUENCE seq_lac_id;
-DROP SEQUENCE seq_ward_id;
-DROP SEQUENCE seq_country_id;
-DROP SEQUENCE seq_region_id;
-DROP SEQUENCE seq_par_cons_id;
-DROP SEQUENCE seq_eer_id;
-DROP SEQUENCE seq_pct_id;
-DROP SEQUENCE seq_lsoa_id;
-DROP SEQUENCE seq_msoa_id;
-DROP SEQUENCE seq_oac_id;
-DROP SEQUENCE seq_greek_coordinate_id;
+DROP SEQUENCE seq_pos_detail_id CASCADE;
+DROP SEQUENCE seq_pos_form_id CASCADE;
+DROP SEQUENCE seq_cart_coordinate_id CASCADE;
+DROP SEQUENCE seq_county_id CASCADE;
+DROP SEQUENCE seq_lac_id CASCADE;
+DROP SEQUENCE seq_ward_id CASCADE;
+DROP SEQUENCE seq_country_id CASCADE;
+DROP SEQUENCE seq_region_id CASCADE;
+DROP SEQUENCE seq_par_cons_id CASCADE;
+DROP SEQUENCE seq_eer_id CASCADE;
+DROP SEQUENCE seq_pct_id CASCADE;
+DROP SEQUENCE seq_lsoa_id CASCADE;
+DROP SEQUENCE seq_msoa_id CASCADE;
+DROP SEQUENCE seq_oac_id CASCADE;
+DROP SEQUENCE seq_greek_coordinate_id CASCADE;
 
 -- CREATE SEQUENCE IN REVERSE ORDER 
 CREATE SEQUENCE seq_greek_coordinate_id MINVALUE 1 INCREMENT 1; 
@@ -55,12 +58,13 @@ CREATE SEQUENCE seq_ward_id		MINVALUE 1 INCREMENT 1;
 CREATE SEQUENCE seq_lac_id		MINVALUE 1 INCREMENT 1;
 CREATE SEQUENCE seq_county_id		MINVALUE 1 INCREMENT 1;
 CREATE SEQUENCE seq_cart_coordinate_id	MINVALUE 1 INCREMENT 1;
-CREATE SEQUENCE seq_pos_id		MINVALUE 1 INCREMENT 1;
+CREATE SEQUENCE seq_pos_form_id		MINVALUE 1 INCREMENT 1;
+CREATE SEQUENCE seq_pos_detail_id	MINVALUE 1 INCREMENT 1;
 
 -- CREATE TABLE IN PROPER ORDER 
 create table postcode_greek_coordinate (
 	pos_greek_coordinate_id 	INT DEFAULT NEXTVAL ('seq_greek_coordinate_id'),
-	pos_longitude 			VARCHAR(5) NOT NULL,
+	pos_longitude 			VARCHAR(50) NOT NULL,
 	pos_latitude 			VARCHAR(50) NOT NULL,
 	PRIMARY KEY (pos_greek_coordinate_id)
 );
@@ -151,12 +155,16 @@ create table postcode_cartesian_coordinate (
 	PRIMARY KEY (pos_cart_coordinate_id) 
 ); 
 
---
+create table postcode_format ( 
+	pos_form_id 			INT DEFAULT NEXTVAL ('seq_pos_form_id'),
+	pos_form_name			VARCHAR(15) NOT NULL, 
+	pos_id 				INT NOT NULL UNIQUE,
+	PRIMARY KEY(pos_form_id, pos_id)
+);
+
 create table postcode_detail ( 
-	pos_id			 	INT DEFAULT NEXTVAL ('seq_pos_id'), 
-	pos1				VARCHAR(15) NOT NULL,
-	pos2				VARCHAR(15) NOT NULL,
-	pos3				VARCHAR(15) NOT NULL,
+	pos_detail_id			INT DEFAULT NEXTVAL ('seq_pos_detail_id'), 
+	pos_id 				INT REFERENCES postcode_format (pos_id),
 	pos_date_introduce		VARCHAR(10) NOT NULL,
 	pos_usertype			INT  	    NOT NULL,
 	pos_cart_coordinate_id		INT 	    NULL,

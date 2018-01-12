@@ -112,14 +112,14 @@ create table leo_detail (
 
 create table leo (
 	leo_id				INT DEFAULT NEXTVAL ('seq_leo_id'),
-	leo_detail_id 			int NULL,
-	leo_grads_id 			int NULL,
-	leo_match_id 			int NULL,
-	leo_uncaptured_id		int NULL, 
-	leo_sust_emp_id 		int NULL,
-	leo_earning_id			int NULL,
-	leo_polar_id			int NULL,
-	leo_pr_att_id			int NULL,
+	leo_detail_id 			int NOT NULL,
+	leo_grads_id 			int NOT NULL,
+	leo_match_id 			int NOT NULL,
+	leo_uncaptured_id		int NOT NULL, 
+	leo_sust_emp_id 		int NOT NULL,
+	leo_earning_id			int NOT NULL,
+	leo_polar_id			int NOT NULL,
+	leo_pr_att_id			int NOT NULL,
 
 	FOREIGN KEY (leo_detail_id) REFERENCES leo_detail (leo_detail_id) ON DELETE CASCADE,
 	FOREIGN KEY (leo_grads_id) REFERENCES leo_graduation (leo_grads_id) ON DELETE CASCADE,

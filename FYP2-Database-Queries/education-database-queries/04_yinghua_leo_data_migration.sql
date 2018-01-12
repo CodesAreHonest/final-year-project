@@ -50,9 +50,6 @@ INSERT INTO leo (leo_detail_id, leo_grads_id, leo_match_id, leo_uncaptured_id, l
 		ON      pa.leo_pr_att_band 		= rawdata.prattband
 		AND     pa.leo_pr_att_included          = rawdata.prattincluded;
 
-leo_detail 10007825 | Guildhall School of Music and Drama | London     
-leo_gradudation 115 
-leo_sust_emp_id  63.7              | 85.8         | 95.6
 
 
 
