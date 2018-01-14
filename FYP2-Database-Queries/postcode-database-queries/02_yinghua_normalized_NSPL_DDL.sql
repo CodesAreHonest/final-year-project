@@ -63,8 +63,8 @@ CREATE SEQUENCE seq_pos_detail_id	MINVALUE 1 INCREMENT 1;
 -- CREATE TABLE IN PROPER ORDER 
 create table postcode_greek_coordinate (
 	pos_greek_coordinate_id 	INT DEFAULT NEXTVAL ('seq_greek_coordinate_id'),
-	pos_longitude 			VARCHAR(50) NOT NULL,
-	pos_latitude 			VARCHAR(50) NOT NULL,
+	pos_longitude 			REAL NOT NULL,
+	pos_latitude 			REAL NOT NULL,
 	PRIMARY KEY (pos_greek_coordinate_id)
 );
 

@@ -67,10 +67,10 @@ INSERT INTO postcode_euro_electoral_region (pos_eer_code, pos_eer_name)
 
 ----------------------------------------
 -- POSTCODE_PARLIAMENT_CONSTITUENCY TABLE INSERTION 
--- ROW COUNTS:  200
+-- ROW COUNTS:  653
 ----------------------------------------
 INSERT INTO postcode_parliament_constituency (pos_par_cons_code, pos_par_cons_name)
-	SELECT DISTINCT pctc, pctn FROM nspl_rawdata;
+	SELECT DISTINCT par_cons_code, par_cons_name FROM nspl_rawdata;
 
 ----------------------------------------
 -- POSTCODE_REGION TABLE INSERTION 

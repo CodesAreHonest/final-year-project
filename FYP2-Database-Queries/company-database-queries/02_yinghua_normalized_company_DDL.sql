@@ -98,7 +98,7 @@ CREATE TABLE company_returns (
 
 CREATE TABLE company_account_category (
 	com_acc_category_id 		INT DEFAULT NEXTVAL ('seq_acc_category_id') PRIMARY KEY, 
-	com_acc_category 		VARCHAR(100) NULL DEFAULT 'No Category'
+	com_acc_category 		VARCHAR(100) NULL DEFAULT 'Undefined'
 );
 
 CREATE TABLE company_account ( 
@@ -113,7 +113,7 @@ CREATE TABLE company_account (
 CREATE TABLE company_previousname (
 	com_pn_id 			INT DEFAULT NEXTVAL ('seq_pn_id') PRIMARY KEY, 
 	com_timeth_change		INT NOT NULL DEFAULT 0,
-	com_pn_name 			VARCHAR(160) NOT NULL DEFAULT 'No previous name',
+	com_pn_name 			VARCHAR(160) NOT NULL DEFAULT 'Undefined',
 	com_date_change			DATE NULL
 ); 
 
@@ -125,11 +125,11 @@ CREATE TABLE company_conf_stmt (
 
 CREATE TABLE company_address (
 	com_address_id			INT DEFAULT NEXTVAL ('seq_address_id') PRIMARY KEY, 
-	com_careof			VARCHAR(100) NULL DEFAULT 'Unregistered',
-	com_pobox 			VARCHAR(10)  NULL DEFAULT 'Unregistered', 
-	com_addressline1		VARCHAR(300) NULL DEFAULT 'No address line 1', 
-	com_addressline2		VARCHAR(300) NULL DEFAULT 'No address line 2', 
-	com_posttown 			VARCHAR(50)  NULL DEFAULT 'No posttown', 
+	com_careof			VARCHAR(100) NULL DEFAULT 'Undefined',
+	com_pobox 			VARCHAR(10)  NULL DEFAULT 'Undefined', 
+	com_addressline1		VARCHAR(300) NULL DEFAULT 'Undefined', 
+	com_addressline2		VARCHAR(300) NULL DEFAULT 'Undefined', 
+	com_posttown 			VARCHAR(50)  NULL DEFAULT 'Undefined', 
 	com_county 			VARCHAR(50)  NULL DEFAULT 'Undefined',
 	com_country			VARCHAR(50)  NULL DEFAULT 'Undefined', 
 	com_postcode 			VARCHAR(20)  NULL DEFAULT 'Undefined' 
@@ -152,7 +152,7 @@ CREATE TABLE company_category (
 
 CREATE TABLE company_detail ( 
 	com_detail_id	 		INT DEFAULT NEXTVAL ('seq_detail_id') PRIMARY KEY,
-	com_name			VARCHAR(160) NULL DEFAULT 'No company name', 
+	com_name			VARCHAR(160) NULL DEFAULT 'Undefined', 
 	com_number 			INT	     NOT NULL, 
 	com_address_id			INT	     REFERENCES company_address (com_address_id), 
 	com_category_id			INT	     REFERENCES company_category (com_category_id),
