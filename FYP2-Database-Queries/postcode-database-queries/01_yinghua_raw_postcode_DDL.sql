@@ -43,7 +43,7 @@ create table nspl_rawdata (
 	isoan 			varchar(50) 	null default 'Undefined',
 	msoac 			varchar(15) 	null default 'Undefined',
 	msoan 			varchar(50) 	null default 'Undefined',
-	oacc 			varchar(5) 	null default 'Undefined',
+	oacc 			varchar(5) 	null default '---',
 	oacn 			varchar(50) 	null default 'Undefined',
 	longitude 		real 		not null,
 	latitude 		real 		not null,

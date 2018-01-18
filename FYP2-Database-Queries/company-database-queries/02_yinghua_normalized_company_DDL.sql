@@ -32,7 +32,6 @@ DROP TABLE company			CASCADE;
 
 
 -- DROP SEQUENCE IN PROPER ORDER 
-DROP SEQUENCE seq_company_id;
 DROP SEQUENCE seq_detail_id;
 DROP SEQUENCE seq_category_id;
 DROP SEQUENCE seq_status_id;
@@ -62,7 +61,7 @@ CREATE SEQUENCE seq_countryoforigin_id	MINVALUE 1 INCREMENT 1;
 CREATE SEQUENCE seq_status_id	 	MINVALUE 1 INCREMENT 1; 
 CREATE SEQUENCE seq_category_id		MINVALUE 1 INCREMENT 1; 
 CREATE SEQUENCE seq_detail_id		MINVALUE 1 INCREMENT 1; 
-CREATE SEQUENCE seq_company_id		MINVALUE 1 INCREMENT 1; 
+
 
 -- CREATE TABLE IN PROPER ORDER 
 CREATE TABLE company_uri (
@@ -93,7 +92,7 @@ CREATE TABLE company_mortgages (
 CREATE TABLE company_returns ( 
 	com_return_id 			INT DEFAULT NEXTVAL ('seq_return_id') PRIMARY KEY, 
 	com_return_nextduedate		DATE NULL DEFAULT NULL,
-	com_num_mortoutstanding		DATE NULL DEFAULT NULL 
+	com_return_lastmadeupdate	DATE NULL DEFAULT NULL 
 );
 
 CREATE TABLE company_account_category (
@@ -161,7 +160,6 @@ CREATE TABLE company_detail (
 );
 
 CREATE TABLE company ( 
-	company_id			INT DEFAULT NEXTVAL ('seq_company_id') PRIMARY KEY,
 	com_detail_id  			INT REFERENCES company_detail (com_detail_id), 
 	com_dissolutiondate     	DATE NOT NULL, 
 	com_incorporationdate		DATE NOT NULL, 
