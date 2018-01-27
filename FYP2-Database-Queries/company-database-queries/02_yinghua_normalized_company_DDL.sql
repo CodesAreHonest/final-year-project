@@ -23,8 +23,6 @@ DROP TABLE company_account_category 	CASCADE;
 DROP TABLE company_account 		CASCADE;
 DROP TABLE company_previousname 	CASCADE; 
 DROP TABLE company_conf_stmt 		CASCADE;
-DROP TABLE company_address 		CASCADE;
-DROP TABLE company_countryoforigin 	CASCADE;
 DROP TABLE company_status		CASCADE;
 DROP TABLE company_category		CASCADE;
 DROP TABLE company_detail		CASCADE;
@@ -35,7 +33,6 @@ DROP TABLE company			CASCADE;
 DROP SEQUENCE seq_detail_id;
 DROP SEQUENCE seq_category_id;
 DROP SEQUENCE seq_status_id;
-DROP SEQUENCE seq_address_id;
 DROP SEQUENCE seq_conf_stmt_id;
 DROP SEQUENCE seq_pn_id;
 DROP SEQUENCE seq_acc_id;
@@ -56,8 +53,6 @@ CREATE SEQUENCE seq_acc_category_id	MINVALUE 1 INCREMENT 1;
 CREATE SEQUENCE seq_acc_id		MINVALUE 1 INCREMENT 1; 
 CREATE SEQUENCE seq_pn_id		MINVALUE 1 INCREMENT 1; 
 CREATE SEQUENCE seq_conf_stmt_id	MINVALUE 1 INCREMENT 1; 
-CREATE SEQUENCE seq_address_id		MINVALUE 1 INCREMENT 1;
-CREATE SEQUENCE seq_countryoforigin_id	MINVALUE 1 INCREMENT 1; 
 CREATE SEQUENCE seq_status_id	 	MINVALUE 1 INCREMENT 1; 
 CREATE SEQUENCE seq_category_id		MINVALUE 1 INCREMENT 1; 
 CREATE SEQUENCE seq_detail_id		MINVALUE 1 INCREMENT 1; 
@@ -77,8 +72,10 @@ CREATE TABLE company_partnership (
 
 CREATE TABLE company_siccodes ( 
 	com_sic_id 			INT DEFAULT NEXTVAL ('seq_sic_id') PRIMARY KEY, 
-	com_timeth_change		INT NULL DEFAULT 0,
-	com_siccode 			VARCHAR(170) NOT NULL
+	com_siccode1 			VARCHAR(170) NOT NULL,
+	com_siccode2 			VARCHAR(170) NOT NULL,
+	com_siccode3 			VARCHAR(170) NOT NULL,
+	com_siccode4 			VARCHAR(170) NOT NULL
 );
 
 CREATE TABLE company_mortgages ( 
@@ -91,8 +88,8 @@ CREATE TABLE company_mortgages (
 
 CREATE TABLE company_returns ( 
 	com_return_id 			INT DEFAULT NEXTVAL ('seq_return_id') PRIMARY KEY, 
-	com_return_nextduedate		DATE NULL DEFAULT NULL,
-	com_return_lastmadeupdate	DATE NULL DEFAULT NULL 
+	com_return_nextduedate		VARCHAR(50) NULL DEFAULT NULL,
+	com_return_lastmadeupdate	VARCHAR(50) NULL DEFAULT NULL 
 );
 
 CREATE TABLE company_account_category (
@@ -104,40 +101,41 @@ CREATE TABLE company_account (
 	com_acc_id 			INT DEFAULT NEXTVAL ('seq_acc_id') PRIMARY KEY, 
 	com_acc_refday			INT NULL DEFAULT 0,
 	com_acc_refmonth		INT NULL DEFAULT 0,
-	com_acc_nextduedate 		DATE NULL DEFAULT NULL, 
-	com_acc_lastmadeupdate		DATE NULL DEFAULT NULL, 
+	com_acc_nextduedate 		VARCHAR(50) NULL DEFAULT NULL, 
+	com_acc_lastmadeupdate		VARCHAR(50) NULL DEFAULT NULL, 
 	com_acc_category_id 		INT REFERENCES company_account_category (com_acc_category_id) 
 ); 
 
 CREATE TABLE company_previousname (
 	com_pn_id 			INT DEFAULT NEXTVAL ('seq_pn_id') PRIMARY KEY, 
-	com_timeth_change		INT NOT NULL DEFAULT 0,
-	com_pn_name 			VARCHAR(160) NOT NULL DEFAULT 'Undefined',
-	com_date_change			DATE NULL
+	com_pn1_condate			VARCHAR(20) NOT NULL,
+	com_pn1_companyname		VARCHAR(160) NOT NULL,
+	com_pn2_condate			VARCHAR(20) NOT NULL,
+	com_pn2_companyname		VARCHAR(160) NOT NULL,
+	com_pn3_condate			VARCHAR(20) NOT NULL,
+	com_pn3_companyname		VARCHAR(160) NOT NULL,
+	com_pn4_condate			VARCHAR(20) NOT NULL,
+	com_pn4_companyname		VARCHAR(160) NOT NULL,
+	com_pn5_condate			VARCHAR(20) NOT NULL,
+	com_pn5_companyname		VARCHAR(160) NOT NULL,
+	com_pn6_condate			VARCHAR(20) NOT NULL,
+	com_pn6_companyname		VARCHAR(160) NOT NULL,
+	com_pn7_condate			VARCHAR(20) NOT NULL,
+	com_pn7_companyname		VARCHAR(160) NOT NULL,
+	com_pn8_condate			VARCHAR(20) NOT NULL,
+	com_pn8_companyname		VARCHAR(160) NOT NULL,
+	com_pn9_condate			VARCHAR(20) NOT NULL,
+	com_pn9_companyname		VARCHAR(160) NOT NULL,
+	com_pn10_condate		VARCHAR(20) NOT NULL,
+	com_pn10_companyname		VARCHAR(160) NOT NULL
+
 ); 
 
 CREATE TABLE company_conf_stmt (
 	com_conf_stmt_id	 	INT DEFAULT NEXTVAL ('seq_conf_stmt_id') PRIMARY KEY, 
-	com_conf_stmt_id_nextduedate	DATE NULL DEFAULT NULL,
-	com_conf_stmt_id_lastmadeupdate DATE NULL DEFAULT NULL
+	com_conf_stmt_nextduedate	VARCHAR(50) NULL DEFAULT NULL,
+	com_conf_stmt_lastmadeupdate 	VARCHAR(50) NULL DEFAULT NULL
 );
-
-CREATE TABLE company_address (
-	com_address_id			INT DEFAULT NEXTVAL ('seq_address_id') PRIMARY KEY, 
-	com_careof			VARCHAR(100) NULL DEFAULT 'Undefined',
-	com_pobox 			VARCHAR(10)  NULL DEFAULT 'Undefined', 
-	com_addressline1		VARCHAR(300) NULL DEFAULT 'Undefined', 
-	com_addressline2		VARCHAR(300) NULL DEFAULT 'Undefined', 
-	com_posttown 			VARCHAR(50)  NULL DEFAULT 'Undefined', 
-	com_county 			VARCHAR(50)  NULL DEFAULT 'Undefined',
-	com_country			VARCHAR(50)  NULL DEFAULT 'Undefined', 
-	com_postcode 			VARCHAR(20)  NULL DEFAULT 'Undefined' 
-);
-
-CREATE TABLE company_countryoforigin ( 
-	com_countryoforigin_id 		INT DEFAULT NEXTVAL ('seq_countryoforigin_id')  PRIMARY KEY, 
-	com_countryoforigin 		VARCHAR(50) NOT NULL DEFAULT 'Undefined'
-); 
 
 CREATE TABLE company_status ( 
 	com_status_id	 		INT DEFAULT NEXTVAL ('seq_status_id') PRIMARY KEY, 
@@ -152,17 +150,24 @@ CREATE TABLE company_category (
 CREATE TABLE company_detail ( 
 	com_detail_id	 		INT DEFAULT NEXTVAL ('seq_detail_id') PRIMARY KEY,
 	com_name			VARCHAR(160) NULL DEFAULT 'Undefined', 
-	com_number 			INT	     NOT NULL, 
-	com_address_id			INT	     REFERENCES company_address (com_address_id), 
+	com_number 			VARCHAR(10)  NOT NULL, 
 	com_category_id			INT	     REFERENCES company_category (com_category_id),
-	com_status_id			INT	     REFERENCES company_status (com_status_id),
-	com_countryoforigin_id		INT	     REFERENCES company_countryoforigin (com_countryoforigin_id) 	     	
+	com_status_id			INT	     REFERENCES company_status (com_status_id), 	     	
 );
 
 CREATE TABLE company ( 
 	com_detail_id  			INT REFERENCES company_detail (com_detail_id), 
 	com_dissolutiondate     	DATE NOT NULL, 
 	com_incorporationdate		DATE NOT NULL, 
+	com_countryoforigin 		VARCHAR(50) NOT NULL DEFAULT 'Undefined',
+	com_careof			VARCHAR(100) NULL DEFAULT 'Undefined',
+	com_pobox 			VARCHAR(10)  NULL DEFAULT 'Undefined', 
+	com_addressline1		VARCHAR(300) NULL DEFAULT 'Undefined', 
+	com_addressline2		VARCHAR(300) NULL DEFAULT 'Undefined', 
+	com_posttown 			VARCHAR(50)  NULL DEFAULT 'Undefined', 
+	com_county 			VARCHAR(50)  NULL DEFAULT 'Undefined',
+	com_country			VARCHAR(50)  NULL DEFAULT 'Undefined', 
+	com_postcode 			VARCHAR(20)  NULL DEFAULT 'Undefined',
 	com_acc_id 			INT REFERENCES company_account (com_acc_id), 
 	com_return_id			INT REFERENCES company_returns (com_return_id), 
 	com_mort_id			INT REFERENCES company_mortgages (com_mort_id), 

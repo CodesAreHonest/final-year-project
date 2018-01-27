@@ -1,60 +1,77 @@
-drop table company_rawdata; 
+DROP SEQUENCE seq_sic_id;
+DROP SEQUENCE seq_detail_id;
+DROP SEQUENCE seq_pn_id;
 
--- create new table for the database 
-create table company_rawdata ( 
-	CompanyName 		varchar(160) null default 'Undefined', 
-	CompanyNumber 		varchar(8) not null,
-	CareOf 			varchar(100) null default 'Undefined', 
-	POBox 			varchar(10) null default 'Undefined',
-	AddressLine1 		varchar(300) null default 'Undefined',
-	AddressLine2 		varchar(300) null default 'Undefined',
-	PostTown 		varchar(50) null default 'Undefined',
-	County 			varchar(50) null default 'Undefined',
-	Country 		varchar(50) null default 'Undefined',
-	PostCode 		varchar(20) null default 'Undefined',
-	CompanyCategory 	varchar(100) not null,
-	CompanyStatus 		varchar(70) not null,
-	CountryOfOrigin 	varchar(50) not null,
-	DissolutionDate 	varchar(20) null default '3000-01-01',
-	IncorporationDate 	varchar(20) null default '3000-01-01',
-	AccountingRefDay 	int null default 0,
-	AccountingRefMonth 	int null default 0,
-	Account_NextDueDate 	varchar(20) null default '3000-01-01',
-	Account_LastMadeUpdate 	varchar(20) null default '3000-01-01',
-	AccountCategory 	varchar(30) null default 'Undefined',
-	Return_NextDueDate 	varchar(20) null default '3000-01-01',
-	Return_LastMadeUpDate 	varchar(20) null default '3000-01-01',
-	NumMortCharges 		int not null,
-	NumMortOutstanding 	int not null,
-	NumMortPartSatisfied	int not null,
-	NumMortSatisfied 	int not null,
-	SICCode1 		varchar(170) null default 'Undefined',
-	SICCode2 		varchar(170) null default 'Undefined',
-	SICCode3 		varchar(170) null default 'Undefined',
-	SICCode4 		varchar(170) null default 'Undefined',
-	NumGenPartners 		int not null,
-	NumLimPartners 		int not null,
-	URI 			varchar(47) not null,
-	pn1_CONDate 		varchar(20) null default '3000-01-01',
-	pn1_CompanyName 	varchar(160) null default 'Undefined',
-	pn2_CONDate 		varchar(20) null default '3000-01-01',
-	pn2_CompanyName 	varchar(160) null default 'Undefined',
-	pn3_CONDate 		varchar(20) null default '3000-01-01',
-	pn3_CompanyName 	varchar(160) null default 'Undefined',
-	pn4_CONDate 		varchar(20) null default '3000-01-01',
-	pn4_CompanyName 	varchar(160) null default 'Undefined',
-	pn5_CONDate 		varchar(20) null default '3000-01-01',
-	pn5_CompanyName 	varchar(160) null default 'Undefined',
-	pn6_CONDate 		varchar(20) null default '3000-01-01',
-	pn6_CompanyName		varchar(160) null default 'Undefined',
-	pn7_CONDate 		varchar(20) null default '3000-01-01',
-	pn7_CompanyName 	varchar(160) null default 'Undefined',
-	pn8_CONDate 		varchar(20) null default '3000-01-01',
-	pn8_CompanyName 	varchar(160) null default 'Undefined',
-	pn9_CONDate 		varchar(20) null default '3000-01-01',
-	pn9_CompanyName 	varchar(160) null default 'Undefined',
-	pn10_CONDate 		varchar(20) null default '3000-01-01',
-	pn10_CompanyName 	varchar(160) null default 'Undefined',
-	ConfStmtNextDueDate 	varchar(20) default '3000-01-01',
-	ConfStmtLastMadeUpDate 	varchar(20) default '3000-01-01'
+CREATE SEQUENCE seq_sic_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_detail_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_pn_id		MINVALUE 1 INCREMENT 1; 
+
+DROP TABLE company_previousname CASCADE;
+DROP TABLE company_siccodes CASCADE; 
+DROP TABLE company_detail CASCADE;
+DROP TABLE company; 
+
+CREATE TABLE company_previousname (
+	com_pn_id 			INT DEFAULT NEXTVAL ('seq_pn_id') PRIMARY KEY, 
+	com_pn1_condate			VARCHAR(20) NOT NULL,
+	com_pn1_companyname		VARCHAR(160) NOT NULL,
+	com_pn2_condate			VARCHAR(20) NOT NULL,
+	com_pn2_companyname		VARCHAR(160) NOT NULL,
+	com_pn3_condate			VARCHAR(20) NOT NULL,
+	com_pn3_companyname		VARCHAR(160) NOT NULL,
+	com_pn4_condate			VARCHAR(20) NOT NULL,
+	com_pn4_companyname		VARCHAR(160) NOT NULL,
+	com_pn5_condate			VARCHAR(20) NOT NULL,
+	com_pn5_companyname		VARCHAR(160) NOT NULL,
+	com_pn6_condate			VARCHAR(20) NOT NULL,
+	com_pn6_companyname		VARCHAR(160) NOT NULL,
+	com_pn7_condate			VARCHAR(20) NOT NULL,
+	com_pn7_companyname		VARCHAR(160) NOT NULL,
+	com_pn8_condate			VARCHAR(20) NOT NULL,
+	com_pn8_companyname		VARCHAR(160) NOT NULL,
+	com_pn9_condate			VARCHAR(20) NOT NULL,
+	com_pn9_companyname		VARCHAR(160) NOT NULL,
+	com_pn10_condate		VARCHAR(20) NOT NULL,
+	com_pn10_companyname		VARCHAR(160) NOT NULL
+
+); 
+
+CREATE TABLE company_siccodes ( 
+	com_sic_id 			INT DEFAULT NEXTVAL ('seq_sic_id') PRIMARY KEY, 
+	com_siccode1 			VARCHAR(170) NOT NULL,
+	com_siccode2 			VARCHAR(170) NOT NULL,
+	com_siccode3 			VARCHAR(170) NOT NULL,
+	com_siccode4 			VARCHAR(170) NOT NULL
 );
+
+CREATE TABLE company_detail ( 
+	com_detail_id	 		INT DEFAULT NEXTVAL ('seq_detail_id') PRIMARY KEY,
+	com_name			VARCHAR(160) NULL DEFAULT 'Undefined', 
+	com_number 			VARCHAR(10)  NOT NULL, 
+	com_category_id			INT	     REFERENCES company_category (com_category_id),
+	com_status_id			INT	     REFERENCES company_status (com_status_id)	     	
+);
+
+CREATE TABLE company ( 
+	com_detail_id  			INT REFERENCES company_detail (com_detail_id), 
+	com_dissolutiondate     	DATE NOT NULL, 
+	com_incorporationdate		DATE NOT NULL, 
+	com_countryoforigin 		VARCHAR(50) NOT NULL DEFAULT 'Undefined',
+	com_careof			VARCHAR(100) NULL DEFAULT 'Undefined',
+	com_pobox 			VARCHAR(10)  NULL DEFAULT 'Undefined', 
+	com_addressline1		VARCHAR(300) NULL DEFAULT 'Undefined', 
+	com_addressline2		VARCHAR(300) NULL DEFAULT 'Undefined', 
+	com_posttown 			VARCHAR(50)  NULL DEFAULT 'Undefined', 
+	com_county 			VARCHAR(50)  NULL DEFAULT 'Undefined',
+	com_country			VARCHAR(50)  NULL DEFAULT 'Undefined', 
+	com_postcode 			VARCHAR(20)  NULL DEFAULT 'Undefined',
+	com_acc_id 			INT REFERENCES company_account (com_acc_id), 
+	com_return_id			INT REFERENCES company_returns (com_return_id), 
+	com_mort_id			INT REFERENCES company_mortgages (com_mort_id), 
+	com_sic_id			INT REFERENCES company_siccodes (com_sic_id),
+	com_partnership_id		INT REFERENCES company_partnership (com_partnership_id),
+	com_uri_id			INT REFERENCES company_uri (com_uri_id),
+	com_pn_id			INT REFERENCES company_previousname (com_pn_id),
+	com_conf_stmt_id		INT REFERENCES company_conf_stmt (com_conf_stmt_id)
+);
+

@@ -1,0 +1,9 @@
+Prepare to import data
+Imported 500 rows 5.5791291990000005
+Imported 1000 rows 11.085203597
+Imported 1500 rows 15.870228589
+Imported 2000 rows 21.962116611
+Imported 2500 rows 27.613415994
+Imported 5000 rows 56.524391587
+Will not display progress because too much row to process. 86.256376073
+58542.39441s seconds on import 4079779 rows from CSV to company_rawdata.
