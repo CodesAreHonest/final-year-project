@@ -179,12 +179,6 @@ CREATE TABLE company (
 );
 
 
--- CHECK WHETHER ALL TABLE AND SEQUENCES ARE CREATED. 
-\d+
-
-Begin to insert company_previousname data
-75.79536s seconds on import company previousdate statement.
-
 
 	
 

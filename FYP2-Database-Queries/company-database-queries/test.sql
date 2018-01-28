@@ -1,15 +1,35 @@
+DROP TABLE company_previousname 	CASCADE;
+DROP TABLE company_siccodes 		CASCADE; 
+DROP TABLE company_returns 		CASCADE; 
+DROP TABLE company_mortgages 		CASCADE; 
+DROP TABLE company_partnership 		CASCADE;
+DROP TABLE company_uri 			CASCADE; 
+DROP TABLE company_conf_stmt 		CASCADE;
+
 DROP SEQUENCE seq_sic_id;
-DROP SEQUENCE seq_detail_id;
 DROP SEQUENCE seq_pn_id;
+DROP SEQUENCE seq_return_id;
+DROP SEQUENCE seq_mort_id;
+DROP SEQUENCE seq_partnership_id;
+DROP SEQUENCE seq_uri_id;
+DROP SEQUENCE seq_conf_stmt_id;
 
 CREATE SEQUENCE seq_sic_id		MINVALUE 1 INCREMENT 1; 
-CREATE SEQUENCE seq_detail_id		MINVALUE 1 INCREMENT 1; 
 CREATE SEQUENCE seq_pn_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_return_id		MINVALUE 1 INCREMENT 1;
+CREATE SEQUENCE seq_mort_id		MINVALUE 1 INCREMENT 1;  
+CREATE SEQUENCE seq_partnership_id	MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_uri_id 		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_conf_stmt_id	MINVALUE 1 INCREMENT 1; 
 
-DROP TABLE company_previousname CASCADE;
-DROP TABLE company_siccodes CASCADE; 
-DROP TABLE company_detail CASCADE;
-DROP TABLE company; 
+
+CREATE TABLE company_siccodes ( 
+	com_sic_id 			INT DEFAULT NEXTVAL ('seq_sic_id') PRIMARY KEY, 
+	com_siccode1 			VARCHAR(170) NOT NULL,
+	com_siccode2 			VARCHAR(170) NOT NULL,
+	com_siccode3 			VARCHAR(170) NOT NULL,
+	com_siccode4 			VARCHAR(170) NOT NULL
+);
 
 CREATE TABLE company_previousname (
 	com_pn_id 			INT DEFAULT NEXTVAL ('seq_pn_id') PRIMARY KEY, 
@@ -36,42 +56,35 @@ CREATE TABLE company_previousname (
 
 ); 
 
-CREATE TABLE company_siccodes ( 
-	com_sic_id 			INT DEFAULT NEXTVAL ('seq_sic_id') PRIMARY KEY, 
-	com_siccode1 			VARCHAR(170) NOT NULL,
-	com_siccode2 			VARCHAR(170) NOT NULL,
-	com_siccode3 			VARCHAR(170) NOT NULL,
-	com_siccode4 			VARCHAR(170) NOT NULL
+CREATE TABLE company_returns ( 
+	com_return_id 			INT DEFAULT NEXTVAL ('seq_return_id') PRIMARY KEY, 
+	com_return_nextduedate		VARCHAR(50) NULL DEFAULT NULL,
+	com_return_lastmadeupdate	VARCHAR(50) NULL DEFAULT NULL 
 );
 
-CREATE TABLE company_detail ( 
-	com_detail_id	 		INT DEFAULT NEXTVAL ('seq_detail_id') PRIMARY KEY,
-	com_name			VARCHAR(160) NULL DEFAULT 'Undefined', 
-	com_number 			VARCHAR(10)  NOT NULL, 
-	com_category_id			INT	     REFERENCES company_category (com_category_id),
-	com_status_id			INT	     REFERENCES company_status (com_status_id)	     	
+CREATE TABLE company_mortgages ( 
+	com_mort_id 			INT DEFAULT NEXTVAL ('seq_mort_id') PRIMARY KEY, 
+	com_num_mortchanges		INT NOT NULL,
+	com_num_mortoutstanding		INT NOT NULL,
+	com_num_mortpartsatisfied	INT NOT NULL,
+	com_num_mortsatisfied 		INT NOT NULL
 );
 
-CREATE TABLE company ( 
-	com_detail_id  			INT REFERENCES company_detail (com_detail_id), 
-	com_dissolutiondate     	DATE NOT NULL, 
-	com_incorporationdate		DATE NOT NULL, 
-	com_countryoforigin 		VARCHAR(50) NOT NULL DEFAULT 'Undefined',
-	com_careof			VARCHAR(100) NULL DEFAULT 'Undefined',
-	com_pobox 			VARCHAR(10)  NULL DEFAULT 'Undefined', 
-	com_addressline1		VARCHAR(300) NULL DEFAULT 'Undefined', 
-	com_addressline2		VARCHAR(300) NULL DEFAULT 'Undefined', 
-	com_posttown 			VARCHAR(50)  NULL DEFAULT 'Undefined', 
-	com_county 			VARCHAR(50)  NULL DEFAULT 'Undefined',
-	com_country			VARCHAR(50)  NULL DEFAULT 'Undefined', 
-	com_postcode 			VARCHAR(20)  NULL DEFAULT 'Undefined',
-	com_acc_id 			INT REFERENCES company_account (com_acc_id), 
-	com_return_id			INT REFERENCES company_returns (com_return_id), 
-	com_mort_id			INT REFERENCES company_mortgages (com_mort_id), 
-	com_sic_id			INT REFERENCES company_siccodes (com_sic_id),
-	com_partnership_id		INT REFERENCES company_partnership (com_partnership_id),
-	com_uri_id			INT REFERENCES company_uri (com_uri_id),
-	com_pn_id			INT REFERENCES company_previousname (com_pn_id),
-	com_conf_stmt_id		INT REFERENCES company_conf_stmt (com_conf_stmt_id)
+CREATE TABLE company_partnership (
+	com_partnership_id 		INT DEFAULT NEXTVAL ('seq_partnership_id') PRIMARY KEY, 
+	com_num_genpartners 		INT NOT NULL,
+	com_num_limpartners		INT NOT NULL
+); 
+
+CREATE TABLE company_uri (
+	com_uri_id 			INT DEFAULT NEXTVAL ('seq_uri_id') PRIMARY KEY,
+	com_uri 			VARCHAR(47) NOT NULL
+); 
+
+CREATE TABLE company_conf_stmt (
+	com_conf_stmt_id	 	INT DEFAULT NEXTVAL ('seq_conf_stmt_id') PRIMARY KEY, 
+	com_conf_stmt_nextduedate	VARCHAR(50) NULL DEFAULT NULL,
+	com_conf_stmt_lastmadeupdate 	VARCHAR(50) NULL DEFAULT NULL
 );
+
 
