@@ -157,8 +157,8 @@ CREATE TABLE company_detail (
 
 CREATE TABLE company ( 
 	com_detail_id  			INT REFERENCES company_detail (com_detail_id), 
-	com_dissolutiondate     	DATE NOT NULL, 
-	com_incorporationdate		DATE NOT NULL, 
+	com_dissolutiondate     	VARCHAR(20) NOT NULL, 
+	com_incorporationdate		VARCHAR(20) NOT NULL, 
 	com_countryoforigin 		VARCHAR(50) NOT NULL DEFAULT 'Undefined',
 	com_careof			VARCHAR(100) NULL DEFAULT 'Undefined',
 	com_pobox 			VARCHAR(10)  NULL DEFAULT 'Undefined', 
