@@ -1,0 +1,139 @@
+\chapter{Implementation Plan} 
+% Main chapter title
+
+\label{Chapter5} 
+%Call reference to this chapter use \ref{ChapterX}
+
+\lhead{Chapter 5. \emph{Implementation Plan}} 
+% Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+\doublespacing
+% LINE FORMATTING
+
+%\clearpage
+%\pagebreak
+
+\section{Project Task Identification}
+
+\subsection{Identification of Critical Success Factors}
+
+Critical success factors are a key requirement which is necessary and essential to be identified to achieve the project objectives in this project. The requirement for our design objectives are listed below: 
+
+
+\begin{enumerate}
+\item \textbf{Determine a suitable operating system.} The operating system should be reliable, secure and appropriate for data processing, concurrent and distributed computing activities. If the selected operating system does not meet requirements, a new operating system has to be considered.
+
+\item \textbf{Acquire free public data set for big data processing.} Large data set is required for data processing with concurrent and distributed computing to make use of concurrent programming language’s package and architecture. If the data set obtains not clean and useful, data cleansing and data deduplication have to be conducted.
+
+\item \textbf{Selection of database management system (DBMS). } The database-management system for this project should support for operating system, concurrent programming language and project activities. If the selected DBMS does not compatible and suitable, a new DBMS capability has to be considered. 
+
+\item \textbf{Installation and setup DBMS for big data handling.} The selected database-management system should be installed and running on the operating system for data storing and data handling. The database system allows developer to conduct development activities for manage concurrency control for update and retrieval in this project.
+
+\item \textbf{Selection of Go and RUST concurrent programming language for comparison. } There are many types of concurrent programming language for system development. The selected language for this project is RUST and Go. This programming language architecture, packages and capabilities should be considered to conduct performance comparison.
+
+\item \textbf{Coding of “Import CSV into database” with Go program.} The program is required to write with Go language to read CSV and upload into PostgreSQL database. This task is conduct for data definition and data preparation before data processing is performed. 
+
+\item \textbf{Coding of “Import CSV into database” with RUST program. } The program is required to write with Go language in order to read CSV and upload into PostgreSQL database. This task is conduct for data definition and data preparation before data processing is performed. 
+
+\item \textbf{Conduct minor comparison on sequential and concurrent programming with Go and RUST language on PostgreSQL database transaction.} The sequential and concurrent program is required to write with Go and RUST language in order to conduct a comparison of execution time for database retrieval on PostgreSQL.
+
+\item \textbf{Conduct minor comparison on sequential and concurrent programming with Go and RUST language on reading CSV files. } The sequential and concurrent program is required to write with Go and RUST language to conduct a comparison of execution time on reading CSV files.
+
+\item \textbf{Installation of LTTng tracing network on user application or Linux kernel to produce outcomes into log files. } The open source software tracing toolkits enable the developer to create a tracepoint in Linux kernel or user applications to obtain process reading and create output into log files as Common Trace Format (CTF). This task has to be completed to improve troubleshooting and debugging process.
+
+\item \textbf{Install Eclipse Trace Compass to extract and read Common Trace Format information from log files. } The open source Eclipse IDE plugin read CTF files and produce useful graphical and tabulated information from traces. This task has to be completed to improve debugging process and analyse process behaviour.
+
+\end{enumerate}
+
+\pagebreak
+
+\subsection{Project Tasks for FYP Phase 1}
+
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+	
+\item Installation of Ubuntu 16.04 LTS 64-bit operating system.
+\item Acquire free public data set for big data processing.
+\item Installation of  Eclipse Parallel Application IDE Parallel Oxygen version. 
+\item Selection of Go and RUST concurrent programming language for comparison.
+\item Installation of Go language compiler and Goclipse plugin for Eclipse IDE.
+\item Installation of RUST language compiler and RustDT plugin for Eclipse IDE.
+\item Selection of PostgreSQL object-oriented relational database management system (OORDBMS).
+\item Installation and setup PostgreSQL database system intro PC for data handling.
+\item Golang programming for import CSV files into PostgreSQL database.
+\item Sequential and concurrent programming with Golang on PostgreSQL database retrieval.
+\item Sequential and concurrent programming with Golang on reading CSV files.
+\item Big data checking, cleaning and preparation with Devil Advocate. 
+\item Installation of LTTng tracing network on user application or linux kernel.
+\item Install Eclipse Trace Compass to extract and read Common Trace Format information from log files.
+
+\end{enumerate}
+
+\begin{landscape}
+	\subsection{Gantt Chart for Phase 1}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1.5\textwidth]{Figure/Gantt1.png}
+		\rule{35em}{0.5pt}
+		\caption[Gantt Chart for Phase 1]{Gantt Chart for Phase 1}
+	\end{figure}
+\end{landscape}
+
+\subsection{Project Tasks for FYP Phase 2}
+
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+	\item Data auditing.
+	\item Data cleansing. 
+	\item Data duplicate elimination.
+	\item Data parsing. 
+	\item Programming for import CSV files into PostgreSQL database.
+	\item Sequential and concurrent programming with Go and RUST on PostgreSQL database retrieval.
+	\item Sequential and concurrent programming with Go and RUST on reading CSV files.
+	\item Distribute programming for real time processing system.
+	\item Create tracepoint in application program and linux kernel.
+	\item Acquire process reading.
+	\item Testing concurrent and distributed system. 
+	
+\end{enumerate}
+
+\begin{landscape}
+	\subsection{Gantt Chart for Phase 2}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1.5\textwidth]{Figure/Gantt2.png}
+		\rule{35em}{0.5pt}
+		\caption[Gantt Chart for Phase 2]{Gantt Chart for Phase 2}
+	\end{figure}
+\end{landscape}
+
+
+\subsection{Milestone Deliverables}
+The milestone deliverables are:
+
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex]
+\item A Golang program. 
+\item A RUST program.
+\item A report based of this project. 
+\end{enumerate}
+
+%MAIN SECTION ================================
+\section{Planned Execution Activities}
+
+\subsection{Phase 1}
+
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+	
+	\item \textbf{Devil Advocation Test.}
+	 The 'Devil Advocation' tests are conducted to ensure obtained raw CSV data set is clean and useful. The expected result of this test is the number of commas in the record should not exceed the number of columns in a database. In addition, the data content itself should be unique and suitable for storing in the database. More information is provided in Appendix B.1.
+		
+	\item \textbf{Golang programming for import CSV files into PostgreSQL database.}
+	The Golang programming for import CSV raw data into PostgreSQL is to ensure Go language is capable of processing raw CSV data and PostgreSQL database. The expected result for this program should read 100 rows of data from raw CSV file and insert into PostgreSQL database. More information is provided in Appendix C.
+	\pagebreak
+	
+	\item \textbf{Sequential and concurrent programming with Golang on PostgreSQL database retrieval.}
+    The Go program should retrieve 300 rows of data from three tables (each table 100 rows) in PostgreSQL database sequentially and concurrently. The expected result for this program is concurrent processing should have better performance than sequential. More information is provided in Appendix D.	
+	
+	\item \textbf{Sequential and concurrent programming with Golang on reading CSV files.}
+	The Go program should retrieve 100 rows of data from raw CSV file sequentially and concurrently. The expected result for this program is concurrent processing should have better performance than sequential. More information is provided in Appendix E.
+	 
+\end{enumerate}
+

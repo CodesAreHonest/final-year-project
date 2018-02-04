@@ -1,0 +1,261 @@
+\chapter{Devil Advocation Test} 
+\label{AppendixB} 
+\lhead{Appendix B. \emph{Devil Advocation Test}} 
+
+% Write your Appendix content below here.
+% =========================================
+
+\section{Introduction}
+The devil advocation test is conducted to ensure obtained raw CSV data are clean and useful. The test is conduced to ensure:- 
+
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+	\item The number of commas in each records should match number of columns in database.
+	\item Raw data from CSV should match the column's data type in database for data importation and preparation.
+	\item Review and check uniqueness of data in each columns and row.
+\end{enumerate}  
+
+\pagebreak
+
+\section{Match number of commas with database columns}
+
+\lstset{basicstyle=\ttfamily\tiny} 
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Match number of commas with database columns}, label=commandline-02]
+
+===================
+1. connect to database
+===================
+
+yinghua@yinghua:~$ psql fyp1;
+psql (9.5.8)
+Type "help" for help.
+
+==================================
+2. create table without one column
+==================================
+
+fyp1=# create table subject_test ( ukprn int not null, providername varchar(100) not null, region varchar(100) not null, subject varchar(50) not null, sex varchar(30) not null, yearaftergraduation varchar(30) not null, grads varchar(10) null default null, unmatched varchar(20) null default null, matched varchar(20) null default null, activityNotCaptured varchar(20) default null, nosustdest varchar(20) null default null, sustemponly varchar(20) null default null, sustemp varchar(20) null default null, sustempfsorboth varchar(20) null default null, earningsinclude varchar(20) null default null, lowerannearn varchar(20) null default null, medianannearn varchar(20) null default null, upperannearn varchar(20) null default null, polargrpone varchar(20) null default null, polargrponeincluded varchar(20) null default null, prattband varchar(20) null default null);
+
+========================================================================
+3. Terminal return error complains extra data after last expected column
+========================================================================
+
+fyp1=# \copy subject_test from 'institution-subject-data.csv' with header csv;
+
+ERROR:  extra data after last expected column
+
+CONTEXT:  COPY subject_test, line 2: "10000291,Anglia Ruskin University,East,Agriculture & related subjects,Female,1,30,x,x,x,x,x,x,x,20,9..."
+
+\end{lstlisting}
+
+In this section, PostgreSQL query is executed on a terminal to check the number of commas match the number of columns possesses in the table. We will purposely remove one column during table creation and try to import all rows of data into PostgreSQL database. 
+
+The terminal will return an error and complains data could not insert into the table because a column is expected during importation process. 
+\linebreak
+
+\lstset{basicstyle=\ttfamily\tiny} 
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Identify correctness of data types}, label=commandline-02]
+
+========================================================================
+4. Add new column into tables and import data successfully
+========================================================================
+
+fyp1=# alter table subject_test add column prattincluded varchar(20) null default null;
+fyp1=# \copy subject_test from 'institution-subject-data.csv' with header csv;
+COPY 32706
+
+
+\end{lstlisting}
+
+Ultimately, the CSV raw data will import successfully only if the count of commas match the counts of columns in table. 
+\pagebreak
+
+\section{Identify correctness and suitability of data types}
+
+\lstset{basicstyle=\ttfamily\tiny} 
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Identify correctness of data types}, label=commandline-02]
+
+======================
+Step 1. connect to database
+======================
+
+yinghua@yinghua:~$ psql fyp1;
+psql (9.5.8)
+Type "help" for help.
+
+==================================
+Step 2. create companydata table
+==================================
+
+fyp1=# create table companydata ( CompanyName varchar(160) null default null, CompanyNumber varchar(8) not null primary key, CareOf varchar(100) null, POBOX varchar(10) null, AddressLine1 varchar(300) null, AddressLine2 varchar(300) null, PostTown varchar(50) null, County varchar(50) null, Country varchar(50) null, PostCode varchar(20) null, CompanyCategory varchar(100) not null, CompanyStatus varchar(70) not null, CountryOfOrigin varchar(50) not null, DissolutionDate date null default null, IncorporationDate date null default null, AccountingRefDay int null, AccountingRefMonth int null default 0, Account_NextDueDate date null default null, Account_LastMadeUpdate date null default null, AccountCategory varchar(30) null, Return_NextDueDate date null default null, Return_LastMadeUpDate date null default null, NumMortChanges int null, NumMortOutstanding int null, NumMortPartSatisfied int null, NumMortSatisfied int null, SICCode1 varchar(170) null, SICCode2 varchar(170) null, SICCode3 varchar(170) null, SICCode4 varchar(170) null, NumGenPartners int not null, NumLimPartners int not null, URI varchar(47) not null, pn1_CONDate date null default null, pn1_CompanyName varchar(160) null, pn2_CONDate date null default null, pn2_CompanyName varchar(160) null, pn3_CONDate date null default null, pn3_CompanyName varchar(160) null, pn4_CONDate date null default null, pn4_CompanyName varchar(160) null, pn5_CONDate date null default null, pn5_CompanyName varchar(160) null, pn6_CONDate date null default null, pn6_CompanyName varchar(160) null, pn7_CONDate date null default null, pn7_CompanyName varchar(160) null, pn8_CONDate date null default null, pn8_CompanyName varchar(160) null, pn9_CONDate date null default null, pn9_CompanyName varchar(160) null, pn10_CONDate date null default null, pn10_CompanyName varchar(160) null, ConfStmtNextDueDate date null default null, ConfStmtLastMadeUpDate date null default null);
+CREATE TABLE
+
+===========================================
+Step 3 - Import data into companydata table
+===========================================
+fyp1=# \copy companydata from 'Basic-Company-Data-Full.csv' with header csv;
+
+=================================================================================
+Step 4 - Terminal return error because double quotes are not allow to insert into date datatypes. 
+=================================================================================
+ERROR:  invalid input syntax for type date: ""
+CONTEXT:  COPY companydata, line 2, column dissolutiondate: ""
+
+\end{lstlisting}
+
+In this section, PostgreSQL query is executed on a terminal to check the suitability and correctness of data types during data importation from CSV files to PostgreSQL database. 
+
+The terminal will return an error and because double quotes are not allow to insert into "date" datatypes. It is caused by the NULL values in company CSV raw data is generated with double quotes and unable to insert them into "date" data types. 
+
+\pagebreak
+
+\lstset{basicstyle=\ttfamily\tiny} 
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Remove null values with double quotes in CSV raw data}, label=commandline-02]
+
+=====================================
+Step 5 - Remove null value with double quotes for data insertion on DATE DATATYPE
+=====================================
+yinghua@yinghua-NL8C:~/Documents/FYP/Basic-Company-Data$ sed 's/""//g' Basic-Company-Data-Full.csv > Full.csv
+
+=====================================
+Step 6 - Import data into companydata table
+=====================================
+fyp1=# \copy companydata from 'Full.csv' with header csv;
+COPY 4077979
+
+\end{lstlisting}
+
+As the meaning of null values with double quotes and without quotes are the same. To resolve this problem, \textit{seq} command is required produce new files by remove null values with double quotes stores in each columns. The CSV raw data will import successfully if every columns of data match table's column data types. 
+
+\pagebreak
+
+\section{Identify row and column uniqueness in each raw data}
+
+Data redundancy and duplication is an inevitable phenomenon found in million of data obtained from on-line sources. Unintentional duplication of records created from data warehouse are hardly avoided. Therefore, the uniqueness of data has to be check in every row and columns for conduct data de-duplication in Phase 2.
+\newline
+
+\subsection{Identify row uniqueness}
+
+\lstset{basicstyle=\ttfamily\tiny} 
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Identify row uniqueness}, label=commandline-02]
+======================
+Step 1. connect to database
+======================
+
+yinghua@yinghua:~$ psql fyp1;
+psql (9.5.8)
+Type "help" for help.
+
+fyp1#Data redundancy and duplication is an inevitable phenomenon found in million of data obtained from on-line sources. Unintentional duplication of records created from the data warehouse 's hard to be avoided. Therefore, the uniqueness of data has to be check in every row and columns for conduct data de-duplication in Phase 2.
+
+======================================================
+Step 2 - Verify duplicates row in company data tables
+======================================================
+fyp1=# select (companydata.*)::text, count(*) from companydata group by companydata.* having count(*) > 1;
+
+ companydata | count 
+-------------+-------
+(0 rows)
+
+======================================================
+Step 3 - Verify duplicates row in subject data tables
+======================================================
+fyp1=# select (leo.*)::text, count(*) from leo group by leo.* having count(*) > 1; 
+  leo    | count 
+---------+-------
+(0 rows)
+
+======================================================
+Step 4 - Verify duplicates row in LEO data tables
+======================================================
+fyp1=# select (leo.*)::text, count(*) from leo group by leo.* having count(*) > 1; 
+  leo    | count 
+---------+-------
+(0 rows)
+
+======================================================
+Step 5: Verify duplicates row in NSPL data table
+======================================================
+fyp1=# select (nspl.*)::text, count(*) from nspl group by nspl.* having count(*) > 1;
+ nspl | count 
+------+-------
+(0 rows)
+
+\end{lstlisting}
+
+In this section, PostgreSQL query is executed on a terminal to identify duplicates row found in every table. The result shows that there is no row duplication occurs between rows. 
+
+\subsection{Identify column uniqueness}
+
+\lstset{basicstyle=\ttfamily\tiny} 
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Identify column uniqueness}, label=commandline-02]
+======================
+Step 1. connect to database
+======================
+
+yinghua@yinghua:~$ psql fyp1;
+psql (9.5.8)
+Type "help" for help.
+
+===============================
+Step 2. List structure of table
+===============================
+
+fyp1=# \d+ leo
+
+Table "public.leo"
+Column              |          Type          |            Modifiers            | Storage  | 
+--------------------+------------------------+---------------------------------+----------+
+ukprn               | integer                | not null                        | plain    |
+providername        | character varying(100) | not null                        | extended |
+region              | character varying(100) | not null                        | extended |
+subject             | character varying(50)  | not null                        | extended |
+sex                 | character varying(30)  | not null                        | extended |
+yearaftergraduation | character varying(30)  | not null                        | extended |
+grads               | character varying(10)  | default NULL::character varying | extended |
+unmatched           | character varying(20)  | default NULL::character varying | extended |
+
+(more columns are not shown.....)
+
+===============================================================
+Step 3. Check duplication of data in selected columns
+===============================================================
+
+fyp1=# select ukprn, providername, region, count(*) from leo group by ukprn, providername, region having count(*) > 1;
+
+===============================================================
+Step 4. The duplication of columns with rows are return
+===============================================================
+
+ukprn   |                    providername                     |          region          | count 
+----------+-----------------------------------------------------+--------------------------+-------
+10007775 | Queen Mary University of London                     | London                   |   207
+10007792 | The University of Exeter                            | South West               |   207
+10003324 | The Institute of Cancer Research                    | London                   |   207
+10007784 | University College London                           | London                   |   207
+10003957 | Liverpool John Moores University                    | North West               |   207
+10000886 | The University of Brighton                          | South East               |   207
+10007816 | The Royal Central School of Speech and Drama        | London                   |   207
+10002681 | Glasgow School of Art                               | Scotland                 |   207
+10005545 | Royal Agricultural University                       | South West               |   207
+10037449 | University of St Mark and St John                   | South West               |   207
+10007144 | The University of East London                       | London                   |   207
+10007161 | Teesside University                                 | North East               |   207
+10007713 | York St John University                             | Yorkshire and the Humber |   207
+10003863 | Leeds Trinity University                            | Yorkshire and the Humber |   207
+
+(more duplication data found in columns are not shown......)
+
+
+\end{lstlisting}
+
+In this section, PostgreSQL query is executed on a terminal to identify duplicates data found in specific columns. The result shows the count of duplication data found in selected columns and lists out in tabular form. This method is proved to be able to identify data duplication occurs within a column. 
+
+
+
+
+
+ 
+
+
+
+

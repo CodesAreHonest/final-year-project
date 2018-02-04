@@ -1,0 +1,73 @@
+\chapter{Result of Sequential and concurrent programming with Golang on process CSV} 
+\label{AppendixF} 
+\lhead{Appendix F. \emph{Result of Golang on process CSV}}
+
+% Write your Appendix content below here.
+% =========================================
+
+\section {Linux command for Go program execution}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Linux command for Go program execution}, label=commandline-02]
+================================================================
+Step 1 - Build sequential-read-csv.go 
+================================================================
+yinghua@yinghua:~/Desktop/apps/eclipse-workspace/FYP1/src/postgres-process$ go build sequential-read-csv.go
+
+================================================================
+Step 2 - Execute sequential-read-csv.go program
+================================================================
+yinghua@yinghua:~/Desktop/apps/eclipse-workspace/FYP1/src/postgres-process$ time go run sequential-read-csv.go
+Start reading 100 row Company CSV data
+Finish reading Company CSV data
+Start reading 100 row LEO CSV data
+Finish readying LEO CSV data
+Start reading 100 row NSPL CSV data
+Finish readying LEO CSV data
+Total execution 6.00823s elapsed
+
+real	0m6.285s
+user	0m0.316s
+sys	0m0.056s
+
+================================================================
+Step 3 - Build concurrent-read-csv.go 
+================================================================
+yinghua@yinghua:~/Desktop/apps/eclipse-workspace/FYP1/src/postgres-process$ go build concurrent-read-csv.go
+
+================================================================
+Step 4 - Execute concurrent-read-csv.go program 
+================================================================
+yinghua@yinghua:~/Desktop/apps/eclipse-workspace/FYP1/src/postgres-process$ time go run concurrent-read-csv.go
+Start reading 100 row NSPL CSV data
+Start reading 100 row Company CSV data
+Start reading 100 row LEO CSV data
+Finish reading LEO CSV data
+Finish reading NSPL CSV data
+Finish readying LEO CSV data
+Total execution 2.00376s elapsed
+
+real	0m2.243s
+user	0m0.264s
+sys	0m0.044s
+\end{lstlisting}
+
+\section{Result of Golang programming on process CSV}
+
+\begin{table}[H]
+	\centering
+	\begin{tabulary}{1.0\textwidth}{|L|L|L|L}
+		\hline
+		{\bf Elapsed Time} & {\bf sequential-read-csv.go}  & {\bf concurrent-read-csv.go} \\ \hline
+		real      & 6.285s                    &  2.243s                  \\ \hline
+		user     & 0.316s                    &  0.264s                  \\ \hline
+		sys       & 0.056s                    &  0.044s                  \\ \hline
+	\end{tabulary}
+	\caption{Result of Golang programming on process CSV raw data}
+\end{table}
+
+
+
+
+
+

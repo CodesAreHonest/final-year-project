@@ -1,0 +1,88 @@
+\chapter{Result of Sequential and concurrent programming with Golang on process PostgreSQL database.} 
+\label{AppendixG} 
+\lhead{Appendix G. \emph{Result of Golang on process PostgreSQL database}}
+
+% Write your Appendix content below here.
+% =========================================
+
+\section {Linux command for Go program execution}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Linux command for Go program execution}, label=commandline-02]
+
+================================================================
+Step 1 - Build sequential-psql.go 
+================================================================
+yinghua@yinghua:~/Desktop/apps/eclipse-workspace/FYP1/src/postgres-process$ go build sequential-psql.go
+
+================================================================
+Step 2 - Execute sequential-psql.go program
+================================================================
+yinghua@yinghua:~/Desktop/apps/eclipse-workspace/FYP1/src/postgres-process$ time go run sequential-psql.go
+Start retrieve company data from database ...
+Data retrieval of company data SUCCESS!
+2.00721985s elapsed
+
+Start retrieve postcode data from database ...
+Data retrieval of postcode data SUCCESS!
+2.00144933s elapsed
+
+Start retrieve LEO data from database ...
+Data retrieval of subject data SUCCESS!
+2.00131415s elapsed
+
+Total execution 6.01005s elapsed
+
+real	0m6.252s
+user	0m0.272s
+sys	0m0.032s
+
+================================================================
+Step 3 - Build concurrent-psql.go
+================================================================
+yinghua@yinghua:~/Desktop/apps/eclipse-workspace/FYP1/src/postgres-process$ go build concurrent-psql.go
+
+================================================================
+Step 4 - Execute concurrent-psql.go program 
+================================================================
+yinghua@yinghua:~/Desktop/apps/eclipse-workspace/FYP1/src/postgres-process$ time go run concurrent-psql.go
+Start retrieve postcode data from database ...
+Start retrieve company data from database ...
+Start retrieve LEO data from database ...
+2.00615007s elapsed
+Retrieval of subject data success.
+
+2.00661550s elapsed
+Retrieval of postcode success.
+
+2.00745319s elapsed
+Retrieval of company data success.
+
+Total execution 2.00754s elapsed
+
+real	0m2.268s
+user	0m0.244s
+sys	0m0.076s
+
+
+
+\end{lstlisting}
+
+\section{Result of Golang programming on process PostgreSQL database}
+
+\begin{table}[H]
+	\centering
+	\begin{tabulary}{1.0\textwidth}{|L|L|L|L}
+		\hline
+		{\bf Elapsed Time} & {\bf sequential-psql.go}  & {\bf concurrent-psql.go} \\ \hline
+		real      & 6.252s                    &  2.268s                  \\ \hline
+		user     & 0.272s                    &  0.244s                  \\ \hline
+		sys       & 0.032s                    &  0.076s                  \\ \hline
+	\end{tabulary}
+	\caption{Result of Golang programming on PostgreSQL database}
+\end{table}
+
+
+
+
+

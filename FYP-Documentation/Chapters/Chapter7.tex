@@ -1,0 +1,67 @@
+\chapter{Comparison Discussion and Recommendations} 
+% Main chapter title
+
+\label{Chapter7} 
+%Call reference to this chapter use \ref{ChapterX}
+
+\lhead{Chapter 7. \emph{Comparison Discussion and Recommendations}} 
+% Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+\doublespacing
+% LINE FORMATTING
+
+%\clearpage
+%\pagebreak
+
+% MAIN SECTION ==============================
+
+\section{Problems Encountered \& Overcoming Them}
+
+\subsection{Acquisition of free large datasets for data processing}
+
+The problem encountered during data gathering of this project is difficulty on finding suitable free big data from websites. It is a challenge to find problem and raise question by going into data details. It took huge amount of time to understand the focus of project and gather desired data for problem solving. 
+
+With the help of supervisor, I had successfully obtained suitable datasets for this project. He provides guidance and helping hand to clear my doubts and confusion by suggests several website and introduce various data repositories during the meeting. 
+
+\subsection{Goclipse plugin compile error}
+
+Eclipse IDE could not compile and build my Go files, this is because the IDE couldn’t find GOROOT in usr/local/go. The development activities cannot proceed and face impediment on executing critical success factors. The cause of the problem is Golang compiler executable doesn't possess a copy in usr/local/go, which caused Eclipse fail to compile Go file because couldn't file the compiler. 
+
+The problem is resolved with help of supervisors, he guides me to execute Linux command line to resolve the problem during FYP meeting. Moreover, he helps identify the root cause of problem with Google Hangout in the midnights. 
+
+\subsection{Unclear and doubts on writing documentation}
+
+The problem encountered during writing documentation is unclear about the purpose and objectives of each section which leads to messy and poor content deliveries in writing. A certain standard and requirement should be achieved in writing the FYP document.
+
+The problem is resolved with the help of supervisor as he patiently guide us to arrange the content layout of document and writing citation with references.  
+
+\subsection{Difficulty on understand concurrent programming}
+
+The problem encountered during coding process is to understand concurrent concepts. It took an enormous amount of time to implement the ideas of Goroutine and Go channel into the program to achieve concurrency with Go programming language. This is because I do not possess the experiences and knowledge to build a concurrent program.
+
+The problem is resolved with the help of official documentation and StackOverflow websites which provide clear explanation and enlightenment for me to understand the concepts and semantics of languages. 
+
+\section{Execution time performance comparisons}
+
+\subsection{Performance comparisons of Golang process PostgreSQL database}
+
+Table G.2 in Appendix G shows the total elapsed time for Go sequential program and Go concurrent program to retrieve 300 rows of data from PostgreSQL. Real refers to actual elapsed time for the program; user and sys refer to CPU time used by process. Fmt.Println() of data retrieval is removed during the execution to obtain accurate results on program performance. It is found that concurrent programming is faster than sequential programming on process data from PostgreSQL database. 
+
+However, the amount of CPU time spent in the kernel within the process (sys) by concurrent program is higher than sequential program. This is probably caused by utilization of hardware resources when goroutine and gochannel are communicating in the process. 
+
+\subsection{Performance comparisons of Golang process raw CSV files}
+
+Table F.1 in Appendix F shows the total elapsed time for Go sequential program and Go concurrent program to retrieve 300 rows from raw CSV data. Real refers to actual elapsed time for the program; user and sys refer to CPU time used by process. Fmt.Println() of data retrieval is removed during the execution to obtain accurate results on program performance. It is found that concurrent programming is faster than sequential programming on process data from raw CSV files. 
+
+ The optimization to implementations in textit{encoding/csv} has improved \cite{go1.8-changelog} and fixed slow reading problems in Go version 1.8. The build-in CSV library works blazingly well with bufio.Reader() to split the commas during the read CSV files process. 
+
+
+
+
+
+
+
+
+
+
+

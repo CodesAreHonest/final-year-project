@@ -1,0 +1,578 @@
+\begin{thebibliography}{75}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[et~al(2014)]{rise-of-bigdata}
+Ibrahim Abaker Targio~Hashem et~al.
+\newblock \emph{The rise of big data on cloud computing: Review and open
+  research issues}, 2014.
+\newblock URL
+  \url{https://www.acm.org/publications/authors/reference-formatting}.
+\newblock Retrieved on 28/07/2017.
+
+\bibitem[Geer(2015)]{rise-of-multicore}
+David Geer.
+\newblock \emph{Chip Makers Turn to Multicore Processors}, 2015.
+\newblock URL \url{http://ieeexplore.ieee.org/document/1430623/?part=1}.
+\newblock Retrieved on 28/07/2017.
+
+\bibitem[Pike(2005)]{google-tech-talk}
+Bob Pike.
+\newblock \emph{Google Tech Talk}, 2005.
+\newblock URL
+  \url{http://9p.io/sources/contrib/ericvh/go-plan9/doc/go_talk-20091030.pdf}.
+\newblock Retrieved on 28/07/2017.
+
+\bibitem[Andrew G.~R.(1983)]{notation-concurrent-programming}
+Schneider F.~B. Andrew G.~R.
+\newblock Concept and notation of concurrent programming.
+\newblock \emph{Computing Surveys}, pages 1--2, 1983.
+\newblock
+  \doi{http://babel.ls.fi.upm.es/teaching/concurrencia/material/concepts_and_notations.pdf}.
+\newblock Retrieve on 04/08/2017.
+
+\bibitem[Ben-Ari(2005)]{principles-concurrent-programming}
+M.~Ben-Ari.
+\newblock \emph{Principle of Concurrent Programming}.
+\newblock Pearson 2nd Edition, 2005.
+\newblock ISBN 9780321312839.
+
+\bibitem[Guntheroth(2017)]{why-go}
+Kurt Guntheroth.
+\newblock \emph{Why did Google develop Go?}, 2017.
+\newblock URL \url{https://www.quora.com/Why-did-Google-develop-Go/}.
+\newblock Retrieved on 29/07/2017.
+
+\bibitem[golang.org(1999)]{golang-org}
+golang.org.
+\newblock The go programming language, 1999.
+\newblock URL \url{https://golang.org/}.
+\newblock Retrieved on 29/07/2017.
+
+\bibitem[Organization(2011)]{gcc-source}
+GCC Organization.
+\newblock Ada, go and objective-c++ are not default languages, 2011.
+\newblock URL \url{https://gcc.gnu.org/install/configure.html}.
+\newblock Retrieved on 29/07/2017.
+
+\bibitem[Benjamin J.L.~Wang(2017)]{pure-con-programming}
+Uwe~R.Zimmer Benjamin J.L.~Wang.
+\newblock College of engineering and computer sciences the australian national
+  university.
+\newblock \emph{Pure Concurrent Programming}, 2017.
+\newblock URL
+  \url{http://ieeexplore.ieee.org/abstract/document/7965126/?part=1}.
+\newblock Retrieved on 29/07/2017.
+
+\bibitem[Britannica(2017)]{control-structures}
+Britannica.
+\newblock Control structures, 2017.
+\newblock URL
+  \url{https://www.britannica.com/technology/computer-programming-language/Control-structures#ref849883}.
+\newblock Retrieved on 05/08/2017.
+
+\bibitem[Armstrong(2013)]{sequential-vs-concurrent}
+Joe Armstrong.
+\newblock Sequential vs concurrent programming languages.
+\newblock \emph{Programming Erlang 2nd Edition}, 2013.
+\newblock
+  \doi{https://www.safaribooksonline.com/library/view/programming-erlang-2nd/9781941222454/f_0018.html}.
+
+\bibitem[Harvey and Wright(1999)]{sequential-programming}
+Brian Harvey and Matthew Wright.
+\newblock Sequential programming.
+\newblock \emph{Simply Scheme: Introducing Computer Science}, 1999.
+\newblock
+  \doi{https://www.safaribooksonline.com/library/view/programming-erlang-2nd/9781941222454/f_0018.html}.
+
+\bibitem[Sutter(2005)]{concurrency-revolution-in-sd}
+Herb Sutter.
+\newblock Will concurrency be the next revolution in software development?,
+  2005.
+\newblock URL
+  \url{http://www.drdobbs.com/the-concurrency-revolution/184401916}.
+\newblock Retrieved on 05/08/2017.
+
+\bibitem[Stenberg(2017)]{concurrent-distributed-programming-in-future}
+Jan Stenberg.
+\newblock Concurrent and distributed programming in the future, 2017.
+\newblock URL
+  \url{https://www.infoq.com/news/2017/03/distributed-programming-qcon}.
+\newblock Retrieved on 06/08/2017.
+
+\bibitem[Agha(1990)]{oop-concurrent}
+Gul Agha.
+\newblock Concurrent object-oriented programming.
+\newblock \emph{Magazine Communications of the ACM}, pages 125--141, 1990.
+\newblock \doi{10.1145/83880.84528}.
+\newblock URL \url{http://dl.acm.org/citation.cfm?id=84528}.
+\newblock Retrieved on 06/08/2017.
+
+\bibitem[Norvell(2009)]{what-is-concurrent-programming}
+Theodore Norvell.
+\newblock What is concurrent programming?
+\newblock pages 1--2, 2009.
+\newblock URL \url{http://www.engr.mun.ca/~theo/Courses/cp/pub/cp0.pdf}.
+\newblock Retrieved on 06/08/2017.
+
+\bibitem[Sutter and Larus(2005)]{software-concurrency-revolution}
+Herb Sutter and James Larus.
+\newblock Software and concurrency revolution.
+\newblock \emph{Queue -- Multiprocessors}, pages 59--60, 2005.
+\newblock \doi{10.1145/1095408.1095421}.
+\newblock URL \url{http://dl.acm.org/citation.cfm?id=1095421}.
+\newblock Retrieved on 06/08/2017.
+
+\bibitem[Tribaud(2017)]{language-learn-2017}
+Tribaud.
+\newblock Top programming language to learn in 2017, 2017.
+\newblock URL
+  \url{https://www.codingame.com/blog/top-programming-languages-to-learn-in-2017}.
+\newblock Retrieved on 07/08/2017.
+
+\bibitem[J.J.(1978)]{concurrent-programming-concept}
+Horning J.J.
+\newblock Distributed processes: A concurrent programming concept.
+\newblock \emph{Communication of the ACM}, 1978.
+\newblock \doi{10.1145/359642.359651}.
+\newblock URL \url{http://dl.acm.org/citation.cfm?id=359651}.
+\newblock Retrieved on 07/08/2017.
+
+\bibitem[Group(2017{\natexlab{a}})]{what-is-psql}
+PostgreSQL Global~Development Group.
+\newblock What is postgresql?
+\newblock \emph{PostgreSQL 9.5.9 Documentation: Preface.}, 2017{\natexlab{a}}.
+\newblock URL
+  \url{https://www.postgresql.org/docs/9.5/static/intro-whatis.html}.
+\newblock Retrieved on 08/09/2017.
+
+\bibitem[pos(2017)]{postgre-tutorial}
+What is postgresql?, 2017.
+\newblock URL \url{http://www.postgresqltutorial.com/what-is-postgresql/}.
+\newblock Retrieved on 18/08/2017.
+
+\bibitem[Majumdar(2006)]{mvcc-survey}
+Dibyendu Majumdar.
+\newblock A quick survey of multiversion concurrency algorithms.
+\newblock \emph{MVCC Survey}, 2006.
+\newblock URL \url{forge.ow2.org/docman/view.php/237/132/mvcc-survey.pdf}.
+\newblock Retrieved on 19/08/2017.
+
+\bibitem[et~al(2003)]{telegraphCQ-processing}
+Sirish et~al.
+\newblock Telegraphcq: continuous dataflow processing.
+\newblock \emph{SIGMOD '03 Proceedings of the 2003 ACM SIGMOD international
+  conference on Management of data}, page 668, 2003.
+\newblock \doi{10.1145/872757.872857}.
+\newblock URL \url{http://dl.acm.org/citation.cfm?id=872857}.
+\newblock Retrieved on 19/08/2017.
+
+\bibitem[et~al(2011)]{postgre-performance}
+George et~al.
+\newblock Predictable performance and high query concurrency for data
+  analytics.
+\newblock \emph{The VLDB Journal}, pages 227--248, 2011.
+\newblock \doi{10.1007/s00778-011-0221-2}.
+\newblock URL
+  \url{http://delivery.acm.org.proxyvlib.mmu.edu.my/10.1145/1970000/1969355/778_2011_Article_221.pdf?ip=203.106.62.29&id=1969355&acc=ACTIVE%20SERVICE&key=69AF3716A20387ED%2EE854CB4DB8D6D408%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&CFID=801067487&CFTOKEN=72015032&__acm__=1503554298_5a4d19e623542c1086bd72577837f01a#URLTOKEN#}.
+\newblock Retrieved on 19/08/2017.
+
+\bibitem[Group(2017{\natexlab{b}})]{psql-concurrency}
+PostgreSQL Global~Development Group.
+\newblock Concurrency control.
+\newblock \emph{Introduction}, 2017{\natexlab{b}}.
+\newblock URL \url{https://www.postgresql.org/docs/9.5/static/mvcc-intro.html}.
+\newblock Retrieved on 10/09/2017.
+
+\bibitem[Group(2017{\natexlab{c}})]{psql-mvcc}
+PostgreSQL Global~Development Group.
+\newblock Postgresql concurrency with mvcc.
+\newblock \emph{How MVCC Works}, 2017{\natexlab{c}}.
+\newblock URL
+  \url{https://devcenter.heroku.com/articles/postgresql-concurrency}.
+\newblock Retrieved on 10/09/2017.
+
+\bibitem[Group(2017{\natexlab{d}})]{psql-linux-dl}
+PostgreSQL Global~Development Group.
+\newblock Linux downloads.
+\newblock \emph{PostgreSQL Support Documentation}, 2017{\natexlab{d}}.
+\newblock URL \url{https://www.postgresql.org/download/linux/ubuntu/}.
+\newblock Retrieved on 10/09/2017.
+
+\bibitem[Pike(2010)]{expressiveness-of-go}
+Rob Pike.
+\newblock Expressiveness of go, 2010.
+\newblock URL
+  \url{http://www.intercapedine.net/documenti/ExpressivenessOfGo.pdf}.
+\newblock Retrieved on 07/08/2017.
+
+\bibitem[Filip and Martin(2015)]{radio-access-system-with-go}
+Forsby Filip and Persson Martin.
+\newblock Evaluation of golang for high performance scalable radio access
+  systems, 2015.
+\newblock URL
+  \url{http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A873124&dswid=-8907#sthash.gj7rKTc5.dpbs}.
+\newblock Retrieved on 07/08/2017.
+
+\bibitem[Polak and Pitner(2014)]{text-processing-performance-with-go}
+Slavomir Polak and Tomas Pitner.
+\newblock Text processing performance in go language.
+\newblock pages 149--152, 2014.
+\newblock URL
+  \url{http://www.cssi-morava.cz/new/doc/IT2014/sbornik.pdf#page=149}.
+\newblock Retrieved on 08/08/2017.
+
+\bibitem[Singh(2015)]{sliding-puzzle-game-with-go}
+Pravenda Singh.
+\newblock Implementing an intelligent version of the classical sliding-puzzle
+  game for unix terminals using golang’s concurrency primitives.
+\newblock 2015.
+\newblock URL \url{https://arxiv.org/pdf/1503.08345.pdf}.
+\newblock Retrieved on 08/08/2017.
+
+\bibitem[Hoare(2013)]{rust}
+Hoare.
+\newblock The rust programming language, 2013.
+\newblock URL \url{http://www.rust-lang.org/}.
+\newblock Retrieved on 08/08/2017.
+
+\bibitem[et~al(2013{\natexlab{a}})]{gpu-programming-with-rust}
+Eric~Holk et~al.
+\newblock Gpu programming in rust: Implementing high-level abstractions in a
+  systems-level language.
+\newblock \emph{Indiana University}, 2013{\natexlab{a}}.
+\newblock \doi{10.1109/IPDPSW.2013.173}.
+\newblock URL \url{http://ieeexplore.ieee.org/abstract/document/6650903}.
+\newblock Retrieved on 08/08/2017.
+
+\bibitem[Reed(2015)]{rust-patina}
+Eric Reed.
+\newblock Patina: A formalization of the rust programming language. university
+  of washington.
+\newblock 2015.
+\newblock URL
+  \url{https://www.cs.washington.edu/tr/2015/03/UW-CSE-15-03-02.pdf}.
+\newblock Retrieved on 08/08/2017.
+
+\bibitem[et~al(2013{\natexlab{b}})]{comparing-usability-language}
+Sebastian~Nanz et~al.
+\newblock Design of an empirical study for comparing the usability of
+  concurrent programming languages.
+\newblock \emph{Information of Software Technology}, 55\penalty0 (7):\penalty0
+  1304--1315, 2013{\natexlab{b}}.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S0950584912001802}.
+\newblock Retrieved on 09/08/2017.
+
+\bibitem[Shapiro(2006{\natexlab{a}})]{embedding-among-languages}
+Ehud Shapiro.
+\newblock Embeddings among concurrent programming languages (preliminary
+  version).
+\newblock \emph{Lecture Notes in Computer Science}, 630, 2006{\natexlab{a}}.
+\newblock URL
+  \url{https://link.springer.com/chapter/10.1007%2FBFb0084811?LI=true}.
+\newblock Retrieved on 09/08/2017.
+
+\bibitem[Shapiro(2006{\natexlab{b}})]{separate-languages-with-categories}
+Ehud Shapiro.
+\newblock Separating concurrent languages with categories of language
+  embeddings.
+\newblock 2006{\natexlab{b}}.
+\newblock URL
+  \url{https://pdfs.semanticscholar.org/7d2a/9a3954922741472f5ff06d2c1dafb258420e.pdf}.
+\newblock Retrieved on 09/08/2017.
+
+\bibitem[Shapiro(1989)]{family-of-concurrency-languages}
+Ehud Shapiro.
+\newblock The family of concurrency programming languages.
+\newblock \emph{ACM Computing Surveys (CSUR)}, 21\penalty0 (3):\penalty0
+  413--510, 1989.
+\newblock URL \url{http://dl.acm.org/citation.cfm?id=72555}.
+\newblock Retrieved on 10/08/2017.
+
+\bibitem[Herlihy(1993)]{methodology-concurrent-object}
+Maurice Herlihy.
+\newblock A methodology for implementing highly concurrent data objects.
+\newblock \emph{ACM Transactions on Programming Languages and Systems
+  (TOPLAS)}, 15\penalty0 (5), 1993.
+\newblock \doi{10.1145/161468.161469}.
+\newblock URL \url{http://dl.acm.org/citation.cfm?id=161469}.
+\newblock Retrieved on 13/08/2017.
+
+\bibitem[Medvidovic and Taylor(1997)]{framework-classifying-language}
+Nenad Medvidovic and Richard~N. Taylor.
+\newblock A framework for classifying and comparing architecture description
+  languages.
+\newblock \emph{ACM SIGSOFT Software Engineering Notes Homepage}, 22\penalty0
+  (6):\penalty0 60--76, 1997.
+\newblock \doi{10.1145/267896.267903}.
+\newblock URL \url{http://dl.acm.org/citation.cfm?id=267903}.
+\newblock Retrieved on 13/08/2017.
+
+\bibitem[P.D.(1982)]{concurrent-programming-survey}
+Stotts P.D.
+\newblock A comparative survey of concurrent programming languages.
+\newblock \emph{ACM SIGPLAN}, 17:\penalty0 50--61, 1982.
+\newblock \doi{10.1109/2.73}.
+\newblock URL
+  \url{http://research.cs.queensu.ca/home/cordy/cisc860/Biblio/drb/CE/stotts82.pdf}.
+\newblock Retrieved on 15/08/2017.
+
+\bibitem[W.F.(1996)]{compare-explicit-implicit-concurrent-language}
+Vincent W.F.
+\newblock A comparison of implicit and explicit parallel programming.
+\newblock \emph{Journal of Parallel and Distributed Computing}, 34\penalty0
+  (1):\penalty0 50--65, 1996.
+\newblock URL
+  \url{http://www.sciencedirect.com/science/article/pii/S0743731596900453}.
+\newblock Retrieved on 15/08/2017.
+
+\bibitem[Loidl(2003)]{compare-parallel-functional-languages}
+H.W. Loidl.
+\newblock Comparing parallel functional languages: Programming and performance.
+\newblock \emph{Higher-Order and Symbolic Computation}, 16\penalty0
+  (3):\penalty0 203--251, 2003.
+\newblock \doi{10.1023/A:1025641323400}.
+\newblock URL \url{http://dl.acm.org/citation.cfm?id=940872}.
+\newblock Retrieved on 15/08/2017.
+
+\bibitem[Marlow(2013)]{distributed-programming}
+Simon Marlow.
+\newblock Distributed programming.
+\newblock \emph{Parallel and Concurrent Programming in Haskell}, 2013.
+\newblock URL
+  \url{https://www.safaribooksonline.com/library/view/parallel-and-concurrent/9781449335939/ch14.html}.
+\newblock Retrieved on 08/08/2017.
+
+\bibitem[Stackoverflow(2016)]{developer-survey-results}
+Stackoverflow.
+\newblock Ii. most loved, dreaded, and wanted., developer survey results, 2016.
+\newblock URL \url{https://insights.stackoverflow.com/survey/2016}.
+\newblock Retrieved on 08/08/2017.
+
+\bibitem[Ty(2017)]{error-handling-in-rust-go}
+Ty.
+\newblock Rust vs go adventures in error handling, 2017.
+\newblock URL \url{https://insights.stackoverflow.com/survey/2016}.
+\newblock Retrieved on 08/08/2017.
+
+\bibitem[BV(2017)]{tiobe-go}
+Tiobe~Software BV.
+\newblock The go programming language.
+\newblock \emph{TIOBE Index}, 2017.
+\newblock URL \url{https://www.tiobe.com/tiobe-index/go/}.
+\newblock Retrieved on 11/09/2017.
+
+\bibitem[Stackoverflow(2017)]{stackoverflow-rust}
+Stackoverflow.
+\newblock Most love programming language.
+\newblock \emph{Developer Survey Results 2017}, 2017.
+\newblock URL \url{https://insights.stackoverflow.com/survey/2017}.
+\newblock Retrieved on 11/09/2017.
+
+\bibitem[golang.org(2017)]{go-lang}
+golang.org.
+\newblock The go programming language, 2017.
+\newblock URL \url{https://golang.org/doc/}.
+\newblock Retrieved on 08/08/2017.
+
+\bibitem[rustlang.org(2017)]{rust-lang}
+rustlang.org.
+\newblock The rust programming language, 2017.
+\newblock URL \url{https://www.rust-lang.org/en-US/}.
+\newblock Retrieved on 08/08/2017.
+
+\bibitem[Doxsey(2017)]{intro-to-go}
+Caleb Doxsey.
+\newblock \emph{Concurrency}.
+\newblock An Introduction to Programming in Go. 2017.
+\newblock URL \url{https://www.golang-book.com/books/intro/10}.
+\newblock Retrieved on 08/08/2017.
+
+\bibitem[Wen(2017)]{rust-memory-guarantees}
+Chua~Yong Wen.
+\newblock Appreciating rust’s memory safety guarantees, 2017.
+\newblock URL
+  \url{https://blog.gds-gov.tech/appreciating-rust-memory-safety-438301fee097}.
+\newblock Retrieved on 09/08/2017.
+
+\bibitem[Hackernews(2017)]{rust-vs-go-news}
+Hackernews.
+\newblock Rust vs go, 2017.
+\newblock URL \url{https://news.ycombinator.com/item?id=13430108}.
+\newblock Retrieved on 09/08/2017.
+
+\bibitem[Nilsen(2017)]{go-csp}
+Arild Nilsen.
+\newblock Communication sequential process (csp).
+\newblock \emph{An alternative to the actor model}, 2017.
+\newblock URL \url{https://arild.github.io/csp-presentation/}.
+\newblock Retrieved on 11/09/2017.
+
+\bibitem[Yager(2017)]{go-problem}
+Will Yager.
+\newblock The problem.
+\newblock \emph{Why Go is no good}, 2017.
+\newblock URL \url{http://yager.io/programming/go.html}.
+\newblock Retrieved on 11/09/2017.
+
+\bibitem[Techopedia(2017)]{rust-actor-model}
+Techopedia.
+\newblock Actor model.
+\newblock \emph{Programming Tools}, 2017.
+\newblock URL \url{https://www.techopedia.com/definition/25150/actor-model}.
+\newblock Retrieved on 11/09/2017.
+
+\bibitem[Ticki(2016)]{why-use-rust}
+Ticki.
+\newblock Why should i use rust?
+\newblock \emph{The RUST programming language}, 2016.
+\newblock URL
+  \url{https://www.reddit.com/r/rust/comments/4l44z3/why_should_i_use_rust/}.
+\newblock Retrieved on 11/09/2017.
+
+\bibitem[lang organization(2017)]{rust-not-oop}
+Rust lang organization.
+\newblock How do i map object-oriented concepts to rust?
+\newblock \emph{Design Patterns}, 2017.
+\newblock URL
+  \url{https://www.rust-lang.org/en-US/faq.html#how-do-i-map-object-oriented-concepts-to-rust}.
+\newblock Retrieved on 11/09/2017.
+
+\bibitem[Hoare(2012)]{difference-unix}
+Simon Hoare.
+\newblock What is the difference between unix, linux and ubuntu?
+\newblock \emph{Ask Ubuntu Forum}, 2012.
+\newblock URL
+  \url{https://askubuntu.com/questions/183723/whats-the-difference-between-unix-linux-and-ubuntu}.
+\newblock Retrieved on 08/09/2017.
+
+\bibitem[Invert(2010)]{ubuntu-secure-than-window}
+Invert.
+\newblock Why is ubuntu is more secure than windows or mac os x?
+\newblock \emph{Ask Ubuntu Forum}, 2010.
+\newblock URL
+  \url{https://askubuntu.com/questions/1069/why-is-ubuntu-more-secure-than-windows-or-mac-os-x}.
+\newblock Retrieved on 08/09/2017.
+
+\bibitem[Noyes(2017)]{linux-secure-than-window}
+Katherine Noyes.
+\newblock Why linux is more secure than windows?
+\newblock \emph{Linux Line}, 2017.
+\newblock URL
+  \url{https://www.pcworld.com/article/202452/why_linux_is_more_secure_than_windows.html}.
+\newblock Retrieved on 08/09/2017.
+
+\bibitem[McInnes(2015)]{difference-unix-msdos}
+James McInnes.
+\newblock What are key differences between unix and ms-dos?
+\newblock \emph{Programming language comparisons}, 2015.
+\newblock URL
+  \url{https://www.quora.com/What-are-the-key-differences-between-Unix-and-MS-DOS}.
+\newblock Retrieved on 08/09/2017.
+
+\bibitem[Pefhany(2014)]{printf-bad}
+Spehro Pefhany.
+\newblock Why is printf() bad for debugging embedded systems?
+\newblock \emph{Electrical Engineering Stack Exchange}, 2014.
+\newblock URL
+  \url{https://electronics.stackexchange.com/questions/105283/why-is-printf-bad-for-debugging-embedded-systems}.
+\newblock Retrieved on 11/09/2017.
+
+\bibitem[project(2017)]{what-is-tracing}
+The~LTTng project.
+\newblock What is tracing?
+\newblock \emph{Trace Compass Documentation}, 2017.
+\newblock URL \url{http://lttng.org/docs/v2.9/#doc-what-is-tracing}.
+\newblock Retrieved on 11/09/2017.
+
+\bibitem[Tutorialpoint(2017)]{what-is-debugger}
+Tutorialpoint.
+\newblock What is gnu debugger?
+\newblock \emph{How GDB debugs?}, 2017.
+\newblock URL
+  \url{https://www.tutorialspoint.com/gnu_debugger/what_is_gdb.htm}.
+\newblock Retrieved on 11/09/2017.
+
+\bibitem[Tutorialspoint(2017)]{data-completeness-check}
+Tutorialspoint.
+\newblock Data profile validation.
+\newblock \emph{ETL Testing - Data Completeness}, 2017.
+\newblock URL
+  \url{https://www.tutorialspoint.com/etl_testing/etl_testing_data_completeness.htm}.
+\newblock Retrieved on 03/02/2018.
+
+\bibitem[Techopedia(2018)]{data-redundancy-definition}
+Techopedia.
+\newblock Data redundancy.
+\newblock \emph{Unified Communication}, 2018.
+\newblock URL
+  \url{https://www.techopedia.com/definition/18707/data-redundancy}.
+\newblock Retrieved on 03/02/2018.
+
+\bibitem[Rouse(2005)]{data-encoding-definition}
+Margaret Rouse.
+\newblock Encoding and decoding.
+\newblock \emph{Programming}, 2005.
+\newblock URL
+  \url{http://searchnetworking.techtarget.com/definition/encoding-and-decoding}.
+\newblock Retrieved on 03/02/2018.
+
+\bibitem[Eillingwood(2013)]{sed-usage}
+Justin Eillingwood.
+\newblock The basics of using the sed stream editor to manipulate text in
+  linux.
+\newblock \emph{Linux Basics and Commands}, 2013.
+\newblock URL
+  \url{https://www.digitalocean.com/community/tutorials/the-basics-of-using-the-sed-stream-editor-to-manipulate-text-in-linux}.
+\newblock Retrieved on 03/02/2018.
+
+\bibitem[MuleSoft(2018)]{data-transformation-definition}
+MuleSoft.
+\newblock Data transformation.
+\newblock \emph{SQA Resources}, 2018.
+\newblock URL \url{https://www.mulesoft.com/resources/esb/data-transformation}.
+\newblock Retrieved on 03/02/2018.
+
+\bibitem[Satis(2009)]{orm-introduction}
+Satis.
+\newblock Introduction.
+\newblock \emph{What is an ORM and where can I learn about it}, 2009.
+\newblock URL
+  \url{https://stackoverflow.com/questions/1279613/what-is-an-orm-and-where-can-i-learn-more-about-it}.
+\newblock Retrieved on 03/02/2018.
+
+\bibitem[Experian(2014)]{data-cleaning-definition}
+Experian.
+\newblock What is data cleansing.
+\newblock \emph{Data Cleansing}, 2014.
+\newblock URL \url{https://www.edq.com/uk/glossary/data-cleansing/}.
+\newblock Retrieved on 03/02/2018.
+
+\bibitem[Oberoi(2017)]{normalization-benefits}
+Vikrant Oberoi.
+\newblock What is data redundancy in a dbms? what is a simple explanation?
+\newblock \emph{Database management software of Quora}, 2017.
+\newblock URL
+  \url{https://www.quora.com/What-is-data-redundancy-in-a-DBMS-What-is-a-simple-explanation}.
+\newblock Retrieved on 04/02/2018.
+
+\bibitem[Rouse(2017)]{data-migration-definition}
+Margaret Rouse.
+\newblock Definition.
+\newblock \emph{data migration}, 2017.
+\newblock URL
+  \url{http://searchstorage.techtarget.com/definition/data-migration}.
+\newblock Retrieved on 04/02/2018.
+
+\bibitem[organization(2017)]{go1.8-changelog}
+Golang organization.
+\newblock Performance.
+\newblock \emph{Go 1.8 Release Notes}, 2017.
+\newblock URL \url{https://golang.org/doc/go1.8#performance}.
+\newblock Retrieved on 18/09/2017.
+
+\end{thebibliography}

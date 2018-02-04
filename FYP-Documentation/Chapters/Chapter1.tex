@@ -1,0 +1,115 @@
+\chapter{Introduction} 
+% Main chapter title
+
+\label{Chapter1} 
+%Call reference to this chapter use \ref{ChapterX}
+
+\lhead{Chapter 1. \emph{Introduction}} 
+% Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+\doublespacing
+% LINE FORMATTING
+
+%\clearpage
+%\pagebreak
+
+% MAIN SECTION ==============================
+\section{Introduction}
+
+In a globalization and modernization era, the volume and variety of big data continue to increase at an exponential rate. Cloud computing environment such as IBM, Microsoft Azure, GCP and Amazon AWS possess great shifts in modern ICT and robust architecture to perform large-scale and complex computing service for enterprise applications.\cite{rise-of-bigdata} Chip makers AMD, IBM, Intel, and Sun rapidly building chips with energy-efficient multiple processing cores that improve overall performance by handling more work in parallel for server, desktops and laptops.  \cite{rise-of-multicore} The performance and availability of system required to increase dramatically with the inclusion of multi-threading and multi-processing.
+
+Software development activities are consistently working on improving efforts in development and deployment activities by solving issues, challenges and problem regarding concurrent and distributed computing. With the advent of client/server focus; massive cluster and networking technologies, the advancement of technology reveal problem and constraints on linguistic issues to the developer.\cite{google-tech-talk} Availability of inexpensive hardware allow developer to exploit various possibilities in the construction of distributed system and multi-processors that were previously economically infeasible.  \cite{notation-concurrent-programming}
+
+Software application today is inherently and expanded into concurrent and distributed computing with real-time applications. \cite{principles-concurrent-programming}. However, majority of systems language not designed with concurrent and parallelization in mind and software users and  load of request gradually increase. 
+
+Google created a new concurrent programming language, known as Go to rewrite their large production system to solve compile time and string processing by inventing a language that design for efficiency, simplicity and quick compilation without dependency checking. \cite{why-go} At the same time, Mozilla Research invents a system concurrent programming language, known as Rust that emphasize security, safety and control with performance. 
+
+Go is free and open source programming language created by Google at 2007 and announce on 2009 \cite{golang-org} with two compiler implementation, GC and GCCGO. \cite{gcc-source} The language were designed for high-speed compilation, support for concurrency and communication, and efficient or latency-free garbage collection. It is C-like and statically typed language that compiles into single binary with go compiler to reduce compile time. Go allow developer to model problems with a random order of events, optimize data operations, and utilize parallel processing of machines and network with concurrency programming. \cite{pure-con-programming}
+
+In this paper, we are going to focus on utilizing concurrent programming concepts of RUST and Go language. We will conduct a head-to-head comparison of RUST and Go in every individual perspective including performance in data processing. This paper attempts to expose important concepts of these languages and conduct a comparison for the use of self-study material and propose an evaluation scheme.
+\pagebreak
+
+\subsection{Project Brief Description}
+We will use the Go programming language (Go or Golang) and Rust programming language to process a combination of static data to represents a real time, concurrent and distributed processing system. For this application, we will define the entire processing topology, covering the key concepts and elements of data sources (inputs), data processors (program filters/codes), and the data outputs. 
+
+The application process mash-up of two unambiguous, free and informed consent data sources in a stream and produce meaningful information with the concepts, elements and ideas of Go and RUST language features on Ubuntu 16.04 LTS operating system.
+
+The UK Company Profile Data, UK Longitudinal Education Outcomes (LEO) data and UK National Statistics Postcode Lookup (NSPL) data are handled by PostgreSQL, an object-oriented relational database management system. These data are processed by program written with Go language and Rust language to conduct language performance comparison and obtain useful information. Further conclusions and inference can be drawn from output to identify the expressive power and concepts of these language.
+
+\pagebreak
+\subsection{Project Objectives}
+The objectives of this project are:
+
+
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+
+	\item To learn and understand about Go and RUST programming language concepts and their concurrent processing features. 
+	\item To explore different techniques on data processing, concurrent and distributed programming for big data.  
+	\item To conduct performance comparison between Go and Rust language implementation in data processing with concurrent programming.
+	\item To conduct a comparison on Go and Rust concurrent programming language concepts in retrieving big data with different techniques. 
+	\item To implement the handling of big data with PostgreSQL, an object-oriented relational database management system (OORDBMS).
+
+\end{enumerate}
+
+\pagebreak
+
+\subsection{Project Motivations}
+
+During my involvement and participation of industrial training in JobStreet.com (A SEEK ASIA Company), my colleague often discuss about Golang implementation in worker thread with session on server side scripting to handle concurrent request and reduce web server loads. In Tech Talk Thursday with Grab Singapore organised in MMU Cyberjaya in January, the speaker mentioned the companies use Go language as tool to build their backend on handling request. Indirectly, the discussion and seminar by technical professionals stimulate my curiosity on capabilities and usage of golang.
+
+In my process of exploration, I had attended several Golang meetups and learning sections in Kuala Lumpur. I am impressed the new language helps company saving cost on building servers and running well in small hardware specs. Other than that, I had discovered various notable company and sites start migrated their essential services and critical component from other languages to Go. Within several years, Google’s Go language has gone from being an unfamiliar language to well-known promising tools or significant source for a big technology company to develop fast-moving new projects.
+
+As Go soared to a new height in Tiobe programming language popularity, it has inspired me to gather more information and knowledge regarding the capabilities of the language. After viewing online articles and journals, I had discover this concurrency-friendly programming language may be the future of development, and it stimulates my passion and excitement for learning the language.
+
+Simultaneously, I notice this project was published as FYP title in this semester. Without any hesitation, I am exhilarated to pursuit and register this project in my final academic year in order unveil the capabilities of golang. It will be enjoyable and great to learn this language throughout the project.
+
+
+
+%MAIN SECTION ================================
+\section{Project Scope}
+
+\subsection{Phase 1 Scope of Work}
+
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+	
+\item Research project interest and raise question in different categories of data repositories.  
+\item Setup boot partition for Ubuntu 16.04 LTS operating system with Window 10.
+\item Install Go language compiler and RUST language compiler on PC. 
+\item Install Eclipse for Parallel Application IDE.
+\item Install Goclipse and RUST GUI into Eclipse IDE. 
+\item Install Terminator application into Ubuntu; it is an application that produces multiple terminals in a single window so that developer can perform various task in a single environment.
+\item Install Synaptic Package Manager that enable upgrade and remove software package a user-friendly way without dealing with dependencies issues.
+\item Set up PostgreSQL into PC for big data handling.
+
+\end{enumerate}
+
+\subsection{Project Deliverables for Phase 1}
+
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+\item Acquire free, consent and big UK’s basic company data published by Companies House in data.gov.uk that containing basic company data of live companies on the register for data processing.
+\item Acquire institution subject data published by UK Higher Education site and create a mashup in a project which works with two sets of data and process them to provide output. 
+\item Acquire postcode data for UK location as the linker of basic company data with institution subject data. 
+\item Develop a proof of concepts and understanding on concurrent and program with Go language.
+\item Write Go code for sequential and concurrent programs which able to process raw CSV data and PostgreSQL database. 
+\item Conduct comparison on sequential and concurrent programming with Go programming language on retrieving 300 rows of data. 
+
+\end{enumerate}
+
+%\subsection{Phase 2 Scope of Work}
+%
+%\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+%\item Write a C programming language based CNC interpreter program on Linux to parse G-Code language and send command signals to Digilent Nexys 3 FPGA board.
+%\item Develop a VHDL programming language CNC interpolation program for Digilent Nexys 3 FPGA to perform 3-Axis interpolation to prototype CNC machine.
+%\end{enumerate}
+%
+%\subsection{Project Deliverables for Phase 2}
+%
+%\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+%\item A Linux-based CNC Interpreter program capable of parsing G-Code files and send generated commands to Digilent Nexys3 FPGA Board.
+%\item A FPGA-based CNC Interpolator driver capable of generating digital pulses as a signal for the CNC machine.
+%\item A report based on this project.
+%\end{enumerate}
+
+% MAIN SECTION ===============================
+%\section{Chapter Summary}
+%Your job here

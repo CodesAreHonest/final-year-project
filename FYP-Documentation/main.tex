@@ -1,0 +1,374 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Masters/Doctoral Thesis 
+% LaTeX Template
+% Version 1.43 (17/5/14)
+%
+% This template has been downloaded from:\documentclass[options]{class}
+% http://www.LaTeXTemplates.com
+%
+% Current author:
+% Some items were added and modified by for use in 
+% undergraduate Final Year Project (FYP) at
+% Multimedia University, Cyberjaya, Malaysia.
+% Wan Ruslan Yusoff 
+% wruslan@mmu.edu.my
+%
+% Original authors:
+% Steven Gunn 
+% http://users.ecs.soton.ac.uk/srg/softwaretools/document/templates/
+% and
+% Sunil Patel
+% http://www.sunilpatel.co.uk/thesis-template/
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Note:
+% Make sure to edit document variables in the Thesis.cls file
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[12pt, oneside]{Thesis} 
+% The default font size and one-sided printing (no margin offsets)
+
+\graphicspath{{Pictures/}} 
+% Specifies the directory where pictures are stored
+\usepackage{float} 
+% To make picture stay at placement
+\usepackage{pdfpages}
+\usepackage{setspace} 
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{lscape}
+
+% Double spacing
+%\doublespacing % Use on each page
+
+\usepackage[square, numbers, comma, sort&compress]{natbib} 
+% Use the natbib reference package - read up on this to edit the reference style; if you want text (e.g. Smith et al., 2012) for the in-text references (instead of numbers), remove 'numbers' 
+\usepackage{hyperref}
+\hypersetup{urlcolor=black, colorlinks=true} 
+% Colors hyperlinks in blue - change to black if annoying
+
+
+\title{\ttitle} 
+% Defines the thesis title - don't touch this
+
+% ================================================
+% % ADDED BY WRY
+\usepackage{caption}
+\usepackage{appendix}
+\usepackage{tikz}
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+\usetikzlibrary{chains}
+
+% ================================================
+% % ADDED BY CHARLES
+\usepackage{tabulary}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{enumitem}
+
+% ==================================================
+\begin{document}
+% ==================================================
+
+
+\frontmatter 
+% Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+
+\setstretch{1.3} 
+% Line spacing of 1.3
+
+% Define the page headers using the FancyHdr package and set up for one-sided printing
+\fancyhead{}
+
+% Clears all page headers and footers
+\rhead{\thepage}
+
+% Sets the right side header to show the page number
+\lhead{}
+% Clears the left side page header
+
+\pagestyle{fancy} 
+% Finally, use the "fancy" page style to implement the FancyHdr headers
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} 
+% New command to make the lines in the title page
+
+% PDF meta-data
+\hypersetup{pdftitle={\ttitle}}
+\hypersetup{pdfsubject=\subjectname}
+\hypersetup{pdfauthor=\authornames}
+\hypersetup{pdfkeywords=\keywordnames}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage}
+\begin{center}
+
+{\LARGE \ttitle}\\[0.4cm] 
+\vfill
+\Large{CHAI YING HUA} 
+
+\vfill
+\normalsize{SESSION 2017/2018}
+\vfill
+\normalsize\FACNAME\\
+\normalsize \UNIVNAME\\
+{\normalsize SEPTEMBER 2017}\\ 
+\vfill
+\end{center}
+
+\end{titlepage}
+\thispagestyle{empty}
+\begin{center}
+
+	{\LARGE \ttitle}\\[0.4cm] % Thesis title
+	\vfill
+	\footnotesize{BY}
+	\vfill
+	\Large{CHAI YING HUA} % Author name - remove the \href bracket to remove the link
+	\vfill
+	\footnotesize{SESSION 2017/2018}
+	\vfill
+	\footnotesize{THIS PROJECT REPORT IS PREPARED FOR}
+	\vfil
+	\normalsize\FACNAME\\
+	\normalsize \UNIVNAME\\
+	\normalsize{IN PARTIAL FULFILLMENT}\\
+	\normalsize{FOR}\\
+	\vfil
+	\normalsize{BACHELOR OF COMPUTER SCIENCE (HONS)}\\
+	\normalsize{WITH SPECIALIZATION IN}\\
+	\normalsize{SOFTWARE ENGINEERING}\\
+	\vfil
+	\normalsize\FACNAME\\
+	\vfil
+	\Large \UNIVNAME\\
+	\vfil
+	{\normalsize SEPTEMBER 2017}\\ % Date
+	%\includegraphics{Logo} % University/department logo - uncomment to place it
+	\vfill
+\end{center}
+
+\newpage
+\thispagestyle{empty}
+
+The copyright of this thesis belongs to the author under the terms of the Copyright Act 1987 as qualified by Regulation 4(1) of the Multimedia University Intellectual Property Regulations. Due acknowledgment shall always be made of the use of any material contained in, or derived from, this thesis. 
+
+\vfil
+\textit{© Chai Ying Hua, 2017}\\
+All rights reserved
+
+
+%----------------------------------------------------------------------------------------
+%	DECLARATION PAGE
+%	Your institution may give you a different text to place here
+%----------------------------------------------------------------------------------------
+\newpage
+\Declaration{
+
+\addtocontents{toc}{\vspace{1em}} 
+% Add a gap in the Contents, for aesthetics
+
+I hereby declare that the work in this thesis have been done by myself and no portion of the work contained in this thesis has been submitted in support of any application for any other degree or qualification of this or any other university or institute of learning.
+
+\vfill
+
+\rule[1em]{25em}{0.5pt} % This prints a line for the signature
+\\Name: \textit{Chai Ying Hua}
+\\Student ID: 1141328508
+\\Faculty of Computing \& Informatics
+\\Multimedia University
+\\Date: 1$^{st}$ August 2017
+
+}
+
+\clearpage % Start a new page
+
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+\setstretch{1.3} % Reset the line-spacing to 1.3 for body text (if it has changed)
+
+\acknowledgements{\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
+\begin{flushleft}
+
+The success and outcome of this project require tons of guidance and assistance from many people, and I am blessed and appreciate to have got this all along the completion of my project. My project would not be complete smoothly without their helping hands.
+
+First and foremost, I would like to express sincere gratitude to my project supervisor, Mr Wan Ruslan Yusoff of Faculty of Computing Informatics at Multimedia University Cyberjaya for your unfailing support and assistance on my project. The door to Ruslan office and his mailbox was always open whenever I faced any impediment and trouble about my project or writing. He consistently and patiently steered me in the right direction whenever he thought I needed it. Also, he is eager to share his expertise and industrial experience in computing fields and provide encouragement and motivation on my project.
+
+I owe gratitude to my parents for providing chances and opportunity for me to study in Multimedia University. They are caring, and concern about my academic and regularly provide support and attention on cultivating me to get myself prepare for an upcoming challenge.
+
+Last but not least, I place on record, my sense of gratitude to my friend and classmate, who directly and indirectly unceasing encouragement and provide guidance till the completion of my project.
+  
+
+\end{flushleft}
+}
+\clearpage % Start a new page
+
+%----------------------------------------------------------------------------------------
+%	LIST OF CONTENTS/FIGURES/TABLES PAGES
+%----------------------------------------------------------------------------------------
+
+\pagestyle{fancy} % The page style headers have been "empty" all this time, now use the "fancy" headers as defined before to bring them back
+%
+\lhead{\emph{Contents}} % Set the left side page header to "Contents"
+\tableofcontents % Write out the Table of Contents
+
+\lhead{\emph{List of Tables}} % Set the left side page header to "List of Tables"
+\listoftables % Write out the List of Tables
+%
+\lhead{\emph{List of Figures}} % Set the left side page header to "List of Figures"
+\listoffigures % Write out the List of Figures
+
+% ADDED BY WRY
+% AUTOMATIC LIST OF LISTINGS
+% \phantomsection
+
+
+\lhead{\emph{Listing}}	
+\lstlistoflistings
+
+%----------------------------------------------------------------------------------------
+%	ABBREVIATIONS AND ACRONYMS 
+%----------------------------------------------------------------------------------------
+%% ADDED BY WRY
+\pagebreak
+\addtotoc{Abbreviations and Acronyms} 
+\lhead{\normalfont\huge{Abbreviations and Acronyms}}
+%
+%
+%% TABLE HEADER
+\begin{table}[ht]
+\begin{tabular}{p{2.5cm}p{11.0cm}}
+%% ========================================
+
+\textbf{IBM} & International Business Machines\\
+\textbf{GCP} & Google Cloud Platform\\
+\textbf{AWS} & Amazon Web Services\\
+\textbf{ICT} & Information and Communication Technology\\
+\textbf{AMD} & Advanced Micro Devices\\
+\textbf{GCC} & GNU Compiler Collection\\
+\textbf{GCCGO} & Golang GNU Compiler Collection\\
+\textbf{LEO} & Longitudinal Education Outcomes \\
+\textbf{NSPL} & National Statistic Postcode Lookup\\
+\textbf{OORDBMS} & Object-Oriented Relational Database Management System\\
+\textbf{MMU} & Multimedia University\\
+\textbf{FYP} & Final Year Project\\
+\textbf{IDE} & Integrated Development Environment\\
+\textbf{UK} & United Kingdom\\
+\textbf{CTF} & Capture The Flag\\ 
+\textbf{MVCC} & Multi-Version Concurrency Control\\
+\textbf{TCP} & Transmission Control Protocol\\
+\textbf{HTTP} & Hypertext Transfer Protocol\\
+\textbf{OO} & Object-Oriented\\
+\textbf{POC} & Proof Of Concept\\
+\textbf{OS} & Operating System\\
+\textbf{CSV} & Comma Separate Values\\
+\textbf{GDB} & GNU Project Debugger\\
+\textbf{GNU} & GNU's Not Unix!\\
+\textbf{UNIX} & Uniplexed Information and Computing Services\\
+\textbf{SQL} & Structured Query Language\\
+\textbf{WIP} & Work In Progress\\
+
+
+%% ======================================
+\end{tabular}
+\end{table}
+
+
+%% ======================================
+%%	ABSTRACT PAGE 
+%% ADDED BY WRY
+\pagebreak
+\addtotoc{Management Summary} 
+\lhead{\normalfont\huge{Management Summary}}
+
+The project focuses on a comparison of concurrent programming language concepts and their expressive power on data processing with concurrent and distributed computing.
+
+The research draws attention to compare Go and Rust programming language, these languages’ paradigm, characteristic and focus are further discussed. Big data are obtained with data collection and tested with Devil Advocate to uncover quality and logical weakness in data contents. Moreover, large datasets are stored and handled by PostgreSQL database, an Object-Oriented Relational Database Management System (OORDBMS). 
+
+Several programs are developed as prototypes to prove concurrent programming implementation on data parsing and data retrieval from raw data and PostgreSQL database. Benchmarking is conducted to obtain accurate processing results from the comparison of language execution. 
+
+Results of the project show Golang program possess supportive packages and build-in library to parse data in streams and perform data retrieval from PostgreSQL database. Several commands and query are executed and uncovered data content weaknesses and vulnerabilities. 
+
+The prototypes successfully prove concurrent programming has better performance and throughput compare to sequential. Data duplication, incorrect data types and content completeness can be identified with testing. All program and execution can be found in Appendices. It is recommended that GORM library should be used for migrating data to enhance maintainability and integrity. Benchmarking shall be improved by unified hardware resource usage during program execution. 
+
+
+\clearpage % Start a new page
+\pagebreak
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - CHAPTERS
+%----------------------------------------------------------------------------------------
+
+\mainmatter 
+% Begin numeric (1,2,3...) page numbering
+
+\pagestyle{fancy} 
+% Return the page headers back to the "fancy" style
+
+\raggedright
+
+
+\input{Chapters/Chapter1} % INTRODUCTION - PROJECT OBJECTIVES/PROBLEM STATEMENTS
+\input{Chapters/Chapter2} % LITERATURE SURVEY
+\input{Chapters/Chapter3} % Added PROJECT DESIGN
+\input{Chapters/Chapter4} % IMPLEMENTATION METHODOLOGY/PROPOSAL DESIGN
+\input{Chapters/Chapter5} % IMPLEMENTATION PLAN
+\input{Chapters/Chapter6} % RESULTS AND FINDINGS
+\input{Chapters/Chapter7} % DISCUSSIONS AND RECOMMENDATIONS
+\input{Chapters/Chapter8} % CONCLUSIONS
+
+
+\clearpage
+
+\singlespacing
+% ====================================
+%	BIBLIOGRAPHY
+\label{Bibliography}
+
+\lhead{\emph{Bibliography}} 
+% Change the page header to say "Bibliography"
+
+\bibliographystyle{unsrtnat} 
+% Use the "unsrtnat" BibTeX style for formatting the Bibliography
+
+\bibliography{Bibliography} 
+% The references (bibliography) information are stored in the file named "Bibliography.bib"
+
+% ====================================
+\addtocontents{toc}{\vspace{2em}} 
+% Add a gap in the Contents, for aesthetics
+
+\appendix
+\appendixpage
+\addappheadtotoc
+
+\singlespacing  % USE SINGLE SPACING FOR APPENDICES
+
+\input{Appendices/AppendixA}
+\input{Appendices/AppendixB}
+\input{Appendices/AppendixC}
+\input{Appendices/AppendixD}
+\input{Appendices/AppendixE}
+\input{Appendices/AppendixF}
+\input{Appendices/AppendixG}
+\input{Appendices/AppendixH}
+%\input{Appendices/AppendixLog}
+%
+\addtocontents{toc}{\vspace{2em}} 
+% Add a gap in the Contents, for aesthetics
+
+\backmatter
+
+\end{document}

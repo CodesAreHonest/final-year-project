@@ -1,0 +1,89 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+The style file: unsrtnat.bst
+Database file #1: Bibliography.bib
+Warning--entry type for "golang-org" isn't style-file defined
+--line 44 of file Bibliography.bib
+Warning--entry type for "gcc-source" isn't style-file defined
+--line 52 of file Bibliography.bib
+Warning--entry type for "control-structures" isn't style-file defined
+--line 112 of file Bibliography.bib
+Warning--entry type for "concurrency-revolution-in-sd" isn't style-file defined
+--line 139 of file Bibliography.bib
+Warning--entry type for "concurrent-distributed-programming-in-future" isn't style-file defined
+--line 149 of file Bibliography.bib
+Warning--entry type for "language-learn-2017" isn't style-file defined
+--line 189 of file Bibliography.bib
+Warning--entry type for "expressiveness-of-go" isn't style-file defined
+--line 207 of file Bibliography.bib
+Warning--entry type for "radio-access-system-with-go" isn't style-file defined
+--line 216 of file Bibliography.bib
+Warning--entry type for "rust" isn't style-file defined
+--line 242 of file Bibliography.bib
+Warning--entry type for "developer-survey-results" isn't style-file defined
+--line 279 of file Bibliography.bib
+Warning--entry type for "error-handling-in-rust-go" isn't style-file defined
+--line 287 of file Bibliography.bib
+Warning--entry type for "go-lang" isn't style-file defined
+--line 295 of file Bibliography.bib
+Warning--entry type for "rust-lang" isn't style-file defined
+--line 303 of file Bibliography.bib
+Warning--entry type for "rust-memory-guarantees" isn't style-file defined
+--line 320 of file Bibliography.bib
+Warning--entry type for "rust-vs-go-news" isn't style-file defined
+--line 328 of file Bibliography.bib
+Warning--entry type for "postgre-tutorial" isn't style-file defined
+--line 440 of file Bibliography.bib
+Warning--empty title in rise-of-bigdata
+Warning--empty title in rise-of-multicore
+Warning--empty title in google-tech-talk
+Warning--empty title in why-go
+Warning--empty journal in what-is-concurrent-programming
+Warning--empty journal in text-processing-performance-with-go
+Warning--empty journal in sliding-puzzle-game-with-go
+Warning--empty journal in rust-patina
+Warning--empty journal in separate-languages-with-categories
+Warning--empty publisher in intro-to-go
+You've used 75 entries,
+            2481 wiz_defined-function locations,
+            967 strings with 16851 characters,
+and the built_in function-call counts, 22667 in all, are:
+= -- 2196
+> -- 558
+< -- 81
++ -- 313
+- -- 158
+* -- 1166
+:= -- 3664
+add.period$ -- 362
+call.type$ -- 75
+change.case$ -- 144
+chr.to.int$ -- 70
+cite$ -- 86
+duplicate$ -- 1352
+empty$ -- 2276
+format.name$ -- 242
+if$ -- 4926
+int.to.chr$ -- 6
+int.to.str$ -- 76
+missing$ -- 61
+newline$ -- 519
+num.names$ -- 222
+pop$ -- 603
+preamble$ -- 1
+purify$ -- 75
+quote$ -- 0
+skip$ -- 885
+stack$ -- 0
+substring$ -- 443
+swap$ -- 204
+text.length$ -- 7
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 519
+warning$ -- 10
+while$ -- 178
+width$ -- 0
+write$ -- 1189
+(There were 26 warnings)

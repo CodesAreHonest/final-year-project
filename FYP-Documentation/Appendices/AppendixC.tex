@@ -1,0 +1,329 @@
+\chapter{Golang programming for import CSV into PostgreSQL database} 
+\label{AppendixC} 
+\lhead{Appendix C. \emph{Golang for import CSV into PostgreSQL database.}} 
+
+% Write your Appendix content below here.
+% =========================================
+
+\section{Introduction}
+
+The Go Programming Language possess package csv to reads and write comma-separated values (CSV) files. The package will automatically ignore whitespace, blank lines and delimits commas to read data. In addition, the language also contains a driver to perform CRUD transaction on PostgreSQL database. 
+
+The program below imports 100 rows of company data, LEO data and NSPL data from CSV files to PostgreSQL database. Five columns of data are selected from each file to import into this program as proof of concept in this project. The tables will be created in PostgreSQL database before the program is executed.
+
+\pagebreak
+
+\subsection {LEO table for data importation}
+
+\lstset{basicstyle=\ttfamily\tiny} 
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={PostgreSQL query for LEO table creation.}, label=commandline-02]
+
+-- File: fyp1-leo.sql
+-- Author: Chai Ying Hua 
+-- Database: psql (PostgreSQL) 9.5.8
+
+-- ======================================
+-- CHANGES IN V1.1(Sun Aug 27. 2017)
+-- 	Create leo table for phase 1 to import data
+-- ======================================
+
+create table go_subject  ( 
+	ukprn int not null, 
+	providername varchar(100) not null,
+	region varchar(100) not null, 
+	subject varchar(50) not null, 
+	sex varchar(30) not null
+);
+
+\end{lstlisting}
+
+\subsection {NSPL table for data importation}
+
+\lstset{basicstyle=\ttfamily\tiny} 
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={PostgreSQL query for NSPL table creation.}, label=commandline-02]
+
+-- File: fyp1-nspl.sql
+-- Author: Chai Ying Hua 
+-- Database: psql (PostgreSQL) 9.5.8
+
+-- ======================================
+-- CHANGES IN V1.1(Mon Sep 4. 2017)
+-- 	Create nspl table for phase 1 to import data
+-- ======================================
+
+create table go_nspl (
+	postcode1 varchar(15) not null,
+	postcode2 varchar(15) not null primary key,
+	date_introduce varchar(10) not null, 
+	usertype int not null,
+	position_quality int not null
+)
+
+\end{lstlisting}
+
+\subsection {LEO table for data importation}
+
+\lstset{basicstyle=\ttfamily\tiny} 
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={PostgreSQL query for Company table creation.}, label=commandline-02]
+
+-- File: fyp1-company.sql
+-- Author: Chai Ying Hua 
+-- Database: psql (PostgreSQL) 9.5.8
+
+-- =========================================================================
+-- CHANGES IN V1.1(Sun Aug 27. 2017)
+-- 	Create companydata table for phase 1 to import data
+-- =========================================================================
+
+create table go_company ( 
+	CompanyName varchar(160) null default null, 
+	CompanyNumber varchar(8) not null primary key,
+	CompanyCategory varchar(100) not null,
+	CompanyStatus varchar(70) not null
+	CountryOfOrigin varchar(50) not null
+);
+
+\end{lstlisting}
+
+
+
+\subsection{Source code of Go program}
+
+\lstset{basicstyle=\ttfamily\tiny} 
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Source code of Go program}, label=commandline-02]
+
+package main
+
+import (
+	"bufio"
+	"database/sql"
+	"encoding/csv"
+	"fmt"
+	"io"
+	"os"
+	"strconv"
+	
+	_ "github.com/lib/pq"
+)
+
+const (
+	DB_USER                       = "yinghua"
+	DB_PASSWORD                   = "123"
+	DB_NAME                       = "fyp1"
+	COMPANY_FILE_DIRECTORY string = "/home/yinghua/Documents/FYP-data/company-data/company-data-full.csv"
+	LEO_FILE_DIRECTORY     string = "/home/yinghua/Documents/FYP-data/subject-data/institution-subject-data.csv"
+	NSPL_FILE_DIRECTORY    string = "/home/yinghua/Documents/FYP-data/postcode-data/UK-NSPL.csv"
+)
+
+type CompanyData struct {
+	name     string
+	number   string
+	category string
+	status   string
+	country  string
+}
+
+type LEOData struct {
+	ukprn   int
+	name    string
+	region  string
+	subject string
+	sex     string
+}
+
+type NSPLData struct {
+	postcode1      string
+	postcode2      string
+	date_introduce string
+	usertype       int
+	pos_quality    int
+}
+
+var db *sql.DB
+
+//====================================================
+//function to check error and print error messages
+//====================================================
+func checkErr(err error, message string) {
+	if err != nil {
+		panic(message + " err: " + err.Error())
+	}
+}
+
+//====================================================
+// initialize connection to database
+//====================================================
+func initDB() {
+
+	dbInfo := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable",
+	DB_USER, DB_PASSWORD, DB_NAME)
+	psqldb, err := sql.Open("postgres", dbInfo)
+	checkErr(err, "psql open")
+	db = psqldb
+
+}
+
+//====================================================
+// Import company data
+//====================================================
+func importCompanyData() {
+
+	var sStmt string = "insert into go_company values ($1, $2, $3, $4, $5)"
+	
+	stmt, err := db.Prepare(sStmt)
+	checkErr(err, "Prepare Stmt")
+	
+	// Open CSV files
+	csvFile, err := os.Open(COMPANY_FILE_DIRECTORY)
+	checkErr(err, "Open CSV")
+	
+	defer csvFile.Close()
+	
+	// Create a new reader.
+	reader := csv.NewReader(bufio.NewReader(csvFile))
+	
+	for i := 0; i <= 100; i++ {
+		record, err := reader.Read()
+		
+		// skipped the first line
+		if i == 0 {
+			continue
+		}
+		
+		// Stop at EOF.
+		if err == io.EOF {
+			break
+		}
+		
+		company := CompanyData{
+			name:     record[0],
+			number:   record[1],
+			category: record[10],
+			status:   record[11],
+			country:  record[12],
+		}
+		
+		stmt.Exec(company.name, company.number, company.category, company.status, company.country)
+		checkErr(err, "Company Data importation")
+	}
+}
+
+//====================================================
+// Import LEO data
+//====================================================
+func importSubjectData() {
+
+	var sStmt string = "insert into go_subject values ($1, $2, $3, $4, $5)"
+	
+	stmt, err := db.Prepare(sStmt)
+	checkErr(err, "Prepare Subject Stmt")
+	
+	csvFile, err := os.Open(LEO_FILE_DIRECTORY)
+	checkErr(err, "Open LEO CSV")
+	
+	defer csvFile.Close()
+	
+	// Create a new reader.
+	reader := csv.NewReader(bufio.NewReader(csvFile))
+	
+	for i := 0; i <= 100; i++ {
+		record, err := reader.Read()
+		
+		// skipped the first line
+		if i == 0 {
+			continue
+		}
+		
+		// Stop at EOF.
+		if err == io.EOF {
+			break
+		}
+		
+		integer, err := strconv.Atoi(record[0])
+		checkErr(err, "Convert UKRPN to Integer")
+		
+		subject := LEOData{
+			ukprn:   integer,
+			name:    record[1],
+			region:  record[2],
+			subject: record[3],
+			sex:     record[4],
+		}
+		
+			stmt.Exec(subject.ukprn, subject.name, subject.region, subject.subject, subject.sex)
+			checkErr(err, "Subject Data importation")
+		}
+}
+
+//====================================================
+// Import NSPL data
+//====================================================
+func importNSPLData() {
+
+	var sStmt string = "insert into go_nspl values ($1, $2, $3, $4, $5)"
+	
+	stmt, err := db.Prepare(sStmt)
+	checkErr(err, "Prepare Postcode Stmt")
+	
+	csvFile, err := os.Open(NSPL_FILE_DIRECTORY)
+	checkErr(err, "Open Postcode CSV")
+	
+	defer csvFile.Close()
+	
+	// Create a new reader.
+	reader := csv.NewReader(bufio.NewReader(csvFile))
+
+	for i := 0; i <= 100; i++ {
+		record, err := reader.Read()
+		
+		// skipped the first line
+		if i == 0 {
+		continue
+		}
+		
+		// Stop at EOF.
+		if err == io.EOF {
+		break
+		}
+		
+		userInt, err := strconv.Atoi(record[4])
+		checkErr(err, "Convert Usertype to Integer")
+		
+		posInt, err := strconv.Atoi(record[7])
+		checkErr(err, "Convert Usertype to Integer")
+	
+		postcode := NSPLData {
+		postcode1:      record[0],
+		postcode2:      record[1],
+		date_introduce: record[3],
+		usertype:       userInt,
+		pos_quality:    posInt,
+		}
+	
+		stmt.Exec(postcode.postcode1, postcode.postcode2, postcode.date_introduce, postcode.usertype, postcode.pos_quality)
+		checkErr(err, "Postcode Data importation")
+	}
+}
+
+func main() {
+
+	initDB()
+	importCompanyData()
+	importSubjectData()
+	importNSPLData()
+
+}
+
+/**
+
+yinghua@yinghua:~/Desktop/apps/eclipse-workspace/FYP1/src/postgres-process$ go build import-csv-psql.go
+yinghua@yinghua:~/Desktop/apps/eclipse-workspace/FYP1/src/postgres-process$ time go run import-csv-psql.go
+
+real	0m3.647s
+user	0m0.328s
+sys	0m0.096s
+yinghua@yinghua:~/Desktop/apps/eclipse-workspace/FYP1/src/postgres-process$
+
+**/
+
+\end{lstlisting}
