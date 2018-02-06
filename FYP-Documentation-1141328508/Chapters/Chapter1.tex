@@ -26,15 +26,18 @@ Google created a new concurrent programming language, known as Go to rewrite the
 
 Go is free and open source programming language created by Google at 2007 and announce on 2009 \cite{golang-org} with two compiler implementation, GC and GCCGO. \cite{gcc-source} The language were designed for high-speed compilation, support for concurrency and communication, and efficient or latency-free garbage collection. It is C-like and statically typed language that compiles into single binary with go compiler to reduce compile time. Go allow developer to model problems with a random order of events, optimize data operations, and utilize parallel processing of machines and network with concurrency programming. \cite{pure-con-programming}
 
-In this paper, we are going to focus on utilizing concurrent programming concepts of RUST and Go language. We will conduct a head-to-head comparison of RUST and Go in every individual perspective including performance in data processing. This paper attempts to expose important concepts of these languages and conduct a comparison for the use of self-study material and propose an evaluation scheme.
+In this paper, we are going to focus on utilizing concurrent programming concepts of RUST and Go language in data processing activities. We will develop programs with Go and Rust to carry out retrieving, transform, cleaning, parsing and migration operations in data processing cycle. This paper attempts to expose important concepts of these languages and conduct a comparison for the use of self-study material and propose an evaluation scheme.
 \pagebreak
 
 \subsection{Project Brief Description}
-We will use the Go programming language (Go or Golang) and Rust programming language to process a combination of static data to represents a real time, concurrent and distributed processing system. For this application, we will define the entire processing topology, covering the key concepts and elements of data sources (inputs), data processors (program filters/codes), and the data outputs. 
 
-The application process mash-up of two unambiguous, free and informed consent data sources in a stream and produce meaningful information with the concepts, elements and ideas of Go and RUST language features on Ubuntu 16.04 LTS operating system.
+We will use the Go and Rust programming language to process a combination of static data to represents a real time, concurrent processing system. For this project, we will covering the utilization of concurrent languages' elements and key concepts in entire data processing cycle. The cycle consists of collection of data sources (inputs), implementation of data processors (program filters/codes), and manipulation of data storage. 
 
-The UK Company Profile Data, UK Longitudinal Education Outcomes (LEO) data and UK National Statistics Postcode Lookup (NSPL) data are handled by PostgreSQL, an object-oriented relational database management system. These data are processed by program written with Go language and Rust language to conduct language performance comparison and obtain useful information. Further conclusions and inference can be drawn from output to identify the expressive power and concepts of these language.
+The Go and Rust programming language based application process mash-up of three unambiguous, free and informed consent dataset in stream. These application are developed to demonstrate the capabilities of concurrent features on data processing activities. These program attempts to transform specific structure of data into required format of data storage. In addition, the application capable to detect and correct inaccurate records found in datasets and import into PostgreSQL database, an object-oriented relational database management system (OORDBMS). 
+
+PL/pgSQL, a procedural language supported by PostgreSQL OORDMS is used to write data definition language (DDL) and data manipulation language (DML) to create objects, schemas and structure of database. The query are written into files and composed as scripts to be executed automatically to perform database creation, manipulation and control efficiently. 
+
+The performance execution of program developed from different programming language and programming style will be recorded, compared and discussed in detail. Further conclusions and inference can be drawn from execution results to identify the expressive power and concepts of these language.
 
 \pagebreak
 \subsection{Project Objectives}
@@ -95,20 +98,40 @@ Simultaneously, I notice this project was published as FYP title in this semeste
 
 \end{enumerate}
 
-%\subsection{Phase 2 Scope of Work}
-%
-%\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
-%\item Write a C programming language based CNC interpreter program on Linux to parse G-Code language and send command signals to Digilent Nexys 3 FPGA board.
-%\item Develop a VHDL programming language CNC interpolation program for Digilent Nexys 3 FPGA to perform 3-Axis interpolation to prototype CNC machine.
-%\end{enumerate}
-%
-%\subsection{Project Deliverables for Phase 2}
-%
-%\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
-%\item A Linux-based CNC Interpreter program capable of parsing G-Code files and send generated commands to Digilent Nexys3 FPGA Board.
-%\item A FPGA-based CNC Interpolator driver capable of generating digital pulses as a signal for the CNC machine.
-%\item A report based on this project.
-%\end{enumerate}
+\subsection{Phase 2 Scope of Work}
+
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+\item Perform data encoding to convert dirty data into consistent and valid format. 
+\item Perform database normalization to eliminate data redundancy and improve data integrity. 
+\item Write a Go programming language based sequential and concurrent program as ORM tool to export data from raw CSV file and PostgreSQL database convert into object model.
+\item Write a Rust programming language based sequential and concurrent program as ORM tool to export data from raw CSV file and PostgreSQL database convert into object model.
+\item Perform data cleaning to eliminate missing data and standardize the fields in consistent format. 
+\item Develop Go programming language based data cleaning parser to clean company raw datasets and import into PostgreSQL database. 
+\item Perform database tuning to optimize database's performance on handling extra workloads and increase client's connection limit. 
+\item Perform query tuning to increase query execution performance on data processing. 
+\item Develop several Go programming language based concurrent program as data migration tool to transfer data from legacy storage into new storage within PostgreSQL database. 
+\item Write several PL/pgSQL scripts to import raw data from legacy storage into normalized table within PostgreSQL database. 
+\item Perform data verification to verify the consistency and accuracy of database records after the data migration is complete. 
+\item Perform distributed programming to process data through multiple nodes.
+
+\end{enumerate}
+
+\subsection{Project Deliverables for Phase 2}
+
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+	
+\item A dirty raw CSV datasets shall be encoded and consistent format. 
+\item A Go programming language based and a Rust programming based ORM tools capable to retrieve 4 millions row of data from CSV datasets and PostgreSQL database in sequential and concurrent manner. 
+\item Duplication, missing, corruption and inconsistency of data shall be eliminated with data cleaning. 
+\item The database shall capable to handle extra workloads and allow more clients to establish concurrent connection on perform transaction simultaneously. 
+\item Conduct performance comparison of sequential and concurrent programming with Go programming language on retrieving 4 millions row of data. 
+\item Conduct performance comparison of sequential and concurrent programming with Rust programming language on retrieving 4 millions row of data. 
+\item Conduct performance comparison between Go and Rust programming language on data retrieval. 
+\item A Go programming language based data migration tool capable to migrate 4 millions of data from legacy storage to normalized table within PostgreSQL database. 
+\item Several PL/pgSQL scripts capable to perform table creation, data manipulation and migrate data from legacy storage into normalized table within PostgreSQL database. 
+\item Ensure the migrated data are consistent and accurate. 
+
+\end{enumerate}
 
 % MAIN SECTION ===============================
 %\section{Chapter Summary}

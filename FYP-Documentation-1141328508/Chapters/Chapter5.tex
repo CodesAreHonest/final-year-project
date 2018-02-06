@@ -81,17 +81,16 @@ Critical success factors are a key requirement which is necessary and essential 
 \subsection{Project Tasks for FYP Phase 2}
 
 \begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
-	\item Data auditing.
-	\item Data cleansing. 
-	\item Data duplicate elimination.
+	\item Data encoding.
+	\item Data transformation. 
 	\item Data parsing. 
-	\item Programming for import CSV files into PostgreSQL database.
+	\item Data cleansing. 
+	\item Data normalization.
+	\item Database tuning. 
+	\item Query tuning. 
+	\item Data migration.
 	\item Sequential and concurrent programming with Go and RUST on PostgreSQL database retrieval.
 	\item Sequential and concurrent programming with Go and RUST on reading CSV files.
-	\item Distribute programming for real time processing system.
-	\item Create tracepoint in application program and linux kernel.
-	\item Acquire process reading.
-	\item Testing concurrent and distributed system. 
 	
 \end{enumerate}
 
@@ -110,8 +109,9 @@ Critical success factors are a key requirement which is necessary and essential 
 The milestone deliverables are:
 
 \begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex]
-\item A Golang program. 
-\item A RUST program.
+\item Go program for data parsing, object relational mapping and data migration. 
+\item RUST program for data parsing and object relational mapping.
+\item PL/pgSQL's DDL, DML and DCL scripts for database creation, manipulation and migration control.
 \item A report based of this project. 
 \end{enumerate}
 
@@ -122,8 +122,8 @@ The milestone deliverables are:
 
 \begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
 	
-	\item \textbf{Devil Advocation Test.}
-	 The 'Devil Advocation' tests are conducted to ensure obtained raw CSV data set is clean and useful. The expected result of this test is the number of commas in the record should not exceed the number of columns in a database. In addition, the data content itself should be unique and suitable for storing in the database. More information is provided in Appendix B.1.
+	\item \textbf{Data Validation.}
+	 The Data Validation is conducted to ensure obtained raw CSV data set is clean and useful. The expected result of this test is the number of commas in the record should not exceed the number of columns in a database. In addition, the data content itself should be unique and suitable for storing in the database. More information is provided in Appendix B.1.
 		
 	\item \textbf{Golang programming for import CSV files into PostgreSQL database.}
 	The Golang programming for import CSV raw data into PostgreSQL is to ensure Go language is capable of processing raw CSV data and PostgreSQL database. The expected result for this program should read 100 rows of data from raw CSV file and insert into PostgreSQL database. More information is provided in Appendix C.
@@ -135,5 +135,35 @@ The milestone deliverables are:
 	\item \textbf{Sequential and concurrent programming with Golang on reading CSV files.}
 	The Go program should retrieve 100 rows of data from raw CSV file sequentially and concurrently. The expected result for this program is concurrent processing should have better performance than sequential. More information is provided in Appendix E.
 	 
+\end{enumerate}
+
+\subsection{Phase 2}
+
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+	
+	\item \textbf{Data encoding.}
+	This activity is a deliverable of Phase 2 in this project. It is conducted to ensure that the dirty and corrupted datasets are converted into consistent format so that it will be safe to used for Object Relational Mapping, Data Transformation and Data Parsing. 
+	
+	\item \textbf{Development of PL/pgSQL scripts for data transformation.} 
+	This activity is a deliverable of Phase 2 in this project. It is conducted to extract data in CSV format from raw datasets and import into PostgreSQL database. 
+	
+	\item \textbf{Development of Go and Rust Object Relational Mapping (ORM) program for data retrieval.}
+	This activity is a deliverable of Phase 2 in this project. The data from CSV file and PostgreSQL database are retrieved and map into object model. Go and Rust program should retrieve 4 millions row of data from raw CSV file and PostgreSQL database in sequential and concurrent manner. The execution duration of each program are tabulated and recorded for comparison purposes. 
+	
+	\item \textbf{Development of PL/pgSQL DDL scripts for normalized entity creation.}
+	This activity is a deliverable of Phase 2 in this project. It can eliminate redundancy and data anomalies to improve data integrity. Database design is performed to define table and establish relationship between entity to create a relational database schema. Moreover, normalized table will be created correctly with PL/pgSQL's DDL scripts based on the Entity Relationship Diagram shown in Section 3.
+	
+	\item \textbf{Development of Go data parser program.}
+	This activity is a deliverable of Phase 2 in this project. The missing fields will be eliminated and data standardization is conducted to promote conformity and usability of data. 
+	
+	\item \textbf{Database tuning.}
+	This activity is a deliverable of Phase 2 in this project. It is performed to configure PostgreSQL's database environment and setting to increase performance on data processing. 
+	
+	\item \textbf{Query tuning.}
+	This activity is conducted to optimize database transaction performance and avoid poor performance execution on data processing activities. 
+	
+	\item \textbf{Development of PL/pgSQL's DML, DCL scripts and Go concurrent program for database migration.}
+	This activity is a deliverable of Phase 2 in this project. The data that are transformed and cleaned will be import into normalized table. These data are migrated from legacy storage into new storage within PostgreSQL database. 
+	
 \end{enumerate}
 

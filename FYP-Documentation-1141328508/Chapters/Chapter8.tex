@@ -1,0 +1,129 @@
+\chapter{Conclusions} 
+% Main chapter title
+
+\label{Chapter8} 
+%Call reference to this chapter use \ref{ChapterX}
+
+\lhead{Chapter 8. \emph{Conclusions}} 
+% Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+\doublespacing
+% LINE FORMATTING
+
+%\clearpage
+%\pagebreak
+
+% MAIN SECTION ==============================
+\section{Conclusions}
+
+In phase 1, we have review many concepts and addressed the details of concurrent programming language concepts.
+
+The project objectives for Phase 1 are:
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+	
+	\item To learn and understand about Go and RUST programming language concepts and their concurrent processing features.  
+	\item To conduct a comparison on Go programming language concepts in processing big data with different techniques. 
+	\item To implement the handling of big data with PostgreSQL, an object-oriented relational database management system (OORDBMS)
+	
+\end{enumerate}
+
+\pagebreak
+
+What we have achieved on Phase 1:
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+	
+	\item We reviewed different concepts and characteristics of concurrent programming language.
+	\item We established the fundamentals of concurrent programming knowledge and possess confident advance to the next phase of development.
+	\item We established a development platform for concurrency programming.
+	\item We demonstrated the capability of concurrent programming language, which is provide better performance and throughput on data processing compare to sequential programming with results.
+	
+\end{enumerate}
+
+
+The project objectives for Phase 2 are:
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+	
+	\item To learn and understand the importance of data processing activities in data process cycle.
+	\item To understand the limitation of concurrent programming language and PostgreSQL database resource utilization. 
+	\item To perform text substitution with data encoding on eliminate incompatible data type on data source. 
+	\item To implement Go and Rust concurrent programming features on data processing activities. 
+	\item To perform database cleansing on eliminate defects and error found in big data. 
+	\item To develop Go and Rust program as ORM tool on data retrieval from CSV file and PostgreSQL database and map into object model. 
+	\item To conduct database and query tuning to optimize performance on data processing execution. 
+	\item To produce PL/pgSQL's DDL, DML and DCL scripts for database entity creation and database migration. 
+	\item To develop a Go programming based data migration system to transfer data from legacy storage into new storage within PostgreSQL database. 
+	
+\end{enumerate}
+
+What we have achieved on Phase 2:
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+	\item We understand the purpose and benefits of each data processing activities in data process cycle. 
+	\item We established understanding of limitation of concurrent programming language and PostgreSQL database resource utilization to prevent crashes in system execution. 
+	\item We demonstrated the capabilities of data encoding on text substitution of raw CSV files with regular expression as input command.  
+	\item We demonstrated strength and limitation of Go and Rust concurrent programming features on data retrieval through execution times and language structure. 
+	\item We have implemented Go program to eliminate NULL values in every single row and perform data standardization to increase usability of data. 
+	\item We have conducted database normalization to eliminate data redundancy, resolve anomalies and improve data integrity. 
+	\item We have implemented Go and Rust program as ORM tool to retrieve 4 millions of data from CSV file and PostgreSQL database in sequential and concurrent manner. 
+	\item We have conducted database and query tuning to optimize data processing performance and allow more threads to establish connection with database concurrently. 
+	\item We have developed PL/pgSQL's DDL, DML and DCL scripts to create database table, establish relationship between entity and perform database migration for 30,000 rows of data. 
+	\item We have developed a Go program to migrate 4 millions rows of data from legacy storage to new storage within PostgreSQL database without violates data consistency, validity and consistency. 
+	
+\end{enumerate}
+
+
+\section{Lessons Learned}
+
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+	\item \textbf{Data science knowledge.} Data science is being use as competitive weapon and it transform the way how companies operate with information. It is a totally new knowledge and experience for me as Software Engineering student to learn and explore.
+	
+	\item \textbf{Concurrent programming concepts.} Concurrent concepts is difficult to be understand and never thought in subject syllabus. Learning the art of concurrent programming for building applications in this project provide satisfaction and motivation to fulfill my desire to build a real-time system. 
+	
+	\item \textbf{Consistent update with FYP Supervisor.} FYP supervisor ensure the project is on track and doing right. It is essential to make available time for consultation and rapidly update the progress for supervisor via email to enhance the work quality. Moreover, FYP supervisor review my work ensure the time and resource is not waste on doing the wrong task. 	 
+	
+	\item \textbf{Ubuntu Operating System.} The project allow me to learn Linux Bash commands through practice. The Ubuntu operating system is found not difficult to be learned and it is more safety, reliable and consistent to conduct development activities due to its lightweight.
+	
+	\item \textbf{PostgreSQL database.} The project allow me to learn the basics of PostgreSQL database configuration and developed PL/pgSQL scripts through development activities. It is enjoyable and joyful to learn the world's most advanced open source database and establish deeper understanding on database's feature. Other than that, the feeling of accomplishment emerged in my mind as I possess the flexibility to manipulate database settings and communicate with data source through query. 
+	
+	\item \textbf{Database normalization. } The project allow me to learn and implement the normalization rules to perform excellent data management with good database designs. My supervisor patiently guides the important procedure to perform database normalization and data migration during FYP meeting and constantly provide example to perform data cleaning. 
+	
+\end{enumerate}
+
+\section{Recommendations for Future Work}
+
+\subsection{Phase 1}
+
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+	\item \textbf{GORM for CRUD on data processing.} GORM is an Object-relational mapping (ORM) library for Golang that converting data from incompatible files types into struct or interface. For instance, this project does not use GORM to import data and possess poor readability, error handling and maintainability in program. It is recommend to import data with GORM package because it supports auto migration, associations with database and every features are tested. 
+	\linebreak
+	
+	\item \textbf{Benchmark on language performance comparison.} Although this project possess well-defined of benchmarking on database table spacing, hardware configuration and amount of query execution on data retrieval to conduct language performance comparison. These benchmarks are insufficient to determine the accurateness of programming language performance. This is because the CPU usage might be running on other processes or program while conducting the performance test. It is recommend to unified number of processes running in background and programming style for performance comparison between different concurrent programming languages.
+	
+	\item \textbf{Data quality.} Although this project use data validation to identify raw dataset quality. The method is insufficient to ensure data obtained is valid, complete and accurate to be processed. It is recommend to use several scripting language such as Python and Perl to identify internal data consistency and validity.
+	
+\end{enumerate}
+
+\subsection{Phase 2}
+
+\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
+	
+	\item \textbf{Company database normalized design.} Although the company datasets is normalized correctly, there are several transitive functional dependencies found in the table and required to be divide with 3NF (Third Normal Form) rules. The database still possess insert, delete and update anomalies on \textbf{company} tables and require extra efforts on reduce the complexity of tables. 
+	
+	\item \textbf{Data types for date attributes.} Although the data transformation, data parsing and data migration of company datasets are conducted successfully. The date values are declared as \textit{VARCHAR} in PostgreSQL database and declared as \textit{String} in Go and Rust program to reduce errors on date format conversion. The declaration increase difficulty on sorting and does not comply to unambiguous input format (ISO 8601). It is recommend to use \textit{date} data types to store date values for better data analysis and processing results. 
+	
+	\item \textbf{Code structure of data cleaning parser.} Although the data cleaning parser is able to eliminate NULL values in every single rows and provide standardization support on each field, the program use more than 40 if-else statement within a loops and it reduces the performance on program execution. It is recommend to use better control flow statement to reduce the effort on data checking and resources utilization for the program. 
+	
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

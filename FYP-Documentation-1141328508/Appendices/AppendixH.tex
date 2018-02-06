@@ -34,21 +34,18 @@ public | nspl        | table | yinghua
 ==================================================================
 Step 3 - Create go_company table ready for importation 
 ==================================================================
-
 fyp1=# create table go_company (companyname varchar(160) null default null, companynumber varchar(8) not null primary key, companycategory varchar(100) not null, companystatus varchar(70) not null, countryoforigin varchar(50) not null );
 CREATE TABLE
 
 ==================================================================
 Step 4 - Create go_subject table ready for importation 
 ==================================================================
-
 fyp1=# create table go_subject (ukprn int not null, providername varchar(100) not null, region varchar(100) not null, subject varchar(50) not null, sex varchar(30) not null ); 
 CREATE TABLE
 
 ==================================================================
 Step 5 - Create go_nspl table ready for importation 
 ==================================================================
-
 fyp1=# create table go_nspl (postcode1 varchar(15) not null, postcode2 varchar(15) not null primary key, date_introduce varchar(10) not null,usertype int not null, position_quality int not null);
 
 ==================================================================
@@ -136,7 +133,5 @@ count
 (1 row)
 
 \end{lstlisting}
-
-
 
 

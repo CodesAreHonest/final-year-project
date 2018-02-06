@@ -154,7 +154,7 @@
 	\vfil
 	\Large \UNIVNAME\\
 	\vfil
-	{\normalsize SEPTEMBER 2017}\\ % Date
+	{\normalsize FEBRUARY 2018}\\ % Date
 	%\includegraphics{Logo} % University/department logo - uncomment to place it
 	\vfill
 \end{center}
@@ -165,7 +165,7 @@
 The copyright of this thesis belongs to the author under the terms of the Copyright Act 1987 as qualified by Regulation 4(1) of the Multimedia University Intellectual Property Regulations. Due acknowledgment shall always be made of the use of any material contained in, or derived from, this thesis. 
 
 \vfil
-\textit{© Chai Ying Hua, 2017}\\
+\textit{© Chai Ying Hua, 2018}\\
 All rights reserved
 
 
@@ -188,7 +188,7 @@ I hereby declare that the work in this thesis have been done by myself and no po
 \\Student ID: 1141328508
 \\Faculty of Computing \& Informatics
 \\Multimedia University
-\\Date: 1$^{st}$ August 2017
+\\Date: 7$^{th}$ February 2018
 
 }
 
@@ -217,12 +217,59 @@ Last but not least, I place on record, my sense of gratitude to my friend and cl
 \clearpage % Start a new page
 
 %----------------------------------------------------------------------------------------
-%	LIST OF CONTENTS/FIGURES/TABLES PAGES
+%	ABBREVIATIONS AND ACRONYMS 
 %----------------------------------------------------------------------------------------
+%% ADDED BY WRY
 
 \pagestyle{fancy} % The page style headers have been "empty" all this time, now use the "fancy" headers as defined before to bring them back
 %
-\lhead{\emph{Contents}} % Set the left side page header to "Contents"
+\pagebreak
+\addtotoc{Abbreviations and Acronyms} 
+\lhead{\normalfont\huge{Abbreviations and Acronyms}}
+%
+%
+%% TABLE HEADER
+\begin{table}[ht]
+	\begin{tabular}{p{2.5cm}p{11.0cm}}
+		%% ========================================
+		
+		\textbf{IBM} & International Business Machines\\
+		\textbf{GCP} & Google Cloud Platform\\
+		\textbf{AWS} & Amazon Web Services\\
+		\textbf{ICT} & Information and Communication Technology\\
+		\textbf{AMD} & Advanced Micro Devices\\
+		\textbf{GCC} & GNU Compiler Collection\\
+		\textbf{GCCGO} & Golang GNU Compiler Collection\\
+		\textbf{LEO} & Longitudinal Education Outcomes \\
+		\textbf{NSPL} & National Statistic Postcode Lookup\\
+		\textbf{OORDBMS} & Object-Oriented Relational Database Management System\\
+		\textbf{MMU} & Multimedia University\\
+		\textbf{FYP} & Final Year Project\\
+		\textbf{IDE} & Integrated Development Environment\\
+		\textbf{UK} & United Kingdom\\
+		\textbf{CTF} & Capture The Flag\\ 
+		\textbf{MVCC} & Multi-Version Concurrency Control\\
+		\textbf{TCP} & Transmission Control Protocol\\
+		\textbf{HTTP} & Hypertext Transfer Protocol\\
+		\textbf{OO} & Object-Oriented\\
+		\textbf{POC} & Proof Of Concept\\
+		\textbf{OS} & Operating System\\
+		\textbf{CSV} & Comma Separate Values\\
+		\textbf{GDB} & GNU Project Debugger\\
+		\textbf{GNU} & GNU's Not Unix!\\
+		\textbf{UNIX} & Uniplexed Information and Computing Services\\
+		\textbf{SQL} & Structured Query Language\\
+		\textbf{WIP} & Work In Progress\\
+		
+		
+		%% ======================================
+	\end{tabular}
+\end{table}
+
+%----------------------------------------------------------------------------------------
+%	LIST OF CONTENTS/FIGURES/TABLES PAGES
+%----------------------------------------------------------------------------------------
+
 \tableofcontents % Write out the Table of Contents
 
 \lhead{\emph{List of Tables}} % Set the left side page header to "List of Tables"
@@ -235,57 +282,8 @@ Last but not least, I place on record, my sense of gratitude to my friend and cl
 % AUTOMATIC LIST OF LISTINGS
 % \phantomsection
 
-
 \lhead{\emph{Listing}}	
 \lstlistoflistings
-
-%----------------------------------------------------------------------------------------
-%	ABBREVIATIONS AND ACRONYMS 
-%----------------------------------------------------------------------------------------
-%% ADDED BY WRY
-\pagebreak
-\addtotoc{Abbreviations and Acronyms} 
-\lhead{\normalfont\huge{Abbreviations and Acronyms}}
-%
-%
-%% TABLE HEADER
-\begin{table}[ht]
-\begin{tabular}{p{2.5cm}p{11.0cm}}
-%% ========================================
-
-\textbf{IBM} & International Business Machines\\
-\textbf{GCP} & Google Cloud Platform\\
-\textbf{AWS} & Amazon Web Services\\
-\textbf{ICT} & Information and Communication Technology\\
-\textbf{AMD} & Advanced Micro Devices\\
-\textbf{GCC} & GNU Compiler Collection\\
-\textbf{GCCGO} & Golang GNU Compiler Collection\\
-\textbf{LEO} & Longitudinal Education Outcomes \\
-\textbf{NSPL} & National Statistic Postcode Lookup\\
-\textbf{OORDBMS} & Object-Oriented Relational Database Management System\\
-\textbf{MMU} & Multimedia University\\
-\textbf{FYP} & Final Year Project\\
-\textbf{IDE} & Integrated Development Environment\\
-\textbf{UK} & United Kingdom\\
-\textbf{CTF} & Capture The Flag\\ 
-\textbf{MVCC} & Multi-Version Concurrency Control\\
-\textbf{TCP} & Transmission Control Protocol\\
-\textbf{HTTP} & Hypertext Transfer Protocol\\
-\textbf{OO} & Object-Oriented\\
-\textbf{POC} & Proof Of Concept\\
-\textbf{OS} & Operating System\\
-\textbf{CSV} & Comma Separate Values\\
-\textbf{GDB} & GNU Project Debugger\\
-\textbf{GNU} & GNU's Not Unix!\\
-\textbf{UNIX} & Uniplexed Information and Computing Services\\
-\textbf{SQL} & Structured Query Language\\
-\textbf{WIP} & Work In Progress\\
-
-
-%% ======================================
-\end{tabular}
-\end{table}
-
 
 %% ======================================
 %%	ABSTRACT PAGE 
@@ -294,15 +292,17 @@ Last but not least, I place on record, my sense of gratitude to my friend and cl
 \addtotoc{Management Summary} 
 \lhead{\normalfont\huge{Management Summary}}
 
-The project focuses on a comparison of concurrent programming language concepts and their expressive power on data processing with concurrent and distributed computing.
+The project focuses on a utilized concurrent programming language concepts and their expressive power on data processing with concurrent computing.
 
-The research draws attention to compare Go and Rust programming language, these languages’ paradigm, characteristic and focus are further discussed. Big data are obtained with data collection and tested with Devil Advocate to uncover quality and logical weakness in data contents. Moreover, large datasets are stored and handled by PostgreSQL database, an Object-Oriented Relational Database Management System (OORDBMS). 
+The research draws attention on implementation and utilization of Go and Rust programming language on data processing cycle with PostgreSQL database as data storage. These languages’ paradigm, characteristic and focus are used in data preparation, data processing and data storage. 
 
-Several programs are developed as prototypes to prove concurrent programming implementation on data parsing and data retrieval from raw data and PostgreSQL database. Benchmarking is conducted to obtain accurate processing results from the comparison of language execution. 
+Big datasets are obtained from secondary sources with data collection and verify with data validation to inspect the quality and logical weakness in data contents. The raw datasets in CSV format will be backup and import into PostgreSQL database with data transformation. The defects discovered such as inconsistency, incorrect and duplication in large datasets are eliminated with data encoding and data cleaning. Ultimately, the unnormalized and unorganized data will be migrated into normalized table in new storage to establish excellent relational database management system freed from anomalies. 
 
-Results of the project show Golang program possess supportive packages and build-in library to parse data in streams and perform data retrieval from PostgreSQL database. Several commands and query are executed and uncovered data content weaknesses and vulnerabilities. 
+Several concurrent programming language based programs are developed to support data processing activities such as data transformation, data cleaning and data migration. The processing execution's performance of program developed from different concurrent programming language and programming style will be compared and discussed in detail. 
 
-The prototypes successfully prove concurrent programming has better performance and throughput compare to sequential. Data duplication, incorrect data types and content completeness can be identified with testing. All program and execution can be found in Appendices. It is recommended that GORM library should be used for migrating data to enhance maintainability and integrity. Benchmarking shall be improved by unified hardware resource usage during program execution. 
+PL/pgSQL scripts will be developed to create database entity's data structure, objects, schemas and perform data migration within PostgreSQL database. The lightweight scripts will execute multiple written query simultaneously to perform database creation, manipulation and control efficiently.
+
+The project successfully prove concurrent programming has better performance and throughput on data processing compare to sequential programming. Data duplication, data inconsistencies and data incompleteness had successfully eliminated to establish high data quality. The capabilities and limitation of concurrent programming features on data processing are demonstrated and further discussed.
 
 
 \clearpage % Start a new page
@@ -364,6 +364,7 @@ The prototypes successfully prove concurrent programming has better performance 
 \input{Appendices/AppendixF}
 \input{Appendices/AppendixG}
 \input{Appendices/AppendixH}
+\input{Appendices/AppendixI}
 %\input{Appendices/AppendixLog}
 %
 \addtocontents{toc}{\vspace{2em}} 

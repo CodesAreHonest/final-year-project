@@ -36,42 +36,33 @@ The primary focus of Phase 1 is implement prototype to prove theoretical concept
 
 \subsection{Data Collection}
 
-The project is required to work with large data sets to utilize infrastructure and processing power of GO and RUST concurrent programming language. Data collection is conducted to identify of company recruitment preferences on higher education graduates of different subjects in the UK with basic company and LEO datasets. Data collected is required to be clean and able to solve interesting problem or question. The free, consent and licensed data sets acquired from UK government website provider (data.gov.uk) are as follow:
+The project is required to work with large data sets to utilize infrastructure and processing power of GO and RUST concurrent programming language. Data collection is conducted to identify of company recruitment preferences on higher education graduates of different subjects in the UK with basic company and LEO datasets. Data collected is required to be clean and able to solve interesting problem or question. 
 
-\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
-	
-	\item \textbf{Longitudinal Education Outcomes (LEO) datasets} published by Department of Education in CSV format with 160 thousand records.
-	\item \textbf{Basic Company datasets} published by Companies House in CSV format with 4 million records.
-	\item \textbf{National Statistics Postcode Lookup (NSPL) datasets} roduced by ONS Geography in CSV format.  
-	
-\end{enumerate}
+The characteristic of free, consent and licensed data sets acquired from UK government website provider (data.gov.uk) are as follow:
 
-The file format of large dataset obtained are Comma Separated Values (CSV) format which the information is organized with one record as one line and each field is separated by comma (,). CSV format is used for data processing in this project because it is human readable and simple to be parse. It can be handle easily using PostgreSQL database and easy to be read by programs. 
+\begin{table}[H]
+	\resizebox{\textwidth}{!}{%
+	\begin{tabulary}{1.0\textwidth}{|L|L|L|L|L|L}
+		\hline
+		{\bf No} & {\bf Name of Datasets}  						& {\bf Column } & {\bf Rows} & {\bf Size}	\\ \hline
+		1.       & Longitudinal Educations Outcomes (LEO)       &  21          & 32706       & 1.8   GB		\\ \hline
+		2.       & Basic Company Profile (Company)              &  55          & 3595702     & 667.5 MB		\\ \hline
+		3.       & National Statistics Postcode Lookup (NSPL)   &  35          & 1754882     & 4.2	 MB		\\ \hline
+	\end{tabulary}}
+	\caption{Result of Golang programming on process CSV raw data}
+\end{table}
+
+The file format of all large dataset obtained are Comma Separated Values (CSV) format which the information is organized with one record as one line and each field is separated by comma (,). CSV format is used for data processing in this project because it is human readable and simple to be parse. It can be handle using PostgreSQL database and retrievable by programs. 
 
 \pagebreak
 
 \subsubsection{Longitudinal Education Outcomes (LEO) dataset }
 
-The data set focus on employment and earnings outcome of Bachelor’s Degree graduate in Great Britain after five years. It contains information about students include personal characteristics, education or qualification achieved, employment and income earnings.  The longitudinal education outcome data dictionary is created and shown below: 
+The data set focus on employment and earnings outcome of Bachelor’s Degree graduate in Great Britain after five years. It contains information about students include personal characteristics, education or qualification achieved, employment and income earnings.  The data dictionary of longitudinal education outcome is created and placed in Appendix I.1.1.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1.0\textwidth]{Data-Dictionary/LEO.png}
-	\rule{35em}{0.7pt}
-	\caption[Longitudinal Education Outcomes Data Dictionary]{NLongitudinal Education Outcomes Data Dictionary}
-\end{figure}
-
-\pagebreak
 \subsubsection{Basic Company dataset}
 
-The data set possesses up-to-date basic companies information on UK register. It contains company names, annual returns filing dates, location details, account and basic information about mortgage and business changes. The basic company data dictionary is created and shown as below:
-
-\begin{figure}[H]
-	\centering	
-	\includegraphics[width=0.9\textwidth]{Data-Dictionary/company-data-dictionary.png}
-	\rule{35em}{0.5pt}
-	\caption[Basic Company Data Dictionary]{Basic Company Data Dictionary}
-\end{figure}
+The data set possesses up-to-date basic companies information on UK register. It contains company names, annual returns filing dates, location details, account and basic information about mortgage and business changes. The data dictionary of basic company dataset is created and placed in Appendix I.1.2.
 
 \subsubsection{National Statistics Postcode Lookup (NSPL) dataset}
 
@@ -84,16 +75,9 @@ The data set possesses up-to-date basic companies information on UK register. It
 
 As postcode data for every location on earth is unique. Company data sets possess \textbf{postcode} field in the business address, but LEO dataset do not have the \textbf{postcode} field which leads to difficulty of defining a relationship between these two datasets. Figure above show NSPL dataset serves as a linker to map \textbf{region} column from LEO data to link with \textbf{postcode} column found in company datasets.
 
-The data set possesses current postcode for the United Kingdom. It contains information relates postcode number, location, country name, parliamentary constitution, electoral and other geographical details. The NSPL data dictionary is created and shown as below:
+The data set possesses current postcode for the United Kingdom. It contains information relates postcode number, location, country name, parliamentary constitution, electoral and other geographical details. The data dictionary of National Statistics Postcode Lookup (NSPL) dataset is created and placed in Appendix I.1.3.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\textwidth]{Data-Dictionary/NSPL-data-dictionary.png}
-	\rule{35em}{0.5pt}
-	\caption[National Statistical Postcode Lookup Data Dictionary]{National Statistical Postcode Lookup Data Dictionary}
-\end{figure}
 
-\pagebreak
 
 \subsection{Data Validation}
 
@@ -108,7 +92,7 @@ Data validation is conducted to inspect the quality dimension of data sources ac
 
 The important steps taken on validation of data are shown in Figure 3.5. The \textbf{completeness} of datasets will be examine to assures the characteristic of data fulfill Comma Separate Values (CSV) standard and requirement. The common test performed during data completeness check are using aggregate functions such as max, min or counts. \cite{data-completeness-check}
 
-Once the completeness test is passed, the \textbf{validity} of data types in each columns are measured to prevent incompatible data types during Data Importation, Object Relational Mapping (ORM) and Data Migration. The types of data stored in each columns of obtained datasets shall be identify to describe suitable data type for Database Definition Language (DDL) during database table creation. As an example, the alphanumeric and text field are usually defined as VARCHAR and field contains only number will be declared as INTEGER.  
+Furthermore, the \textbf{validity} of data types in each columns are measured to prevent incompatible data types during Data Importation, Object Relational Mapping (ORM) and Data Migration. The types of data stored in each columns of obtained datasets shall be identify to describe suitable data type for Database Definition Language (DDL) during database table creation. As an example, the alphanumeric and text field are usually defined as VARCHAR and field contains only number will be declared as INTEGER.  
 
 In addition, the \textbf{uniqueness} of records will be verify to discover wasteful and duplication of data. The data redundancy indicates same piece of data are exist in multiple place. \cite{data-redundancy-definition} This condition will results in waste of space, data inconsistency and violates data integrity. If the duplication of data is discovered, database normalization will be performed to eliminate the duplication of records. 
 
@@ -116,9 +100,9 @@ Last but not least, the \textbf{consistency} of data will be analyze to ensure d
 
 \subsection{Performance Benchmarking}
 
-To conduct a comparison between Go and RUST language, software benchmark method and criteria play an important role to obtain accurate performance and expressive power of language. The benchmarking of this project required assessing performance characteristic of computer hardware by running the program against compiler or database.
+To conduct a comparison between Go and RUST language, benchmarking plays an important role to achieve fairness in compare performance and expressive power of language.
 
-The component that are benchmarked are:  
+The component that are benchmarked are listed below:  
 
 \begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
 	
@@ -141,7 +125,7 @@ The component that are benchmarked are:
 	\centering
 	\includegraphics[width=0.9\textwidth]{Figure/fyp-context.png}
 	\rule{35em}{0.5pt}
-	\caption[System Context Diagram]{System Context Diagram}
+	\caption[Phase 1 System Context Diagram]{Phase 1 System Context Diagram}
 \end{figure}
 
 System context diagram provide high level view that defines relationship between proposed system with external entities. The proposed system is written in Go and Rust programming language with sequential and concurrent computing. The system shall process raw dataset stores in different nodes and dataset stores in PostgreSQL database. Moreover, the system should process data from raw CSV dataset and PostgreSQL database in sequential and concurrent manner. 
@@ -152,7 +136,7 @@ System context diagram provide high level view that defines relationship between
 	\centering
 	\includegraphics[width=0.9\textwidth]{Figure/block-diagram.png}
 	\rule{35em}{0.5pt}
-	\caption[Block Diagram]{Block Diagram}
+	\caption[Phase 1 Block Diagram]{Phase 1 Block Diagram}
 \end{figure}
 
 The block diagram provides a high-level overview of importation CSV into PostgreSQL with Go and Rust program. The large dataset store is store in different nodes with CSV format. Data stores in PostgreSQL database and raw CSV data at different nodes will be processed by Go and Rust program with sequential and concurrent manner. The database table is created with query in the terminal before Go and Rust program is executed.
@@ -218,8 +202,6 @@ The flowchart provides a high-level view on concurrent manner on reading CSV fil
 
 The deployment diagram describes the proof of concept of phase 1 in specification level and overall architecture of the project. Three database table is created in PostgreSQL database prepare to be processed. Simultaneously, three large data sets are stored in different nodes await to be process or retrieved. The Go and Rust program are written in sequentially and concurrently to process data from CSV file or PostgreSQL database system.
 
-LTTng tracing network is installed to create tracepoint in both Rust and Go program to obtain process reading and create traces as output into log files as Common Trace Format (CTF) format and store into log folder. Last but not least, Eclipse Trace Compass (an Eclipse IDE plugin) read CTF files and produce useful graphical and tabulated information from traces as output.
-
 \section{Phase 2}
 
 \subsection{Introduction}
@@ -238,6 +220,7 @@ In Phase 2, we have established an extensive understanding on concurrent languag
 \begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
 	
 	\item Data encoding will be conducted with stream editor to convert dirty data into consistent format.
+	\item Data transformation will be conducted to extracted data from CSV file and import into PostgreSQL database for data handling.
 	\item Database normalization will be perform to eliminate data redundancy and improve data integrity.
 	\item The structure of database schema and object (user and tables) will be created with scripts written in Data Definition Language (DDL) of PL/pgSQL (Procecural Language/PostgreSQL). 
 	\item A \textbf{sequential} and \textbf{concurrent} program will be implemented with Go programming language as an Object Relational Mapping (O/R mapping tool) to convert raw data from CSV data sources into object model, the performance execution will be recorded and compared. 
@@ -249,7 +232,7 @@ In Phase 2, we have established an extensive understanding on concurrent languag
 	\item A \textbf{sequential} and \textbf{concurrent} program will be implemented with Go programming language as data importation tool to export Company raw data from CSV data sources and import into PostgreSQL database. 
 	\item Query tuning will be conducted to increase query execution performance on data processing. 
 	\item Several \textbf{concurrent} program will be implemented with Go programming language as data migration tool to transfer company and NSPL data from legacy storage into normalized table within PostgreSQL database. 
-	\item Data Manipulation Language (DML) and Data Control Language (DCL) scripts will be written with PL/pgSQL to transfer raw data from legacy storage into normalized table within PostgreSQL database.  
+	\item Data Manipulation Language (DML) scripts will be written with PL/pgSQL to transfer raw data from legacy storage into normalized table within PostgreSQL database.  
 	\item Data verification will be conducted with UNIX command line to check the accuracy and consistency of database records after the data migration is complete. 
 	
 \end{enumerate}
@@ -271,42 +254,43 @@ The stream editor allow developer to make editing decisions by calling the comma
 
 \section{Data Transformation}
 
-\subsection{Phase 2 Deployment Diagram}
+\subsection{Phase 2 Architectural Diagram}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.0\textwidth]{FYP2/Chapter3/FYP2-data-transformation-deployment.png}
+	\includegraphics[width=1.0\textwidth]{FYP2/Chapter3/FYP2-data-transformation-arc.png}
 	\rule{35em}{0.5pt}
-	\caption[Data Transformation Deployment Diagram]{Data Transformation Deployment Diagram}
+	\caption[Data Transformation Architectural Diagram]{Data Transformation Architectural Diagram}
 \end{figure} 
 
 
-Data transformation is the process of converting one format to another by extracting from source application into data warehouse. \cite{data-transformation-definition} Figure 3.15 shows the deployment diagram of data transformation process in this project. The encoded data (processed in Data Encoding mentioned in Section 3.3) in CSV format is extracted and import into PostgreSQL database with PL/pgSQL commands in terminal environment and Go program with the assists of language built-in packages. The sequential and concurrent execution of data transformation will be recorded and compared. 
+Data transformation is the process of converting one format to another by extracting from source application into data warehouse. \cite{data-transformation-definition} 
 
-\section{Object Relational Mapping}
+Figure 3.15 shows the architectural diagram of data transformation process in this project. After the data inconsistency is eliminated with data encoding (performed in Section 3.3), the data in CSV format is extracted and import into PostgreSQL database with PL/pgSQL commands in terminal environment.
 
-\subsection{Phase 2 Deployment Diagram}
+\section{Data Retrieval}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1.0\textwidth]{FYP2/Chapter3/FYP2-ORM-deployment.png}
-	\rule{35em}{0.5pt}
-	\caption[Object Relational Mapping Deployment Diagram]{Object Relational Mapping Deployment Diagram}
-\end{figure} 
+\subsection{Phase 2 Deployment Diagram} 
 
-Object-Relational Mapping (ORM) is a technique to manipulate data from database with object-oriented paradigm. The data retrieve from CSV data sources or PostgreSQL database will be convert into object model to ease the manipulation of data in discipline manner. \cite{orm-introduction} The approach increase usability, flexibility and improve data handling for Data Cleaning and Data Migration.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1.0\textwidth]{FYP2/Chapter3/FYP2-ORM-deployment.png}
+		\rule{35em}{0.5pt}
+	\caption[Data Retrieval with ORM Deployment Diagram]{Data Retrieval with ORM Deployment Diagram}
+	\end{figure}
 
-Figure 3.16 shows the ORM deployment diagram that provide graphic representation of mapping between object and data with mapping program written in Go and Rust programming language. In this project, we will construct our own ORM tools tool with the assistance of CSV package driver, PostgreSQL driver and built-in SQL library from respective language. 
 
-The entire records are retrieved from all tables and data sources with Go and Rust's ORM to conduct performance comparison between sequential and concurrent execution and concurrent programming languages' expressive power. The results will be recorded and compared. 
+Object-Relational Mapping (ORM) is a technique to manipulate data from database with object-oriented paradigm. The data retrieve from CSV data sources and PostgreSQL database will be convert into object model to ease the manipulation of data in discipline manner. \cite{orm-introduction} The approach increase usability, flexibility and improve data handling for Data Cleaning and Data Migration.
+
+Figure 3.16 shows the ORM deployment diagram that provide graphic representation of mapping between object and data with mapping program written in Go and Rust programming language. In this project, we will construct our own ORM tools tool for data retrieval from CSV file and PostgreSQL database with the assistance of CSV package driver, PostgreSQL driver and built-in SQL library from respective language. 
+
+All the rows of data will be retrieved from PostgreSQL database and CSV file with Go and Rust's ORM to conduct performance comparison between sequential and concurrent execution and concurrent programming languages' expressive power. The results will be recorded and compared. 
 
 \section{Data Cleaning}
 
-Data cleaning is the action of detecting and removing missing, incomplete and data duplication within database. \cite{data-cleaning-definition} The inconsistencies and incorrect records may detected in the datasets obtained from the secondary sources because we have lack of control over the data quality. Therefore, database normalization and data standardization is conducted to improve the quality and reliability of the datasets. 
+\subsection{Introduction}
 
-\subsection{Database Normalization}
-
-\subsubsection{Consequences of Data Redundancy}
+Data cleaning is the action of detecting and removing missing, incomplete and data redundancy within database. \cite{data-cleaning-definition} The inconsistencies and incorrect records will be detected in the datasets obtained from the secondary sources because we have lack of control over the data quality. 
 
 Data redundancy occurs within a data storage when same piece of data exists in two separate places or two different fields within a single database. Database without normalization will cause updation, deletion and insertion anomalies. The table below is used to understand these the impact of these anomalies on causing data inconsistencies. 
 
@@ -324,6 +308,10 @@ Data redundancy occurs within a data storage when same piece of data exists in t
 	\item \textbf{Updation anomaly.} To update student address in the table, the entire \textbf{address} column are required to be updated. If the duplicate records in the database are partially updated, it will leads to data inconsistency. 
 	
 \end{enumerate}
+
+Therefore, \textbf{database normalization} and \textbf{data standardization} is conducted to improve the quality and reliability of the datasets.
+
+\subsection{Database Normalization}
 
 \subsubsection{Introduction}
 
@@ -343,7 +331,7 @@ Relational database design is conducted to define entities, attributes, relation
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.0\textwidth]{FYP2/Chapter3/FYP2-Company-Normalized-ERD.png}
+	\includegraphics[width=1.1\textwidth]{FYP2/Chapter3/FYP2-Company-Normalized-ERD.png}
 	\rule{35em}{0.5pt}
 	\caption[Company Normalized Database Design]{Company Normalized Database Design}
 \end{figure} 
@@ -354,7 +342,7 @@ The figure above shows Company's entity relationship diagram (ERD) to provide a 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.0\textwidth]{FYP2/Chapter3/FYP2-Postcode-Normalized-ERD.png}
+	\includegraphics[width=1.1\textwidth]{FYP2/Chapter3/FYP2-Postcode-Normalized-ERD.png}
 	\rule{35em}{0.5pt}
 	\caption[Postcode Normalized Database Design]{Postcode Normalized Database Design}
 \end{figure} 
@@ -365,7 +353,7 @@ The figure above shows Postcode's entity relationship diagram (ERD) to provide a
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.0\textwidth]{FYP2/Chapter3/FYP2-Education-Normalized-ERD.png}
+	\includegraphics[width=1.1\textwidth]{FYP2/Chapter3/FYP2-Education-Normalized-ERD.png}
 	\rule{35em}{0.5pt}
 	\caption[Education Normalized Database Design]{Education Normalized Database Design}
 \end{figure} 
@@ -383,7 +371,9 @@ The figure above shows Education's entity relationship diagram (ERD) to provide 
 	\caption[Company Data Cleaning Parser Deployment Diagram]{Company Data Cleaning Parser Deployment Diagram}
 \end{figure} 
 
-The cleaning parser is written with Go program language that consume company raw data as input and make execution decisions to eliminate NULL values and perform data standardization to repair missing and incorrect data. Afterwards, the cleaned data will be stored into PostgreSQL database await to be processed. The program work similarly as ORM (as mentioned in Section 3.5) by utilizing go-csv driver to retrieve data from CSV files and lib/pq or database/sql driver to establish connection and perform transaction with the PostgreSQL database. 
+The figure 3.18 shows the deployment diagram of company data cleaning parser. 
+
+The cleaning parser is written with Go program language that consume encoded company raw data (performed in Section 3.3) as input and make execution decisions to eliminate NULL values and perform data standardization to repair missing and incorrect data. Afterwards, the cleaned data will be stored into PostgreSQL database await to be processed. The program work similarly as ORM (mentioned in Section 3.5) by utilizing go-csv driver to retrieve data from CSV files and lib/pq or database/sql driver to establish connection and perform transaction with the PostgreSQL database. 
 
 \section{Database Tuning}
 
@@ -422,11 +412,13 @@ Data migration is the process of transferring data within storage system for dat
 	\end{figure}
 \end{landscape}
 
+Figure 3.20 shows the deployment diagram of data migration process. 
+
 The normalized table in all database are created with PL/pgSQL DDL scripts. Once the creation of table is successful, the data migration of education database is performed with PL/pgSQL DML script running in terminal environment. The mentioned database is migrated with script because it only contains 30000+ rows and its lightweight to be process with queries. 
 
 Afterwards, the postcode and company database are migrated from legacy storage to new storage with the execution of scripts and Go program as shown in Figure 3.23. Both company and postcode data are migrated with Go program because it contains more than 4 millions rows in total and its difficult to handle with queries. The unique data is extracted from legacy storage and stored into the normalized table in new storage. 
 
-The migration program is written with Go programming language with the inclusion of database/sql driver to establish connection and lib/pq driver to perform transaction with PostgreSQL database. All the migration process does not modify the source data in legacy storage to serve as backup for in case of emergence. In addition, the changes of migration can be easily tracked and recorded for verification purposes. Ultimately, the migration duration is recorded and measured.  
+The migration program is written with Go programming language with the inclusion of database/sql driver to establish connection and lib/pq driver to perform transaction with PostgreSQL database. All the migration process does not modify the source data in legacy storage to serve as backup for in case of emergence. In addition, the changes of migration can be easily tracked for verification purposes. Ultimately, the migration duration is recorded and measured.  
 
 
 % MAIN SECTION ===============================
