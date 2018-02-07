@@ -1,0 +1,396 @@
+\chapter{Data Parser} 
+\label{AppendixN} 
+\lhead{Appendix N. \emph{Data Parser}}
+
+% Write your Appendix content below here.
+% =========================================
+
+\section{Go program based Data Cleaning Parser}
+
+\subsection{Function to clean and parse data}
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Parse and cleaned data retrieved from CSV}, label=commandline-02]
+package main
+
+import (
+	"fmt" 
+	"strconv"
+	"bufio"
+	"encoding/csv"
+	"io"
+	"os"
+	"time"
+)
+
+==========================================================================================================
+Perform cleaning and parsing on data retrieved from CSV and import processed data into PostgreSQL database
+========================================================================================================== 
+func importCSVtoDB() { 
+
+	start := time.Now()
+	retrieveCSV()
+	importDB()
+	
+	fmt.Printf("%.5fs seconds on cleaned 3595702 rows of company data. \n", time.Since(start).Seconds())
+
+}
+
+==============================================================================================================
+Retrieve data 3595702 lines of data from CSV to eliminate NULL values and standardize data in specific columns
+==============================================================================================================
+func retrieveCSV() {
+	csvFile, err := os.Open(COMPANY_FILE_DIRECTORY)
+	checkErr(err, "Open CSV")
+	
+	defer csvFile.Close()
+	
+	// Create a new reader.
+	reader := csv.NewReader(bufio.NewReader(csvFile))
+	
+	start := time.Now()
+	
+	for i := 0; i < ENTRIES; i++ {
+	
+		record, err := reader.Read()
+		
+		if i == 0 {
+			continue
+		}
+		
+		if i == 100000 { 
+			fmt.Println("Cleaned 100000 rows", time.Since(start).Seconds()) 
+		} else if i == 500000 { 
+			fmt.Println("Cleaned 500000 rows", time.Since(start).Seconds())
+		} else if i == 1000000 { 
+			fmt.Println("Cleaned 1000000 rows", time.Since(start).Seconds())
+		} else if i == 2000000 { 
+			fmt.Println("Cleaned 2000000 rows", time.Since(start).Seconds())
+		} else if i == 3000000 { 
+			fmt.Println("Cleaned 3000000 rows", time.Since(start).Seconds())
+		} else if i == 4000000 { 
+			fmt.Println("Cleaned 4000000 rows", time.Since(start).Seconds())
+		}
+		
+		// Stop at EOF.
+		if err == io.EOF {
+			break
+		}
+		
+		int_mortchange, err := strconv.Atoi(record[22]) 
+		checkErr(err, "convert mortchange value to integer") 
+		
+		int_mortoutstanding, err  := strconv.Atoi(record[23])
+		checkErr(err, "convert mortoutstanding value to integer") 
+		
+		int_mortpartsatisfied, err := strconv.Atoi(record[24]) 
+		checkErr(err, "convert mortpartsatisfied value to integer") 
+		
+		int_mortsatisfied, err  := strconv.Atoi(record[25])
+		checkErr(err, "convert mortsatisfied value to integer") 
+		
+		int_genpartner, err := strconv.Atoi(record[30]) 
+		checkErr(err, "convert genpartner value to integer")
+		
+		int_limpartner, err := strconv.Atoi(record[31])
+		checkErr(err, "convert limpartner value to integer")
+		
+		
+		company := company_rawdata{	
+			number: record[1],
+			num_MortChanges: int_mortchange, 
+			num_MortOutstanding: int_mortoutstanding, 
+			num_MortPartSatisfied: int_mortpartsatisfied, 
+			num_MortSatisfied: int_mortsatisfied,
+			num_genPartner: int_genpartner,
+			num_limPartner: int_limpartner,
+			uri: record[32],
+		}
+		
+		company.category.Scan(record[10])
+		if len(company.category.String) == 0 {
+			company.category.String = "Undefined"
+		}
+		
+		company.status.Scan(record[11])
+		if len(company.status.String) == 0 {
+			company.status.String = "Undefined"
+		}
+		
+		company.countryOfOrigin.Scan(record[12])
+		if len(company.countryOfOrigin.String) < 2 {
+			company.countryOfOrigin.String = "Undefined"
+		}
+		
+		company.name.Scan(record[0])
+		if len(company.name.String) == 0 {
+			company.name.String = "Undefined"
+		}
+		
+		company.careOf.Scan(record[2])
+		if len(company.careOf.String) == 0 {
+			company.careOf.String = "Undefined"
+		}
+		
+		company.poBox.Scan(record[3])
+		if len(company.poBox.String) == 0 {
+			company.poBox.String = "Undefined"
+		}
+		
+		company.addressLine1.Scan(record[4])
+		if len(company.addressLine1.String) == 0 {
+			company.addressLine1.String = "Undefined"
+		}
+		
+		company.addressLine2.Scan(record[5])
+		if len(company.addressLine2.String) == 0 {
+			company.addressLine2.String = "Undefined"
+		}
+		
+		company.postTown.Scan(record[6])
+		if len(company.postTown.String) == 0 {
+			company.postTown.String = "Undefined"
+		}
+		
+		company.county.Scan(record[7])
+		if len(company.county.String) == 0 {
+			company.county.String = "Undefined"
+		}
+		
+		company.country.Scan(record[8])
+		if len(company.country.String) == 0 {
+			company.country.String = "Undefined"
+		}
+		
+		company.postcode.Scan(record[9])
+		if len(company.postcode.String) == 0 {
+			company.postcode.String = "Undefined"
+		}
+		
+		company.dissolution_date.Scan(record[13])
+		if len(company.dissolution_date.String) == 0 {
+			company.dissolution_date.String = "01/01/3000"
+		}
+		
+		company.incorporate_date.Scan(record[14])
+		if len(company.dissolution_date.String) == 0 {
+			company.dissolution_date.String = "01/01/3000"
+		}
+		
+		company.accounting_refDay.Scan(record[15])
+		company.accounting_refMonth.Scan(record[16])
+		
+		company.account_nextDueDate.Scan(record[17])
+		if len(company.account_nextDueDate.String) == 0 {
+			company.account_nextDueDate.String = "01/01/3000"
+		}
+		
+		company.account_lastMadeUpdate.Scan(record[18])
+		if len(company.account_lastMadeUpdate.String) == 0 {
+			company.account_lastMadeUpdate.String = "01/01/3000"
+		}
+		
+		...... 
+		(Source code not fully display)
+		(many if-else from record[19] to record[49] on data handling to eliminate NULL values ....)
+		......
+		......
+		
+		company.pn9_companyname.Scan(record[50])
+		if len(company.pn9_companyname.String) == 0 {
+			company.pn9_companyname.String = "Undefined"
+		}
+		
+		company.pn10_condat		companycategoryArray = append(companycategoryArray, company.category.String) 
+		companystatusArray = append(companystatusArray, company.status.String) 
+		countryoforiginArray = append(countryoforiginArray, company.countryOfOrigin.String)
+		dissolutiondateArray = append(dissolutiondateArray, company.dissolution_date.String) 
+		incorporatedateArray = append(incorporatedateArray, company.incorporate_date.String) e.Scan(record[51])
+		if len(company.pn10_condate.String) == 0 {
+			company.pn10_condate.String = "01/01/3000"
+		}
+		
+		company.pn10_companyname.Scan(record[52])
+		if len(company.pn10_companyname.String) == 0 {
+			company.pn10_companyname.String = "Undefined"
+		}
+		
+		company.conf_stmtNextDueDate.Scan(record[53])
+		if len(company.conf_stmtNextDueDate.String) == 0 {
+			company.conf_stmtNextDueDate.String = "01/01/3000"
+		}
+		
+		company.conf_stmtLastMadeUpdate.Scan(record[54])
+		if len(company.conf_stmtLastMadeUpdate.String) == 0 {
+			company.conf_stmtLastMadeUpdate.String = "01/01/3000"
+		}
+		
+		companynameArray = append(companynameArray, company.name.String)
+		companynumberArray = append(companynumberArray, company.number)
+		careofArray = append(careofArray, company.careOf.String)
+		poboxArray = append(poboxArray, company.poBox.String)
+		addressline1Array = append(addressline1Array, company.addressLine1.String)
+		
+		addressline2Array = append(addressline2Array, company.addressLine2.String) 
+		posttownArray = append(posttownArray, company.postTown.String) 
+		countyArray = append(countyArray, company.county.String) 
+		countryArray = append(countryArray, company.country.String) 
+		postcodeArray = append(postcodeArray, company.postcode.String) 
+	
+		
+				...... 
+				(Source code not fully display)
+				(many appends of array for data standardization ....)
+				......
+				......
+				
+		pn9_companyname_Array = append(pn9_companyname_Array, company.pn9_companyname.String)
+		pn10_condate_Array = append(pn10_condate_Array, company.pn10_condate.String)
+		pn10_companyname_Array = append(pn10_companyname_Array, company.pn10_companyname.String)
+		confstmtnextduedateArray = append(confstmtnextduedateArray, company.conf_stmtNextDueDate.String)
+		confstmtlastmadeupdateArray = append(confstmtlastmadeupdateArray, company.conf_stmtLastMadeUpdate.String)
+	
+	}
+}
+
+================================================================
+P/S: The source code is not fully display due to lack of space, 
+		to view full source code refer /go-import-company/retrieve-csv.go
+		
+================================================================
+
+\end{lstlisting}
+
+Listing N.1 shows the source code for function on data retrieval from CSV and perform data cleaning and data standardization. The function possess control flow (if-else statement) to check the empty and missing fields in each records. If the record is found empty and missing, the program will replace a standard value to indicate the field is meaningful. 
+
+The information of data repairing in this program are as shown in table below: 
+
+\begin{table}[H]
+	\centering
+	\begin{tabulary}{1.0\textwidth}{|L|L|L|}
+		\hline
+		{\textbf{Missing data retrieved from CSV file}} & {\bf Replaced data by Go program with standard value}   \\ \hline
+		INTEGER(10)						  & 0      			                     \\ \hline
+		DATE							  &	"01/01/3000"    	              \\ \hline
+		VARCHAR 						  & "Undefined"       			       \\ \hline
+		CHAR  							  & "---"                               \\ \hline
+		REAL 							  & 0.0                                 \\ \hline
+	\end{tabulary}
+	\caption{Data repair on missing values.}
+\end{table}
+
+After the data in specific columns is replaced and fixed, it will be stored into dedicated array await to be import into database.
+
+\newpage 
+
+\subsection{Function to import cleaned data into PostgreSQL database.}
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Import cleaned data into PostgreSQL database}, label=commandline-02]
+===========================================================================================================
+Import cleaned data processed by retrieveCSV() into PostgreSQL database with Semaphore concurrent concepts. 
+===========================================================================================================
+func importDB() { 
+
+	// Assigned 400000 Gorountines 
+	sem := make (chan bool, 400000) 
+	
+	initDB() 
+	fmt.Println("Prepare to import data") 
+	
+	var sStmt string = "INSERT INTO company_rawdata1 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51, $52, $53, $54, $55);"
+	
+	stmt, err := db.Prepare(sStmt)
+	checkErr(err, "Prepare insert com_category")
+	
+	for i := len(companynameArray); i > 0; i-- {
+		sem <- true 
+		go func () { 
+			defer func () { <- sem } () 
+			_, err = stmt.Exec(companynameArray[i], companynumberArray[i], careofArray[i], poboxArray[i], addressline1Array[i], 
+			addressline2Array[i], posttownArray[i], countyArray[i], countryArray[i], postcodeArray[i], 
+			companycategoryArray[i], companystatusArray[i], countryoforiginArray[i], dissolutiondateArray[i], incorporatedateArray[i], 
+			refdayArray[i], refmonthArray[i], a_nextduedateArray[i], a_lastmadeupdateArray[i], accountcategoryArray[i], 
+			nextduedateArray[i], lastmadeupdateArray[i], mortchargesArray[i], mortoutstandingArray[i], mortpartsatisfiedArray[i], 
+			mortsatisfiedArray[i], siccode1Array[i], siccode2Array[i], siccode3Array[i], siccode4Array[i], 
+			genPartnerArray[i], limPartnerArray[i], uriArray[i], pn1_condate_Array[i], pn1_companyname_Array[i], 
+			pn2_condate_Array[i], pn2_companyname_Array[i], pn3_condate_Array[i], pn3_companyname_Array[i], pn4_condate_Array[i], 
+			pn4_companyname_Array[i], pn5_condate_Array[i], pn5_companyname_Array[i], pn6_condate_Array[i], pn6_companyname_Array[i], 
+			pn7_condate_Array[i], pn7_companyname_Array[i], pn8_condate_Array[i], pn8_companyname_Array[i], pn9_condate_Array[i], 
+			pn9_companyname_Array[i], pn10_condate_Array[i], pn10_companyname_Array[i], confstmtnextduedateArray[i], confstmtlastmadeupdateArray[i])
+			
+			checkErr(err, "Company Data Importation")
+		}()
+	}
+}
+
+\end{lstlisting}
+
+Listing N.2 shows the source code for function on data importation into PostgreSQL database. The function insert all the cleaned and processed data stores in array into table declared in PostgreSQL database. 
+
+400000 \textit{Goroutines} is assigned to increase the execution process of data cleaning with \textit{Semaphore} concurrent concepts. These Goroutines communicate with each other to perform importation of 3 millions row of data with 299 active connection available. 
+
+This program execution duration will be tabulated, compared and discussed. 
+
+\section{Data Consistency Verification}
+
+\subsection{Validate Company Data Completeness and Comformances}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Import cleaned data into PostgreSQL database}, label=commandline-02]
+====================================
+Step 1 - Connect to company database
+====================================
+yinghua@yinghua:~$ psql company; 
+psql (9.5.10)
+Type "help" for help.
+
+company=# \d+ 
+
+============================================================================
+Step 2 - Select some columns that contain NULL values before data is cleaned 
+============================================================================
+
+company=# \d+ 
+        Column         |          Type          |                Modifiers                | Storage  | 
+-----------------------+------------------------+-----------------------------------------+----------+
+careof                 | character varying(100) | default 'Undefined'::character varying  | extended |
+pobox                  | character varying(10)  | default 'Undefined'::character varying  | extended |
+addressline1           | character varying(300) | default 'Undefined'::character varying  | extended |
+addressline2           | character varying(300) | default 'Undefined'::character varying  | extended |
+posttown               | character varying(50)  | default 'Undefined'::character varying  | extended |
+
+============================================================================
+Step 3 - Verify the completeness of selected columns 
+============================================================================
+company=# select careof from company_rawdata where careof is null; 
+careof 
+--------
+(0 rows)
+
+company=# select pobox from company_rawdata where pobox is null; 
+pobox 
+--------
+(0 rows)
+
+company=# select addressline1 from company_rawdata where addressline1 is null; 
+addressline1 
+--------
+(0 rows)
+
+company=# select addressline2 from company_rawdata where addressline2 is null; 
+addressline2 
+--------
+(0 rows)
+
+company=# select posttown from company_rawdata where posttown is null; 
+posttown 
+--------
+(0 rows)
+
+\end{lstlisting}
+
+In this section, we will verify the completeness of several columns to demonstrate the missing data and NULL values are eliminated with data parser. 
+
+\newpage
+
+
+

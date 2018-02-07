@@ -1,0 +1,131 @@
+\chapter{Data Retrieval Results.} 
+\label{AppendixQ} 
+\lhead{Appendix Q. \emph{Data Retrieval Results.}}
+
+% Write your Appendix content below here.
+% =========================================
+
+\section{Result for Go program for CSV file data retrieval.}
+
+\subsection{Go Sequential program vs Go Concurrent program.}
+
+\begin{table}[H]
+	\centering
+	\begin{tabulary}{1.0\textwidth}{|L|L|L|}
+		\hline
+		{\bf{CSV Datasets}} & {\bf Sequential Duration (s)} & {\bf Concurrent Duration (s)}  \\ \hline
+		Education (LEO)		& 0.09179      			  		& 0.12362                    	 \\ \hline
+		Company				& 32.64937    					& 36.22334                       \\ \hline
+		Postcode (NSPL) 	& 13.07156       				& 15.21926                       \\ \hline
+		\bf{Total}   		& \textbf{45.81286}  			& \bf{\underline{36.22355}}       \\ \hline
+	\end{tabulary}
+	\caption{Phase 2 Go Sequential program vs Go Concurrent program.}
+\end{table}
+
+Table Q.1 show the table of results comparison between Go sequential program and concurrent program in CSV file data retrieval. The total elapsed time of concurrent program is faster than sequential program in retrieving 4 millions of data from three CSV files.
+
+\newpage  
+
+\section{Result for Rust program for CSV file data retrieval.}
+
+\subsection{Rust Sequential program vs Rust Concurrent program.}
+
+\begin{table}[H]
+	\centering
+	\begin{tabulary}{1.0\textwidth}{|L|L|L|}
+		\hline
+		{\bf{CSV Datasets}} & {\bf Sequential Duration (s)} & {\bf Concurrent Duration (s)}  \\ \hline
+		Education (LEO)		& 0.90461     			  		& 1.038585794                    	 \\ \hline
+		Company				& 292.70488175    				& 314.530471492                       \\ \hline
+		Postcode (NSPL) 	& 109.972792579       			& 116.362977683                       \\ \hline
+		\bf{Total}   		& \textbf{403.582455002}  			& \bf{\underline{314.530967308}}       \\ \hline
+	\end{tabulary}
+	\caption{Phase 2 Rust Sequential program vs Rust Concurrent program.}
+\end{table}
+
+Table Q.2 show the table of results comparison between Rust sequential program and Rust concurrent program in CSV file data retrieval. The total elapsed time of concurrent program is faster than sequential program in retrieving 4 millions of data from three CSV files.
+
+\newpage
+
+\section{Result for Go program for PostgreSQL data retrieval.}
+
+\subsection{Go Sequential program vs Go Concurrent program.}
+
+\begin{table}[H]
+	\centering
+	\begin{tabulary}{1.0\textwidth}{|L|L|L|}
+		\hline
+		{\bf{PostgreSQL table}} & {\bf Sequential Duration (s)} & {\bf Concurrent Duration (s)}  \\ \hline
+		Education (LEO)		& 0.22304     			  		& 0.5291                    	 \\ \hline
+		Company				& 39.8771    					& 43.36509                      \\ \hline
+		Postcode (NSPL) 	& 39.8771       				& 14.52721                       \\ \hline
+		\bf{Total}   		& \textbf{52.06485}  			& \bf{\underline{43.36518}}       \\ \hline
+	\end{tabulary}
+	\caption{Phase 2 Go Sequential program vs Go Concurrent program.}
+\end{table}
+
+Table Q.3 show the table of results comparison between Go sequential program and Go concurrent program in PostgreSQL database retrieval. The total elapsed time of concurrent program is faster than sequential program in retrieving 4 millions of data from three tables in PostgreSQL database.
+
+\newpage
+
+\section{Result for Rust program for PostgreSQL data retrieval.}
+
+\subsection{Rust Sequential program vs Rust Concurrent program.}
+
+\begin{table}[H]
+	\centering
+	\begin{tabulary}{1.0\textwidth}{|L|L|L|}
+		\hline
+		{\bf{PostgreSQL table}} & {\bf Sequential Duration (s)} & {\bf Concurrent Duration (s)}  \\ \hline
+		Education (LEO)		& 0.720544494     			  	& 0.789323246                    	 \\ \hline
+		Company				& 172.584919465    				& 181.387234079                       \\ \hline
+		Postcode (NSPL) 	& 60.442268738       			& 65.702471599                       \\ \hline
+		\bf{Total}   		& \textbf{233.752923612}  			& \bf{\underline{181.389403179}}       \\ \hline
+	\end{tabulary}
+	\caption{Phase 2 Rust Sequential program vs Rust Concurrent program.}
+\end{table}
+
+Table Q.4 show the table of results comparison between Rust sequential program and Rust concurrent program in PostgreSQL database retrieval. The total elapsed time of concurrent program is faster than sequential program in retrieving 4 millions of data from three tables in PostgreSQL database.
+
+\newpage
+
+\section{Comparison of concurrent programming languages performance.}
+
+\subsection{Go CSV Concurrent program vs Rust CSV Concurrent program.}
+
+\begin{table}[H]
+	\centering
+	\begin{tabulary}{1.0\textwidth}{|L|L|L|}
+		\hline
+		{\bf{CSV Datasets}} & {\bf Go Concurrent Duration (s)} & {\bf Rust Concurrent Duration (s)}  \\ \hline
+		Education (LEO)		& 0.12362     			  	   & 1.038586                  	 \\ \hline
+		Company				& 36.22334   				   & 314.53047                       \\ \hline
+		Postcode (NSPL) 	& 15.21926       			   & 116.36298                       \\ \hline
+		\bf{Total}   		& \bf{\underline{36.22355}}  	& \textbf{314.53097}       \\ \hline
+	\end{tabulary}
+	\caption{Phase 2 Go CSV Concurrent program vs Rust CSV Concurrent program.}
+\end{table}
+
+Table Q.5 show the table of results comparison between Go concurrent program and Rust concurrent program in CSV file data retrieval. The total elapsed time of Go concurrent program is faster than Rust concurrent program in retrieving 4 millions of data from three datasets in CSV file.
+
+\newpage
+
+\subsection{Go PostgreSQL Concurrent program vs Rust PostgreSQL Concurrent program.}
+
+\begin{table}[H]
+	\centering
+	\begin{tabulary}{1.0\textwidth}{|L|L|L|}
+		\hline
+		{\bf{PostgreSQL table}} & {\bf Go Concurrent Duration (s)} & {\bf Rust Concurrent Duration (s)}  \\ \hline
+		Education (LEO)		& 0.5291     			  	   & 0.78932              	 \\ \hline
+		Company				& 43.36509   				   & 181.38723                       \\ \hline
+		Postcode (NSPL) 	& 14.52721       			   & 65.70247                       \\ \hline
+		\bf{Total}   		& \bf{\underline{43.36518}}  	& \textbf{181.38940}       \\ \hline
+	\end{tabulary}
+	\caption{Phase 2 Go PostgreSQL Concurrent program vs Rust PostgreSQL Concurrent program.}
+\end{table}
+
+Table Q.6 show the table of results comparison between Go concurrent program and Rust concurrent program in PostgreSQL database retrieval. The total elapsed time of Go concurrent program is faster than Rust concurrent program in retrieving 4 millions of data from three tables in PostgreSQL database.
+
+
+

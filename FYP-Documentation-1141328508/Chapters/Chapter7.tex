@@ -68,20 +68,7 @@ The understanding is established and discovered from Go official documentation a
 The project objectives had been reduce to concurrent programming on data processing instead of distributed programming. 
 
 It is possible to perform distributed programming on data processing activities in this project. However, the development required extra duration on experimentation, design and testing. Based on my current understanding and knowledge on the subject, it will require extra 3 months to develop distributed programming based program. 
-
-\section{Execution time performance comparisons}
-
-\subsection{Performance comparisons of Golang process PostgreSQL database}
-
-Table G.2 in Appendix G shows the total elapsed time for Go sequential program and Go concurrent program to retrieve 300 rows of data from PostgreSQL. Real refers to actual elapsed time for the program; user and sys refer to CPU time used by process. Fmt.Println() of data retrieval is removed during the execution to obtain accurate results on program performance. It is found that concurrent programming is faster than sequential programming on process data from PostgreSQL database. 
-
-However, the amount of CPU time spent in the kernel within the process (sys) by concurrent program is higher than sequential program. This is probably caused by utilization of hardware resources when goroutine and gochannel are communicating in the process. 
-
-\subsection{Performance comparisons of Golang process raw CSV files}
-
-Table F.1 in Appendix F shows the total elapsed time for Go sequential program and Go concurrent program to retrieve 300 rows from raw CSV data. Real refers to actual elapsed time for the program; user and sys refer to CPU time used by process. Fmt.Println() of data retrieval is removed during the execution to obtain accurate results on program performance. It is found that concurrent programming is faster than sequential programming on process data from raw CSV files. 
-
-The optimization to implementations in textit{encoding/csv} has improved \cite{go1.8-changelog} and fixed slow reading problems in Go version 1.8. The build-in CSV library works blazingly well with bufio.Reader() to split the commas during the read CSV files process. 
+ 
 
 
 

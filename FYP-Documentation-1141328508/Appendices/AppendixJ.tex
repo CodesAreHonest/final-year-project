@@ -1,0 +1,100 @@
+\chapter{Data Encoding} 
+\label{AppendixJ} 
+\lhead{Appendix J. \emph{Data Encoding}}
+
+% Write your Appendix content below here.
+% =========================================
+
+\section {Dirty Records Found in Company Datasets.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Three rows of data in Company CSV datasets}, label=commandline-02]
+===========================================================================
+List first three rows of data in company-data.csv file for display purposes
+===========================================================================
+yinghua@yinghua-NL8C:~/Documents/FYP/Basic-Company-Data$ head -3 company-data.csv 
+
+"! LTD","08209948","","","METROHOUSE 57 PEPPER ROAD","HUNSLET","LEEDS","YORKSHIRE","","LS10 2RU","Private Limited Company","Active","United Kingdom","","11/09/2012","30","9","30/06/2018","30/09/2016","DORMANT","09/10/2016","11/09/2015","0","0","0","0","99999 - Dormant Company","","","","0","0","http://business.data.gov.uk/id/company/08209948","","","","","","","","","","","","","","","","","","","","","25/09/2019","11/09/2016"
+
+"!BIG IMPACT GRAPHICS LIMITED","07382019","","","335 ROSDEN HOUSE","372 OLD STREET","LONDON","","","EC1V 9AV","Private Limited Company","Active","United Kingdom","","21/09/2010","30","9","30/06/2018","30/09/2016","DORMANT","19/10/2016","21/09/2015","0","0","0","0","59112 - Video production activities","59113 - Television programme production activities","74100 - specialised design activities","74202 - Other specialist photography","0","0","http://business.data.gov.uk/id/company/07382019","","","","","","","","","","","","","","","","","","","","","05/10/2019","21/09/2016"
+
+"!NSPIRED LTD","SC421617","","","26 POLMUIR ROAD","","ABERDEEN","","UNITED KINGDOM","AB11 7SY","Private Limited Company","Active","United Kingdom","","11/04/2012","30","3","30/12/2017","30/03/2016","TOTAL EXEMPTION SMALL","09/05/2017","11/04/2016","0","0","0","0","70229 - Management consultancy activities other than financial management","","","","0","0","http://business.data.gov.uk/id/company/SC421617","","","","","","","","","","","","","","","","","","","","","25/04/2020","11/04/2017"
+
+\end{lstlisting}
+
+Listing J.1 display first three rows of data found in company CSV datasets, the double quotes are found in empty values (,"","","",) will result in storing as \textit{String} into PostgreSQL database and caused data inconsistency. Therefore, Data encoding is performed to eliminate double quotes ("") found in empty values to prevent incompatible data types for data handling.
+
+\newpage
+
+\section {Data encoding with stream editor.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Execution of data encoding with stream editor.}, label=commandline-02]
+=======================================
+Step 1 - Date on running data encoding
+=======================================
+yinghua@yinghua-NL8C:~$ date
+Sun Aug 27 01:33:00 MYT 2017
+
+===========================================================
+Step 2 - The specification of Operating System environment
+===========================================================
+yinghua@yinghua-NL8C:~$ uname -a 
+Linux yinghua-NL8C 4.10.0-32-generic #36~16.04.1-Ubuntu SMP Wed Aug 9 09:19:02 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux
+
+===============================================
+Step 3 - Change Directory to CSV file location
+===============================================
+yinghua@yinghua-NL8C:~$ cd ~/Documents/FYP/Basic-Company-Data/
+
+===============================================
+Step 4 - List files in directory
+===============================================
+yinghua@yinghua-NL8C:~/Documents/FYP/Basic-Company-Data$ ls -al 
+drwxrwxr-x 5 yinghua yinghua       4096 Feb  7 15:09 .
+drwxrwxr-x 5 yinghua yinghua       4096 Sep  8 00:16 ..
+-rw-r--r-- 1 yinghua yinghua 1980210686 Sep  1 07:00 company-data.csv <-- Input file for encoding
+
+===========================================================================
+Step 5 - Remove null value with double quotes for data encoding
+---------------------------------------------------------------------------
+sed 				= Stream Editor 
+'s/""//g'   			= Regular expression to eliminate double quotes in empty field
+company-data.csv 		= Input file 
+> 				= Redirection operation 
+company-data-full.csv 		= Output file
+===========================================================================
+yinghua@yinghua-NL8C:~/Documents/FYP/Basic-Company-Data$ sed 's/""//g' company-data.csv > company-data-full.csv
+
+===================================================================
+Step 6 - The encoded file is processed and stored in same directory
+===================================================================
+yinghua@yinghua-NL8C:~/Documents/FYP/Basic-Company-Data$ ls -al 
+drwxrwxr-x 5 yinghua yinghua       4096 Feb  7 15:09 .
+drwxrwxr-x 5 yinghua yinghua       4096 Sep  8 00:16 ..
+-rw-r--r-- 1 yinghua yinghua 1980210686 Sep  1 07:00 company-data.csv <-- Input file for encoding
+-rw-rw-r-- 1 yinghua yinghua 1751741578 Sep  1 11:39 company-data-full.csv <-- Encoded file
+\end{lstlisting} 
+
+The combination of Linux commands is executed to display the data encoding operations. According to Step 5 in Listing J.2, \textit{company-data.csv} is consume as input file and process with text substitution to eliminate double quotes according to regular expression provided. The execution will redirect \textit{company-data-full.csv} as output file and stored into the same directory as shown in Step 6. 
+
+\newpage
+
+\section {View Records in Encoded Company Datasets}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Three rows of data in Encoded Company Datasets}, label=commandline-02]
+===========================================================================
+List first three rows of data in company-data-full.csv file for display purposes
+===========================================================================
+yinghua@yinghua-NL8C:~/Documents/FYP/Basic-Company-Data$ head -3 company-data-full.csv 
+
+"! LTD","08209948",,,"METROHOUSE 57 PEPPER ROAD","HUNSLET","LEEDS","YORKSHIRE",,"LS10 2RU","Private Limited Company","Active","United Kingdom",,"11/09/2012","30","9","30/06/2018","30/09/2016","DORMANT","09/10/2016","11/09/2015","0","0","0","0","99999 - Dormant Company",,,,"0","0","http://business.data.gov.uk/id/company/08209948",,,,,,,,,,,,,,,,,,,,,"25/09/2019","11/09/2016"
+
+"!BIG IMPACT GRAPHICS LIMITED","07382019",,,"335 ROSDEN HOUSE","372 OLD STREET","LONDON",,,"EC1V 9AV","Private Limited Company","Active","United Kingdom",,"21/09/2010","30","9","30/06/2018","30/09/2016","DORMANT","19/10/2016","21/09/2015","0","0","0","0","59112 - Video production activities","59113 - Television programme production activities","74100 - specialised design activities","74202 - Other specialist photography","0","0","http://business.data.gov.uk/id/company/07382019",,,,,,,,,,,,,,,,,,,,,"05/10/2019","21/09/2016"
+
+"!NSPIRED LTD","SC421617",,,"26 POLMUIR ROAD",,"ABERDEEN",,"UNITED KINGDOM","AB11 7SY","Private Limited Company","Active","United Kingdom",,"11/04/2012","30","3","30/12/2017","30/03/2016","TOTAL EXEMPTION SMALL","09/05/2017","11/04/2016","0","0","0","0","70229 - Management consultancy activities other than financial management",,,,"0","0","http://business.data.gov.uk/id/company/SC421617",,,,,,,,,,,,,,,,,,,,,"25/04/2020","11/04/2017"
+
+\end{lstlisting}
+
+Listing J.3 display first three rows of data found in encoded company CSV datasets, the double quotes found in empty values are eliminated and removed after the file is encoded. The operation is successful and data consistency is maintained with data encoding activities. The encoded data is safe to be processed by other activities such as data transformation and data parsing. 

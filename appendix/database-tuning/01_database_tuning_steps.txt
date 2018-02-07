@@ -1,0 +1,130 @@
+================================
+Step 1 - Connect to any database 
+================================
+yinghua@yinghua:~$ psql company; 
+psql (9.5.10)
+Type "help" for help.
+
+company=# 
+
+============================================
+Step 2- Display the location of config file 
+============================================
+company=# show config_file;
+               config_file                
+------------------------------------------
+ /etc/postgresql/9.5/main/postgresql.conf
+(1 row)
+
+==================================================================================
+Step 3 - Close the database and login as root with admin privileges on Ubuntu OS 
+==================================================================================
+yinghua@yinghua:~$ sudo su 
+[sudo] password for yinghua: 
+root@yinghua:/home/yinghua# 
+
+==================================================================================
+Step 4 - Configure the value of Max Connection Limit in PostgreSQL Configuration file
+==================================================================================
+root@yinghua:/home/yinghua# sudo gedit /etc/postgresql/9.5/main/postgresql.conf
+
+# -----------------------------
+# PostgreSQL configuration file
+# -----------------------------
+#
+# This file consists of lines of the form:
+#
+#   name = value
+#
+# (The "=" is optional.)  Whitespace may be used.  Comments are introduced with
+# "#" anywhere on a line.  The complete list of parameter names and allowed
+# values can be found in the PostgreSQL documentation.
+#
+# The commented-out settings shown in this file represent the default values.
+# Re-commenting a setting is NOT sufficient to revert it to the default value;
+# you need to reload the server.
+#
+# This file is read on server startup and when the server receives a SIGHUP
+# signal.  If you edit the file on a running system, you have to SIGHUP the
+# server for the changes to take effect, or use "pg_ctl reload".  Some
+# parameters, which are marked below, require a server shutdown and restart to
+# take effect.
+#
+# Any parameter can also be given as a command-line option to the server, e.g.,
+# "postgres -c log_connections=on".  Some parameters can be changed at run time
+# with the "SET" SQL command.
+#
+# Memory units:  kB = kilobytes        Time units:  ms  = milliseconds
+#                MB = megabytes                     s   = seconds
+#                GB = gigabytes                     min = minutes
+#                TB = terabytes                     h   = hours
+#                                                   d   = days
+
+(.... other settings found in this configuration files) 
+
+#------------------------------------------------------------------------------
+# CONNECTIONS AND AUTHENTICATION
+#------------------------------------------------------------------------------
+
+# - Connection Settings -
+
+#listen_addresses = '*'			# what IP address(es) to listen on;
+					# comma-separated list of addresses;
+					# defaults to 'localhost'; use '*' for all
+					# (change requires restart)
+port = 5432				# (change requires restart)
+max_connections = 300			# (change requires restart)  <========== Modify from 100 to 300 
+
+=========================================================================================
+Step 5 - Configure the value of Shared Buffer parameters in PostgreSQL Configuration file
+=========================================================================================
+
+#------------------------------------------------------------------------------
+# RESOURCE USAGE (except WAL)
+#------------------------------------------------------------------------------
+
+# - Memory -
+
+shared_buffers = 256MB			# min 128kB		<========== Modify from 128MB to 256MB 
+					# (change requires restart)
+#huge_pages = try			# on, off, or try
+					# (change requires restart)
+#temp_buffers = 8MB			# min 800kB
+#max_prepared_transactions = 0		# zero disables the feature
+					# (change requires restart)
+# Caution: it is not advisable to set max_prepared_transactions nonzero unless
+# you actively intend to use prepared transactions.
+#work_mem = 4MB				# min 64kB
+#maintenance_work_mem = 64MB		# min 1MB
+#autovacuum_work_mem = -1		# min 1MB, or -1 to use maintenance_work_mem
+#max_stack_depth = 2MB			# min 100kB
+dynamic_shared_memory_type = posix	# the default is the first option
+					# supported by the operating system:
+					#   posix
+					#   sysv
+					#   windows
+					#   mmap
+					# use none to disable dynamic shared memory
+					# (change requires restart)
+
+===================================================================================
+Step 6 - Add the value of maximum size of shared memory segment into Ubuntu System Configuration
+===================================================================================
+
+root@yinghua:/home/yinghua# sudo gedit /etc/sysctl.conf
+
+kernel.shmmax=26000000000	<========== Add this line, it is equal to 26GB 
+
+===================================================================================
+Step 7 - Restart the PostgreSQL database to update the changes 
+==================================================================================
+root@yinghua:/home/yinghua# /etc/init.d/postgresql restart
+[ ok ] Restarting postgresql (via systemctl): postgresql.service.
+
+
+
+
+
+
+
+

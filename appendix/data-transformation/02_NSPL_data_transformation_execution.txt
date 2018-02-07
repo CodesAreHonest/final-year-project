@@ -1,0 +1,44 @@
+========================================================================================
+Step 1 - Change to contain postcode raw data directory and check the location of scripts
+========================================================================================
+yinghua@yinghua:~$ cd ~/gitRepo/final-year-project/FYP2-Database-Queries/postcode-database-queries
+yinghua@yinghua:~/gitRepo/final-year-project/FYP2-Database-Queries/postcode-database-queries$ ls -al
+total 44
+drwxrwxr-x 2 yinghua yinghua 4096 Feb  7 16:22 .
+drwxrwxr-x 5 yinghua yinghua 4096 Jan 29 22:58 ..
+-rw-rw-r-- 1 yinghua yinghua 4264 Feb  7 16:22 01_yinghua_raw_postcode_DDL.sql     <- This script 
+-rw-rw-r-- 1 yinghua yinghua 7554 Jan 17 15:48 02_yinghua_normalized_NSPL_DDL.sql
+-rw-rw-r-- 1 yinghua yinghua 5164 Jan 14 18:06 03_yinghua_insert_NSPL_table.sql
+-rw-rw-r-- 1 yinghua yinghua 1252 Jan 13 22:06 postcode_format.sql
+-rw-rw-r-- 1 yinghua yinghua 2224 Jan 15 14:54 test2.sql
+-rw-rw-r-- 1 yinghua yinghua 3416 Jan 14 18:29 test.sql
+
+========================================================================================
+Step 2 - Execution of data transformation scripts 
+========================================================================================
+yinghua@yinghua:~/gitRepo/final-year-project/FYP2-Database-Queries/postcode-database-queries$ psql -U yinghua -d postcode -a -f 01_yinghua_raw_postcode_DDL.sql
+
+(output too much not shown...) 
+
+========================================================================================
+Step 3 - Connect to postcode database
+========================================================================================
+yinghua@yinghua:~/gitRepo/final-year-project/FYP2-Database-Queries/postcode-database-queries$ psql postcode; 
+psql (9.5.10)
+Type "help" for help.
+
+postcode=# 
+
+========================================================================================
+Step 4 - Select number of rows of table in database after data transformation
+========================================================================================
+postcode=# select distinct count(*) from nspl_rawdata; 
+  count  
+---------
+ 1754882
+(1 row)
+
+
+
+
+

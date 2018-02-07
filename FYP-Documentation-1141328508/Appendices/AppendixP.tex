@@ -1,0 +1,1367 @@
+\chapter{Data Migration} 
+\label{AppendixP} 
+\lhead{Appendix P. \emph{Data Migration}}
+
+% Write your Appendix content below here.
+% =========================================
+
+\section{PL/pgSQL's DML Script for Data Migration.}
+
+\subsection{Script for Education Normalized Database Migration.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={PL/pgSQL's DML Script for Education Normalized Database Migration.}, label=commandline-02]
+
+-- File: 03_yinghua_insert_leo_table_DML.sql
+-- Date: Mon Dec 8 10:10 MYT 2017
+-- Author: Chai Ying Hua 
+-- Version: 1.0 
+-- Database: psql (PostgreSQL) 9.5.10
+-- ====================================================================
+-- (Version 1.0 Change: 8 Dec 2017) 
+--  	1. Delete all data in reverse order.
+--	2. Migrate all data from raw table into normalized lookup table. 
+-- ====================================================================
+
+
+-- DELETE ALL DATA FROM TABLE IN REVERSE ORDER 
+DELETE FROM leo_prior_attainment 	WHERE TRUE;
+DELETE FROM leo_polar 			WHERE TRUE;
+DELETE FROM leo_earning 		WHERE TRUE;
+DELETE FROM leo_sustain_employment 	WHERE TRUE;
+DELETE FROM leo_uncaptured 		WHERE TRUE;
+DELETE FROM leo_match 			WHERE TRUE;
+DELETE FROM leo_graduation 		WHERE TRUE;
+DELETE FROM leo_detail 			WHERE TRUE;
+DELETE FROM leo				WHERE TRUE;
+
+-- SELECT UNIQUE DATA FROM RAW TABLE AND INSERT INTO NORMALIZED DATA. 
+
+----------------------------------------
+-- LEO_PRIOR_ATTAINMENT TABLE MIGRATION 
+-- ROW COUNTS: 2139 
+----------------------------------------
+INSERT INTO leo_prior_attainment (leo_pr_att_band,leo_pr_att_included)
+	SELECT DISTINCT prattband, prattincluded FROM leo_rawdata;
+
+----------------------------------------
+-- LEO_POLAR TABLE MIGRATION 
+-- ROW COUNTS: 6793 
+---------------------------------------- 
+INSERT INTO leo_polar (leo_polar_grp_one,leo_polar_grp_included)
+	SELECT DISTINCT polargrpone, polargrponeincluded FROM leo_rawdata;
+
+----------------------------------------
+-- LEO_EARNING TABLE MIGRATION 
+-- ROW COUNTS: 14372
+---------------------------------------- 
+INSERT INTO leo_earning (leo_earning_include,leo_lower_ann_earn,leo_median_ann_earn,leo_upper_ann_earn)
+	SELECT DISTINCT earningsinclude, lowerannearn, medianannearn, upperannearn FROM leo_rawdata;
+
+----------------------------------------
+-- LEO_SUSTAIN_EMPLOYMENT TABLE MIGRATION 
+-- ROW COUNTS: 6192
+---------------------------------------- 
+INSERT INTO leo_sustain_employment (leo_sust_emp_only,leo_sust_emp,leo_sust_emp_fs_or_both)
+	SELECT DISTINCT sustemponly, sustemp, sustempfsorboth FROM leo_rawdata;
+
+----------------------------------------
+-- LEO_UNCAPTURED TABLE MIGRATION 
+-- ROW COUNTS: 6283
+---------------------------------------- 
+INSERT INTO leo_uncaptured (leo_activitynotcaptured,leo_no_sust_dest)
+	SELECT DISTINCT activitynotcaptured, nosustdest FROM leo_rawdata;
+
+----------------------------------------
+-- LEO_MATCH TABLE MIGRATION 
+-- ROW COUNTS: 3992
+---------------------------------------- 
+INSERT INTO leo_match (leo_unmatched,leo_matched)
+	SELECT DISTINCT unmatched, matched FROM leo_rawdata;
+
+----------------------------------------
+-- LEO_GRADUATION TABLE MIGRATION 
+-- ROW COUNTS: 195
+---------------------------------------- 
+INSERT INTO leo_graduation (leo_grad)
+	SELECT DISTINCT grads FROM leo_rawdata;
+
+----------------------------------------
+-- LEO_DETAIL TABLE MIGRATION 
+-- ROW COUNTS: 32706		<- SAME COUNT WITH RAWDATA 
+---------------------------------------- 
+INSERT INTO leo_detail (leo_ukprn, leo_providername, leo_region, leo_subject, leo_sex, leo_yearaftergraduation)
+	SELECT DISTINCT ukprn, providername, region, subject, sex, yearaftergraduation FROM leo_rawdata;
+
+----------------------------------------
+-- LEO TABLE MIGRATION 
+-- ROW COUNTS: 32706		<- SAME COUNT WITH RAWDATA
+----------------------------------------
+INSERT INTO leo (leo_detail_id, leo_grads_id, leo_match_id, leo_uncaptured_id, leo_sust_emp_id, leo_earning_id, leo_polar_id, leo_pr_att_id)
+	SELECT leo_detail_id, leo_grads_id, leo_match_id, leo_uncaptured_id, leo_sust_emp_id, leo_earning_id, leo_polar_id, leo_pr_att_id
+	FROM leo_rawdata AS rawdata
+	JOIN leo_detail     AS detail 
+		ON      detail.leo_ukprn = rawdata.ukprn 
+		AND 	detail.leo_providername = rawdata.providername
+		AND 	detail.leo_region = rawdata.region
+		AND 	detail.leo_subject = rawdata.subject
+		AND 	detail.leo_sex = rawdata.sex
+		AND 	detail.leo_yearaftergraduation = rawdata.yearaftergraduation
+	JOIN leo_graduation AS grad 
+		ON 	grad.leo_grad = rawdata.grads
+	JOIN leo_match	    AS match 
+		ON 	match.leo_unmatched = rawdata.unmatched
+		AND    	match.leo_matched   = rawdata.matched
+	JOIN leo_uncaptured AS uncaptured 
+		ON      uncaptured.leo_activitynotcaptured = rawdata.activitynotcaptured
+		AND     uncaptured.leo_no_sust_dest        = rawdata.nosustdest
+	JOIN leo_sustain_employment       AS sustemp 
+		ON      sustemp.leo_sust_emp_only 	= rawdata.sustemponly
+		AND     sustemp.leo_sust_emp      	= rawdata.sustemp
+		AND     sustemp.leo_sust_emp_fs_or_both = rawdata.sustempfsorboth
+	JOIN leo_earning    AS earning 
+		ON      earning.leo_earning_include 	= rawdata.earningsinclude
+		AND     earning.leo_lower_ann_earn      = rawdata.lowerannearn
+		AND     earning.leo_median_ann_earn     = rawdata.medianannearn
+		AND     earning.leo_upper_ann_earn      = rawdata.upperannearn
+	JOIN leo_polar      AS polar 
+		ON      polar.leo_polar_grp_one 	= rawdata.polargrpone
+		AND     polar.leo_polar_grp_included    = rawdata.polargrponeincluded
+	JOIN leo_prior_attainment     AS pa 
+		ON      pa.leo_pr_att_band 		= rawdata.prattband
+		AND     pa.leo_pr_att_included          = rawdata.prattincluded;
+
+----------------
+-- END SCRIPT -- 
+----------------
+
+\end{lstlisting}
+
+\subsection{Script for Postcode Normalized Database Migration.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={PL/pgSQL's DML Script for Postcode Normalized Database Migration.}, label=commandline-02]
+-- File: 03_yinghua_insert_NSPL_table.sql
+-- Date: Fri Jan 12 16:02 MYT 2018
+-- Author: Chai Ying Hua 
+-- Version: 1.0 
+-- Database: psql (PostgreSQL) 9.5.10
+-- =========================================================
+
+DELETE FROM postcode_greek_coordinate;
+DELETE FROM postcode_output_area_classification; 
+DELETE FROM postcode_middle_super_output_area; 
+DELETE FROM postcode_lower_super_output_area;
+DELETE FROM postcode_primary_care_trust;
+DELETE FROM postcode_euro_electoral_region;
+DELETE FROM postcode_parliament_constituency;
+DELETE FROM postcode_region;
+DELETE FROM postcode_country;
+DELETE FROM postcode_ward;
+DELETE FROM postcode_local_authority_county;
+DELETE FROM postcode_county;
+DELETE FROM postcode_cartesian_coordinate;
+
+
+-- SELECT UNIQUE DATA FROM RAW TABLE AND INSERT INTO NORMALIZED DATA. 
+----------------------------------------
+-- POSTCODE_GREEK_COORDINATE TABLE MIGRATION 
+-- ROW COUNTS: 1664728 
+----------------------------------------
+INSERT INTO postcode_greek_coordinate (pos_longitude, pos_latitude)
+	SELECT DISTINCT longitude, latitude FROM nspl_rawdata;
+
+----------------------------------------
+-- POSTCODE_AREA_OUTPUT_CLASSIFICATION TABLE MIGRATION 
+-- ROW COUNTS: 77 
+----------------------------------------
+INSERT INTO postcode_output_area_classification (pos_oac_code, pos_oac_name)
+	SELECT DISTINCT oacc, oacn FROM nspl_rawdata;
+
+----------------------------------------
+-- POSTCODE_MIDDLE_SUPER_OUTPUT_AREA TABLE MIGRATION 
+-- ROW COUNTS: 8484 
+----------------------------------------
+INSERT INTO postcode_middle_super_output_area (pos_msoa_code, pos_msoa_name)
+	SELECT DISTINCT msoac, msoan FROM nspl_rawdata;
+
+----------------------------------------
+-- POSTCODE_LOWER_SUPER_OUTPUT_AREA TABLE MIGRATION 
+-- ROW COUNTS: 42460 
+----------------------------------------
+INSERT INTO postcode_lower_super_output_area (pos_lsoa_code, pos_lsoa_name)
+	SELECT DISTINCT isoac, isoan FROM nspl_rawdata;
+
+----------------------------------------
+-- POSTCODE_PRIMARY_CARE_TRUST TABLE MIGRATION 
+-- ROW COUNTS:  200
+----------------------------------------
+INSERT INTO postcode_primary_care_trust (pos_pct_code, pos_pct_name)
+	SELECT DISTINCT pctc, pctn FROM nspl_rawdata;
+
+----------------------------------------
+-- POSTCODE_EURO_ELECTORAL_REGION TABLE MIGRATION 
+-- ROW COUNTS:  15
+----------------------------------------
+INSERT INTO postcode_euro_electoral_region (pos_eer_code, pos_eer_name)
+	SELECT DISTINCT eerc, eern FROM nspl_rawdata;
+
+----------------------------------------
+-- POSTCODE_PARLIAMENT_CONSTITUENCY TABLE MIGRATION 
+-- ROW COUNTS:  653
+----------------------------------------
+INSERT INTO postcode_parliament_constituency (pos_par_cons_code, pos_par_cons_name)
+	SELECT DISTINCT par_cons_code, par_cons_name FROM nspl_rawdata;
+
+----------------------------------------
+-- POSTCODE_REGION TABLE MIGRATION 
+-- ROW COUNTS:  15
+----------------------------------------
+INSERT INTO postcode_region (pos_region_code, pos_region_name)
+	SELECT DISTINCT region_code, region_name FROM nspl_rawdata;
+
+----------------------------------------
+-- POSTCODE_COUNTRY TABLE MIGRATION 
+-- ROW COUNTS:  7
+----------------------------------------
+INSERT INTO postcode_country (pos_country_code, pos_country_name)
+	SELECT DISTINCT countrycode, countryname FROM nspl_rawdata;
+
+----------------------------------------
+-- POSTCODE_WARD TABLE MIGRATION 
+-- ROW COUNTS:  9115
+----------------------------------------
+INSERT INTO postcode_ward (pos_ward_code, pos_ward_name)
+	SELECT DISTINCT wardcode, wardname FROM nspl_rawdata;
+
+----------------------------------------
+-- POSTCODE_LOCAL_AUTHORITY_COUNTY TABLE MIGRATION 
+-- ROW COUNTS:  394
+----------------------------------------
+INSERT INTO postcode_local_authority_county (pos_lac_code, pos_lac_name)
+	SELECT DISTINCT county_lac, county_lan FROM nspl_rawdata;
+
+----------------------------------------
+-- POSTCODE_COUNTY TABLE MIGRATION 
+-- ROW COUNTS:  34
+----------------------------------------
+INSERT INTO postcode_county (pos_county_code, pos_county_name)
+	SELECT DISTINCT countycode, countyname FROM nspl_rawdata;
+
+----------------------------------------
+-- POSTCODE_CARTESIAN_COORDINATE TABLE MIGRATION 
+-- ROW COUNTS:  1662088
+----------------------------------------
+INSERT INTO postcode_cartesian_coordinate (pos_easting, pos_northing)
+	SELECT DISTINCT easting, northing FROM nspl_rawdata;
+
+----------------------------------------
+-- POSTCODE_DETAIL TABLE MIGRATION 
+-- ROW COUNTS:  1754882 		<--- SAME ROW WITH RAW DATA.  
+----------------------------------------
+INSERT INTO postcode_detail (pos1, pos2, pos3, pos_date_introduce, pos_usertype, pos_cart_coordinate_id, position_quality, pos_spatial_accuracy, pos_location, pos_socrataid, pos_last_upload)
+	SELECT postcode1, postcode2, postcode3, date_introduce, usertype, pos_cart_coordinate_id, position_quality, spatial_accuracy, location, socrataid, last_upload
+	FROM nspl_rawdata AS rawdata
+	JOIN postcode_cartesian_coordinate AS pos_car_coor	
+		ON rawdata.easting = pos_car_coor.pos_easting 
+		AND rawdata.northing = pos_car_coor.pos_northing; 
+
+\end{lstlisting}
+
+\subsection{Script for Company Normalized Database Migration.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={PL/pgSQL's DML Script for Company Normalized Database Migration.}, label=commandline-02]
+-- FILE: 03_yinghua_insert_company_table_DML.sql  
+-- DATE: Mon Jan 9 17:00 MYT 2018
+-- AUTHOR: Chai Ying Hua 
+-- VERSION: 1.0
+-- DATABASE: psql (PostgreSQL) 9.5.10
+-- DESCRIPTION:
+-- =======================================================
+--
+--    	1. Delete all data in reverse order.
+--	2. Migrate all data from raw table into normalized lookup table. 
+-- ========================================================
+
+-- SELECT UNIQUE DATA FROM RAW TABLE AND INSERT INTO NORMALIZED TABLE. 
+
+----------------------------------------
+-- COMPANY_RETURNS TABLE MIGRATION 
+-- ROW COUNTS:  28697
+----------------------------------------
+INSERT INTO company_returns (com_return_nextduedate, com_return_lastmadeupdate)
+	SELECT DISTINCT return_nextduedate, return_lastmadeupdate FROM company_rawdata;
+
+----------------------------------------
+-- COMPANY_MORTGAGES TABLE MIGRATION 
+-- ROW COUNTS: 3710
+----------------------------------------
+INSERT INTO company_mortgages (com_num_mortchanges, com_num_mortoutstanding, com_num_mortpartsatisfied, com_num_mortsatisfied)
+	SELECT DISTINCT nummortcharges, nummortoutstanding, nummortpartsatisfied, nummortsatisfied FROM company_rawdata;
+
+----------------------------------------
+-- COMPANY_SICCODE TABLE MIGRATION 
+-- ROW COUNTS: 51693
+----------------------------------------
+INSERT INTO company_siccodes (com_siccode1, com_siccode2, com_siccode3, com_siccode4)
+	SELECT DISTINCT siccode1, siccode2, siccode3, siccode4 FROM company_rawdata;
+
+----------------------------------------
+-- COMPANY_PARTNERSHIP TABLE MIGRATION 
+-- ROW COUNTS: 279
+----------------------------------------
+INSERT INTO company_partnership (com_num_genpartners, com_num_limpartners)
+	SELECT DISTINCT numgenpartners, numlimpartners FROM company_rawdata;
+
+----------------------------------------
+-- COMPANY_URI TABLE MIGRATION 
+-- ROW COUNTS: 2033290
+----------------------------------------
+-INSERT INTO company_uri (com_uri)
+	SELECT DISTINCT uri FROM company_rawdata;
+
+----------------------------------------
+-- COMPANY_CONF_STMT TABLE MIGRATION 
+-- ROW COUNTS: 14900
+----------------------------------------
+INSERT INTO company_conf_stmt (com_conf_stmt_nextduedate, com_conf_stmt_lastmadeupdate)
+	SELECT DISTINCT confstmtnextduedate, confstmtlastmadeupdate FROM company_rawdata;
+
+----------------------------------------
+-- COMPANY_PREVIOUSNAME TABLE MIGRATION 
+-- ROW COUNTS: 190185
+----------------------------------------
+INSERT INTO company_previousname (com_pn1_condate, com_pn1_companyname, com_pn2_condate, com_pn2_companyname, com_pn3_condate, com_pn3_companyname, com_pn4_condate, com_pn4_companyname, com_pn5_condate, com_pn5_companyname, com_pn6_condate, com_pn6_companyname, com_pn7_condate, com_pn7_companyname, com_pn8_condate, com_pn8_companyname, com_pn9_condate, com_pn9_companyname, com_pn10_condate, com_pn10_companyname) 
+	SELECT DISTINCT pn1_condate, pn1_companyname, pn2_condate, pn2_companyname, pn3_condate, pn3_companyname, pn4_condate, pn4_companyname, pn5_condate, pn5_companyname, pn6_condate, pn6_companyname,pn7_condate, pn7_companyname, pn8_condate, pn8_companyname, pn9_condate, pn9_companyname, pn10_condate, pn10_companyname FROM company_rawdata;
+
+
+\end{lstlisting}
+
+Listing P.1, P.2 and P.3 shows PL/pgSQL's DML scripts for Company, Postcode and Education normalized database migration. These scripts retrieve the UNIQUE value from raw data from each columns and stored into the \textbf{resources table} created in Appendix M. The SQL scripts use INSERT with SELECT concepts to migrate countless rows of data from legacy table into new storage. 
+
+The row counts of each table are displayed and updated into the each Listing P.1, P.2 and P.3. 
+
+\newpage
+
+\section{Go programming language based data migration program.}
+
+\subsection{Postcode data migration program. }
+
+\subsubsection{Extract Normalized Table Key Field.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Resource Table Key Retrieval Function.}, label=commandline-02]
+
+package main
+
+import (
+	"fmt" 
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+)
+
+var (
+	detail_id [] int64
+	county_id [] int64 
+	lac_id [] int64 
+	ward_id [] int64 
+	country_id [] int64 
+	region_id [] int64 
+	par_cons_id [] int64 
+	eer_id [] int64 
+	pct_id [] int64 
+	lsoa_id [] int64 
+	msoa_id [] int64 
+	oac_id [] int64 
+	greek_coordinate_id [] int64 
+)
+
+func retrieve_detail() {
+
+	rows, err := db.Query("SELECT pos_detail_id FROM nspl_rawdata AS rawdata JOIN postcode_detail AS detail ON detail.pos1 = rawdata.postcode1 AND detail.pos2 = rawdata.postcode2 AND detail.pos3 = rawdata.postcode3 AND detail.pos_date_introduce = rawdata.date_introduce AND detail.pos_usertype = rawdata.usertype AND detail.position_quality = rawdata.position_quality AND detail.pos_spatial_accuracy = rawdata.spatial_accuracy AND     detail.pos_location = rawdata.location AND detail.pos_socrataid = rawdata.socrataid AND detail.pos_last_upload = rawdata.last_upload;" )
+	
+	checkErr(err, "Error on query DB")	
+	
+	for rows.Next() {
+	
+		var n postcode_id
+		
+		err = rows.Scan(&n.pos_detail_id)
+		checkErr(err, "Retrieve pos_detail_id key")
+		
+		detail_id = append(detail_id, n.pos_detail_id); 
+	}
+
+	fmt.Printf("Postcode detail: %d \n", len(detail_id))
+	defer rows.Close()
+}
+
+func retrieve_county() {
+
+	rows, err := db.Query("SELECT pos_county_id FROM nspl_rawdata AS rawdata JOIN postcode_county AS county ON county.pos_county_code = rawdata.countycode AND county.pos_county_name = rawdata.countyname JOIN postcode_local_authority_county AS lac ON lac.pos_lac_code = rawdata.county_lac AND lac.pos_lac_name = rawdata.county_lan;" )
+	
+	checkErr(err, "Error on query DB")	
+	
+	for rows.Next() {
+	
+		var n postcode_id
+		
+		err = rows.Scan(&n.pos_county_id)
+		checkErr(err, "Retrieve pos_county_id key")
+		
+		county_id = append(county_id, n.pos_county_id); 
+	}
+	
+	fmt.Printf("Postcode county: %d \n", len(county_id))
+	defer rows.Close()
+}
+
+func retrieve_local_authority_council() {
+
+	rows, err := db.Query("SELECT pos_lac_id FROM nspl_rawdata AS rawdata JOIN postcode_local_authority_county AS lac ON lac.pos_lac_code = rawdata.county_lac AND lac.pos_lac_name = rawdata.county_lan;" )
+	
+	checkErr(err, "Error on query DB")	
+	
+	for rows.Next() {
+	
+		var n postcode_id
+		
+		err = rows.Scan(&n.pos_lac_id)
+		checkErr(err, "Retrieve pos_lac_id key")
+		
+		lac_id = append(lac_id, n.pos_lac_id); 
+	}
+	
+	fmt.Printf("Postcode Local Authority Council: %d \n", len(lac_id))
+	defer rows.Close()
+}
+
+func retrieve_ward() {
+
+	rows, err := db.Query("SELECT pos_ward_id FROM nspl_rawdata AS rawdata JOIN postcode_ward AS ward ON ward.pos_ward_code = rawdata.wardcode AND ward.pos_ward_name = rawdata.wardname;" )
+	checkErr(err, "Error on query pos_ward_id")	
+	
+	for rows.Next() {
+	
+		var n postcode_id
+		
+		err = rows.Scan(&n.pos_ward_id)
+		checkErr(err, "Retrieve pos_ward_id key")
+		
+		ward_id = append(ward_id, n.pos_ward_id); 
+	}
+	
+	fmt.Printf("Postcode Ward: %d \n", len(ward_id))
+	defer rows.Close()
+}
+
+func retrieve_country() {
+
+	rows, err := db.Query("SELECT pos_country_id FROM nspl_rawdata AS rawdata JOIN postcode_country AS country ON country.pos_country_code = rawdata.countrycode AND country.pos_country_name = rawdata.countryname;" )
+	checkErr(err, "Error on query pos_country_id")	 
+	
+	for rows.Next() {
+		var n postcode_id
+		
+		err = rows.Scan(&n.pos_country_id)
+		checkErr(err, "Retrieve pos_country_id key")
+		
+		country_id = append(country_id, n.pos_country_id); 
+	}
+	
+	fmt.Printf("Postcode Country: %d \n", len(country_id))
+	defer rows.Close()
+}
+
+func retrieve_region() {
+
+	rows, err := db.Query("SELECT pos_region_id FROM nspl_rawdata AS rawdata JOIN postcode_region AS region ON region.pos_region_code = rawdata.region_code AND region.pos_region_name = rawdata.region_name;" )
+	checkErr(err, "Error on query pos_region_id")	 
+	
+	for rows.Next() {
+	
+		var n postcode_id
+		
+		err = rows.Scan(&n.pos_region_id)
+		checkErr(err, "Retrieve pos_region_id key")
+		
+		region_id = append(region_id, n.pos_region_id); 
+	}
+	
+	fmt.Printf("Postcode Region: %d \n", len(region_id))
+	defer rows.Close()
+}
+
+func retrieve_parliament_constituency() {
+
+	rows, err := db.Query("SELECT pos_par_cons_id FROM nspl_rawdata AS rawdata JOIN postcode_parliament_constituency AS ppc ON ppc.pos_par_cons_code = rawdata.par_cons_code AND ppc.pos_par_cons_name = rawdata.par_cons_name;" )
+	checkErr(err, "Error on query pos_par_cons_id")	 
+	
+	for rows.Next() {
+	
+		var n postcode_id
+		
+		err = rows.Scan(&n.pos_par_cons_id)
+		checkErr(err, "Retrieve pos_par_cons_id key")
+		
+		par_cons_id = append(par_cons_id, n.pos_par_cons_id); 
+	}
+	
+	fmt.Printf("Postcode Parliament Constituency: %d \n", len(par_cons_id))
+	defer rows.Close()
+}
+
+func retrieve_euro_electoral_region() {
+
+	rows, err := db.Query("SELECT pos_eer_id FROM nspl_rawdata AS rawdata JOIN postcode_euro_electoral_region AS eer ON eer.pos_eer_code = rawdata.eerc AND eer.pos_eer_name = rawdata.eern;" )
+	checkErr(err, "Error on query pos_eer_id")	 
+	
+	for rows.Next() {
+	
+		var n postcode_id
+		
+		err = rows.Scan(&n.pos_eer_id)
+		checkErr(err, "Retrieve pos_eer_id key")
+		
+		eer_id = append(eer_id, n.pos_eer_id); 
+	}
+
+	fmt.Printf("Postcode Euro Electoral Region: %d \n", len(eer_id))
+	defer rows.Close()
+}
+
+func retrieve_primary_care_trust() {
+
+	rows, err := db.Query("SELECT pos_pct_id FROM nspl_rawdata AS rawdata JOIN postcode_primary_care_trust AS pct ON pct.pos_pct_code = rawdata.pctc AND pct.pos_pct_name = rawdata.pctn;" )
+	checkErr(err, "Error on query pos_pct_id")	 
+	
+	for rows.Next() {
+	
+		var n postcode_id
+		
+		err = rows.Scan(&n.pos_pct_id)
+		checkErr(err, "Retrieve pos_pct_id key")
+		
+		pct_id = append(pct_id, n.pos_pct_id); 
+	}
+	
+	fmt.Printf("Postcode Primary Care Trust: %d \n", len(pct_id))
+	defer rows.Close()
+}
+
+func retrieve_lower_super_output_area () {
+	
+	rows, err := db.Query("SELECT pos_lsoa_id FROM nspl_rawdata AS rawdata JOIN postcode_lower_super_output_area AS lsoa ON lsoa.pos_lsoa_code = rawdata.isoac AND lsoa.pos_lsoa_name = rawdata.isoan;" )
+	checkErr(err, "Error on query pos_lsoa_id")	 
+	
+	for rows.Next() {
+	
+		var n postcode_id
+		
+		err = rows.Scan(&n.pos_lsoa_id)
+		checkErr(err, "Retrieve pos_lsoa_id key")
+		
+		lsoa_id = append(lsoa_id, n.pos_lsoa_id); 
+	}
+
+	fmt.Printf("Postcode Lower Super Output Area: %d \n", len(lsoa_id))
+	defer rows.Close()
+}
+
+func retrieve_middle_super_output_area() {
+
+	rows, err := db.Query("SELECT pos_msoa_id FROM nspl_rawdata AS rawdata JOIN postcode_middle_super_output_area AS msoa ON msoa.pos_msoa_code = rawdata.msoac AND msoa.pos_msoa_name = rawdata.msoan;" )
+	checkErr(err, "Error on query pos_msoa_id")	 
+	
+	for rows.Next() {
+	
+		var n postcode_id
+		
+		err = rows.Scan(&n.pos_msoa_id)
+		checkErr(err, "Retrieve pos_msoa_id key")
+		
+		msoa_id = append(msoa_id, n.pos_msoa_id); 
+	}
+
+	fmt.Printf("Postcode Middle Super Output Area: %d \n", len(msoa_id))
+	defer rows.Close()
+}
+
+func retrieve_output_area_classification() {
+
+	rows, err := db.Query("SELECT pos_oac_id FROM nspl_rawdata AS rawdata JOIN postcode_output_area_classification AS oac ON oac.pos_oac_code = rawdata.oacc AND oac.pos_oac_name = rawdata.oacn;" )
+	checkErr(err, "Error on query pos_oac_id")	 
+	
+	for rows.Next() {
+	
+		var n postcode_id
+		
+		err = rows.Scan(&n.pos_oac_id)
+		checkErr(err, "Retrieve pos_oac_id key")
+		
+		oac_id = append(oac_id, n.pos_oac_id); 
+	}
+	
+	fmt.Printf("Postcode Output Area Classification: %d \n", len(oac_id))
+	defer rows.Close()
+}
+
+func retrieve_greek_coordinate() {
+
+	rows, err := db.Query("SELECT pos_greek_coordinate_id FROM nspl_rawdata AS rawdata JOIN postcode_greek_coordinate AS pgc ON pgc.pos_longitude = rawdata.longitude AND pgc.pos_latitude = rawdata.latitude;" )
+	checkErr(err, "Error on query pos_greek_coordinate_id")	 
+	
+	for rows.Next() {
+	
+		var n postcode_id
+		
+		err = rows.Scan(&n.pos_greek_coordinate_id)
+		checkErr(err, "Retrieve pos_greek_coordinate_id key")
+		
+		greek_coordinate_id = append(greek_coordinate_id, n.pos_greek_coordinate_id); 
+	}
+	
+	fmt.Printf("Postcode Greek Coordinate: %d \n", len(greek_coordinate_id))
+	defer rows.Close()
+}
+
+\end{lstlisting}
+
+Listing P.4 shows the source code for resource table key retrieval. Each function is used specifically to retrieve primary key of specific resource table and stored in dedicated array with \textbf{append}. Once each function had finish executed, these arrays contain extracted PRIMARY KEY (PK) and await to be insert into the another table as FOREIGN KEY (FK). This process is called \textit{referential integrity}.
+
+\newpage
+
+\subsubsection{Migrate data with Referencial Integrity.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Postcode Data Migration main program.}, label=commandline-02]
+
+package main
+
+import (
+	"log"
+	"fmt" 
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"database/sql"
+	"sync"
+)
+
+const (
+	DB_USER     = "yinghua"
+	DB_PASSWORD = "123"
+	DB_NAME     = "postcode"
+	ENTRIES	    = 1754882 
+)
+
+var ( 
+	db *sql.DB
+	sqlStatement = "INSERT INTO postcode (pos_detail_id, pos_county_id, pos_lac_id, pos_ward_id, pos_country_id, pos_region_id, pos_par_cons_id, pos_eer_id, pos_pct_id, pos_lsoa_id, pos_msoa_id, pos_oac_id, pos_greek_coordinate_id) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13);";
+
+)
+
+//====================================================
+//function to check error and print error messages
+//====================================================
+func checkErr(err error, message string) {
+	if err != nil {
+		panic(message + " err: " + err.Error())
+	}
+}
+
+//====================================================
+// initialize connection with database
+//====================================================
+func initDB() {
+
+	dbInfo := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable",
+	DB_USER, DB_PASSWORD, DB_NAME)
+	sqldb, err := sql.Open("postgres", dbInfo)
+	checkErr(err, "Initialize database")
+	
+	sqldb.SetMaxOpenConns(90)
+	db = sqldb
+}
+
+func main() { 
+	initDB()
+	retrieve_key()
+	insert_key()
+	
+	fmt.Println("The postcode data had migrated complete")
+}
+
+=======================================================================================
+Function that migrate all the keys into Postcode table with Reference Integrity 
+=======================================================================================
+func insert_key() {
+
+	fmt.Println("Begin to migrate postcode data")
+	
+	stmt, err := db.Prepare(sqlStatement)
+	checkErr(err, "Prepare insert statement")
+	
+	wg := sync.WaitGroup{}
+	
+	// ensure all routines finish before returning
+	defer wg.Wait()
+	
+	for i := ENTRIES; i > 0 ; i-- { 
+		wg.Add(1)
+		go func () {
+			defer wg.Done()
+			res, err := stmt.Exec(detail_id[i],  county_id[i], lac_id[i], ward_id[i], country_id[i], region_id[i], par_cons_id[i], eer_id[i], pct_id[i], lsoa_id[i], msoa_id[i], oac_id[i], greek_coordinate_id[i])
+			checkErr(err, "Insert statement execution error") 
+
+			if res == nil { 
+				log.Fatal(err)
+			}
+		}()
+	} 
+}
+
+=======================================================================================
+Function that retrieve all the key from Normalized Resource table and stored into array
+======================================================================================= 
+func retrieve_key() { 
+	retrieve_detail()
+	retrieve_county()
+	retrieve_local_authority_council()
+	retrieve_ward() 
+	retrieve_country()
+	retrieve_region() 
+	retrieve_parliament_constituency()
+	retrieve_euro_electoral_region()
+	retrieve_primary_care_trust()
+	retrieve_lower_super_output_area()
+	retrieve_middle_super_output_area()
+	retrieve_output_area_classification()
+	retrieve_greek_coordinate()
+}
+
+\end{lstlisting}
+
+Listing P.5 shows the source code for postcode data migration main program. The main function is where \textbf{a program start its execution}. 
+
+When the main program is compiled and executed, main() will called \textbf{retrieve\_key()} function to retrieve all the PRIMARY KEY (PK) from each resource table and stored into dedicated array (refer row 50). Once the process had finished executed, the \textbf{insert\_key*()} function will be execute to retrieved these key values in array and migrated into the postcode table (refer row 71-82). The PK in array is insert into another table as FOREIGN KEY (FK) to establish relationship between entity. 
+
+The \textbf{insert\_key()} function use channels to synchronize migration execution across goroutines to form an concurrent execution. The synchronization primitives of Go programming language is used to perform communication in mutual exclusion locks. The entire execution of this function will be display and print on terminal (refer row 53). 
+
+The result obtained will be tabulated, compared and discussed.
+
+\subsection {Company data migration program}
+
+\subsubsection{Extract Normalized Table Key Field.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Resource Table Key Retrieval Function.}, label=commandline-02]
+package main
+
+import (
+	"fmt" 
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+)
+
+func retrieve_detail_id() {	
+	fmt.Println("Begin to retrieve company_detail_id from company_detail")
+	rows, err := db.Query("SELECT com_detail_id FROM company_detail;")
+	checkErr(err, "Error on query com_detaiL_id statement")
+	
+	var ( 
+		com_detail_id int 
+	)
+	
+	for rows.Next() {
+		err = rows.Scan(&com_detail_id)
+		checkErr(err, "Retrieve com_detail_id")
+		
+		com_detail_idArray = append(com_detail_idArray, com_detail_id) 
+	}
+	
+	fmt.Printf("Company detail id: %d \n", len(com_detail_idArray))
+	defer rows.Close()
+}
+
+func retrieve_normal_detail() { 
+	fmt.Println("Begin to retrieve normal detail from company_rawdata")
+	rows, err := db.Query("SELECT dissolutiondate, incorporationdate, countryoforigin, careof, pobox, addressline1, addressline2, posttown, county, country, postcode FROM company_rawdata;")
+	checkErr(err, "Error on query normal detail statement")
+	
+	var ( 
+		dissolutiondate string 
+		incorporationdate string 
+		countryoforigin string 
+		careof string 
+		pobox string 
+		addressline1 string 
+		addressline2 string 
+		posttown string 
+		county string 
+		country string 
+		postcode string 
+	)
+	
+	for rows.Next() {
+		err = rows.Scan(&dissolutiondate, &incorporationdate, &countryoforigin, &careof, &pobox, &addressline1, &addressline2, &posttown, &county, &country, &postcode)
+		checkErr(err, "Retrieve company normal detail")
+		
+		dissolutiondateArray = append(dissolutiondateArray, dissolutiondate)
+		incorporatedateArray = append(incorporatedateArray, incorporationdate) 
+		countryoforiginArray = append(countryoforiginArray, countryoforigin) 
+		careofArray = append(careofArray, careof) 
+		poboxArray = append(poboxArray, pobox) 
+		addressline1Array = append(addressline1Array, addressline1) 
+		addressline2Array = append(addressline2Array, addressline2) 
+		posttownArray = append(posttownArray, posttown)  
+		countyArray = append(countyArray, county) 
+		countryArray = append(countryArray, country) 
+		postcodeArray = append(postcodeArray, postcode)  
+	}
+	
+	fmt.Printf("Dissolution date: %d \n", len(dissolutiondateArray))
+	fmt.Printf("Incorporationdate: %d \n", len(incorporatedateArray))
+	fmt.Printf("Country of origin: %d \n", len(countryoforiginArray))
+	fmt.Printf("Careof: %d \n", len(careofArray))
+	fmt.Printf("Pobox: %d \n", len(poboxArray))
+	fmt.Printf("Address line 1: %d \n", len(addressline1Array))
+	fmt.Printf("Address line 2: %d \n", len(addressline2Array))
+	fmt.Printf("Post town: %d \n", len(posttownArray))
+	fmt.Printf("County: %d \n", len(countyArray))
+	fmt.Printf("Country: %d \n", len(countryArray))
+	fmt.Printf("Postcode: %d \n", len(postcodeArray))    
+	
+	defer rows.Close()
+}
+
+func retrieve_account_id() {	
+	fmt.Println("Begin to retrieve com_acc_id from company_account")
+	rows, err := db.Query("SELECT com_acc_id FROM company_account;")
+	checkErr(err, "Error on query com_acc_id statement")
+	
+	var ( 
+		com_acc_id int 
+	)
+	
+	for rows.Next() {
+		err = rows.Scan(&com_acc_id)
+		checkErr(err, "Retrieve com_detail_id")
+		
+		com_acc_idArray = append(com_acc_idArray, com_acc_id) 
+	}
+	
+	fmt.Printf("Company account id: %d \n", len(com_acc_idArray))
+	defer rows.Close()
+}
+
+func retrieve_returns_id() {	
+	fmt.Println("Begin to retrieve com_return_id from company_returns")
+	rows, err := db.Query("SELECT com_return_id FROM company_returns AS return JOIN company_rawdata AS raw ON raw.return_nextduedate = return.com_return_nextduedate AND raw.return_lastmadeupdate = return.com_return_lastmadeupdate;")
+	checkErr(err, "Error on query com_return_id statement")
+	
+	var com_return_id int 
+	
+	for rows.Next() {
+		err = rows.Scan(&com_return_id)
+		checkErr(err, "Retrieve com_return_id")
+		
+		com_return_idArray = append(com_return_idArray, com_return_id) 
+	}
+	
+	fmt.Printf("Company return id: %d \n", len(com_return_idArray))
+	defer rows.Close()
+}
+
+func retrieve_mort_id() {	
+	fmt.Println("Begin to retrieve com_mort_id from company_mortgages")
+	rows, err := db.Query("SELECT com_mort_id FROM company_mortgages AS mort JOIN company_rawdata AS raw ON mort.com_num_mortchanges = raw.nummortcharges AND mort.com_num_mortoutstanding = raw.nummortoutstanding AND mort.com_num_mortpartsatisfied = raw.nummortpartsatisfied AND mort.com_num_mortsatisfied = raw.nummortsatisfied;")
+	checkErr(err, "Error on query com_mort_id statement")
+	
+	var com_mort_id int 
+	
+	for rows.Next() {
+		err = rows.Scan(&com_mort_id)
+		checkErr(err, "Retrieve com_mort_id")
+		
+		com_mort_idArray = append(com_mort_idArray, com_mort_id) 
+	}
+	
+	fmt.Printf("Company mort id: %d \n", len(com_mort_idArray))
+	defer rows.Close()
+}
+
+func retrieve_sic_id() {	
+	fmt.Println("Begin to retrieve com_sic_id from company_siccodes")
+	rows, err := db.Query("SELECT com_sic_id FROM company_siccodes AS sic JOIN company_rawdata AS raw ON sic.com_siccode1 = raw.siccode1 AND sic.com_siccode2 = raw.siccode2 AND raw.siccode3 = sic.com_siccode3 AND raw.siccode4 = sic.com_siccode4;")
+	checkErr(err, "Error on query com_sic_id statement")
+	
+	var com_sic_id int 
+	
+	for rows.Next() {
+		err = rows.Scan(&com_sic_id)
+		checkErr(err, "Retrieve com_sic_id")
+		
+		com_sic_idArray = append(com_sic_idArray, com_sic_id) 
+	}
+	
+	fmt.Printf("Company mort id: %d \n", len(com_sic_idArray))
+	defer rows.Close()
+}
+
+func retrieve_partnership_id() {	
+	fmt.Println("Begin to retrieve com_partnership_id from company_partnership")
+	rows, err := db.Query("SELECT com_partnership_id FROM company_partnership AS part JOIN company_rawdata AS raw ON raw.numgenpartners = part.com_num_genpartners AND raw.numlimpartners = part.com_num_limpartners;")
+	checkErr(err, "Error on query com_partnership_id statement")
+	
+	var com_partnership_id int 
+	
+	for rows.Next() {
+		err = rows.Scan(&com_partnership_id)
+		checkErr(err, "Retrieve com_sic_id")
+		
+		com_partnership_idArray = append(com_partnership_idArray, com_partnership_id) 
+	}
+	
+	fmt.Printf("Company partnership: %d \n", len(com_partnership_idArray))
+	defer rows.Close()
+}
+
+func retrieve_uri_id() {	
+	fmt.Println("Begin to retrieve com_uri_id from company_uri")
+	rows, err := db.Query("SELECT com_uri_id FROM company_uri AS uri JOIN company_rawdata AS raw ON uri.com_uri = raw.uri;")
+	checkErr(err, "Error on query com_uri_id statement")
+	
+	var com_uri_id int 
+	
+	for rows.Next() {
+		err = rows.Scan(&com_uri_id)
+		checkErr(err, "Retrieve com_uri_id")
+		
+		com_uri_idArray = append(com_uri_idArray, com_uri_id) 
+	}
+	
+	fmt.Printf("Company uri: %d \n", len(com_uri_idArray))
+	defer rows.Close()
+}
+
+
+func retrieve_previousname_id() {	
+	fmt.Println("Begin to retrieve com_pn_id from company_previousname")
+	rows, err := db.Query("SELECT com_pn_id FROM company_rawdata AS raw JOIN company_previousname AS pn ON raw.pn1_condate = pn.com_pn1_condate AND raw.pn1_companyname = pn.com_pn1_companyname AND raw.pn2_condate = pn.com_pn2_condate AND raw.pn2_companyname = pn.com_pn2_companyname AND raw.pn3_condate = pn.com_pn3_condate AND raw.pn3_companyname = pn.com_pn3_companyname AND raw.pn4_condate = pn.com_pn4_condate AND raw.pn4_companyname = pn.com_pn4_companyname AND raw.pn5_condate = pn.com_pn5_condate AND raw.pn5_companyname = pn.com_pn5_companyname AND raw.pn6_condate = pn.com_pn6_condate AND raw.pn6_companyname = pn.com_pn6_companyname AND raw.pn7_condate = pn.com_pn7_condate AND raw.pn7_companyname = pn.com_pn7_companyname AND raw.pn8_condate = pn.com_pn8_condate AND raw.pn8_companyname = pn.com_pn8_companyname AND raw.pn9_condate = pn.com_pn9_condate AND raw.pn9_companyname = pn.com_pn9_companyname AND raw.pn10_condate = pn.com_pn10_condate;")
+	checkErr(err, "Error on query com_pn_id statement")
+	
+	var com_pn_id int 
+	
+	for rows.Next() {
+		err = rows.Scan(&com_pn_id)
+		checkErr(err, "Retrieve com_pn_id")
+		
+		com_previousname_idArray = append(com_previousname_idArray, com_pn_id) 
+	}
+	
+	fmt.Printf("Company previousname: %d \n", len(com_previousname_idArray))
+	defer rows.Close()
+} 
+
+func retrieve_conf_stmt_id() {	
+	fmt.Println("Begin to retrieve com_conf_stmt_id from company_conf_stmt")
+	rows, err := db.Query("SELECT com_conf_stmt_id FROM company_conf_stmt AS stmt JOIN company_rawdata AS raw ON stmt.com_conf_stmt_nextduedate = raw.confstmtnextduedate AND stmt.com_conf_stmt_lastmadeupdate = raw.confstmtlastmadeupdate;")
+	checkErr(err, "Error on query com_pn_id statement")
+	
+	var com_conf_stmt_id int 
+	
+	for rows.Next() {
+		err = rows.Scan(&com_conf_stmt_id)
+		checkErr(err, "Retrieve com_conf_stmt_id")
+		
+		com_conf_stmt_idArray = append(com_conf_stmt_idArray, com_conf_stmt_id) 
+	}
+	
+	fmt.Printf("Company conference statement: %d \n", len(com_conf_stmt_idArray))
+	defer rows.Close()
+}
+
+\end{lstlisting}
+
+Listing P.6 shows the source code for company resource table key retrieval. Each function is used specifically to retrieve primary key of specific resource table and stored in dedicated array with \textbf{append}. Once each function had finish executed, these arrays contain extracted PRIMARY KEY (PK) and await to be insert into the another table as FOREIGN KEY (FK). This process is called \textit{referential integrity}.
+
+\subsubsection{Migrate data with Referencial Integrity.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Resource Table Key Retrieval Function.}, label=commandline-02]
+package main 
+
+import (
+	"fmt" 
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"time"
+)
+
+func retrieve_key_from_normalized_table(){
+	initDB()
+	retrieve_detail_id()
+	retrieve_normal_detail()
+	retrieve_account_id()
+	retrieve_returns_id()
+	retrieve_mort_id()
+	retrieve_sic_id()
+	retrieve_partnership_id()
+	retrieve_uri_id()
+	retrieve_conf_stmt_id()
+	retrieve_previousname_id()
+}
+
+func import_company_table() { 
+
+	start := time.Now()
+	retrieve_key_from_normalized_table()
+	insert_company_table()
+	fmt.Printf("%.5fs seconds on import company. \n", time.Since(start).Seconds())
+}
+
+func insert_company_table() { 
+	sem := make (chan bool, CONCURRENCY) 
+	
+	fmt.Println("Begin to insert company data")
+	var sqlStatement = "INSERT INTO company (com_detail_id, com_dissolutiondate, com_incorporationdate, com_countryoforigin, com_careof, com_pobox, com_addressline1, com_addressline2, com_posttown, com_county, com_country, com_postcode, com_acc_id, com_return_id, com_mort_id, com_sic_id, com_partnership_id, com_uri_id, com_pn_id, com_conf_stmt_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20);"
+	
+	stmt, err := db.Prepare(sqlStatement)
+	checkErr(err, "Prepare insert company")
+	
+	for i := len(dissolutiondateArray); i > 0; i-- { 
+		sem <- true
+		go func () {
+		defer func() {<-sem}() 
+			_, err := stmt.Exec(com_detail_idArray[i], dissolutiondateArray[i], incorporatedateArray[i], countryoforiginArray[i], careofArray[i], poboxArray[i], addressline1Array[i], addressline2Array[i], posttownArray[i], countyArray[i], 
+			countryArray[i], postcodeArray[i], com_acc_idArray[i], com_return_idArray[i], com_mort_idArray[i],
+			com_sic_idArray[i], com_partnership_idArray[i], com_uri_idArray[i], com_previousname_idArray[i], com_conf_stmt_idArray[i])
+			checkErr(err, "Insert statement execution error") 
+		}()
+	} 
+	
+	for i := 0 ; i < cap(sem); i++ { 
+		sem <- true
+	} 
+}
+
+\end{lstlisting}
+
+Listing P.7 shows the source code for company data migration main program. The main function is where \textbf{a program start its execution}. 
+
+When the main program is compiled and executed, main() will called \textbf{retrieve\_key\_from\_normalized\_table()} function to retrieve all the PRIMARY KEY (PK) from each resource table and stored into dedicated array (refer row 9 to 20). Once the process had finished executed, the \textbf{insert\_company\_table()} function will be execute to retrieved these key values in array and migrated into the postcode table (refer row 31-54). The PK in array is insert into another table as FOREIGN KEY (FK) to establish relationship between entity. 
+
+The \textbf{insert\_key()} function use \textit{Semaphore} to control the access of 400,000 \textit{Goroutines} on common resource provided by PostgreSQL database and operating system environment. The concurrency of data migration execution in this program are controlled and limited to prevent race condition. These Goroutines communicate with each other with flag to utilized 299 open connection with PostgreSQL database on migrating 3.5 millions of data with specific resource provided. 
+
+The result obtained will be tabulated, compared and discussed.
+
+\section{List of database relation}
+
+\subsection{List Company Database Table Size}
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={List size of company normalized table.}, label=commandline-02]
+ Schema |           Name           |   Type   |  Owner  |    Size    | Line counts  
+--------+--------------------------+----------+---------+------------+-------------
+ public | company                  | table    | yinghua | 725 MB     | 3595702
+ public | company_account          | table    | yinghua | 262 MB     | 3595702
+ public | company_account_category | table    | yinghua | 8192 bytes | 16
+ public | company_category         | table    | yinghua | 8192 bytes | 21
+ public | company_conf_stmt        | table    | yinghua | 904 kB     | 14900
+ public | company_detail           | table    | yinghua | 300 MB     | 3595702
+ public | company_mortgages        | table    | yinghua | 216 kB     | 3710
+ public | company_partnership      | table    | yinghua | 40 kB      | 279
+ public | company_previousname     | table    | yinghua | 48 MB      | 190185
+ public | company_raw              | table    | yinghua | 1658 MB    | 3595702
+ public | company_rawdata          | table    | yinghua | 2476 MB    | 3595702
+ public | company_returns          | table    | yinghua | 1720 kB    | 28697
+ public | company_siccodes         | table    | yinghua | 9872 kB    | 51693
+ public | company_status           | table    | yinghua | 32 kB      | 14
+ public | company_uri              | table    | yinghua | 164 MB     | 2033290
+
+\end{lstlisting}
+
+Listing P.8 shows all the database relation found in Company database. The result shows the normalized entity are migrated successfully based on Entity Relationship Diagram database design with PL/pgSQL's DDL scripts and Go migration program.
+
+\newpage
+
+\subsection{List Postcode Database Table Size}
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={List size of Postcode normalized table.}, label=commandline-02]
+ Schema |                Name                 |   Type   |  Owner  |    Size    | Line Counts 
+--------+-------------------------------------+----------+---------+------------+-------------
+ public | nspl_rawdata                        | table    | yinghua | 1403 MB    | 1754882
+ public | postcode                            | table    | yinghua | 152 MB     | 1754882
+ public | postcode_cartesian_coordinate       | table    | yinghua | 70 MB      | 1662088
+ public | postcode_country                    | table    | yinghua | 8192 bytes | 7
+ public | postcode_county                     | table    | yinghua | 8192 bytes | 34
+ public | postcode_detail                     | table    | yinghua | 225 MB     | 1754882
+ public | postcode_euro_electoral_region      | table    | yinghua | 8192 bytes | 15
+ public | postcode_greek_coordinate           | table    | yinghua | 70 MB      | 1664728
+ public | postcode_local_authority_county     | table    | yinghua | 48 kB      | 394
+ public | postcode_lower_super_output_area    | table    | yinghua | 2560 kB    | 42460
+ public | postcode_middle_super_output_area   | table    | yinghua | 528 kB     | 8484
+ public | postcode_output_area_classification | table    | yinghua | 8192 bytes | 77
+ public | postcode_parliament_constituency    | table    | yinghua | 64 kB      | 653
+ public | postcode_primary_care_trust         | table    | yinghua | 40 kB      | 200
+ public | postcode_region                     | table    | yinghua | 8192 bytes | 15
+ public | postcode_ward                       | table    | yinghua | 544 kB     | 9115
+
+
+\end{lstlisting}
+
+Listing P.9 shows all the database relation found in Postcode database. The result shows the normalized entity are migrated successfully with PL/pgSQL's DML scripts and Go migration program.
+
+\subsection{List Education Database Table Size}
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={List size of Education normalized table.}, label=commandline-02]
+ Schema |          Name          |   Type   |  Owner  |    Size    | Line Counts 
+--------+------------------------+----------+---------+------------+-------------
+ public | leo                    | table    | yinghua | 4400 kB    | 32706
+ public | leo_detail             | table    | yinghua | 3680 kB    | 32706
+ public | leo_earning            | table    | yinghua | 872 kB     | 14372
+ public | leo_graduation         | table    | yinghua | 8192 bytes | 195
+ public | leo_match              | table    | yinghua | 200 kB     | 3992
+ public | leo_polar              | table    | yinghua | 320 kB     | 6793
+ public | leo_prior_attainment   | table    | yinghua | 120 kB     | 2139
+ public | leo_rawdata            | table    | yinghua | 5064 kB    | 32706
+ public | leo_sustain_employment | table    | yinghua | 336 kB     | 6192
+ public | leo_uncaptured         | table    | yinghua | 296 kB     | 6283
+
+\end{lstlisting}
+
+Listing P.10 shows all the database relation found in Education database. The result shows the normalized entity are migrated successfully based on Entity Relationship Diagram database design with PL/pgSQL's DML scripts.
+
+\newpage 
+
+\section{Execution of Company Migration Program}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Execution of Company Migration Program.}, label=commandline-02]
+==========================
+Step 1 - Change Directory
+==========================
+yinghua@yinghua:~$ cd gitRepo/go-import-company/src/main
+yinghua@yinghua:~/gitRepo/go-import-company/src/main$
+
+==========================
+Step 2 - Compile and Run 
+==========================
+yinghua@yinghua:~/gitRepo/go-import-company/src/main$ go build *.go 
+yinghua@yinghua:~/gitRepo/go-import-company/src/main$ time go run *.go 
+
+------------------------
+Import company_uri data 
+------------------------
+Begin to retrieve uri from company_rawdata
+Company URI: 2033290 
+Begin to insert company_uri data
+258.93969s seconds on import uri. 
+
+------------------------
+Import company_partnership data 
+------------------------
+Begin to retrieve partnership from company_rawdata
+General partner: 279 
+Limited partner: 279 
+Begin to insert company_partnership data
+2.71493s seconds on import partnership. 
+
+------------------------
+Import company_mortgages data 
+------------------------
+Begin to retrieve mortgages from company_rawdata
+Mort charges: 3710 
+Mort outstanding: 3710 
+Mort partsatisfied: 3710 
+mort satisfied: 3710 
+Begin to insert company_mortgages data
+5.16182s seconds on import mortgages. 
+
+------------------------
+Import company_returns data 
+------------------------
+Begin to retrieve returns from company_rawdata
+Return next due date: 28697 
+Return last made update: 28697 
+Begin to insert company_returns data
+14.24606s seconds on import returns. 
+
+------------------------
+Import company_account_category data 
+------------------------
+Begin to retrieve account category from company_rawdata
+Category: 16 
+Begin to insert company_account_category data
+1.56320s seconds on import account category. 
+
+------------------------
+Import company_account data 
+------------------------
+Begin to retrieve account from company_rawdata
+Ref day : 3595702 
+Ref month: 3595702 
+Account nextduedate: 3595702 
+Account lastmadeupdate: 3595702 
+Category ID: 3595702 
+Begin to insert company_account data
+2867.11349s seconds on import account.  
+
+------------------------
+Import company_conf_stmt data 
+------------------------
+Begin to retrieve conference statement from company_rawdata
+Conference Statement next due date : 14900 
+Conference Statement last made update: 14900 
+Begin to insert company_conf_stmt data
+14.31405s seconds on import conference statement. 
+
+------------------------
+Import company_address data 
+------------------------
+Begin to retrieve address from company_rawdata
+Care of: 1419715 
+PO Box: 1419715 
+Address Line 1: 1419715 
+Address Line 2: 1419715 
+Post town: 1419715 
+County: 1419715 
+Country: 1419715 
+Postcode: 1419715 
+Begin to insert company_address data
+181.64420s seconds on import address statement. 
+
+------------------------
+Import company_countryoforigin data 
+------------------------
+Begin to retrieve countryoforigin from company_rawdata
+Country of origin: 196 
+Begin to insert company_countryoforigin data
+2.43293s seconds on import countryoforigin statement. 
+
+------------------------
+Import company_status data 
+------------------------
+Begin to retrieve companystatus from company_rawdata
+Company status: 14 
+Begin to insert com_status data
+22.42986s seconds on import companystatus statement. 
+
+------------------------
+Import company_category data 
+------------------------
+Begin to retrieve companycategory from company_rawdata
+Company category: 21 
+Begin to insert com_status data
+1.39370s seconds on import company category statement. 
+
+------------------------
+Import company_siccodes data 
+------------------------
+Begin to retrieve siccode from company_rawdata
+SIC code 1: 51693 
+SIC code 2: 51693 
+SIC code 3: 51693 
+SIC code 4: 51693 
+Begin to insert com_status data
+16.41218s seconds on import companysiccode statement. 
+
+------------------------
+Import company_previousname data 
+------------------------
+Begin to retrieve previousdate from company_rawdata
+Company change of date 1: 190185 
+Company change name 1: 190185 
+Company change of date 2: 190185 
+Company change name 2: 190185 
+Company change of date 3: 190185 
+Company change name 3: 190185 
+Company change of date 4: 190185 
+Company change name 4: 190185 
+Company change of date 5: 190185 
+Company change name 5: 190185 
+Company change of date 6: 190185 
+Company change name 6: 190185 
+Company change of date 7: 190185 
+Company change name 7: 190185 
+Company change of date 8: 190185 
+Company change name 8: 190185 
+Company change of date 9: 190185 
+Company change name 9: 190185 
+Company change of date 10: 190185 
+Company change name 10: 190185 
+Begin to insert company_previousname data
+87.43327s seconds on import company previousdate statement. 
+
+------------------------
+Import company_detail data 
+------------------------
+Begin to retrieve companydetail from company_rawdata
+Company name: 3595702 
+Company number: 3595702 
+Company category id: 3595702 
+Company status id: 3595702 
+Begin to insert company_detail data
+7500.89631s seconds on import companydetail statement. 
+
+------------------------
+Import company detail data 
+------------------------
+Begin to retrieve company_detail_id from company_detail
+Company detail id: 3595702 
+
+------------------------
+Migrate company data
+------------------------
+Begin to retrieve normal detail from company_rawdata
+Dissolution date: 3595702 
+Incorporationdate: 3595702 
+Country of origin: 3595702 
+Careof: 3595702 
+Pobox: 3595702 
+Address line 1: 3595702 
+Address line 2: 3595702 
+Post town: 3595702 
+County: 3595702 
+Country: 3595702 
+Postcode: 3595702 
+
+Begin to retrieve com_acc_id from company_account
+Company account id: 3595702 
+Begin to retrieve com_return_id from company_returns
+Company return id: 3595702 
+Begin to retrieve com_mort_id from company_mortgages
+Company mort id: 3595702 
+Begin to retrieve com_sic_id from company_siccodes
+Company mort id: 3595702 
+Begin to retrieve com_partnership_id from company_partnership
+Company partnership: 3595702 
+Begin to retrieve com_uri_id from company_uri
+Company uri: 3595702 
+Begin to retrieve com_conf_stmt_id from company_conf_stmt
+Company conference statement: 3595702 
+Begin to retrieve com_pn_id from company_previousname
+Company previousname: 3595702 
+
+Begin to insert company data
+14821.83897s seconds on import company. 
+
+\end{lstlisting}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

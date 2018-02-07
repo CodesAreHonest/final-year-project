@@ -331,7 +331,7 @@ Relational database design is conducted to define entities, attributes, relation
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.1\textwidth]{FYP2/Chapter3/FYP2-Company-Normalized-ERD.png}
+	\includegraphics[width=1.0\textwidth]{FYP2/Chapter3/FYP2-Company-Normalized-ERD.png}
 	\rule{35em}{0.5pt}
 	\caption[Company Normalized Database Design]{Company Normalized Database Design}
 \end{figure} 
@@ -342,7 +342,7 @@ The figure above shows Company's entity relationship diagram (ERD) to provide a 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.1\textwidth]{FYP2/Chapter3/FYP2-Postcode-Normalized-ERD.png}
+	\includegraphics[width=1.0\textwidth]{FYP2/Chapter3/FYP2-Postcode-Normalized-ERD.png}
 	\rule{35em}{0.5pt}
 	\caption[Postcode Normalized Database Design]{Postcode Normalized Database Design}
 \end{figure} 
@@ -353,7 +353,7 @@ The figure above shows Postcode's entity relationship diagram (ERD) to provide a
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.1\textwidth]{FYP2/Chapter3/FYP2-Education-Normalized-ERD.png}
+	\includegraphics[width=1.0\textwidth]{FYP2/Chapter3/FYP2-Education-Normalized-ERD.png}
 	\rule{35em}{0.5pt}
 	\caption[Education Normalized Database Design]{Education Normalized Database Design}
 \end{figure} 
@@ -417,6 +417,10 @@ Figure 3.20 shows the deployment diagram of data migration process.
 The normalized table in all database are created with PL/pgSQL DDL scripts. Once the creation of table is successful, the data migration of education database is performed with PL/pgSQL DML script running in terminal environment. The mentioned database is migrated with script because it only contains 30000+ rows and its lightweight to be process with queries. 
 
 Afterwards, the postcode and company database are migrated from legacy storage to new storage with the execution of scripts and Go program as shown in Figure 3.23. Both company and postcode data are migrated with Go program because it contains more than 4 millions rows in total and its difficult to handle with queries. The unique data is extracted from legacy storage and stored into the normalized table in new storage. 
+
+The postcode migration program is developed with \textbf{Channel Synchronization} concepts to perform data migration execution across goroutines to form an concurrent execution. The synchronization primitives of Go programming language is used to perform communication between threads within channel in mutual exclusion locks.
+
+Other than that, the company migration program is developed with \textbf{Semaphore} concepts to apply control access of 400,000 \textit{Goroutines} on common resource provided by PostgreSQL database and operating system environment. The concurrency of data migration execution in this program are controlled and limited to prevent race condition. These Goroutines are required to communicate with each other to utilized 299 open connection with PostgreSQL database on migrating 3.5 millions of data with specific resource provided. 
 
 The migration program is written with Go programming language with the inclusion of database/sql driver to establish connection and lib/pq driver to perform transaction with PostgreSQL database. All the migration process does not modify the source data in legacy storage to serve as backup for in case of emergence. In addition, the changes of migration can be easily tracked for verification purposes. Ultimately, the migration duration is recorded and measured.  
 

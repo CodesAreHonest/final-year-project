@@ -1,0 +1,672 @@
+\chapter{Data Definition Language (DDL).} 
+\label{AppendixM} 
+\lhead{Appendix M. \emph{Data Definition Language (DDL).}}
+
+% Write your Appendix content below here.
+% =========================================
+
+\section{PL/pgSQL's DDL scripts for Postcode Normalized Table Creation.}
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={PL/pgSQL's DDL scripts for Postcode Normalized Table Creation.}, label=commandline-02]
+
+-- File: 02_yinghua_normalized_NSPL_DDL.sql
+-- Date: Sat Dec 6 16:02 MYT 2017
+-- Author: Chai Ying Hua 
+-- Version: 1.0 
+-- Database: psql (PostgreSQL) 9.5.10
+-- =========================================================
+--  1. Drop table in Reverse order. 
+--  2. Create table in Proper order. 
+--  3. Verify whether all tables and sequences are created. 
+-- =========================================================
+
+-- DROP TABLE IN REVERSE ORDER 
+DROP TABLE postcode_greek_coordinate 		CASCADE; 
+DROP TABLE postcode_output_area_classification  CASCADE; 
+DROP TABLE postcode_middle_super_output_area 	CASCADE; 
+DROP TABLE postcode_lower_super_output_area 	CASCADE; 
+DROP TABLE postcode_primary_care_trust 		CASCADE; 
+DROP TABLE postcode_euro_electoral_region 	CASCADE; 
+DROP TABLE postcode_parliament_constituency 	CASCADE; 
+DROP TABLE postcode_region 			CASCADE; 
+DROP TABLE postcode_country 			CASCADE;
+DROP TABLE postcode_ward 			CASCADE; 
+DROP TABLE postcode_local_authority_county 	CASCADE;
+DROP TABLE postcode_county 			CASCADE;
+DROP TABLE postcode_cartesian_coordinate 	CASCADE;
+DROP TABLE postcode_detail	 		CASCADE;
+DROP TABLE postcode	 			CASCADE;
+
+-- DROP SEQUENCE IN PROPER ORDER 
+DROP SEQUENCE seq_pos_detail_id 	CASCADE;
+DROP SEQUENCE seq_cart_coordinate_id 	CASCADE;
+DROP SEQUENCE seq_county_id 		CASCADE;
+DROP SEQUENCE seq_lac_id 		CASCADE;
+DROP SEQUENCE seq_ward_id 		CASCADE;
+DROP SEQUENCE seq_country_id 		CASCADE;
+DROP SEQUENCE seq_region_id 		CASCADE;
+DROP SEQUENCE seq_par_cons_id 		CASCADE;
+DROP SEQUENCE seq_eer_id 		CASCADE;
+DROP SEQUENCE seq_pct_id 		CASCADE;
+DROP SEQUENCE seq_lsoa_id 		CASCADE;
+DROP SEQUENCE seq_msoa_id 		CASCADE;
+DROP SEQUENCE seq_oac_id 		CASCADE;
+DROP SEQUENCE seq_greek_coordinate_id 	CASCADE;
+DROP SEQUENCE seq_pos_temp_id 		CASCADE;
+
+-- CREATE SEQUENCE IN REVERSE ORDER 
+CREATE SEQUENCE seq_pos_temp_id		MINVALUE 1 INCREMENT 1;
+CREATE SEQUENCE seq_greek_coordinate_id MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_oac_id 		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_msoa_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_lsoa_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_pct_id 		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_eer_id 		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_par_cons_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_region_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_country_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_ward_id		MINVALUE 1 INCREMENT 1;
+CREATE SEQUENCE seq_lac_id		MINVALUE 1 INCREMENT 1;
+CREATE SEQUENCE seq_county_id		MINVALUE 1 INCREMENT 1;
+CREATE SEQUENCE seq_cart_coordinate_id	MINVALUE 1 INCREMENT 1;
+CREATE SEQUENCE seq_pos_detail_id	MINVALUE 1 INCREMENT 1;
+
+-- CREATE TABLE IN PROPER ORDER 
+create table postcode_greek_coordinate (
+	pos_greek_coordinate_id 	INT DEFAULT NEXTVAL ('seq_greek_coordinate_id'),
+	pos_longitude 			REAL NOT NULL,
+	pos_latitude 			REAL NOT NULL,
+	PRIMARY KEY (pos_greek_coordinate_id)
+);
+
+create table postcode_output_area_classification (
+	pos_oac_id 			INT DEFAULT NEXTVAL ('seq_oac_id'), 
+	pos_oac_code 			VARCHAR(5) NULL DEFAULT '---',
+	pos_oac_name 			VARCHAR(50) NULL DEFAULT 'Undefined',
+	PRIMARY KEY (pos_oac_id)
+
+);
+
+create table postcode_middle_super_output_area (
+	pos_msoa_id 			INT DEFAULT NEXTVAL ('seq_msoa_id'),
+	pos_msoa_code 			VARCHAR(15) NULL DEFAULT 'Undefined',
+	pos_msoa_name 			VARCHAR(50) NULL DEFAULT 'Undefined',
+	PRIMARY KEY (pos_msoa_id)
+);
+
+create table postcode_lower_super_output_area (
+	pos_lsoa_id 			INT DEFAULT NEXTVAL ('seq_lsoa_id'),
+	pos_lsoa_code 			VARCHAR(15) NULL DEFAULT 'Undefined',
+	pos_lsoa_name 			VARCHAR(50) NULL DEFAULT 'Undefined',
+	PRIMARY KEY (pos_lsoa_id)
+
+);
+
+create table postcode_primary_care_trust (
+	pos_pct_id 			INT DEFAULT NEXTVAL ('seq_pct_id'),
+	pos_pct_code 			VARCHAR(15) NULL DEFAULT 'Undefined',
+	pos_pct_name 			VARCHAR(70) NULL DEFAULT 'Undefined',
+	PRIMARY KEY (pos_pct_id)
+);
+
+create table postcode_euro_electoral_region (
+	pos_eer_id 			INT DEFAULT NEXTVAL ('seq_eer_id'),
+	pos_eer_code 			VARCHAR(15) NULL DEFAULT 'Undefined',
+	pos_eer_name 			VARCHAR(30) NULL DEFAULT 'Undefined',
+	PRIMARY KEY (pos_eer_id)
+);
+
+create table postcode_parliament_constituency (
+	pos_par_cons_id 		INT DEFAULT NEXTVAL ('seq_par_cons_id'), 
+	pos_par_cons_code		VARCHAR(15) NULL DEFAULT 'Undefined',
+	pos_par_cons_name		VARCHAR(75) NULL DEFAULT 'Undefined',
+	PRIMARY KEY (pos_par_cons_id)
+);
+
+create table postcode_region (
+	pos_region_id 			INT DEFAULT NEXTVAL ('seq_region_id'), 
+	pos_region_code			VARCHAR(15) NULL DEFAULT 'Undefined',
+	pos_region_name			VARCHAR(50) NULL DEFAULT 'Undefined',
+	PRIMARY KEY (pos_region_id)
+);
+
+create table postcode_country ( 
+	pos_country_id 			INT DEFAULT NEXTVAL ('seq_country_id'), 
+	pos_country_code		VARCHAR(30) NULL DEFAULT 'Undefined',
+	pos_country_name		VARCHAR(30) NULL DEFAULT 'Undefined',
+	PRIMARY KEY (pos_country_id)
+);
+
+create table postcode_ward (
+	pos_ward_id 			INT DEFAULT NEXTVAL ('seq_ward_id'), 
+	pos_ward_code			VARCHAR(15) NULL DEFAULT 'Undefined',
+	pos_ward_name			VARCHAR(75) NULL DEFAULT 'Undefined',
+	PRIMARY KEY (pos_ward_id) 
+); 
+
+create table postcode_local_authority_county (
+	pos_lac_id 			INT DEFAULT NEXTVAL ('seq_lac_id'), 
+	pos_lac_code			VARCHAR(15) NULL DEFAULT 'Undefined',
+	pos_lac_name			VARCHAR(75) NULL DEFAULT 'Undefined',
+	PRIMARY KEY (pos_lac_id) 
+); 
+
+create table postcode_county (
+	pos_county_id	 		INT DEFAULT NEXTVAL ('seq_county_id'), 
+	pos_county_code			VARCHAR(15) NULL DEFAULT 'Undefined',
+	pos_county_name			VARCHAR(75) NULL DEFAULT 'Undefined',
+	PRIMARY KEY (pos_county_id) 
+); 
+
+create table postcode_cartesian_coordinate (
+	pos_cart_coordinate_id	 	INT DEFAULT NEXTVAL ('seq_cart_coordinate_id'), 
+	pos_easting			INT NULL DEFAULT 0,
+	pos_northing			INT NULL DEFAULT 0,
+	PRIMARY KEY (pos_cart_coordinate_id) 
+); 
+
+create table postcode_detail ( 
+	pos_detail_id			BIGINT DEFAULT NEXTVAL ('seq_pos_detail_id'), 
+	pos1				VARCHAR(15) NOT NULL, 
+	pos2				VARCHAR(15) NOT NULL, 
+	pos3				VARCHAR(15) NOT NULL, 
+	pos_date_introduce		VARCHAR(10) NOT NULL,
+	pos_usertype			INT  	    NOT NULL,
+	pos_cart_coordinate_id		INT 	    NOT NULL,
+	position_quality		INT         NOT NULL,
+	pos_spatial_accuracy		VARCHAR(30) NULL DEFAULT 'Undefined',
+	pos_location			VARCHAR(50) NULL DEFAULT 'Undefined',
+	pos_socrataid			INT         NOT NULL,	
+	pos_last_upload 		DATE 	    NOT NULL,
+	PRIMARY KEY (pos_detail_id), 
+	FOREIGN KEY (pos_cart_coordinate_id) REFERENCES postcode_cartesian_coordinate (pos_cart_coordinate_id)
+);
+
+create table postcode ( 
+	pos_detail_id 			INT REFERENCES postcode_detail (pos_detail_id), 
+	pos_county_id 			INT REFERENCES postcode_county (pos_county_id),
+	pos_lac_id 			INT REFERENCES postcode_local_authority_county (pos_lac_id),
+	pos_ward_id 			INT REFERENCES postcode_ward (pos_ward_id), 
+	pos_country_id			INT REFERENCES postcode_country (pos_country_id),
+	pos_region_id 			INT REFERENCES postcode_region (pos_region_id),	
+	pos_par_cons_id 		INT REFERENCES postcode_parliament_constituency (pos_par_cons_id),
+	pos_eer_id 			INT REFERENCES postcode_euro_electoral_region (pos_eer_id), 
+	pos_pct_id			INT REFERENCES postcode_primary_care_trust (pos_pct_id),  
+	pos_lsoa_id			INT REFERENCES postcode_lower_super_output_area (pos_lsoa_id), 
+	pos_msoa_id			INT REFERENCES postcode_middle_super_output_area (pos_msoa_id), 
+	pos_oac_id			INT REFERENCES postcode_output_area_classification (pos_oac_id),
+	pos_greek_coordinate_id		INT REFERENCES postcode_greek_coordinate (pos_greek_coordinate_id)	
+);
+
+-- CHECK WHETHER ALL TABLE AND SEQUENCE ARE CREATED 
+\d+ 
+
+\end{lstlisting}
+
+Listing M.1 show the PL/pgSQL's Data Definition Language (DDL) scripts to create Postcode Normalized table based on database design shown in Section 3.6.2.3. All the table are defined with PRIMARY KEY (PK) and establish referencial integrity relationship amongs entity to form a good relational database design. Moreover, the data types are defined correctly with sufficient memory provided on each columns.
+
+\pagebreak
+
+\section{PL/pgSQL's DDL scripts for Company Normalized Table Creation.}
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={PL/pgSQL's DDL scripts for Company Normalized Table Creation.}, label=commandline-02]
+
+-- FILE: 02_yinghua_normalized_company_DDL.sql  
+-- DATE: Mon Jan 7 17:00 MYT 2018
+-- AUTHOR: Chai Ying Hua 
+-- VERSION: 1.0
+-- DATABASE: psql (PostgreSQL) 9.5.10
+-- DESCRIPTION:
+-- =======================================================
+--
+--  	1. Drop previous created table in proper order. 
+--	2. Create sequence in proper order. 
+--	3. Drop sequence in reverse order. 
+-- 	4. Create table in reverse order for main table to reference foreign key
+--	5. Check all the tables. 
+-- ========================================================
+
+-- DROP TABLE IN REVERSE ORDER 
+DROP TABLE company_uri 			CASCADE; 
+DROP TABLE company_partnership 		CASCADE;
+DROP TABLE company_siccodes 		CASCADE;
+DROP TABLE company_mortgages 		CASCADE; 
+DROP TABLE company_returns 		CASCADE; 
+DROP TABLE company_account_category 	CASCADE; 
+DROP TABLE company_account 		CASCADE;
+DROP TABLE company_previousname 	CASCADE; 
+DROP TABLE company_conf_stmt 		CASCADE;
+DROP TABLE company_status		CASCADE;
+DROP TABLE company_category		CASCADE;
+DROP TABLE company_detail		CASCADE;
+DROP TABLE company			CASCADE;
+
+
+-- DROP SEQUENCE IN PROPER ORDER 
+DROP SEQUENCE seq_detail_id;
+DROP SEQUENCE seq_category_id;
+DROP SEQUENCE seq_status_id;
+DROP SEQUENCE seq_conf_stmt_id;
+DROP SEQUENCE seq_pn_id;
+DROP SEQUENCE seq_acc_id;
+DROP SEQUENCE seq_acc_category_id;
+DROP SEQUENCE seq_return_id;
+DROP SEQUENCE seq_mort_id;
+DROP SEQUENCE seq_sic_id;
+DROP SEQUENCE seq_partnership_id;
+DROP SEQUENCE seq_uri_id;
+
+-- DROP SEQUENCE IN PROPER ORDER 
+CREATE SEQUENCE seq_uri_id 		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_partnership_id	MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_sic_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_mort_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_return_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_acc_category_id	MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_acc_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_pn_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_conf_stmt_id	MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_status_id	 	MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_category_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_detail_id		MINVALUE 1 INCREMENT 1; 
+
+
+-- CREATE TABLE IN PROPER ORDER 
+CREATE TABLE company_uri (
+	com_uri_id 			INT DEFAULT NEXTVAL ('seq_uri_id') PRIMARY KEY,
+	com_uri 			VARCHAR(47) NOT NULL
+); 
+
+CREATE TABLE company_partnership (
+	com_partnership_id 		INT DEFAULT NEXTVAL ('seq_partnership_id') PRIMARY KEY, 
+	com_num_genpartners 		INT NOT NULL,
+	com_num_limpartners		INT NOT NULL
+); 
+
+CREATE TABLE company_siccodes ( 
+	com_sic_id 			INT DEFAULT NEXTVAL ('seq_sic_id') PRIMARY KEY, 
+	com_siccode1 			VARCHAR(170) NOT NULL,
+	com_siccode2 			VARCHAR(170) NOT NULL,
+	com_siccode3 			VARCHAR(170) NOT NULL,
+	com_siccode4 			VARCHAR(170) NOT NULL
+);
+
+CREATE TABLE company_mortgages ( 
+	com_mort_id 			INT DEFAULT NEXTVAL ('seq_mort_id') PRIMARY KEY, 
+	com_num_mortchanges		INT NOT NULL,
+	com_num_mortoutstanding		INT NOT NULL,
+	com_num_mortpartsatisfied	INT NOT NULL,
+	com_num_mortsatisfied 		INT NOT NULL
+);
+
+CREATE TABLE company_returns ( 
+	com_return_id 			INT DEFAULT NEXTVAL ('seq_return_id') PRIMARY KEY, 
+	com_return_nextduedate		VARCHAR(50) NULL DEFAULT NULL,
+	com_return_lastmadeupdate	VARCHAR(50) NULL DEFAULT NULL 
+);
+
+CREATE TABLE company_account_category (
+	com_acc_category_id 		INT DEFAULT NEXTVAL ('seq_acc_category_id') PRIMARY KEY, 
+	com_acc_category 		VARCHAR(100) NULL DEFAULT 'Undefined'
+);
+
+CREATE TABLE company_account ( 
+	com_acc_id 			INT DEFAULT NEXTVAL ('seq_acc_id') PRIMARY KEY, 
+	com_acc_refday			INT NULL DEFAULT 0,
+	com_acc_refmonth		INT NULL DEFAULT 0,
+	com_acc_nextduedate 		VARCHAR(50) NULL DEFAULT NULL, 
+	com_acc_lastmadeupdate		VARCHAR(50) NULL DEFAULT NULL, 
+	com_acc_category_id 		INT REFERENCES company_account_category (com_acc_category_id) 
+); 
+
+CREATE TABLE company_previousname (
+	com_pn_id 			INT DEFAULT NEXTVAL ('seq_pn_id') PRIMARY KEY, 
+	com_pn1_condate			VARCHAR(20) NOT NULL,
+	com_pn1_companyname		VARCHAR(160) NOT NULL,
+	com_pn2_condate			VARCHAR(20) NOT NULL,
+	com_pn2_companyname		VARCHAR(160) NOT NULL,
+	com_pn3_condate			VARCHAR(20) NOT NULL,
+	com_pn3_companyname		VARCHAR(160) NOT NULL,
+	com_pn4_condate			VARCHAR(20) NOT NULL,
+	com_pn4_companyname		VARCHAR(160) NOT NULL,
+	com_pn5_condate			VARCHAR(20) NOT NULL,
+	com_pn5_companyname		VARCHAR(160) NOT NULL,
+	com_pn6_condate			VARCHAR(20) NOT NULL,
+	com_pn6_companyname		VARCHAR(160) NOT NULL,
+	com_pn7_condate			VARCHAR(20) NOT NULL,
+	com_pn7_companyname		VARCHAR(160) NOT NULL,
+	com_pn8_condate			VARCHAR(20) NOT NULL,
+	com_pn8_companyname		VARCHAR(160) NOT NULL,
+	com_pn9_condate			VARCHAR(20) NOT NULL,
+	com_pn9_companyname		VARCHAR(160) NOT NULL,
+	com_pn10_condate		VARCHAR(20) NOT NULL,
+	com_pn10_companyname		VARCHAR(160) NOT NULL
+
+); 
+
+CREATE TABLE company_conf_stmt (
+	com_conf_stmt_id	 	INT DEFAULT NEXTVAL ('seq_conf_stmt_id') PRIMARY KEY, 
+	com_conf_stmt_nextduedate	VARCHAR(50) NULL DEFAULT NULL,
+	com_conf_stmt_lastmadeupdate 	VARCHAR(50) NULL DEFAULT NULL
+);
+
+CREATE TABLE company_status ( 
+	com_status_id	 		INT DEFAULT NEXTVAL ('seq_status_id') PRIMARY KEY, 
+	com_status 			VARCHAR(70) NOT NULL DEFAULT 'Undefined'
+);
+
+CREATE TABLE company_category ( 
+	com_category_id		 	INT DEFAULT NEXTVAL ('seq_category_id') PRIMARY KEY, 
+	com_category 			VARCHAR(100) NOT NULL DEFAULT 'Undefined'
+); 
+
+CREATE TABLE company_detail ( 
+	com_detail_id	 		INT DEFAULT NEXTVAL ('seq_detail_id') PRIMARY KEY,
+	com_name			VARCHAR(160) NULL DEFAULT 'Undefined', 
+	com_number 			VARCHAR(10)  NOT NULL, 
+	com_category_id			INT	     REFERENCES company_category (com_category_id),
+	com_status_id			INT	     REFERENCES company_status (com_status_id), 	     	
+);
+
+CREATE TABLE company ( 
+	com_detail_id  			INT REFERENCES company_detail (com_detail_id), 
+	com_dissolutiondate     	VARCHAR(20) NOT NULL, 
+	com_incorporationdate		VARCHAR(20) NOT NULL, 
+	com_countryoforigin 		VARCHAR(50) NOT NULL DEFAULT 'Undefined',
+	com_careof			VARCHAR(100) NULL DEFAULT 'Undefined',
+	com_pobox 			VARCHAR(10)  NULL DEFAULT 'Undefined', 
+	com_addressline1		VARCHAR(300) NULL DEFAULT 'Undefined', 
+	com_addressline2		VARCHAR(300) NULL DEFAULT 'Undefined', 
+	com_posttown 			VARCHAR(50)  NULL DEFAULT 'Undefined', 
+	com_county 			VARCHAR(50)  NUListing M.1 show the PL/pgSQL's Data Definition Language (DDL) scripts to create Postcode Normalized table based on database design shown in Section 3.6.2.3. All the table are defined with PRIMARY KEY (PK) and establish referencial integrity relationship amongs entity to form a good relational database design. Moreover, the data types are defined correctly with sufficient memory provided on each columns.
+	
+	\pagebreakLL DEFAULT 'Undefined',
+	com_country			VARCHAR(50)  NULL DEFAULT 'Undefined', 
+	com_postcode 			VARCHAR(20)  NULL DEFAULT 'Undefined',
+	com_acc_id 			INT REFERENCES company_account (com_acc_id), 
+	com_return_id			INT REFERENCES company_returns (com_return_id), 
+	com_mort_id			INT REFERENCES company_mortgages (com_mort_id), 
+	com_sic_id			INT REFERENCES company_siccodes (com_sic_id),
+	com_partnership_id		INT REFERENCES company_partnership (com_partnership_id),
+	com_uri_id			INT REFERENCES company_uri (com_uri_id),
+	com_pn_id			INT REFERENCES company_previousname (com_pn_id),
+	com_conf_stmt_id		INT REFERENCES company_conf_stmt (com_conf_stmt_id)
+);
+
+\end{lstlisting}
+
+Listing M.2 show the PL/pgSQL's Data Definition Language (DDL) scripts to create Company Normalized table based on database design shown in Section 3.6.2.2. All the table are defined with PRIMARY KEY (PK) and establish referencial integrity relationship amongs entity to form a good relational database design. Moreover, the data types are defined correctly with sufficient memory provided on each columns.
+
+\pagebreak
+
+
+\section{PL/pgSQL's DDL scripts for Education Normalized Table Creation.}
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={PL/pgSQL's DDL scripts for Education Normalized Table Creation.}, label=commandline-02]
+
+-- File: 02_yinghua_create_normalized_leo_table.sql
+-- Date: Fri Dec 5 14:04 MYT 2017
+-- Author: Chai Ying Hua 
+-- Version: 1.0 
+-- Database: psql (PostgreSQL) 9.5.10
+-- ======================================
+-- 
+--  	1. Drop previous created table in proper order. 
+--	2. Create sequence in proper order. 
+--	3. Drop sequence in reverse order. 
+-- 	4. Create table in reverse order for main table to reference foreign key
+--	5. Check all the tables. 
+-- ======================================
+
+-- DROP TABLE IN PROPER ORDER 
+
+
+drop table leo_prior_attainment CASCADE; 
+drop table leo_polar CASCADE;
+drop table leo_earning CASCADE;
+drop table leo_sustain_employment CASCADE;
+drop table leo_uncaptured CASCADE; 
+drop table leo_match CASCADE;
+drop table leo_graduation CASCADE;
+drop table leo_detail CASCADE;
+drop table leo CASCADE;
+
+-- DROP SEQUENCE IN PROPER ORDER 
+DROP SEQUENCE seq_leo_id;
+DROP SEQUENCE seq_leo_detail_id;
+DROP SEQUENCE seq_grads_id;
+DROP SEQUENCE seq_match_id;
+DROP SEQUENCE seq_uncaptured_id;
+DROP SEQUENCE seq_sust_emp_id;
+DROP SEQUENCE seq_earning_id;
+DROP SEQUENCE seq_polar_id;
+DROP SEQUENCE seq_pr_att_id;
+
+-- CREATE SEQUENCE IN REVERSE ORDER 
+CREATE SEQUENCE seq_pr_att_id 		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_polar_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_earning_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_sust_emp_id 	MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_uncaptured_id 	MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_match_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_grads_id		MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_leo_detail_id	MINVALUE 1 INCREMENT 1; 
+CREATE SEQUENCE seq_leo_id		MINVALUE 1 INCREMENT 1;
+
+-- CREATE TABLE IN REVERSE ORDER 
+create table leo_prior_attainment (
+	leo_pr_att_id 		INT DEFAULT NEXTVAL ('seq_pr_att_id'),
+	leo_pr_att_band 	varchar(20) NOT NULL, 
+	leo_pr_att_included 	varchar(20) NOT NULL, 
+	PRIMARY KEY (leo_pr_att_id)
+);
+
+create table leo_polar (
+	leo_polar_id 		INT DEFAULT NEXTVAL ('seq_polar_id'),
+	leo_polar_grp_one 	varchar(20) NOT NULL, 
+	leo_polar_grp_included 	varchar(20) NOT NULL, 
+	PRIMARY KEY (leo_polar_id)
+);
+
+create table leo_earning (
+	leo_earning_id 		INT DEFAULT NEXTVAL ('seq_earning_id'), 
+	leo_earning_include 	varchar(20) NOT NULL, 
+	leo_lower_ann_earn 	varchar(20) NOT NULL, 
+	leo_median_ann_earn 	varchar(20) NOT NULL, 
+	leo_upper_ann_earn 	varchar(20) NOT NULL,
+	PRIMARY KEY (leo_earning_id) 
+);
+
+create table leo_sustain_employment (
+	leo_sust_emp_id 		INT DEFAULT NEXTVAL ('seq_sust_emp_id'), 
+	leo_sust_emp_only 		varchar(20) NOT NULL, 
+	leo_sust_emp	 		varchar(20) NOT NULL, 
+	leo_sust_emp_fs_or_both 	varchar(20) NOT NULL, 
+	PRIMARY KEY (leo_sust_emp_id) 
+);
+
+create table leo_uncaptured (
+	leo_uncaptured_id 		INT DEFAULT NEXTVAL ('seq_uncaptured_id'), 
+	leo_activitynotcaptured 	varchar(20) NOT NULL, 
+	leo_no_sust_dest	 	varchar(20) NOT NULL,  
+	PRIMARY KEY (leo_uncaptured_id) 
+);
+
+create table leo_match (
+	leo_match_id	 		INT DEFAULT NEXTVAL ('seq_match_id'), 
+	leo_unmatched 			varchar(20) NOT NULL, 
+	leo_matched	 		varchar(20) NOT NULL,
+	PRIMARY KEY (leo_match_id)
+);
+
+create table leo_graduation (
+	leo_grads_id	 		INT DEFAULT NEXTVAL ('seq_grads_id'), 
+	leo_grad 			varchar(10) NOT NULL, 
+	PRIMARY KEY (leo_grads_id) 
+);
+
+create table leo_detail (
+	leo_detail_id		 	INT DEFAULT NEXTVAL ('seq_leo_detail_id'), 
+	leo_ukprn 			int 		NOT NULL, 
+	leo_providername 		varchar(100) 	NOT NULL, 
+	leo_region 			varchar(50) 	NOT NULL, 
+	leo_subject 			varchar(50) 	NOT NULL, 
+	leo_sex 			varchar(30) 	NOT NULL, 
+	leo_yearaftergraduation		int 		NOT NULL, 
+	PRIMARY KEY (leo_detail_id)
+);
+
+create table leo (
+	leo_id				INT DEFAULT NEXTVAL ('seq_leo_id'),
+	leo_detail_id 			INT NOT NULL,
+	leo_grads_id 			INT NOT NULL,
+	leo_match_id 			INT NOT NULL,
+	leo_uncaptured_id		INT NOT NULL, 
+	leo_sust_emp_id 		INT NOT NULL,
+	leo_earning_id			INT NOT NULL,
+	leo_polar_id			INT NOT NULL,
+	leo_pr_att_id			INT NOT NULL,
+	
+	FOREIGN KEY (leo_detail_id) REFERENCES leo_detail (leo_detail_id) ON DELETE CASCADE,
+	FOREIGN KEY (leo_grads_id) REFERENCES leo_graduation (leo_grads_id) ON DELETE CASCADE,
+	FOREIGN KEY (leo_match_id) REFERENCES leo_match (leo_match_id) ON DELETE CASCADE,
+	FOREIGN KEY (leo_uncaptured_id) REFERENCES leo_uncaptured (leo_uncaptured_id) ON DELETE CASCADE, 
+	FOREIGN KEY (leo_sust_emp_id) REFERENCES leo_sustain_employment (leo_sust_emp_id) ON DELETE CASCADE,
+	FOREIGN KEY (leo_earning_id) REFERENCES leo_earning (leo_earning_id) ON DELETE CASCADE,
+	FOREIGN KEY (leo_polar_id) REFERENCES leo_polar (leo_polar_id) ON DELETE CASCADE,
+	FOREIGN KEY (leo_pr_att_id) REFERENCES leo_prior_attainment (leo_pr_att_id) ON DELETE CASCADE 
+);
+
+-- CHECK ALL THE TABLES 
+\dt
+
+\end{lstlisting}
+
+Listing M.3 show the PL/pgSQL's Data Definition Language (DDL) scripts to create LEO Normalized table based on database design shown in Section 3.6.2.4. All the table are defined with PRIMARY KEY (PK) and establish referencial integrity relationship amongs entity to form a good relational database design. Moreover, the data types are defined correctly with sufficient memory provided on each columns.
+
+\pagebreak
+
+\section{List of database relations}
+
+\subsection{List Relations of Postcode database}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={List all relations in Postcode database.}, label=commandline-02]
+Schema |                Name                 |   Type   |  Owner  |    Size    | -------+-------------------------------------+----------+---------+------------+
+public | nspl_rawdata                        | table    | yinghua | 1403 MB    | 
+public | postcode                            | table    | yinghua | 0 bytes    | 
+public | postcode_cartesian_coordinate       | table    | yinghua | 0 bytes    | 
+public | postcode_country                    | table    | yinghua | 0 bytes    | 
+public | postcode_county                     | table    | yinghua | 0 bytes    | 
+public | postcode_detail                     | table    | yinghua | 0 bytes    | 
+public | postcode_euro_electoral_region      | table    | yinghua | 8192 bytes | 
+public | postcode_greek_coordinate           | table    | yinghua | 0 bytes    | 
+public | postcode_local_authority_county     | table    | yinghua | 0 bytes    | 
+public | postcode_lower_super_output_area    | table    | yinghua | 0 bytes    | 
+public | postcode_middle_super_output_area   | table    | yinghua | 0 bytes    | 
+public | postcode_output_area_classification | table    | yinghua | 0 bytes    | 
+public | postcode_parliament_constituency    | table    | yinghua | 0 bytes    | 
+public | postcode_primary_care_trust         | table    | yinghua | 0 bytes    | 
+public | postcode_region                     | table    | yinghua | 0 bytes    | 
+public | postcode_ward                       | table    | yinghua | 0 bytes    | 
+public | seq_cart_coordinate_id              | sequence | yinghua | 8192 bytes | 
+public | seq_country_id                      | sequence | yinghua | 8192 bytes | 
+public | seq_county_id                       | sequence | yinghua | 8192 bytes | 
+public | seq_eer_id                          | sequence | yinghua | 8192 bytes | 
+public | seq_greek_coordinate_id             | sequence | yinghua | 8192 bytes | 
+public | seq_lac_id                          | sequence | yinghua | 8192 bytes | 
+public | seq_lsoa_id                         | sequence | yinghua | 8192 bytes | 
+public | seq_msoa_id                         | sequence | yinghua | 8192 bytes | 
+public | seq_oac_id                          | sequence | yinghua | 8192 bytes | 
+public | seq_par_cons_id                     | sequence | yinghua | 8192 bytes | 
+public | seq_pct_id                          | sequence | yinghua | 8192 bytes | 
+public | seq_pos_detail_id                   | sequence | yinghua | 8192 bytes | 
+public | seq_pos_form_id                     | sequence | yinghua | 8192 bytes | 
+public | seq_pos_temp_id                     | sequence | yinghua | 8192 bytes | 
+public | seq_region_id                       | sequence | yinghua | 8192 bytes | 
+public | seq_ward_id                         | sequence | yinghua | 8192 bytes | 
+(32 rows)
+
+\end{lstlisting}
+
+Listing M.4 shows all the database relation found in Postcode database. The result shows the normalized entity are created and defined successfully based on Entity Relationship Diagram database design with PL/pgSQL's DDL scripts. 
+
+\newpage
+\subsection{List Relations of Company database}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={List all relations in Company database.}, label=commandline-02]
+ Schema |           Name           |   Type   |  Owner  |    Size    | 
+--------+--------------------------+----------+---------+------------+
+ public | company                  | table    | yinghua | 0 byte	|
+ public | company_account          | table    | yinghua | 0 byte	|
+ public | company_account_category | table    | yinghua | 0 byte	|
+ public | company_category         | table    | yinghua | 0 byte	|
+ public | company_conf_stmt        | table    | yinghua | 0 byte	|
+ public | company_detail           | table    | yinghua | 0 byte	| 
+ public | company_mortgages        | table    | yinghua | 0 byte	|
+ public | company_partnership      | table    | yinghua | 0 byte	|
+ public | company_previousname     | table    | yinghua | 0 byte	|
+ public | company_raw              | table    | yinghua | 1658 MB    | 
+ public | company_rawdata          | table    | yinghua | 2476 MB    | 
+ public | company_returns          | table    | yinghua | 0 byte	|
+ public | company_siccodes         | table    | yinghua | 0 byte	|
+ public | company_status           | table    | yinghua | 0 byte	|
+ public | company_uri              | table    | yinghua | 0 byte	|
+ public | seq_acc_category_id      | sequence | yinghua | 8192 bytes | 
+ public | seq_acc_id               | sequence | yinghua | 8192 bytes | 
+ public | seq_category_id          | sequence | yinghua | 8192 bytes | 
+ public | seq_conf_stmt_id         | sequence | yinghua | 8192 bytes | 
+ public | seq_detail_id            | sequence | yinghua | 8192 bytes | 
+ public | seq_mort_id              | sequence | yinghua | 8192 bytes | 
+ public | seq_partnership_id       | sequence | yinghua | 8192 bytes | 
+ public | seq_pn_id                | sequence | yinghua | 8192 bytes | 
+ public | seq_return_id            | sequence | yinghua | 8192 bytes | 
+ public | seq_sic_id               | sequence | yinghua | 8192 bytes | 
+ public | seq_status_id            | sequence | yinghua | 8192 bytes | 
+ public | seq_uri_id               | sequence | yinghua | 8192 bytes | 
+ (27 rows)
+
+
+\end{lstlisting}
+
+Listing M.4 shows all the database relation found in Company database. The result shows the normalized entity are created and defined successfully based on Entity Relationship Diagram database design with PL/pgSQL's DDL scripts. 
+
+\newpage
+
+\subsection{List Relations of Education database}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={List all relations in Education database.}, label=commandline-02]
+ Schema |          Name          |   Type   |  Owner  |    Size    | Description 
+--------+------------------------+----------+---------+------------+-------------
+ public | leo                    | table    | yinghua | 0 byte	   |
+ public | leo_detail             | table    | yinghua | 0 byte	   |
+ public | leo_earning            | table    | yinghua | 0 byte	   |
+ public | leo_graduation         | table    | yinghua | 0 byte	   |
+ public | leo_match              | table    | yinghua | 0 byte	   |
+ public | leo_polar              | table    | yinghua | 0 byte	   |
+ public | leo_prior_attainment   | table    | yinghua | 0 byte	   |
+ public | leo_rawdata            | table    | yinghua | 0 byte	   |
+ public | leo_sustain_employment | table    | yinghua | 0 byte	   |
+ public | leo_uncaptured         | table    | yinghua | 0 byte	   | 
+ public | seq_earning_id         | sequence | yinghua | 8192 bytes | 
+ public | seq_grads_id           | sequence | yinghua | 8192 bytes | 
+ public | seq_leo_detail_id      | sequence | yinghua | 8192 bytes | 
+ public | seq_leo_id             | sequence | yinghua | 8192 bytes | 
+ public | seq_match_id           | sequence | yinghua | 8192 bytes | 
+ public | seq_polar_id           | sequence | yinghua | 8192 bytes | 
+ public | seq_pr_att_id          | sequence | yinghua | 8192 bytes | 
+ public | seq_sust_emp_id        | sequence | yinghua | 8192 bytes | 
+ public | seq_uncaptured_id      | sequence | yinghua | 8192 bytes | 
+ (19 rows)
+
+\end{lstlisting}
+
+Listing M.4 shows all the database relation found in Education database. The result shows the normalized entity are created and defined successfully based on Entity Relationship Diagram database design with PL/pgSQL's DDL scripts. 
+
+\newpage
+
+
+
+

@@ -1,0 +1,24 @@
+======================================================================================
+Step 1 - Change directory to company data location and counts number of lines in file. 
+======================================================================================
+yinghua@yinghua:~$ cd ~/Documents/FYP1/FYP-data/company-data/
+yinghua@yinghua:~/Documents/FYP1/FYP-data/company-data$ wc -l company-data-full.csv 
+3595702 company-data-full.csv
+
+======================================================================================
+Step 2 - Change directory to NSPL data location and counts number of lines in file. 
+======================================================================================
+yinghua@yinghua:~$ cd ~/Documents/FYP1/FYP-data/postcode-data/
+yinghua@yinghua:~/Documents/FYP1/FYP-data/postcode-data$ wc -l UK-NSPL.csv 
+1754883 UK-NSPL.csv
+
+======================================================================================
+Step 3 - Change directory to LEO data location and counts number of lines in file. 
+======================================================================================
+yinghua@yinghua:~$ cd ~/Documents/FYP1/FYP-data/subject-data/
+yinghua@yinghua:~/Documents/FYP1/FYP-data/subject-data$ wc -l institution-subject-data.csv 
+32707 institution-subject-data.csv
+
+
+
+

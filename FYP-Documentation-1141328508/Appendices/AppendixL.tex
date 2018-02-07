@@ -1,0 +1,1762 @@
+\chapter{Data Retrieval} 
+\label{AppendixL} 
+\lhead{Appendix L. \emph{Data Retrieval}}
+
+% Write your Appendix content below here.
+% =========================================
+
+\section{Go program for CSV file data retrieval.}
+
+\subsection{Go Sequential program source codes.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Go sequential program source codes. (sequential-csv.go)}, label=commandline-02]
+
+package main 
+
+import (
+	"bufio"
+	"encoding/csv"
+	"fmt"
+	"io"
+	"os"
+	"time"
+	
+	_ "github.com/lib/pq"
+)
+
+
+func retrieve_without_channel(directory string, indicator string) {
+
+	fmt.Printf("BEGIN retrieve data from %s files. \n", indicator);
+	
+	csvFile, err := os.Open(directory)
+	checkErr(err, "Open CSV")
+	
+	defer csvFile.Close()
+	
+	// get the time before execution
+	start := time.Now()
+	
+	// Create a new reader.
+	reader := csv.NewReader(bufio.NewReader(csvFile))
+	
+	for {
+		_, err := reader.Read()
+		
+		// Stop at EOF.
+		if err == io.EOF {
+			break
+		}
+
+	}
+
+	// obtain the time after execution
+	fmt.Printf("FINISH retrieve all rows of data from %s files with %.5fs seconds. \n", indicator, time.Since(start).Seconds())
+
+}
+
+func sequential_csv() { 
+
+	// get the time before execution
+	start := time.Now()
+	
+	retrieve_without_channel(LEO_DIRECTORY, LEO_INDICATOR);
+	retrieve_without_channel(COMPANY_DIRECTORY, COMPANY_INDICATOR);
+	retrieve_without_channel(NSPL_DIRECTORY, NSPL_INDICATOR);
+	
+	// obtain the time after execution
+	fmt.Printf("%.5fs seconds on retrieve all the data SEQUENTIALLY. \n", time.Since(start).Seconds())
+}
+
+/** 
+
+yinghua@yinghua:~/gitRepo/go-read-csv/src/main$ go build *.go 
+yinghua@yinghua:~/gitRepo/go-read-csv/src/main$ time go run *.go 
+
+BEGIN retrieve data from subject files. 
+FINISH retrieve all rows of data from subject files with 0.09179 seconds. 
+BEGIN retrieve data from company files. 
+FINISH retrieve all rows of data from company files with 32.64937 seconds. 
+BEGIN retrieve data from postcode files. 
+FINISH retrieve all rows of data from postcode files with 13.07156 seconds. 
+45.81286s seconds on retrieve all the data SEQUENTIALLY. 
+
+real	0m46.050s
+user	0m46.651s
+sys	0m0.612s
+
+**/ 
+
+\end{lstlisting}
+
+Listing L.1 shows the source code of Go programming language based application that retrieve all rows of data from NSPL, company and LEO datasets in sequential manner. The program will open the each raw datasets stored in predefine directory and began to read all lines of records in the CSV file. Ultimately, the execution time will be display and recorded for comparison in result and discussion. 
+
+\newpage
+
+\subsection{Go Concurrent program source codes.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Go concurrent program source codes. (concurrent-csv.go)}, label=commandline-02]
+package main 
+
+import (
+	"bufio"
+	"encoding/csv"
+	"fmt"
+	"io"
+	"os"
+	"time"
+	
+	_ "github.com/lib/pq"
+)
+
+====================================================================
+Function that retrieve data with Goroutune and passed into Gochannel 
+====================================================================
+func retrieve_data_with_channel(directory string, indicator string, msg chan string) {
+
+	fmt.Printf("BEGIN retrieve data from %s files. \n", indicator);
+	
+	csvFile, err := os.Open(directory)
+	checkErr(err, "Open CSV")
+	
+	defer csvFile.Close()
+	
+	// get the time before execution
+	start := time.Now()
+	
+	// Create a new reader.
+	reader := csv.NewReader(bufio.NewReader(csvFile))
+	
+	for {
+		
+		_ , err := reader.Read()
+		
+		// Stop at EOF.
+		if err == io.EOF {
+			break
+		}
+	}
+
+	// obtain the time after execution
+	fmt.Printf("FINISH retrieve all rows of data from %s files with %.5fs seconds.", indicator, time.Since(start).Seconds())
+	msg <- " " 
+
+}
+
+==============================================
+Select function that receive Goroutine message 
+==============================================
+func goSelect(ch_company, ch_leo, ch_nspl chan string) {
+
+
+	for i := 0; i < 3; i++ {
+	
+		select {
+		case msg1 := <-ch_leo:
+			fmt.Println(msg1)
+		case msg2 := <-ch_company:
+			fmt.Println(msg2)
+		case msg3 := <-ch_nspl:
+			fmt.Println(msg3)
+		}
+	}
+}
+
+==============================================
+This function read all CSV data concurrently 
+==============================================
+func concurrent_csv() {
+
+	// get the time before execution
+	start := time.Now()
+	
+	// make three channel for three functions
+	ch_company := make(chan string)
+	ch_leo := make(chan string)
+	ch_nspl := make(chan string)
+	
+	
+	go retrieve_data_with_channel(LEO_DIRECTORY, LEO_INDICATOR, ch_leo);
+	go retrieve_data_with_channel(COMPANY_DIRECTORY, COMPANY_INDICATOR, ch_company);
+	go retrieve_data_with_channel(NSPL_DIRECTORY, NSPL_INDICATOR, ch_nspl);
+	
+	goSelect(ch_company, ch_leo, ch_nspl) 
+	
+	// obtain the time after execution
+	fmt.Printf("T%.5fs seconds on retrieve all the data CONCURRENTLY. \n", time.Since(start).Seconds())
+}
+
+/**
+
+BEGIN retrieve data from postcode files. 
+BEGIN retrieve data from subject files. 
+BEGIN retrieve data from company files. 
+FINISH retrieve all rows of data from subject  files with 0.12362 seconds. 
+FINISH retrieve all rows of data from postcode files with 15.21926 seconds. 
+FINISH retrieve all rows of data from company  files with 36.22334 seconds. 
+36.22355 seconds on retrieve all the data CONCURRENTLY. 
+
+real	0m36.478s
+user	0m52.337s
+sys	0m0.719s
+
+**/
+
+\end{lstlisting}
+
+Listing L.2 shows the source code of Go programming language based application that retrieve all rows of data from NSPL, company and LEO datasets in concurrent manner. Three \textit{Goroutines} is created and each Gorountine is assigned by a job (function) to complete the job. \textit{GoSelect} is used to receive the thread that completed the process and update the state of specific operations. 
+
+The program will open each raw datasets stored in predefine directory simultaneously and began to read all lines of records in the CSV file concurrently. Ultimately, the execution time will be display and recorded for comparison in result and discussion. 
+
+\newpage
+
+\section{Go program for PostgreSQL database retrieval with ORM.}
+
+In this project, we developed our own Object Relational Mapping (ORM) tools to convert data into object model for data handling and manipulation. \textit{Struct} is created to define as \textit{object} that contain characteristic and attributes of elements and ready to be mapped by data retrieved from PostgreSQL database. 
+
+Therefore, \textbf{NSPL struct}, \textbf{Company struct} and \textbf{LEO struct} are created with separate file in each program. 
+
+\subsection{NSPL struct}
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Source code for NSPL struct. (nspl.go)}, label=commandline-02]
+
+============================
+// 36 columns 1754882 rows 
+============================
+type Nspl struct {
+postcode1 		string 
+postcode2 		string 
+postcode3 		string 
+date_introduce 		string 
+usertype 		int  // 5
+
+easting 		sql.NullInt64
+northing 		sql.NullInt64
+position_quality 	int 
+countycode 		sql.NullString 
+countyname 		sql.NullString // 10
+
+county_lac 		sql.NullString 
+county_lan 		sql.NullString 
+wardcode 		sql.NullString 
+wardname 		sql.NullString 
+countrycode 		sql.NullString // 15
+
+countryname 		sql.NullString 
+region_code 		sql.NullString 
+region_name 		sql.NullString 
+par_cons_code 		sql.NullString 
+par_cons_name 		sql.NullString // 20
+
+eerc 			sql.NullString 
+eern 			sql.NullString 
+pctc 			sql.NullString 
+pctn 			sql.NullString 
+isoac 			sql.NullString // 25 
+
+isoan 			sql.NullString 
+msoac 			sql.NullString 
+msoan 			sql.NullString 
+oacc 			sql.NullString 	
+oacn 			sql.NullString 
+longitude 		float64 	// 31
+
+latitude 		float64 
+spatial_accuracy 	sql.NullString 
+last_upload 		string 
+location 		sql.NullString 
+socrataid 		int  		// 36
+
+}
+
+\end{lstlisting}
+
+\subsection{Company struct}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Source code for Company struct. (company.go)}, label=commandline-02]
+=======================
+3595702 rows 55 columns 
+=======================
+type Company struct {
+
+	name 				sql.NullString
+	number 				string 
+	careOf 				sql.NullString 
+	poBox 				sql.NullString  
+	addressLine1 			sql.NullString // 5
+	
+	addressLine2 			sql.NullString  
+	postTown 			sql.NullString  
+	county 				sql.NullString  
+	country 			sql.NullString  
+	postcode 			sql.NullString // 10
+	
+	category 			string 
+	status 				string 
+	countryOfOrigin 		string 
+	dissolution_date 		sql.NullString
+	incorporate_date 		sql.NullString // 15
+	
+	accounting_refDay 		sql.NullInt64
+	accounting_refMonth 		sql.NullInt64
+	account_nextDueDate 		sql.NullString
+	account_lastMadeUpdate 		sql.NullString 
+	account_category 		sql.NullString // 20
+	
+	return_nextDueDate 		sql.NullString
+	return_lastMadeUpdate 		sql.NullString 
+	num_MortChanges 		int64 
+	num_MortOutstanding 		int64
+	num_MortPartSatisfied 		int64 // 25
+	
+	num_MortSatisfied 		int64
+	siccode1 			sql.NullString 
+	siccode2 			sql.NullString
+	siccode3 			sql.NullString
+	siccode4 			sql.NullString // 30
+	
+	num_genPartner 			int
+	num_limPartner 			int
+	uri 				string 
+	pn1_condate 			sql.NullString 
+	pn1_companydate 		sql.NullString // 35
+	
+	pn2_condate 			sql.NullString 
+	pn2_companydate 		sql.NullString
+	pn3_condate 			sql.NullString 
+	pn3_companydate 		sql.NullString
+	pn4_condate 			sql.NullString // 40
+	
+	pn4_companydate 		sql.NullString
+	pn5_condate 			sql.NullString 
+	pn5_companydate 		sql.NullString
+	pn6_condate 			sql.NullString 
+	pn6_companydate 		sql.NullString // 45
+	
+	pn7_condate 			sql.NullString 
+	pn7_companydate 		sql.NullString
+	pn8_condate 			sql.NullString 
+	pn8_companydate 		sql.NullString
+	pn9_condate 			sql.NullString // 50
+	
+	pn9_companydate 		sql.NullString
+	pn10_condate 			sql.NullString 
+	pn10_companydate 		sql.NullString
+	conf_stmtNextDueDate 		sql.NullString 
+	conf_stmtLastMadeUpdate 	sql.NullString // 55
+}
+
+\end{lstlisting}
+
+\newpage
+
+\subsection{LEO struct}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Source code for LEO struct. (leo.go)}, label=commandline-02]
+=======================
+32706 rows 22 columns 
+=======================
+type Leo struct {
+
+	ukprn 				int
+	providername 			string 
+	region 				string 
+	subject 			string 
+	sex 				string // 5 
+	
+	yearAfterGraduation 		string 
+	grads 				sql.NullString
+	unmatched 			sql.NullString
+	matched				sql.NullString
+	activitynocaptured		sql.NullString //10
+	
+	nosustdest 			sql.NullString
+	sustemponly 			sql.NullString
+	sustemp 			sql.NullString
+	sustempfsorboth			sql.NullString
+	earningsinclude			sql.NullString //15 
+	
+	lowerannearn			sql.NullString
+	medianannearn			sql.NullString
+	upperannearn			sql.NullString
+	polargrpone			sql.NullString
+	polargrponeincluded		sql.NullString //20 
+	
+	prattband			sql.NullString
+	prattincluded 			sql.NullString //22
+}
+
+\end{lstlisting}
+
+Listing L.2, L.3 and L.4 shows the source code of NSPL, Company and LEO struct created in Go ORM program.  Table below explain the specification of types conversion and choice data type used in these struct. 
+
+\begin{table}[H]
+	\centering
+	\begin{tabulary}{1.0\textwidth}{|L|L|L|}
+		\hline
+		{\textbf{Data type in PostgreSQL}} & {\bf Data type in Go} & {\bf Specification}  \\ \hline
+		INTEGER(10)						  & int      			  & store signed 32 bits integer.                    \\ \hline
+		BIGINT	&					int64     		& store signed 64 bits integer.                     \\ \hline
+		VARCHAR & string       	& store alphanumeric and alphabets.                        \\ \hline
+		INT or BIGINT & sql.NullInt64   & store NULL values or 64 bits integer.                                \\ \hline
+		VARCHAR & sql.NullString  & store NULL values or string.                               \\ \hline
+		REAL or DECIMAL & float64       	& store signed 64 bit decimal.                                  \\ \hline
+	\end{tabulary}
+	\caption{Data type specification in Go programming language}
+\end{table}
+
+It is essential to understand and declared valid data types for object relational mapping to prevent type errors and data corruption. The attributes of each struct are declared and defined with correct data types for data conversion.  
+
+\newpage
+
+\subsection{Go sequential program source code}
+
+\subsubsection{Company data retrieval function}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Function for company data retrieval. (retrieve\_company.go)}, label=commandline-02]
+=============================================================================
+Retrieving 3595702 rows of data from PostgreSQL database in sequential manner
+=============================================================================
+func retrieve_company() {
+
+	fmt.Println("BEGIN retrieve data from companydata database.")
+	
+	// get the time before execution
+	start := time.Now()
+	
+	
+	rows, err := db.Query("SELECT * FROM companydata;")
+	
+	checkErr(err, "Error on query DB")	
+	
+	for rows.Next() {
+	
+		var c Company
+		
+		err = rows.Scan(&c.name, &c.number, &c.careOf, &c.poBox, &c.addressLine1, 
+		&c.addressLine2, &c.postTown, &c.county, &c.country, &c.postcode, 
+		&c.category, &c.status,  &c.countryOfOrigin,  &c.dissolution_date,  &c.incorporate_date,
+		&c.accounting_refDay,  &c.accounting_refMonth,  &c.account_nextDueDate,  &c.account_lastMadeUpdate,  &c.account_category,
+		&c.return_nextDueDate,  &c.return_lastMadeUpdate,  &c.num_MortChanges,  &c.num_MortOutstanding,  &c.num_MortPartSatisfied,
+		&c.num_MortSatisfied,  &c.siccode1,  &c.siccode2,  &c.siccode3,  &c.siccode4,
+		&c.num_genPartner, &c.num_limPartner, &c.uri, &c.pn1_condate, &c.pn1_companydate, 
+		&c.pn2_condate, &c.pn2_companydate, &c.pn3_condate, &c.pn3_companydate, &c.pn4_condate,
+		&c.pn4_companydate,&c.pn5_condate, &c.pn5_companydate, &c.pn6_condate, &c.pn6_companydate, 
+		&c.pn7_condate, &c.pn7_companydate, &c.pn8_condate, &c.pn8_companydate, &c.pn9_condate, 
+		&c.pn9_companydate, &c.pn10_condate, &c.pn10_companydate, &c.conf_stmtNextDueDate, &c.conf_stmtLastMadeUpdate)
+		checkErr(err, "Read company data rows,")
+		
+		//			fmt.Printf("%+v\n", c)
+	}
+	
+	// obtain the time after execution
+	fmt.Printf("FINISH retrieve all rows of data from company database with %.5fs seconds. \n", time.Since(start).Seconds())
+
+}
+
+\end{lstlisting}
+
+Listing L.6 shows the source code of company data retrieval function that SELECT 3595702 rows of company data from PostgreSQL database in \textbf{sequential} manner. The function will establish connection with database and perform transaction to retrieve all rows of data and map into the object declared (refer row 16-34). 
+
+The execution duration and outcomes will be display on the terminal to indicate the process is completed (refer row 37). The results will be tabulated and discussed in results and finding section. 
+
+\newpage 
+
+\subsubsection{NSPL data retrieval function}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Function for NSPL data retrieval. (retrieve\_nspl.go)}, label=commandline-02]
+=============================================================================
+Retrieving 1754882 rows of data from PostgreSQL database in sequential manner
+=============================================================================
+func retrieve_nspl() {
+
+	fmt.Println("BEGIN retrieve data from nspl database.")
+	
+	// get the time before execution
+	start := time.Now()
+	
+	rows, err := db.Query("SELECT * FROM nspl;")
+	
+	checkErr(err, "Error on query DB")	
+	
+	for rows.Next() {
+	
+		var n Nspl
+		
+		err = rows.Scan(&n.postcode1, &n.postcode2, &n.postcode3, &n.date_introduce, &n.usertype,
+		&n.easting, &n.northing, &n.position_quality, &n.countrycode, &n.countryname,
+		&n.county_lac, &n.county_lan, &n.wardcode, &n.wardname, &n.countrycode,
+		&n.countryname, &n.region_code, &n.region_name, &n.par_cons_code, &n.par_cons_name,
+		&n.eerc, &n.eern, &n.pctc, &n.pctn, &n.isoac, &n.isoan, 
+		&n.msoac, &n.msoan, &n.oacc, &n.oacn, &n.longitude,
+		&n.latitude, &n.spatial_accuracy, &n.last_upload, &n.location, &n.socrataid)
+		checkErr(err, "Read company data rows,")
+		
+		//			fmt.Printf("%+v\n", n)
+	}
+	
+	fmt.Printf("FINISH retrieve all rows of data from nspl database with %.5fs seconds. \n", time.Since(start).Seconds())
+}
+
+\end{lstlisting} 
+
+Listing L.7 shows the source code of NSPL data retrieval function that SELECT 1754882 rows of company data from PostgreSQL database in \textbf{sequential} manner. The function will establish connection with database and perform transaction to retrieve all rows of data and map into the object declared (refer row 15-29). 
+
+The execution duration and outcomes will be display on the terminal to indicate the process is completed (refer row 31). The results will be tabulated and discussed in results and finding section. 
+
+\newpage 
+
+\subsubsection{LEO data retrieval function}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Function for LEO data retrieval. (retrieve\_leo.go)}, label=commandline-02]
+=============================================================================
+Retrieving 32706 rows of data from PostgreSQL database in sequential manner
+=============================================================================
+func retrieve_leo() {
+
+	fmt.Println("BEGIN retrieve data from leo database.")
+	
+	// get the time before execution
+	start := time.Now()
+	rows, err := db.Query("SELECT * FROM leo;")
+	
+	checkErr(err, "Error on query DB")	
+	
+	for rows.Next() {
+	
+		var l Leo
+		
+		err = rows.Scan(&l.ukprn, &l.providername, &l.region, &l.subject, &l.sex,
+		&l.yearAfterGraduation, &l.grads, &l.unmatched, &l.matched, &l.activitynocaptured,
+		&l.nosustdest, &l.sustemponly, &l.sustemp, &l.sustempfsorboth, &l.earningsinclude,
+		&l.lowerannearn, &l.medianannearn, &l.upperannearn, &l.polargrpone, &l.polargrponeincluded,
+		&l.prattband, &l.prattincluded)
+		checkErr(err, "Read LEO data rows,")
+		
+		//			fmt.Printf("%+v\n", l)
+	}
+	
+	fmt.Printf("FINISH retrieve all rows of data from leo database with %.5fs seconds. \n", time.Since(start).Seconds())
+
+}
+
+\end{lstlisting}
+
+Listing L.8 shows the source code of LEO data retrieval function that SELECT 32706 rows of company data from PostgreSQL database in \textbf{sequential} manner. The function will establish connection with database and perform transaction to retrieve all rows of data and map into the object declared (refer row 14-26). 
+
+The execution duration and outcomes will be display on the terminal to indicate the process is completed (refer row 28). The results will be tabulated and discussed in results and finding section. 
+
+\newpage 
+
+\subsubsection{Main function}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Main function for sequential execution. (main.go)}, label=commandline-02]
+package main
+
+import (
+	"fmt"
+	"database/sql"
+	"time"
+	
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+	_ "github.com/lib/pq"
+)
+
+const (
+	DB_USER     = "yinghua"
+	DB_PASSWORD = "123"
+	DB_NAME     = "fyp1"
+)
+
+var db *sql.DB
+
+//====================================================
+//function to check error and print error messages
+//====================================================
+func checkErr(err error, message string) {
+	if err != nil {
+		panic(message + " err: " + err.Error())
+	}
+}
+
+//====================================================
+// initialize connection with database
+//====================================================
+func initDB() {
+
+	dbInfo := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable",
+	DB_USER, DB_PASSWORD, DB_NAME)
+	sqldb, err := sql.Open("postgres", dbInfo)
+	checkErr(err, "Initialize database")
+	db = sqldb
+
+}
+
+//==============================================================
+Retrieve all data from PostgreSQL database in sequential manner 
+//==============================================================
+func sequential_read() {
+
+	// get the time before execution
+	start := time.Now()
+	
+	initDB()
+	retrieve_company()
+	retrieve_leo()
+	retrieve_nspl()
+	
+	// obtain the time after execution
+	fmt.Printf("%.5fs seconds on retrieve all the data from database SEQUENTIALLY. \n", time.Since(start).Seconds())
+
+}
+
+func main() {
+	sequential_read()
+}
+
+/** 
+
+yinghua@yinghua:~/gitRepo/go-read-psql/src/main$ go build *.go 
+yinghua@yinghua:~/gitRepo/go-read-psql/src/main$ time go run *.go
+
+BEGIN retrieve data from companydata database.
+FINISH retrieve all rows of data from companydata database with 39.87781s seconds. 
+BEGIN retrieve data from leo database.
+FINISH retrieve all rows of data from leo database with 0.22304s seconds. 
+BEGIN retrieve data from nspl database.
+FINISH retrieve all rows of data from nspl database with 11.96392s seconds. 
+52.06485s seconds on retrieve all the data from database SEQUENTIALLY. 
+
+real	0m52.358s
+user	0m53.685s
+sys	0m1.533s
+
+**/
+\end{lstlisting}
+
+Listing L.9 shows the source code for main function of Go programming language based PostgreSQL database retrieval program. The main function is where \textbf{a program start its execution}. When the program is compiled and executed, main() will call sequential\_read() function to initiate data retrieval operation from three tables sequentially (refer row 60). 
+
+The program will first establish connection to PostgreSQL database with user, password and database name provided. Then, it will began to retrieve data from company table, LEO table and follow by NSPL table (refer row 51-53) by calling three functions shown in Listing L.6, L.7 and L.8. The total execution time of entire program will be display and print on terminal (refer row 56). 
+
+The result obtained will be tabulated and discussed. 
+
+\newpage 
+
+\subsection{Go concurrent program source code}
+
+\subsubsection{Company data retrieval function}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Function for company data retrieval. (retrieve\_company.go)}, label=commandline-02]
+=============================================================================
+Retrieving 3595702 rows of data from PostgreSQL database in concurrent manner
+=============================================================================
+func retrieve_company_with_channel(msg chan string) {
+
+	fmt.Println("BEGIN retrieve data from companydata database.")
+	
+	// get the time before execution
+	start := time.Now()
+	
+	
+	rows, err := db.Query("SELECT * FROM companydata;")
+	
+	checkErr(err, "Error on query DB")	
+	
+	for rows.Next() {
+	
+		var c Company
+		
+		err = rows.Scan(&c.name, &c.number, &c.careOf, &c.poBox, &c.addressLine1, 
+		&c.addressLine2, &c.postTown, &c.county, &c.country, &c.postcode, 
+		&c.category, &c.status,  &c.countryOfOrigin,  &c.dissolution_date,  &c.incorporate_date,
+		&c.accounting_refDay,  &c.accounting_refMonth,  &c.account_nextDueDate,  &c.account_lastMadeUpdate,  &c.account_category,
+		&c.return_nextDueDate,  &c.return_lastMadeUpdate,  &c.num_MortChanges,  &c.num_MortOutstanding,  &c.num_MortPartSatisfied,
+		&c.num_MortSatisfied,  &c.siccode1,  &c.siccode2,  &c.siccode3,  &c.siccode4,
+		&c.num_genPartner, &c.num_limPartner, &c.uri, &c.pn1_condate, &c.pn1_companydate, 
+		&c.pn2_condate, &c.pn2_companydate, &c.pn3_condate, &c.pn3_companydate, &c.pn4_condate,
+		&c.pn4_companydate,&c.pn5_condate, &c.pn5_companydate, &c.pn6_condate, &c.pn6_companydate, 
+		&c.pn7_condate, &c.pn7_companydate, &c.pn8_condate, &c.pn8_companydate, &c.pn9_condate, 
+		&c.pn9_companydate, &c.pn10_condate, &c.pn10_companydate, &c.conf_stmtNextDueDate, &c.conf_stmtLastMadeUpdate)
+		checkErr(err, "Read company data rows,")
+		
+		//			fmt.Printf("%+v\n", c)
+	}
+	
+	// obtain the time after execution
+	fmt.Printf("FINISH retrieve all rows of data from companydata database with %.5fs seconds. ", time.Since(start).Seconds())
+	msg <- " " 
+
+}
+
+\end{lstlisting}
+
+Listing L.10 shows the source code of company data retrieval function that SELECT 3595702 rows of company data from PostgreSQL database in \textbf{concurrent} manner. The function possess one parameter to allow \textit{Gochannel} to be assigned for concurrent execution. 
+
+Other than that, the function will retrieve all rows of data and map into the object declared (refer row 16-34). The execution duration and outcomes will be display on the terminal to indicate the process is completed (refer row 37). The results will be tabulated and discussed in results and finding section. 
+
+\newpage
+
+\subsubsection{NSPL data retrieval function}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Function for NSPL data retrieval. (retrieve\_nspl.go)}, label=commandline-02]
+=============================================================================
+Retrieving 1754882 rows of data from PostgreSQL database in concurrent manner
+=============================================================================
+func retrieve_nspl_with_channel(msg chan string) {
+
+	fmt.Println("BEGIN retrieve data from nspl database.")
+	
+	// get the time before execution
+	start := time.Now()
+	
+	rows, err := db.Query("SELECT * FROM nspl;")
+	
+	checkErr(err, "Error on query DB")	
+	
+	for rows.Next() {
+	
+		var n Nspl
+		
+		err = rows.Scan(&n.postcode1, &n.postcode2, &n.postcode3, &n.date_introduce, &n.usertype,
+		&n.easting, &n.northing, &n.position_quality, &n.countrycode, &n.countryname,
+		&n.county_lac, &n.county_lan, &n.wardcode, &n.wardname, &n.countrycode,
+		&n.countryname, &n.region_code, &n.region_name, &n.par_cons_code, &n.par_cons_name,
+		&n.eerc, &n.eern, &n.pctc, &n.pctn, &n.isoac, &n.isoan, 
+		&n.msoac, &n.msoan, &n.oacc, &n.oacn, &n.longitude,
+		&n.latitude, &n.spatial_accuracy, &n.last_upload, &n.location, &n.socrataid)
+		checkErr(err, "Read company data rows,")
+		
+		//			fmt.Printf("%+v\n", n)
+	}
+	
+	fmt.Printf("FINISH retrieve all rows of data from nspl database with %.5fs seconds. ", time.Since(start).Seconds())
+	msg <- " "
+
+}
+
+\end{lstlisting}
+
+Listing L.11 shows the source code of NSPL data retrieval function that SELECT 1754882 rows of NSPL data from PostgreSQL database in \textbf{concurrent} manner. The function possess one parameter to allow \textit{Gochannel} to be assigned for concurrent execution. 
+
+Other than that, the function will retrieve all rows of data and map into the object declared (refer row 15-29). The execution duration and outcomes will be display on the terminal to indicate the process is completed (refer row 31). The results will be tabulated and discussed in results and finding section. 
+
+\newpage
+
+\subsubsection{LEO data retrieval function}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Function for LEO data retrieval. (retrieve\_leo.go)}, label=commandline-02]
+=============================================================================
+Retrieving 32706 rows of data from PostgreSQL database in concurrent manner
+=============================================================================
+func retrieve_leo_with_channel(msg chan string) {
+
+	fmt.Println("BEGIN retrieve data from leo database.")
+	
+	// get the time before execution
+	start := time.Now()
+	rows, err := db.Query("SELECT * FROM leo;")
+	
+	checkErr(err, "Error on query DB")	
+	
+	for rows.Next() {
+	
+		var l Leo
+		
+		err = rows.Scan(&l.ukprn, &l.providername, &l.region, &l.subject, &l.sex,
+		&l.yearAfterGraduation, &l.grads, &l.unmatched, &l.matched, &l.activitynocaptured,
+		&l.nosustdest, &l.sustemponly, &l.sustemp, &l.sustempfsorboth, &l.earningsinclude,
+		&l.lowerannearn, &l.medianannearn, &l.upperannearn, &l.polargrpone, &l.polargrponeincluded,
+		&l.prattband, &l.prattincluded)
+		checkErr(err, "Read LEO data rows,")
+		
+		//			fmt.Printf("%+v\n", l)
+	}
+	
+	fmt.Printf("FINISH retrieve all rows of data from leo database with %.5fs seconds. ", time.Since(start).Seconds())
+	msg <- " " 
+
+}
+
+\end{lstlisting}
+
+Listing L.12 shows the source code of NSPL data retrieval function that SELECT 32706 rows of LEO data from PostgreSQL database in \textbf{concurrent} manner. The function possess one parameter to allow \textit{Gochannel} to be assigned for concurrent execution. 
+
+Other than that, the function will retrieve all rows of data and map into the object declared (refer row 14-26). The execution duration and outcomes will be display on the terminal to indicate the process is completed (refer row 28). The results will be tabulated and discussed in results and finding section. 
+
+\newpage
+
+\subsubsection{Main function}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Main function for concurrent execution. (main.go)}, label=commandline-02]
+package main
+
+import (
+	"fmt"
+	"database/sql"
+	"time"
+	
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+	_ "github.com/lib/pq"
+)
+
+const (
+	DB_USER     = "yinghua"
+	DB_PASSWORD = "123"
+	DB_NAME     = "fyp1"
+)
+
+var db *sql.DB
+
+//====================================================
+//function to check error and print error messages
+//====================================================
+func checkErr(err error, message string) {
+	if err != nil {
+		panic(message + " err: " + err.Error())
+	}
+}
+
+//====================================================
+// initialize connection with database
+//====================================================
+func initDB() {
+
+	dbInfo := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable",
+	DB_USER, DB_PASSWORD, DB_NAME)
+	sqldb, err := sql.Open("postgres", dbInfo)
+	checkErr(err, "Initialize database")
+	db = sqldb
+	
+}
+
+func goSelect(ch_company, ch_leo, ch_nspl chan string) {
+	
+	
+	for i := 0; i < 3; i++ {
+		select {
+		case msg1 := <-ch_leo:
+			fmt.Println(msg1)
+		case msg2 := <-ch_company:
+			fmt.Println(msg2)
+		case msg3 := <-ch_nspl:
+			fmt.Println(msg3)
+		
+		}
+	}
+}
+
+//==============================================================
+Retrieve all data from PostgreSQL database in concurrent manner 
+//==============================================================
+func concurrent_read() {
+	// get the time before execution
+	start := time.Now()
+	
+	initDB()
+	
+	// make three channel for three functions
+	ch_company := make(chan string)
+	ch_leo := make(chan string)
+	ch_nspl := make(chan string)
+	
+	
+	go retrieve_company_with_channel(ch_company);
+	go retrieve_leo_with_channel(ch_leo);
+	go retrieve_nspl_with_channel(ch_nspl);
+	
+	goSelect(ch_company, ch_leo, ch_nspl) 
+	
+	// obtain the time after execution
+	fmt.Printf("%.5fs seconds on retrieve all the data from database CONCURRENTLY. \n", time.Since(start).Seconds())
+}
+
+func main() {
+	concurrent_read()
+}
+
+/** 
+
+yinghua@yinghua:~/gitRepo/go-read-psql/src/main$ go build *.go 
+yinghua@yinghua:~/gitRepo/go-read-psql/src/main$ time go run *.go 
+BEGIN retrieve data from nspl database.
+BEGIN retrieve data from companydata database.
+BEGIN retrieve data from leo database.
+FINISH retrieve all rows of data from leo database with 0.52910s seconds.  
+FINISH retrieve all rows of data from nspl database with 14.52721s seconds.  
+FINISH retrieve all rows of data from companydata database with 43.36509s seconds.  
+43.36518s seconds on retrieve all the data from database CONCURRENTLY. 
+
+real	0m43.801s
+user	0m59.145s
+sys	0m1.631s
+
+**/
+
+\end{lstlisting}
+
+Listing L.13 shows the source code for main function of Go programming language based PostgreSQL database retrieval program. The main function is where \textbf{a program start its execution}. 
+
+When the program is compiled and executed, main() will call concurrent\_read() function to initiate data retrieval operation from three tables concurrently (refer row 84). 
+
+The program will first establish connection to PostgreSQL database with user, password and database name provided. Then, it will make three \textit{Gochannels} ready to be parsed into each function (refer row 67-69). The functions shown in Listing L.10, L.11 and L.12 will be assigned into \textit{Goroutines (A lightweight thread)} and parsed into the declared Gochannel to establish concurrent operation. 
+
+These function began to retrieve data from company table, LEO table and NSPL table concurrently. The Goselect is used to received the \textit{Goroutines} and identify the state of each execution once the processed are finished. The total execution time of entire program will be display and print on terminal (refer row 80). 
+
+The result obtained will be tabulated and discussed.
+
+\newpage 
+
+\section{Rust program for CSV file data retrieval}
+
+
+\subsection{Rust Sequential program source codes.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Rust sequential program source codes. (main.rs)}, label=commandline-02]
+extern crate csv;
+use std::fs::File;
+
+======================================
+multiple producer, single consumer.
+======================================
+use std::sync::mpsc;
+
+======================================
+use time crate
+======================================
+extern crate time;
+use time::PreciseTime;
+
+const LEO_INDICATOR: &'static str = "subject";
+const COMPANY_INDICATOR: &'static str = "company";
+const NSPL_INDICATOR: &'static str = "postcode";
+const LEO_DIRECTORY: &'static str = "/home/yinghua/Documents/FYP1/FYP-data/subject-data/institution-subject-data.csv";
+const COMPANY_DIRECTORY: &'static str = "/home/yinghua/Documents/FYP1/FYP-data/company-data/company-data-full.csv";
+const NSPL_DIRECTORY: &'static str = "/home/yinghua/Documents/FYP1/FYP-data/postcode-data/UK-NSPL.csv";
+
+=======================================
+Function to retrieve data from CSV file 
+=======================================
+fn retrieve_data(directory: &'static str, indicator: &'static str) -> u32 {
+
+	println!("BEGIN retrieve data from {} files. ", indicator);
+	
+	// Parse the CSV reader and iterate over each record.
+	let csv_file = File::open(directory).expect("Error open LEO file");
+	
+	let start = PreciseTime::now();
+	let mut rdr = csv::Reader::from_reader(csv_file);
+	
+	for result in rdr.records() {
+
+		let _record = result;
+		//        println!("{:?}", record);
+	}
+		
+		let end = PreciseTime::now();
+		let duration = start.to(end);
+		
+		println!(
+		"FINISH retrieve all rows of data from {} files with {} seconds.",
+		indicator,
+		duration
+		);
+	
+	return 1;
+}
+
+====================================================================
+Function that retrieve all rows of data from three raw CSV datasets. 
+====================================================================
+fn sequential_read() {
+
+	let start = PreciseTime::now();
+	
+	let _leo = retrieve_data(LEO_DIRECTORY, LEO_INDICATOR);
+	let _company = retrieve_data(COMPANY_DIRECTORY, COMPANY_INDICATOR);
+	let _nspl = retrieve_data(NSPL_DIRECTORY, NSPL_INDICATOR);
+	
+	let end = PreciseTime::now();
+	let duration = start.to(end);
+	
+	println!(
+	" {} seconds on retrieve all the data SEQUENTIALLY. ",
+	duration
+	);
+}
+
+fn main() {
+	sequential_read();
+}
+
+/** 
+
+yinghua@yinghua:~/gitRepo/rs-read-csv$ cargo build 
+Compiling rs-read-csv v0.0.1 (file:///home/yinghua/gitRepo/rs-read-csv)
+Finished dev [unoptimized + debuginfo] target(s) in 0.94 secs
+
+yinghua@yinghua:~/gitRepo/rs-read-csv$ time cargo run 
+Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+Running `target/debug/rs-read-csv`
+
+BEGIN retrieve data from subject files. 
+FINISH retrieve all rows of data from subject files with 0.904617367 seconds.
+BEGIN retrieve data from company files. 
+FINISH retrieve all rows of data from company files with 292.704881750 seconds.
+BEGIN retrieve data from postcode files. 
+FINISH retrieve all rows of data from postcode files with 109.972792579 seconds.
+
+403.582455002 seconds on retrieve all the data SEQUENTIALLY. 
+
+**/ 
+
+
+\end{lstlisting}
+
+Listing L.14 shows the source code of Rust programming language based application that retrieve all rows of data from NSPL, company and LEO datasets in sequential manner. The program will open the each raw datasets stored in predefine directory and began to read all lines of records in the CSV file. Ultimately, the execution time will be display and recorded for comparison in result and discussion. 
+
+\newpage
+
+\subsection{Rust Concurrent program source codes.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Rust concurrent program source codes. (main.rs)}, label=commandline-02]
+extern crate csv;
+use std::fs::File;
+
+======================================
+multiple producer, single consumer.
+======================================
+use std::sync::mpsc;
+
+======================================
+import for multithreading. 
+======================================
+use std::thread;
+
+======================================
+use time crate
+======================================
+extern crate time;
+use time::PreciseTime;
+
+const LEO_INDICATOR: &'static str = "subject";
+const COMPANY_INDICATOR: &'static str = "company";
+const NSPL_INDICATOR: &'static str = "postcode";
+const LEO_DIRECTORY: &'static str = "/home/yinghua/Documents/FYP1/FYP-data/subject-data/institution-subject-data.csv";
+const COMPANY_DIRECTORY: &'static str = "/home/yinghua/Documents/FYP1/FYP-data/company-data/company-data-full.csv";
+const NSPL_DIRECTORY: &'static str = "/home/yinghua/Documents/FYP1/FYP-data/postcode-data/UK-NSPL.csv";
+
+=======================================
+Function to retrieve data from CSV file 
+=======================================
+fn retrieve_data(directory: &'static str, indicator: &'static str) -> u32 {
+
+println!("BEGIN retrieve data from {} files. ", indicator);
+
+// Parse the CSV reader and iterate over each record.
+let csv_file = File::open(directory).expect("Error open LEO file");
+
+let start = PreciseTime::now();
+let mut rdr = csv::Reader::from_reader(csv_file);
+
+for result in rdr.records() {
+
+let _record = result;
+//        println!("{:?}", record);
+}
+
+let end = PreciseTime::now();
+let duration = start.to(end);
+
+println!(
+"FINISH retrieve all rows of data from {} files with {} seconds.",
+indicator,
+duration
+);
+
+return 1;
+}
+
+========================================================================================
+Function that retrieve all rows of data from three raw CSV datasets in concurrent manner.  
+========================================================================================
+fn concurrent_read() {
+
+	let start = PreciseTime::now();
+	
+	// transmitter and receiver over the channel
+	let (leo_tx, leo_rx) = mpsc::channel();
+	let (company_tx, company_rx) = mpsc::channel();
+	let (nspl_tx, nspl_rx) = mpsc::channel();
+	
+	thread::spawn(move || {
+		let leo = retrieve_data(LEO_DIRECTORY, LEO_INDICATOR);
+		leo_tx.send(leo).unwrap();
+	});
+	
+	thread::spawn(move || {
+		let company = retrieve_data(COMPANY_DIRECTORY, COMPANY_INDICATOR);
+		company_tx.send(company).unwrap();
+	});
+	
+	thread::spawn(move || {
+		let nspl = retrieve_data(NSPL_DIRECTORY, NSPL_INDICATOR);
+		nspl_tx.send(nspl).unwrap();
+	});
+	
+	let leo_channel = leo_rx.recv().unwrap();
+	let company_channel = company_rx.recv().unwrap();
+	let nspl_channel = nspl_rx.recv().unwrap();
+	
+	let end = PreciseTime::now();
+	let duration = start.to(end);
+	
+	println!(
+	" {} seconds on retrieve all the data CONCURRENTLY. ",
+	duration
+	);
+
+}
+
+fn main() {
+	concurrent_read();
+}
+
+/** 
+
+yinghua@yinghua:~/gitRepo/rs-read-csv$ cargo build 
+Compiling rs-read-csv v0.0.1 (file:///home/yinghua/gitRepo/rs-read-csv)
+Finished dev [unoptimized + debuginfo] target(s) in 0.94 secs
+
+yinghua@yinghua:~/gitRepo/rs-read-csv$ time cargo run 
+
+BEGIN retrieve data from subject files. 
+BEGIN retrieve data from postcode files. 
+BEGIN retrieve data from company files. 
+FINISH retrieve all rows of data from subject files with 1.038585794 seconds.
+FINISH retrieve all rows of data from postcode files with 116.362977683 seconds.
+FINISH retrieve all rows of data from company files with 314.530471492 seconds.
+
+314.530967308 seconds on retrieve all the data CONCURRENTLY. 
+
+**/ 
+
+\end{lstlisting}
+
+Listing L.15 shows the source code of Rust programming language based application that retrieve all rows of data from NSPL, company and LEO datasets in concurrent manner. Three \textit{threads} is created and each thread is assigned by a job (function) to complete the job. Three channel is declared used to receive the thread that completed the process and update the state of specific operations. 
+
+The program will open each raw datasets stored in predefine directory simultaneously and began to read all lines of records in the CSV file concurrently. Ultimately, the execution time will be display and recorded for comparison in result and discussion. 
+
+\newpage
+
+\section{Rust program for PostgreSQL database retrieval with ORM.}
+
+\subsection{NSPL struct}
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Source code for NSPL struct. (nspl.rs)}, label=commandline-02]
+
+============================
+// 36 columns 1754882 rows 
+============================
+#[derive(Debug)]
+struct Nspl {
+	postcode1: String,
+	postcode2: String,
+	postcode3: String,
+	date_introduce: String,
+	user_type: i32,
+	
+	easting: Option<i32>,
+	northing: Option<i32>,
+	position_quality: i32,
+	countycode: Option<String>,
+	countyname: Option<String>,
+	
+	county_lac: Option<String>,
+	county_lan: Option<String>,
+	ward_code: Option<String>,
+	ward_name: Option<String>,
+	country_code: Option<String>,
+	
+	country_name: Option<String>,
+	region_code: Option<String>,
+	region_name: Option<String>,
+	par_cons_code: Option<String>,
+	par_cons_name: Option<String>,
+	
+	eerc: Option<String>,
+	eern: Option<String>,
+	pctc: Option<String>,
+	pctn: Option<String>,
+	isoac: Option<String>,
+	
+	isoan: Option<String>,
+	msoac: Option<String>,
+	msoan: Option<String>,
+	oacc: Option<String>,
+	oacn: Option<String>,
+	
+	longitude: f32,
+	latitude: f32,
+	spatial_accuracy: Option<String>,
+	last_upload: NaiveDate,
+	location: Option<String>,
+	socrataid: i32,
+}
+
+\end{lstlisting}
+
+\newpage
+
+\subsection{Company struct}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Source code for Company struct. (company.rs)}, label=commandline-02]
+=======================
+3595702 rows 55 columns 
+=======================
+#[derive(Debug)]
+struct Company {
+	name: Option<String>,
+	number: String,
+	careof: Option<String>,
+	po_box: Option<String>,
+	address_line1: Option<String>,
+	
+	address_line2: Option<String>,
+	post_town: Option<String>,
+	county: Option<String>,
+	country: Option<String>,
+	post_code: Option<String>,
+	
+	company_category: String,
+	company_status: String,
+	county_of_origin: String,
+	dissolution_date: Option<NaiveDate>,
+	incorporation_date: Option<NaiveDate>,
+	
+	accounting_ref_day: Option<i32>,
+	accounting_ref_month: Option<i32>,
+	account_next_due_date: Option<NaiveDate>,
+	account_last_made_update: Option<NaiveDate>,
+	account_category: Option<String>,
+	
+	return_next_due_date: Option<NaiveDate>,
+	return_last_made_update: Option<NaiveDate>,
+	num_mort_changes: Option<i32>,
+	num_mort_out_standing: Option<i32>,
+	num_mort_part_satisfied: Option<i32>,
+	
+	num_mort_satisfied: Option<i32>,
+	siccode1: Option<String>,
+	siccode2: Option<String>,
+	siccode3: Option<String>,
+	siccode4: Option<String>,
+	
+	num_gen_partners: i32,
+	num_lim_partners: i32,
+	uri: String,
+	pn1_condate: Option<NaiveDate>,
+	pn1_companydate: Option<String>,
+	
+	pn2_condate: Option<NaiveDate>,
+	pn2_companydate: Option<String>,
+	pn3_condate: Option<NaiveDate>,
+	pn3_companydate: Option<String>,
+	pn4_condate: Option<NaiveDate>,
+	
+	pn4_companydate: Option<String>,
+	pn5_condate: Option<NaiveDate>,
+	pn5_companydate: Option<String>,
+	pn6_condate: Option<NaiveDate>,
+	pn6_companydate: Option<String>,
+	
+	pn7_condate: Option<NaiveDate>,
+	pn7_companydate: Option<String>,
+	pn8_condate: Option<NaiveDate>,
+	pn8_companydate: Option<String>,
+	pn9_condate: Option<NaiveDate>,
+	
+	pn9_companyname: Option<String>,
+	pn10_condate: Option<NaiveDate>,
+	pn10_companydate: Option<String>,
+	conf_stmt_next_due_date: Option<NaiveDate>,
+	conf_stmt_last_made_update: Option<NaiveDate>,
+}
+
+\end{lstlisting}
+
+\newpage
+
+\subsection{LEO struct}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Source code for LEO struct. (leo.rs)}, label=commandline-02]
+=======================
+32706 rows 22 columns 
+=======================
+#[derive(Debug)]
+struct Leo {
+	ukprn: i32,
+	provider_name: String,
+	region: String,
+	subject: String,
+	sex: String,
+	
+	year_after_graduation: String,
+	grads: Option<String>,
+	unmatched: Option<String>,
+	matched: Option<String>,
+	activity_not_captured: Option<String>,
+	
+	no_sust_dest: Option<String>,
+	sus_temp_only: Option<String>,
+	sus_temp: Option<String>,
+	sus_tempfs_or_both: Option<String>,
+	earnings_include: Option<String>,
+	
+	lower_ann_earn: Option<String>,
+	median_ann_earn: Option<String>,
+	upper_ann_earn: Option<String>,
+	polar_gr_pone: Option<String>,
+	polar_gr_pone_included: Option<String>,
+	
+	pr_att_band: Option<String>,
+	pr_att_included: Option<String>,
+}
+
+\end{lstlisting}
+
+Listing L.16, L.17 and L.18 shows the source code of NSPL, Company and LEO struct created in Rust ORM program.  Table below explain the specification of types conversion and choice data type used in these struct. 
+
+\begin{table}[H]
+	\centering
+	\begin{tabulary}{1.0\textwidth}{|L|L|L|}
+		\hline
+		{\textbf{Data type in PostgreSQL}} & {\bf Data type in Rust} & {\bf Specification}  \\ \hline
+		INTEGER(10)						  & i32      			  & store signed 32 bits integer.                    \\ \hline
+		BIGINT	&					i64     		& store signed 64 bits integer.                     \\ \hline
+		VARCHAR & String       	& store alphanumeric and alphabets.                        \\ \hline
+		INT  & Option<i32>   & store NULL values or 32 bits integer.                                \\ \hline
+		VARCHAR & Option<String>  & store NULL values or string.                               \\ \hline
+		REAL  & f32       	& store signed 32 bit decimal.           f                       \\ \hline
+	\end{tabulary}
+	\caption{Data type specification in Go programming language}
+\end{table}
+
+It is essential to understand and declared valid data types for object relational mapping to prevent type errors and data corruption. The attributes of each struct are declared and defined with correct data types for data conversion.
+
+
+
+\subsection{Rust program source code}
+
+\subsubsection{Company data retrieval function}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Function for company data retrieval. (company.rs)}, label=commandline-02]
+=============================================================================
+Retrieving 3595702 rows of data from PostgreSQL database 
+=============================================================================
+pub fn retrieve_company() {
+
+
+	let db_url = "postgresql://yinghua:123@localhost:5432/fyp1";
+	let conn = Connection::connect(db_url, TlsMode::None).unwrap();
+	
+	println!("BEGIN retrieve data from companydata database. ");
+	let start = PreciseTime::now();
+	
+	
+	for rows in &conn.query("SELECT * FROM companydata", &[]).unwrap() {
+		let _company = Company {
+			name: rows.get(0),
+			number: rows.get(1),
+			careof: rows.get(2),
+			po_box: rows.get(3),
+			address_line1: rows.get(4),
+			
+			address_line2: rows.get(5),
+			post_town: rows.get(6),
+			county: rows.get(7),
+			country: rows.get(8),
+			post_code: rows.get(9),
+			
+			company_category: rows.get(10),
+			company_status: rows.get(11),
+			county_of_origin: rows.get(12),
+			dissolution_date: rows.get(13),
+			incorporation_date: rows.get(14),
+			
+			accounting_ref_day: rows.get(15),
+			accounting_ref_month: rows.get(16),
+			account_next_due_date: rows.get(17),
+			account_last_made_update: rows.get(18),
+			account_category: rows.get(19),
+			
+			return_next_due_date: rows.get(20),
+			return_last_made_update: rows.get(21),
+			num_mort_changes: rows.get(22),
+			num_mort_out_standing: rows.get(23),
+			num_mort_part_satisfied: rows.get(24),
+			
+			num_mort_satisfied: rows.get(25),
+			siccode1: rows.get(26),
+			siccode2: rows.get(27),
+			siccode3: rows.get(28),
+			siccode4: rows.get(29),
+			
+			num_gen_partners: rows.get(30),
+			num_lim_partners: rows.get(31),
+			uri: rows.get(32),
+			pn1_condate: rows.get(33),
+			pn1_companydate: rows.get(34),
+			
+			pn2_condate: rows.get(35),
+			pn2_companydate: rows.get(36),
+			pn3_condate: rows.get(37),
+			pn3_companydate: rows.get(38),
+			pn4_condate: rows.get(39),
+			
+			pn4_companydate: rows.get(40),
+			pn5_condate: rows.get(41),
+			pn5_companydate: rows.get(42),
+			pn6_condate: rows.get(43),
+			pn6_companydate: rows.get(44),
+			
+			pn7_condate: rows.get(45),
+			pn7_companydate: rows.get(46),
+			pn8_condate: rows.get(47),
+			pn8_companydate: rows.get(48),
+			pn9_condate: rows.get(49),
+			
+			pn9_companyname: rows.get(50),
+			pn10_condate: rows.get(51),
+			pn10_companydate: rows.get(52),
+			conf_stmt_next_due_date: rows.get(53),
+			conf_stmt_last_made_update: rows.get(54),
+		};
+
+	//        println!("{:?}", company);
+	}
+	
+	let end = PreciseTime::now();
+	let duration = start.to(end);
+	
+	println!(
+	"FINISH retrieve all rows of data from companydata database with {} seconds.",
+	duration
+	);
+}
+
+\end{lstlisting}
+
+Listing L.19 shows the source code of company data retrieval function that SELECT 3595702 rows of company data from PostgreSQL database in \textbf{concurrent} manner. The function is used for both sequential and concurrent execution for data retrieval in Rust program. 
+
+Other than that, the function will retrieve all rows of data and map into the object declared (refer row 14-83). The execution duration and outcomes will be display on the terminal to indicate the process is completed (refer row 89). The results will be tabulated and discussed in results and finding section. 
+
+\newpage
+
+\subsubsection{NSPL data retrieval function}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Function for NSPL data retrieval. (nspl.rs)}, label=commandline-02]
+=========================================================
+Retrieving 1754882 rows of data from PostgreSQL database 
+=========================================================
+pub fn retrieve_nspl() {
+
+	let db_url = "postgresql://yinghua:123@localhost:5432/fyp1";
+	let conn = Connection::connect(db_url, TlsMode::None).unwrap();
+	
+	println!("BEGIN retrieve data from nspl database. ");
+	let start = PreciseTime::now();
+	
+	for rows in &conn.query("SELECT * FROM nspl", &[]).unwrap() {
+	
+		let _postcode = Nspl {
+			postcode1: rows.get(0),
+			postcode2: rows.get(1),
+			postcode3: rows.get(2),
+			date_introduce: rows.get(3),
+			user_type: rows.get(4),
+			
+			easting: rows.get(5),
+			northing: rows.get(6),
+			position_quality: rows.get(7),
+			countycode: rows.get(8),
+			countyname: rows.get(9),
+			
+			county_lac: rows.get(10),
+			county_lan: rows.get(11),
+			ward_code: rows.get(12),
+			ward_name: rows.get(13),
+			country_code: rows.get(14),
+			
+			country_name: rows.get(15),
+			region_code: rows.get(16),
+			region_name: rows.get(17),
+			par_cons_code: rows.get(18),
+			par_cons_name: rows.get(19),
+			
+			eerc: rows.get(20),
+			eern: rows.get(21),
+			pctc: rows.get(22),
+			pctn: rows.get(23),
+			isoac: rows.get(24),
+			
+			isoan: rows.get(25),
+			msoac: rows.get(26),
+			msoan: rows.get(27),
+			oacc: rows.get(28),
+			oacn: rows.get(29),
+			
+			longitude: rows.get(30),
+			latitude: rows.get(31),
+			spatial_accuracy: rows.get(32),
+			last_upload: rows.get(33),
+			location: rows.get(34),
+			socrataid: rows.get(35),
+		};
+	
+	//        println!("{:?}", postcode);
+	
+	}
+	
+	let end = PreciseTime::now();
+	let duration = start.to(end);
+	println!(
+	"FINISH retrieve all rows of data from nspl database with {} seconds.",
+	duration
+	);
+
+}
+
+\end{lstlisting}
+
+Listing L.20 shows the source code of company data retrieval function that SELECT 1754882 rows of NSPL data from PostgreSQL database in \textbf{concurrent} manner. The function is used for both sequential and concurrent execution for data retrieval in Rust program. 
+
+Other than that, the function will retrieve all rows of data and map into the object declared (refer row 15-56). The execution duration and outcomes will be display on the terminal to indicate the process is completed (refer row 65). The results will be tabulated and discussed in results and finding section. 
+
+\newpage
+
+\subsubsection{LEO data retrieval function}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Function for LEO data retrieval. (leo.rs)}, label=commandline-02]
+=============================================================================
+Retrieving 32706 rows of data from PostgreSQL database in sequential manner
+=============================================================================
+pub fn retrieve_leo() {
+
+	let db_url = "postgresql://yinghua:123@localhost:5432/fyp1";
+	let conn = Connection::connect(db_url, TlsMode::None).unwrap();
+	
+	println!("BEGIN retrieve data from leo database. ");
+	let start = PreciseTime::now();
+	
+	for rows in &conn.query("SELECT * FROM leo", &[]).unwrap() {
+	
+		let _subject = Leo {
+			ukprn: rows.get(0),
+			provider_name: rows.get(1),
+			region: rows.get(2),
+			subject: rows.get(3),
+			sex: rows.get(4),
+			
+			year_after_graduation: rows.get(5),
+			grads: rows.get(6),
+			unmatched: rows.get(7),
+			matched: rows.get(8),
+			activity_not_captured: rows.get(9),
+			
+			no_sust_dest: rows.get(10),
+			sus_temp_only: rows.get(11),
+			sus_temp: rows.get(12),
+			sus_tempfs_or_both: rows.get(13),
+			earnings_include: rows.get(14),
+			
+			lower_ann_earn: rows.get(15),
+			median_ann_earn: rows.get(16),
+			upper_ann_earn: rows.get(17),
+			polar_gr_pone: rows.get(18),
+			polar_gr_pone_included: rows.get(19),
+			
+			pr_att_band: rows.get(20),
+			pr_att_included: rows.get(21),
+		};
+		
+		//        println!("{:?}", subject);
+		
+	}
+	
+	let end = PreciseTime::now();
+	let duration = start.to(end);
+	println!(
+	"FINISH retrieve all rows of data from leo database with {} seconds.",
+	duration
+	);
+}
+
+\end{lstlisting}
+
+Listing L.21 shows the source code of company data retrieval function that SELECT 32706 rows of LEO data from PostgreSQL database in \textbf{concurrent} manner. The function is used for both sequential and concurrent execution for data retrieval in Rust program. 
+
+Other than that, the function will retrieve all rows of data and map into the object declared (refer row 15-40). The execution duration and outcomes will be display on the terminal to indicate the process is completed (refer row 49). The results will be tabulated and discussed in results and finding section. 
+
+\newpage
+
+\subsubsection{Main function}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Main function for sequential execution. (main.rs)}, label=commandline-02]
+extern crate postgres;
+
+=================
+use time crate
+=================
+extern crate time;
+extern crate chrono;
+use time::PreciseTime;
+
+=====================================
+multiple producer, single consumer.
+=====================================
+use std::sync::mpsc;
+
+=====================================
+import for multithreading execution
+=====================================
+use std::thread;
+
+mod company;
+mod leo;
+mod nspl;
+
+===========================================================================
+Function that retrieve all row of data from PostgreSQL in sequential manner 
+===========================================================================
+fn sequential_read() {
+
+	let start = PreciseTime::now();
+	
+	company::retrieve_company();
+	leo::retrieve_leo();
+	nspl::retrieve_nspl();
+	
+	let end = PreciseTime::now();
+	let duration = start.to(end);
+	
+	println!(
+	" {} seconds on retrieve all the data SEQUENTIALLY. ",
+	duration
+	);
+
+}
+
+===========================================================================
+Function that retrieve all row of data from PostgreSQL in concurrent manner 
+===========================================================================
+fn concurrent_read() {
+
+	let start = PreciseTime::now();
+	
+	// transmitter and receiver over the channel
+	let (leo_tx, leo_rx) = mpsc::channel();
+	let (company_tx, company_rx) = mpsc::channel();
+	let (nspl_tx, nspl_rx) = mpsc::channel();
+	
+	thread::spawn(move || {
+	
+	let company = company::retrieve_company();
+		company_tx.send(company).unwrap();
+	});
+	
+	thread::spawn(move || {
+	
+	let leo = leo::retrieve_leo();
+		leo_tx.send(leo).unwrap();
+	});
+	
+	thread::spawn(move || {
+	
+	let nspl = nspl::retrieve_nspl();
+		nspl_tx.send(nspl).unwrap();
+	});
+	
+	let _leo_channel = leo_rx.recv().unwrap();
+	let _company_channel = company_rx.recv().unwrap();
+	let _nspl_channel = nspl_rx.recv().unwrap();
+	
+	let end = PreciseTime::now();
+	let duration = start.to(end);
+	
+	println!(
+	" {} seconds on retrieve all the data CONCURRENTLY. ",
+	duration
+	);
+}
+
+
+fn main() {
+	concurrent_read();
+	sequential_read();
+}
+
+/** 
+
+yinghua@yinghua:~/gitRepo/rs-read-psql$ cargo build 
+Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+yinghua@yinghua:~/gitRepo/rs-read-psql$ time cargo run 
+Compiling rs-read-psql v0.1.0 (file:///home/yinghua/gitRepo/rs-read-psql)
+
+BEGIN retrieve data from nspl database. 
+BEGIN retrieve data from companydata database. 
+BEGIN retrieve data from leo database. 
+FINISH retrieve all rows of data from leo database with 0.789323246 seconds.
+FINISH retrieve all rows of data from nspl database with 65.702471599 seconds.
+FINISH retrieve all rows of data from companydata database with 181.387234079 seconds.
+181.389403179 seconds on retrieve all the data CONCURRENTLY.
+
+BEGIN retrieve data from companydata database. 
+FINISH retrieve all rows of data from companydata database with 172.584919465 seconds.
+BEGIN retrieve data from leo database. 
+FINISH retrieve all rows of data from leo database with 0.720544494 seconds.
+BEGIN retrieve data from nspl database. 
+FINISH retrieve all rows of data from nspl database with 60.442268738 seconds.
+233.752923612 seconds on retrieve all the data SEQUENTIALLY. 
+
+
+**/ 
+
+\end{lstlisting}
+
+Listing L.22 shows the source code for main function of Rust programming language based PostgreSQL database retrieval program. The main function is where \textbf{a program start its execution}. 
+
+When the program is compiled and executed, main() will call both \textbf{concurrent\_read()} and \textbf{sequential\_read()}function to initiate data retrieval operation from three tables concurrently and sequentially (refer 90-92).
+
+The concurrent function will first establish connection to PostgreSQL database with user, password and database name provided. Then, it will make three channels with \textit{multiple producer and single consumer} that ready to be parsed into each function (refer row 52-55). The three function will be assigned into each \textit{thread} and parsed into the declared channel to establish concurrent operation. The entire execution of this function  will be display and print on terminal (refer row 82-84). 
+
+The sequential function will establish connection to PostgreSQL database with user, password and database name provided once again. Then, the three function began to retrieve data from company table, LEO table and NSPL table sequentially (refer row 31-33). The entire execution of this function  will be display and print on terminal (refer row 38-41). 
+
+The result obtained will be tabulated, compared and discussed.
+
+
+
+
+
+
+
+

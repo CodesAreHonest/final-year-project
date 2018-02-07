@@ -1,0 +1,400 @@
+\chapter{Data Transformation} 
+\label{AppendixK} 
+\lhead{Appendix K. \emph{Data Transformation}}
+
+% Write your Appendix content below here.
+% =========================================
+
+\section{Validate Line Counts in Original Datasets.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Validate lines counts in CSV datasets.}, label=commandline-02]
+======================================================================================
+Step 1 - Change directory to company data location and counts number of lines in file. 
+======================================================================================
+yinghua@yinghua:~$ cd ~/Documents/FYP1/FYP-data/company-data/
+yinghua@yinghua:~/Documents/FYP1/FYP-data/company-data$ wc -l company-data-full.csv 
+3595702 company-data-full.csv 			<-- line count of company datasets
+
+======================================================================================
+Step 2 - Change directory to NSPL data location and counts number of lines in file. 
+======================================================================================
+yinghua@yinghua:~$ cd ~/Documents/FYP1/FYP-data/postcode-data/
+yinghua@yinghua:~/Documents/FYP1/FYP-data/postcode-data$ wc -l UK-NSPL.csv 
+1754883 UK-NSPL.csv				<-- line count of NSPL datasets
+
+======================================================================================
+Step 3 - Change directory to LEO data location and counts number of lines in file. 
+======================================================================================
+yinghua@yinghua:~$ cd ~/Documents/FYP1/FYP-data/subject-data/
+yinghua@yinghua:~/Documents/FYP1/FYP-data/subject-data$ wc -l institution-subject-data.csv 
+32707 institution-subject-data.csv  		<-- line count of LEO datasets
+\end{lstlisting}
+
+The \textbf{number of lines} in each datasets are required to be recorded before these data are transform and import into PostgreSQL database. This step is conducted to prevent loss of data after the data transformation process and execution failure can be quickly observed during the process. Row 6, 13 and 20 in Listing K.1 show the line counts of each datasets with \textit{wc} commands. 
+
+\newpage 
+
+\section{PL/pgSQL's scripts for Data Transformation.}
+
+\subsection{NSPL data transformation script.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={PL/pgSQL's scripts for NSPL data transformation.}, label=commandline-02]
+=================================================
+Step 1 - Drop the previous created table for demonstration
+=================================================
+drop table nspl_rawdata;
+
+===========================================================================================
+Step 2 - Use DDL to define attribute's data types and table for data transformation purpose
+===========================================================================================
+create table nspl_rawdata (
+postcode1 		varchar(15) 	not null,
+postcode2 		varchar(15) 	not null primary key,
+postcode3 		varchar(15) 	not null,
+date_introduce 		varchar(10) 	not null, 
+usertype 		int 		not null,
+easting 		int 		null default 0,
+northing 		int 		null default 0,
+position_quality 	int 		not null,
+countycode 		varchar(15) 	null default 'Undefined',
+countyname 		varchar(50) 	null default 'Undefined',
+county_lac 		varchar(15) 	null default 'Undefined',
+county_lan 		varchar(75) 	null default 'Undefined',
+wardcode 		varchar(15) 	null default 'Undefined',
+wardname 		varchar(75) 	null default 'Undefined',
+countrycode 		varchar(15) 	null default 'Undefined',
+countryname 		varchar(30) 	null default 'Undefined',
+region_code 		varchar(15) 	null default 'Undefined',
+region_name 		varchar(30) 	null default 'Undefined',
+par_cons_code 		varchar(15) 	null default 'Undefined',
+par_cons_name 		varchar(50) 	null default 'Undefined',
+eerc 			varchar(15) 	null default 'Undefined',
+eern 			varchar(30) 	null default 'Undefined',
+pctc 			varchar(15) 	null default 'Undefined',
+pctn 			varchar(70) 	null default 'Undefined',
+isoac 			varchar(15) 	null default 'Undefined',
+isoan 			varchar(50) 	null default 'Undefined',
+msoac 			varchar(15) 	null default 'Undefined',
+msoan 			varchar(50) 	null default 'Undefined',
+oacc 			varchar(5) 	null default '---',
+oacn 			varchar(50) 	null default 'Undefined',
+longitude 		real 		not null,
+latitude 		real 		not null,
+spatial_accuracy	varchar(30) 	null default 'Undefined',
+last_upload		date 		not null,
+location 		varchar(50) 	null default 'Undefined',
+socrataid 		int 		not null
+);
+
+==================================================================================
+Step 3 - Perform data transformation execution
+----------------------------------------------------------------------------------
+\copy 			= Transform data from CSV into PostgreSQL database 
+nspl_rawdata 		= The destination table of data transformation 
+'/home/yinghua/Documents/FYP1/FYP-data/postcode-data/UK-NSPL.csv' = The directory of raw data 
+with header csv 	= Define the format of migration 
+==================================================================================
+\copy nspl_rawdata from '/home/yinghua/Documents/FYP1/FYP-data/postcode-data/UK-NSPL.csv' with header csv;
+\end{lstlisting}
+
+The PL/pgSQL script for NSPL data transformation is written to create database entity with well-defined data types for each attributes as shown in Listing K.2. Afterwards, the data transformation is executed to extract CSV data and import into destination table created on Step 2. 
+
+\newpage
+
+\subsection{Company data transformation script.}
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={PL/pgSQL's scripts for Company data transformation.}, label=commandline-02]
+==========================================================
+Step 1 - Drop the previous created table for demonstration
+==========================================================
+drop table company_rawdata; 
+
+===========================================================================================
+Step 2 - Use DDL to define attribute's data types and table for data transformation purpose
+===========================================================================================
+create table company_rawdata ( 
+CompanyName 		varchar(160) null default 'Undefined', 
+CompanyNumber 		varchar(8) not null,
+CareOf 			varchar(100) null default 'Undefined', 
+POBox 			varchar(10) null default 'Undefined',
+AddressLine1 		varchar(300) null default 'Undefined',
+AddressLine2 		varchar(300) null default 'Undefined',
+PostTown 		varchar(50) null default 'Undefined',
+County 			varchar(50) null default 'Undefined',
+Country 		varchar(50) null default 'Undefined',
+PostCode 		varchar(20) null default 'Undefined',
+CompanyCategory 	varchar(100) not null,
+CompanyStatus 		varchar(70) not null,
+CountryOfOrigin 	varchar(50) not null,
+DissolutionDate 	varchar(20) null default '3000-01-01',
+IncorporationDate 	varchar(20) null default '3000-01-01',
+AccountingRefDay 	int null default 0,
+AccountingRefMonth 	int null default 0,
+Account_NextDueDate 	varchar(20) null default '3000-01-01',
+Account_LastMadeUpdate 	varchar(20) null default '3000-01-01',
+AccountCategory 	varchar(30) null default 'Undefined',
+Return_NextDueDate 	varchar(20) null default '3000-01-01',
+Return_LastMadeUpDate 	varchar(20) null default '3000-01-01',
+NumMortCharges 		int not null,
+NumMortOutstanding 	int not null,
+NumMortPartSatisfied	int not null,
+NumMortSatisfied 	int not null,
+SICCode1 		varchar(170) null default 'Undefined',
+SICCode2 		varchar(170) null default 'Undefined',
+SICCode3 		varchar(170) null default 'Undefined',
+SICCode4 		varchar(170) null default 'Undefined',
+NumGenPartners 		int not null,
+NumLimPartners 		int not null,
+URI 			varchar(47) not null,
+pn1_CONDate 		varchar(20) null default '3000-01-01',
+pn1_CompanyName 	varchar(160) null default 'Undefined',
+pn2_CONDate 		varchar(20) null default '3000-01-01',
+pn2_CompanyName 	varchar(160) null default 'Undefined',
+pn3_CONDate 		varchar(20) null default '3000-01-01',
+pn3_CompanyName 	varchar(160) null default 'Undefined',
+pn4_CONDate 		varchar(20) null default '3000-01-01',
+pn4_CompanyName 	varchar(160) null default 'Undefined',
+pn5_CONDate 		varchar(20) null default '3000-01-01',
+pn5_CompanyName 	varchar(160) null default 'Undefined',
+pn6_CONDate 		varchar(20) null default '3000-01-01',
+pn6_CompanyName		varchar(160) null default 'Undefined',
+pn7_CONDate 		varchar(20) null default '3000-01-01',
+pn7_CompanyName 	varchar(160) null default 'Undefined',
+pn8_CONDate 		varchar(20) null default '3000-01-01',
+pn8_CompanyName 	varchar(160) null default 'Undefined',
+pn9_CONDate 		varchar(20) null default '3000-01-01',
+pn9_CompanyName 	varchar(160) null default 'Undefined',
+pn10_CONDate 		varchar(20) null default '3000-01-01',
+pn10_CompanyName 	varchar(160) null default 'Undefined',
+ConfStmtNextDueDate 	varchar(20) default '3000-01-01',
+ConfStmtLastMadeUpDate 	varchar(20) default '3000-01-01'
+);
+
+==================================================================================
+Step 3 - Perform data transformation execution
+==================================================================================
+\copy company_rawdata from '/home/yinghua/Documents/FYP1/FYP-data/company-data/company-data-full.csv' with header csv;
+
+\end{lstlisting}
+
+The PL/pgSQL script for Company data transformation is written to create database entity with well-defined data types for each attributes as shown in Listing K.3. Afterwards, the data transformation is executed to extract CSV data and import into destination table created on Step 2. 
+
+\subsection{LEO data transformation script.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={PL/pgSQL's scripts for LEO data transformation.}, label=commandline-02]
+==========================================================
+Step 1 - Drop the previous created table for demonstration
+==========================================================
+drop table leo_rawdata;
+
+===========================================================================================
+Step 2 - Use DDL to define attribute's data types and table for data transformation purpose
+===========================================================================================
+create table leo_rawdata ( 
+
+ukprn 			int         not null, 
+providername 		varchar(100) not null,
+region 			varchar(50) not null, 
+subject 		varchar(50) not null, 
+sex 			varchar(30) not null,
+yearaftergraduation 	int 	    not null,
+grads 			varchar(10) null default null,
+unmatched 		varchar(20) null default null,
+matched 		varchar(20) null default null,
+activityNotCaptured 	varchar(20) null default null,
+nosustdest 		varchar(20) null default null,
+sustemponly 		varchar(20) null default null,
+sustemp 		varchar(20) null default null,
+sustempfsorboth 	varchar(20) null default null,
+earningsinclude 	varchar(20) null default null,
+lowerannearn 		varchar(20) null default null,
+medianannearn 		varchar(20) null default null,
+upperannearn 		varchar(20) null default null,
+polargrpone 		varchar(20) null default null,
+polargrponeincluded 	varchar(20) null default null,
+prattband 		varchar(20) null default null,
+prattincluded 		varchar(20) null default null
+
+);
+
+==================================================================================
+Step 3 - Perform data transformation execution
+==================================================================================
+\copy leo_rawdata from '/home/yinghua/Documents/FYP1/FYP-data/subject-data/institution-subject-data.csv' with header csv;
+\end{lstlisting}
+
+The PL/pgSQL script for LEO data transformation is written to create database entity with well-defined data types for each attributes as shown in Listing K.4. Afterwards, the data transformation is executed to extract CSV data and import into destination table created on Step 2.
+
+\newpage
+
+\section{Data Transformation execution.}
+
+\subsection{NSPL data transformation execution.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Execution of PL/pgSQL's scripts for NSPL data transformation.}, label=commandline-02]
+========================================================================================
+Step 1 - Change to contain postcode raw data directory and check the location of scripts
+========================================================================================
+yinghua@yinghua:~$ cd ~/gitRepo/final-year-project/FYP2-Database-Queries/postcode-database-queries
+yinghua@yinghua:~/gitRepo/final-year-project/FYP2-Database-Queries/postcode-database-queries$ ls -al
+total 44
+drwxrwxr-x 2 yinghua yinghua 4096 Feb  7 16:22 .
+drwxrwxr-x 5 yinghua yinghua 4096 Jan 29 22:58 ..
+-rw-rw-r-- 1 yinghua yinghua 4264 Feb  7 16:22 01_yinghua_raw_postcode_DDL.sql     <- This script 
+-rw-rw-r-- 1 yinghua yinghua 7554 Jan 17 15:48 02_yinghua_normalized_NSPL_DDL.sql
+-rw-rw-r-- 1 yinghua yinghua 5164 Jan 14 18:06 03_yinghua_insert_NSPL_table.sql
+-rw-rw-r-- 1 yinghua yinghua 1252 Jan 13 22:06 postcode_format.sql
+-rw-rw-r-- 1 yinghua yinghua 2224 Jan 15 14:54 test2.sql
+-rw-rw-r-- 1 yinghua yinghua 3416 Jan 14 18:29 test.sql
+
+========================================================================================
+Step 2 - Execution of data transformation scripts 
+========================================================================================
+yinghua@yinghua:~/gitRepo/final-year-project/FYP2-Database-Queries/postcode-database-queries$ psql -U yinghua -d postcode -a -f 01_yinghua_raw_postcode_DDL.sql
+
+(output too much not shown...) 
+
+========================================================================================
+Step 3 - Connect to postcode database
+========================================================================================
+yinghua@yinghua:~/gitRepo/final-year-project/FYP2-Database-Queries/postcode-database-queries$ psql postcode; 
+psql (9.5.10)
+Type "help" for help.
+
+postcode=# 
+
+========================================================================================
+Step 4 - Select number of rows of table in database after data transformation
+========================================================================================
+postcode=# select distinct count(*) from nspl_rawdata; 
+count  
+---------
+1754882
+(1 row)
+
+\end{lstlisting}
+
+The execution of NSPL data transformation scripts stated in Section K.2.1 is performed in Step 2 (Row 16-22) at Listing K.5. 
+
+The command required username (yinghua), database (postcode) and script name (01\_yinghua\_raw\_postcode\_DDL.sql) as parameter to execute the script for security and control access purposes. 
+
+Once the execution is complete, the number of row in destination table is verified against the number of lines in postcode dataset (performed in Section K.1). The postcode data transformation is success because the data is not missing and import successfully without errors. 
+
+\newpage 
+
+\subsection{Company data transformation execution.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Execution of PL/pgSQL's scripts for Company data transformation.}, label=commandline-02]
+========================================================================================
+Step 1 - Change to contain company raw data directory and check the location of scripts
+========================================================================================
+yinghua@yinghua:~$ cd ~/gitRepo/final-year-project/FYP2-Database-Queries/company-database-queries
+yinghua@yinghua:~/gitRepo/final-year-project/FYP2-Database-Queries/company-database-queries$ ls -al
+total 32
+drwxrwxr-x 2 yinghua yinghua 4096 Jan 29 22:57 .
+drwxrwxr-x 5 yinghua yinghua 4096 Jan 29 22:58 ..
+-rw-rw-r-- 1 yinghua yinghua 3427 Jan 27 11:42 00_yinghua_company_csv_db_migration.sql  <- This script
+-rw-rw-r-- 1 yinghua yinghua 2883 Jan 27 11:46 01_yinghua_create_company_table.sql
+-rw-rw-r-- 1 yinghua yinghua 6923 Jan 28 16:43 02_yinghua_normalized_company_DDL.sql
+-rw-rw-r-- 1 yinghua yinghua 3221 Jan 28 15:59 03_yinghua_insert_normalized_table_DML.sql
+-rw-rw-r-- 1 yinghua yinghua  365 Jan 20 01:59 session_run.txt
+
+========================================================================================
+Step 2 - Execution of data transformation scripts 
+========================================================================================
+yinghua@yinghua:~/gitRepo/final-year-project/FYP2-Database-Queries/company-database-queries$ psql -U yinghua -d company -a -f 00_yinghua_company_csv_db_migration.sql 
+
+(output too much not shown...) 
+
+========================================================================================
+Step 3 - Connect to company database
+========================================================================================
+yinghua@yinghua:~/gitRepo/final-year-project/FYP2-Database-Queries/company-database-queries$ psql company; 
+psql (9.5.10)
+Type "help" for help.
+
+company=# 
+
+========================================================================================
+Step 4 - Select number of rows of table in database after data transformation
+========================================================================================
+company=# select distinct count(*) from company_rawdata;
+count  
+---------
+3595702
+(1 row)
+
+\end{lstlisting}
+
+The execution of company data transformation scripts stated in Section K.2.2 is performed in Step 2 (Row 15-20) at Listing K.6. 
+
+The command required username (yinghua), database (company) and script name (00\_yinghua\_company\_csv\_db\_migration.sql) as parameter to execute the script for security and control access purposes. 
+
+Once the execution is complete, the number of row in destination table is verified against the number of lines in company dataset (performed in Section K.1). The company data transformation is success because the data is not missing and import successfully without errors. 
+
+\newpage
+
+\subsection{LEO data transformation execution.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Execution of PL/pgSQL's scripts for LEO data transformation.}, label=commandline-02]
+========================================================================================
+Step 1 - Change to contain education raw data directory and check the location of scripts
+========================================================================================
+yinghua@yinghua:~$ cd ~/gitRepo/final-year-project/FYP2-Database-Queries/education-database-queries
+yinghua@yinghua:~/gitRepo/final-year-project/FYP2-Database-Queries/education-database-queries$ ls -al
+total 28
+drwxrwxr-x 2 yinghua yinghua 4096 Jan 28 14:34 .
+drwxrwxr-x 5 yinghua yinghua 4096 Jan 29 22:58 ..
+-rw-rw-r-- 1 yinghua yinghua 1721 Jan  5 14:03 01_yinghua_raw_leo_table_DDL.sql		<- This script 
+-rw-rw-r-- 1 yinghua yinghua 4703 Jan 12 11:16 02_yinghua_normalized_leo_table_DDL.sql
+-rw-rw-r-- 1 yinghua yinghua 3292 Jan 10 01:56 03_yinghua_insert_leo_table_DML.sql
+-rw-rw-r-- 1 yinghua yinghua 2425 Jan 12 11:22 04_yinghua_leo_data_migration.sql
+
+
+========================================================================================
+Step 2 - Execution of data transformation scripts 
+========================================================================================
+yinghua@yinghua:~/gitRepo/final-year-project/FYP2-Database-Queries/education-database-queries$ psql -U yinghua -d education -a -f 01_yinghua_raw_leo_table_DDL.sql 
+
+(output too much not shown...) 
+
+========================================================================================
+Step 3 - Connect to company database
+========================================================================================
+yinghua@yinghua:~/gitRepo/final-year-project/FYP2-Database-Queries/education-database-queries$ psql education; 
+psql (9.5.10)
+Type "help" for help.
+
+education=# 
+
+========================================================================================
+Step 4 - Select number of rows of table in database after data transformation
+========================================================================================
+education=# select distinct count(*) from leo_rawdata; 
+count 
+-------
+32706
+(1 row)
+
+\end{lstlisting}
+
+The execution of LEO data transformation scripts stated in Section K.2.3 is performed in Step 2 (Row 15-20) at Listing K.7. 
+\
+The command required username (yinghua), database (education) and script name (01\_yinghua\_raw\_leo\_table\_DDL.sql) as parameter to execute the script for security and control access purposes. 
+
+Once the execution is complete, the number of row in destination table is verified against the number of lines in LEO dataset (performed in Section K.1). The LEO data transformation is success because the data is not missing and import successfully without errors. 
+
+\newpage
+
+
+
+
+
+
+

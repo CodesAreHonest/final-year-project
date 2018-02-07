@@ -1,0 +1,39 @@
+=======================================
+Step 1 - Date on running data encoding
+=======================================
+yinghua@yinghua-NL8C:~/Documents/FYP/Basic-Company-Data$ date
+Sun Aug 27 01:33:00 MYT 2017
+
+===========================================================
+Step 2 - The specification of Operating System environment
+===========================================================
+yinghua@yinghua-NL8C:~/Documents/FYP/Basic-Company-Data$ uname -a 
+Linux yinghua-NL8C 4.10.0-32-generic #36~16.04.1-Ubuntu SMP Wed Aug 9 09:19:02 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux
+
+===============================================
+Step 3 - Change Directory to CSV file location
+===============================================
+yinghua@yinghua-NL8C:~$ cd ~/Documents/FYP/Basic-Company-Data/
+
+===============================================
+Step 4 - List files in directory
+===============================================
+yinghua@yinghua:~/Documents/FYP1/FYP-data/company-data$ ls -al 
+drwxrwxr-x 5 yinghua yinghua       4096 Feb  7 15:09 .
+drwxrwxr-x 5 yinghua yinghua       4096 Sep  8 00:16 ..
+-rw-r--r-- 1 yinghua yinghua 1980210686 Sep  1 07:00 company-data.csv <-- Input file for encoding
+
+===============================================================
+Step 5 - Remove null value with double quotes for data encoding
+===============================================================
+yinghua@yinghua-NL8C:~/Documents/FYP/Basic-Company-Data$ sed 's/""//g' company-data.csv > company-data-full.csv
+
+===================================================================
+Step 6 - The encoded file is processed and stored in same directory
+===================================================================
+yinghua@yinghua:~/Documents/FYP1/FYP-data/company-data$ ls -al 
+drwxrwxr-x 5 yinghua yinghua       4096 Feb  7 15:09 .
+drwxrwxr-x 5 yinghua yinghua       4096 Sep  8 00:16 ..
+-rw-r--r-- 1 yinghua yinghua 1980210686 Sep  1 07:00 company-data.csv <-- Input file for encoding
+-rw-rw-r-- 1 yinghua yinghua 1751741578 Sep  1 11:39 company-data-full.csv <-- Encoded file
+

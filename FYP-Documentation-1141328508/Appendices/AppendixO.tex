@@ -1,0 +1,241 @@
+\chapter{Database Tuning} 
+\label{AppendixO} 
+\lhead{Appendix O. \emph{Database Tuning}}
+
+% Write your Appendix content below here.
+% =========================================
+
+\section{Increase Max Concurrent Connection Limit}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Increase Max Concurrent Connection Limit}, label=commandline-02]
+================================
+Step 1 - Connect to any database 
+================================
+yinghua@yinghua:~$ psql company; 
+psql (9.5.10)
+Type "help" for help.
+
+company=# 
+
+============================================
+Step 2- Display the location of config file 
+============================================
+company=# show config_file;
+config_file                
+------------------------------------------
+/etc/postgresql/9.5/main/postgresql.conf
+(1 row)
+
+==================================================================================
+Step 3 - Close the database and login as root with admin privileges on Ubuntu OS 
+==================================================================================
+yinghua@yinghua:~$ sudo su 
+[sudo] password for yinghua: 
+root@yinghua:/home/yinghua# 
+
+==================================================================================
+Step 4 - Configure the value of Max Connection Limit in PostgreSQL Configuration file
+==================================================================================
+root@yinghua:/home/yinghua# sudo gedit /etc/postgresql/9.5/main/postgresql.conf
+
+# -----------------------------
+# PostgreSQL configuration file
+# -----------------------------
+#
+# This file consists of lines of the form:
+#
+#   name = value
+#
+# (The "=" is optional.)  Whitespace may be used.  Comments are introduced with
+# "#" anywhere on a line.  The complete list of parameter names and allowed
+# values can be found in the PostgreSQL documentation.
+#
+# The commented-out settings shown in this file represent the default values.
+# Re-commenting a setting is NOT sufficient to revert it to the default value;
+# you need to reload the server.
+#
+# This file is read on server startup and when the server receives a SIGHUP
+# signal.  If you edit the file on a running system, you have to SIGHUP the
+# server for the changes to take effect, or use "pg_ctl reload".  Some
+# parameters, which are marked below, require a server shutdown and restart to
+# take effect.
+#
+# Any parameter can also be given as a command-line option to the server, e.g.,
+# "postgres -c log_connections=on".  Some parameters can be changed at run time
+# with the "SET" SQL command.
+#
+# Memory units:  kB = kilobytes        Time units:  ms  = milliseconds
+#                MB = megabytes                     s   = seconds
+#                GB = gigabytes                     min = minutes
+#                TB = terabytes                     h   = hours
+#                                                   d   = days
+
+(.... other settings found in this configuration files) 
+
+#------------------------------------------------------------------------------
+# CONNECTIONS AND AUTHENTICATION
+#------------------------------------------------------------------------------
+
+# - Connection Settings -
+
+#listen_addresses = '*'			# what IP address(es) to listen on;
+# comma-separated list of addresses;
+# defaults to 'localhost'; use '*' for all
+# (change requires restart)
+port = 5432				# (change requires restart)
+max_connections = 300			# (change requires restart)  <========== Modify from 100 to 300 
+
+===================================================================================
+Step 5 - Restart the PostgreSQL database to update the changes 
+==================================================================================
+root@yinghua:/home/yinghua# /etc/init.d/postgresql restart
+[ ok ] Restarting postgresql (via systemctl): postgresql.service.
+
+\end{lstlisting}
+
+Listing O.1 shows the detail procedure to increase the number of client to establish concurrent connection with PostgreSQL database. Step 1 and Step 2 is performed to identify the location of configuration file because the mentioned file is stored in different place depends on operating system. 
+
+After the location of configuration file is identified, it is required to login as root privileged on Ubuntu OS with administrator credential to perform any modification on Linux's file ownership (Step 3). Then, we open the configuration files with directory as input and increase the \textbf{max\_connection} parameter from 100 to 300 (refer row 76). The modification requires restart of PostgreSQL database to update the changes. 
+
+\newpage
+
+\section{Increase Shared Buffer utilized by PostgreSQL Database}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Increase Shared Buffer utilized by PostgreSQL Database}, label=commandline-02]
+================================
+Step 1 - Connect to any database 
+================================
+yinghua@yinghua:~$ psql company; 
+psql (9.5.10)
+Type "help" for help.
+
+company=# 
+
+============================================
+Step 2- Display the location of config file 
+============================================
+company=# show config_file;
+config_file                
+------------------------------------------
+/etc/postgresql/9.5/main/postgresql.conf
+(1 row)
+
+==================================================================================
+Step 3 - Close the database and login as root with admin privileges on Ubuntu OS 
+==================================================================================
+yinghua@yinghua:~$ sudo su 
+[sudo] password for yinghua: 
+root@yinghua:/home/yinghua# 
+
+==================================================================================
+Step 4 - Configure the value of Shared Buffer parameters in PostgreSQL Configuration file
+==================================================================================
+root@yinghua:/home/yinghua# sudo gedit /etc/postgresql/9.5/main/postgresql.conf
+
+# -----------------------------
+# PostgreSQL configuration file
+# -----------------------------
+#
+# This file consists of lines of the form:
+#
+#   name = value
+#
+# (The "=" is optional.)  Whitespace may be used.  Comments are introduced with
+# "#" anywhere on a line.  The complete list of parameter names and allowed
+# values can be found in the PostgreSQL documentation.
+#
+# The commented-out settings shown in this file represent the default values.
+# Re-commenting a setting is NOT sufficient to revert it to the default value;
+# you need to reload the server.
+#
+# This file is read on server startup and when the server receives a SIGHUP
+# signal.  If you edit the file on a running system, you have to SIGHUP the
+# server for the changes to take effect, or use "pg_ctl reload".  Some
+# parameters, which are marked below, require a server shutdown and restart to
+# take effect.
+#
+# Any parameter can also be given as a command-line option to the server, e.g.,
+# "postgres -c log_connections=on".  Some parameters can be changed at run time
+# with the "SET" SQL command.
+#
+# Memory units:  kB = kilobytes        Time units:  ms  = milliseconds
+#                MB = megabytes                     s   = seconds
+#                GB = gigabytes                     min = minutes
+#                TB = terabytes                     h   = hours
+#                                                   d   = days
+
+(.... other settings found in this configuration files) 
+
+#------------------------------------------------------------------------------
+# RESOURCE USAGE (except WAL)
+#------------------------------------------------------------------------------
+
+# - Memory -
+
+shared_buffers = 256MB			# min 128kB		<========== Modify from 128MB to 256MB 
+							# (change requires restart)
+#hutilized by PostgreSQL Databaseuge_pages = try			# on, off, or try
+							# (change requires restart)
+#temp_buffers = 8MB			# min 800kB
+#max_prepared_transactions = 0		# zero disables the feature
+						# (change requires restart)
+						# Caution: it is not advisable to set max_prepared_transactions nonzero unless
+						# you actively intend to use prepared transactions.
+#work_mem = 4MB				# min 64kB
+#maintenance_work_mem = 64MB		# min 1MB
+#autovacuum_work_mem = -1		# min 1MB, or -1 to use maintenance_work_mem
+#max_stack_depth = 2MB			# min 100kB
+dynamic_shared_memory_type = posix	# the default is the first option
+							# supported by the operating system:
+							#   posix
+							#   sysv
+							#   windows
+							#   mmap
+							# use none to disable dynamic shared memory
+							# (change requires restart)
+							
+===================================================================================
+Step 5 - Restart the PostgreSQL database to update the changes 
+==================================================================================
+root@yinghua:/home/yinghua# /etc/init.d/postgresql restart
+[ ok ] Restarting postgresql (via systemctl): postgresql.service.
+
+
+\end{lstlisting}
+
+Listing O.2 shows the detail procedure to increase the number of shared buffer utilized by PostgreSQL database. Step 1 and Step 2 is performed to identify the location of configuration file because the mentioned file is stored in different place depends on operating system. 
+
+After the location of configuration file is identified, it is required to login as root privileged on Ubuntu OS with administrator credential to perform any modification on Linux's file ownership (Step 3). Then, we open the configuration files with directory as input and increase the \textbf{shared\_buffer} parameter from 126MB to 256MB (refer row 71). The modification requires restart of PostgreSQL database to update the changes. 
+
+\newpage
+
+\section{Increase maximum size of shared memory segment.}
+
+\lstset{basicstyle=\ttfamily\tiny}  
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Increase maximum size of shared memory segment.}, label=commandline-02]
+==================================================================================
+Step 1 - Login as root with admin privileges on Ubuntu OS 
+==================================================================================
+yinghua@yinghua:~$ sudo su 
+[sudo] password for yinghua: 
+root@yinghua:/home/yinghua# 
+
+================================================================================================
+Step 2 - Add the value of maximum size of shared memory segment into Ubuntu System Configuration
+================================================================================================
+root@yinghua:/home/yinghua# sudo gedit /etc/sysctl.conf
+kernel.shmmax=26000000000	<========== Add this line, it is equal to 26GB 
+
+===================================================================================
+Step 3 - Restart the PostgreSQL database to update the changes 
+==================================================================================
+root@yinghua:/home/yinghua# /etc/init.d/postgresql restart
+[ ok ] Restarting postgresql (via systemctl): postgresql.service.
+
+\end{lstlisting}
+
+Listing O.3 shows the detail procedure to increase the maximum size of memory segment shared to PostgreSQL database. 
+
+The operation required to login as root privileged on Ubuntu OS with administrator credential to perform any modification on Linux's file ownership (Step 3). We will configure and modifies the attributes of system kernels to allocate extra memory for PostgreSQL database to perform transaction. The \textbf{sysctl.conf} file is opened and \textbf{shared\_buffer} parameter with 26,000,000,000B (26GB) is added at the end of files (refer row 12). The modification requires restart of PostgreSQL database to update the changes. 
