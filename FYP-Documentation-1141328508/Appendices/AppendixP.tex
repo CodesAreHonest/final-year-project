@@ -1059,7 +1059,7 @@ The result obtained will be tabulated, compared and discussed.
 \begin{lstlisting}[breaklines, frame=single, numbers=left, caption={List size of company normalized table.}, label=commandline-02]
  Schema |           Name           |   Type   |  Owner  |    Size    | Line counts  
 --------+--------------------------+----------+---------+------------+-------------
- public | company                  | table    | yinghua | 725 MB     | 3595702
+ public | company                  | table    | yinghua | 725 MB     | 3595702  <-- same counts 
  public | company_account          | table    | yinghua | 262 MB     | 3595702
  public | company_account_category | table    | yinghua | 8192 bytes | 16
  public | company_category         | table    | yinghua | 8192 bytes | 21
@@ -1068,8 +1068,7 @@ The result obtained will be tabulated, compared and discussed.
  public | company_mortgages        | table    | yinghua | 216 kB     | 3710
  public | company_partnership      | table    | yinghua | 40 kB      | 279
  public | company_previousname     | table    | yinghua | 48 MB      | 190185
- public | company_raw              | table    | yinghua | 1658 MB    | 3595702
- public | company_rawdata          | table    | yinghua | 2476 MB    | 3595702
+ public | company_rawdata          | table    | yinghua | 2476 MB    | 3595702  <-- same counts 
  public | company_returns          | table    | yinghua | 1720 kB    | 28697
  public | company_siccodes         | table    | yinghua | 9872 kB    | 51693
  public | company_status           | table    | yinghua | 32 kB      | 14
@@ -1077,7 +1076,7 @@ The result obtained will be tabulated, compared and discussed.
 
 \end{lstlisting}
 
-Listing P.8 shows all the database relation found in Company database. The result shows the normalized entity are migrated successfully based on Entity Relationship Diagram database design with PL/pgSQL's DDL scripts and Go migration program.
+Listing P.8 shows all the database relation found in Company database. The result shows the normalized entity are migrated successfully based on Entity Relationship Diagram database design with PL/pgSQL's DDL scripts and Go migration program. The normalized table (company) has smaller size compare to original datasets (company\_rawdata). Moreover, the data does not loss and missing after the data migration execution is completed. 
 
 \newpage
 
@@ -1086,8 +1085,8 @@ Listing P.8 shows all the database relation found in Company database. The resul
 \begin{lstlisting}[breaklines, frame=single, numbers=left, caption={List size of Postcode normalized table.}, label=commandline-02]
  Schema |                Name                 |   Type   |  Owner  |    Size    | Line Counts 
 --------+-------------------------------------+----------+---------+------------+-------------
- public | nspl_rawdata                        | table    | yinghua | 1403 MB    | 1754882
- public | postcode                            | table    | yinghua | 152 MB     | 1754882
+ public | nspl_rawdata                        | table    | yinghua | 1403 MB    | 1754882   <- same counts 
+ public | postcode                            | table    | yinghua | 152 MB     | 1754882   <- same counts 
  public | postcode_cartesian_coordinate       | table    | yinghua | 70 MB      | 1662088
  public | postcode_country                    | table    | yinghua | 8192 bytes | 7
  public | postcode_county                     | table    | yinghua | 8192 bytes | 34
@@ -1106,27 +1105,28 @@ Listing P.8 shows all the database relation found in Company database. The resul
 
 \end{lstlisting}
 
-Listing P.9 shows all the database relation found in Postcode database. The result shows the normalized entity are migrated successfully with PL/pgSQL's DML scripts and Go migration program.
+Listing P.9 shows all the database relation found in Postcode database. The result shows the normalized entity are migrated successfully with PL/pgSQL's DML scripts and Go migration program. The normalized table (postcode) has smaller size compare to original datasets (nspl\_rawdata). Moreover, the data does not loss and missing after the data migration execution is completed. 
+
 
 \subsection{List Education Database Table Size}
 \lstset{basicstyle=\ttfamily\tiny}  
 \begin{lstlisting}[breaklines, frame=single, numbers=left, caption={List size of Education normalized table.}, label=commandline-02]
  Schema |          Name          |   Type   |  Owner  |    Size    | Line Counts 
 --------+------------------------+----------+---------+------------+-------------
- public | leo                    | table    | yinghua | 4400 kB    | 32706
- public | leo_detail             | table    | yinghua | 3680 kB    | 32706
+ public | leo                    | table    | yinghua | 4400 kB    | 32706	<- Same counts 
+ public | leo_detail             | table    | yinghua | 3680 kB    | 32706		
  public | leo_earning            | table    | yinghua | 872 kB     | 14372
  public | leo_graduation         | table    | yinghua | 8192 bytes | 195
  public | leo_match              | table    | yinghua | 200 kB     | 3992
  public | leo_polar              | table    | yinghua | 320 kB     | 6793
  public | leo_prior_attainment   | table    | yinghua | 120 kB     | 2139
- public | leo_rawdata            | table    | yinghua | 5064 kB    | 32706
+ public | leo_rawdata            | table    | yinghua | 5064 kB    | 32706	<- Same counts 
  public | leo_sustain_employment | table    | yinghua | 336 kB     | 6192
  public | leo_uncaptured         | table    | yinghua | 296 kB     | 6283
 
 \end{lstlisting}
 
-Listing P.10 shows all the database relation found in Education database. The result shows the normalized entity are migrated successfully based on Entity Relationship Diagram database design with PL/pgSQL's DML scripts.
+Listing P.10 shows all the database relation found in Education database. The result shows the normalized entity are migrated successfully based on Entity Relationship Diagram database design with PL/pgSQL's DML scripts. The normalized table (leo) has smaller size compare to original datasets (leo\_rawdata). Moreover, the data does not loss and missing after the data migration execution is completed. 
 
 \newpage 
 

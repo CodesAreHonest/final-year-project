@@ -90,19 +90,22 @@ What we have achieved on Phase 2:
 	
 \end{enumerate}
 
+\pagebreak
+
 \section{Recommendations for Future Work}
 
 \subsection{Phase 1}
 
 \begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1.5ex]
 	\item \textbf{GORM for CRUD on data processing.} GORM is an Object-relational mapping (ORM) library for Golang that converting data from incompatible files types into struct or interface. For instance, this project does not use GORM to import data and possess poor readability, error handling and maintainability in program. It is recommend to import data with GORM package because it supports auto migration, associations with database and every features are tested. 
-	\linebreak
 	
 	\item \textbf{Benchmark on language performance comparison.} Although this project possess well-defined of benchmarking on database table spacing, hardware configuration and amount of query execution on data retrieval to conduct language performance comparison. These benchmarks are insufficient to determine the accurateness of programming language performance. This is because the CPU usage might be running on other processes or program while conducting the performance test. It is recommend to unified number of processes running in background and programming style for performance comparison between different concurrent programming languages.
 	
 	\item \textbf{Data quality.} Although this project use data validation to identify raw dataset quality. The method is insufficient to ensure data obtained is valid, complete and accurate to be processed. It is recommend to use several scripting language such as Python and Perl to identify internal data consistency and validity.
 	
 \end{enumerate}
+
+\pagebreak
 
 \subsection{Phase 2}
 

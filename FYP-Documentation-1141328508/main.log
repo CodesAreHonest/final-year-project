@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.7)  8 FEB 2018 04:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.7)  8 FEB 2018 04:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1648,7 +1648,7 @@ Chapter 2.
 [11
 
 ] [12] [13] [14] [15] [16] [17] [18]
-<Figure/go-vs-rust.png, id=1927, 1050.92625pt x 435.6275pt>
+<Figure/go-vs-rust.png, id=1911, 1050.92625pt x 435.6275pt>
 File: Figure/go-vs-rust.png Graphic file (type png)
 
 <use Figure/go-vs-rust.png>
@@ -1677,14 +1677,14 @@ Overfull \hbox (4.21312pt too wide) in paragraph at lines 51--51
 []\OT1/cmr/m/n/12 1754882|  
  []
 
-[31] <Figure/erd-data.png, id=2042, 679.53876pt x 150.5625pt>
+[31] <Figure/erd-data.png, id=2026, 679.53876pt x 150.5625pt>
 File: Figure/erd-data.png Graphic file (type png)
 
 <use Figure/erd-data.png>
 Package pdftex.def Info: Figure/erd-data.png used on input line 71.
 (pdftex.def)             Requested size: 371.88211pt x 82.39609pt.
  [32 <./Figure/erd-data.png>]
-<FYP2/Chapter3/FYP2-data-validation-flowchart.png, id=2049, 647.41875pt x 797.9
+<FYP2/Chapter3/FYP2-data-validation-flowchart.png, id=2033, 647.41875pt x 797.9
 8125pt>
 File: FYP2/Chapter3/FYP2-data-validation-flowchart.png Graphic file (type png)
  <use FYP2/Chapter3/FYP2-data-validation-flowchart.png>
@@ -1692,21 +1692,21 @@ Package pdftex.def Info: FYP2/Chapter3/FYP2-data-validation-flowchart.png used
 on input line 86.
 (pdftex.def)             Requested size: 413.20515pt x 509.30598pt.
  [33] [34 <./FYP2/Chapter3/FYP2-data-validation-flowchart.png>] [35] [36]
-<Figure/fyp-context.png, id=2076, 703.62875pt x 221.82875pt>
+<Figure/fyp-context.png, id=2059, 703.62875pt x 221.82875pt>
 File: Figure/fyp-context.png Graphic file (type png)
 
 <use Figure/fyp-context.png>
 Package pdftex.def Info: Figure/fyp-context.png used on input line 126.
 (pdftex.def)             Requested size: 371.88211pt x 117.24033pt.
 
-<Figure/block-diagram.png, id=2077, 645.41125pt x 320.19624pt>
+<Figure/block-diagram.png, id=2060, 645.41125pt x 320.19624pt>
 File: Figure/block-diagram.png Graphic file (type png)
 
 <use Figure/block-diagram.png>
 Package pdftex.def Info: Figure/block-diagram.png used on input line 137.
 (pdftex.def)             Requested size: 371.88211pt x 184.4925pt.
  [37 <./Figure/fyp-context.png>]
-<Figure/postgres-data-sequential.png, id=2083, 903.375pt x 504.88625pt>
+<Figure/postgres-data-sequential.png, id=2067, 903.375pt x 504.88625pt>
 File: Figure/postgres-data-sequential.png Graphic file (type png)
 
 <use Figure/postgres-data-sequential.png>
@@ -1714,14 +1714,14 @@ Package pdftex.def Info: Figure/postgres-data-sequential.png used on input line
  150.
 (pdftex.def)             Requested size: 371.88211pt x 207.84442pt.
  [38 <./Figure/block-diagram.png>]
-<Figure/postgres-data-concurrent.png, id=2089, 583.17876pt x 543.02875pt>
+<Figure/postgres-data-concurrent.png, id=2073, 583.17876pt x 543.02875pt>
 File: Figure/postgres-data-concurrent.png Graphic file (type png)
 
 <use Figure/postgres-data-concurrent.png>
 Package pdftex.def Info: Figure/postgres-data-concurrent.png used on input line
  161.
 (pdftex.def)             Requested size: 371.88211pt x 346.28603pt.
- [39 <./Figure/postgres-data-sequential.png>] <Figure/seq-read-csv.png, id=2094
+ [39 <./Figure/postgres-data-sequential.png>] <Figure/seq-read-csv.png, id=2078
 , 896.34875pt x 610.28pt>
 File: Figure/seq-read-csv.png Graphic file (type png)
 
@@ -1729,7 +1729,7 @@ File: Figure/seq-read-csv.png Graphic file (type png)
 Package pdftex.def Info: Figure/seq-read-csv.png used on input line 174.
 (pdftex.def)             Requested size: 371.88211pt x 253.19629pt.
  [40 <./Figure/postgres-data-concurrent.png>]
-<Figure/concurrent-read-csv.png, id=2101, 703.62875pt x 512.91624pt>
+<Figure/concurrent-read-csv.png, id=2085, 703.62875pt x 512.91624pt>
 File: Figure/concurrent-read-csv.png Graphic file (type png)
 
 <use Figure/concurrent-read-csv.png>
@@ -1737,14 +1737,14 @@ Package pdftex.def Info: Figure/concurrent-read-csv.png used on input line 185.
 
 (pdftex.def)             Requested size: 371.88211pt x 271.08514pt.
  [41 <./Figure/seq-read-csv.png>]
-<Figure/dd-poc.png, id=2106, 852.18375pt x 549.05125pt>
+<Figure/dd-poc.png, id=2090, 852.18375pt x 549.05125pt>
 File: Figure/dd-poc.png Graphic file (type png)
 
 <use Figure/dd-poc.png>
 Package pdftex.def Info: Figure/dd-poc.png used on input line 198.
 (pdftex.def)             Requested size: 413.20515pt x 266.22252pt.
  [42 <./Figure/concurrent-read-csv.png>] [43 <./Figure/dd-poc.png>]
-<FYP2/Chapter3/FYP2-data-process-cycle-flowchart.png, id=2116, 1054.94125pt x 3
+<FYP2/Chapter3/FYP2-data-process-cycle-flowchart.png, id=2100, 1054.94125pt x 3
 89.455pt>
 File: FYP2/Chapter3/FYP2-data-process-cycle-flowchart.png Graphic file (type pn
 g)
@@ -1753,7 +1753,7 @@ Package pdftex.def Info: FYP2/Chapter3/FYP2-data-process-cycle-flowchart.png us
 ed on input line 213.
 (pdftex.def)             Requested size: 413.20515pt x 152.54051pt.
  [44 <./FYP2/Chapter3/FYP2-data-process-cycle-flowchart.png>] [45]
-<FYP2/Chapter3/FYP2-data-encoding.png, id=2137, 624.3325pt x 221.82875pt>
+<FYP2/Chapter3/FYP2-data-encoding.png, id=2121, 624.3325pt x 221.82875pt>
 File: FYP2/Chapter3/FYP2-data-encoding.png Graphic file (type png)
 
 <use FYP2/Chapter3/FYP2-data-encoding.png>
@@ -1761,7 +1761,7 @@ Package pdftex.def Info: FYP2/Chapter3/FYP2-data-encoding.png used on input lin
 e 246.
 (pdftex.def)             Requested size: 413.20515pt x 146.81697pt.
  [46]
-<FYP2/Chapter3/FYP2-data-transformation-arc.png, id=2149, 694.595pt x 368.37625
+<FYP2/Chapter3/FYP2-data-transformation-arc.png, id=2133, 694.595pt x 368.37625
 pt>
 File: FYP2/Chapter3/FYP2-data-transformation-arc.png Graphic file (type png)
  <use FYP2/Chapter3/FYP2-data-transformation-arc.png>
@@ -1769,7 +1769,7 @@ Package pdftex.def Info: FYP2/Chapter3/FYP2-data-transformation-arc.png used on
  input line 261.
 (pdftex.def)             Requested size: 413.20515pt x 219.15004pt.
  [47 <./FYP2/Chapter3/FYP2-data-encoding.png>]
-<FYP2/Chapter3/FYP2-ORM-deployment.png, id=2158, 1069.9975pt x 749.80125pt>
+<FYP2/Chapter3/FYP2-ORM-deployment.png, id=2142, 1069.9975pt x 749.80125pt>
 File: FYP2/Chapter3/FYP2-ORM-deployment.png Graphic file (type png)
 
 <use FYP2/Chapter3/FYP2-ORM-deployment.png>
@@ -1778,14 +1778,14 @@ ne 277.
 (pdftex.def)             Requested size: 413.20515pt x 289.5496pt.
  [48 <./FYP2/Chapter3/FYP2-data-transformation-arc.png>] [49 <./FYP2/Chapter3/F
 YP2-ORM-deployment.png>]
-<FYP2/Chapter3/denormalization-example.png, id=2172, 685.56125pt x 191.71625pt>
+<FYP2/Chapter3/denormalization-example.png, id=2156, 685.56125pt x 191.71625pt>
 File: FYP2/Chapter3/denormalization-example.png Graphic file (type png)
 <use FYP2/Chapter3/denormalization-example.png>
 Package pdftex.def Info: FYP2/Chapter3/denormalization-example.png used on inpu
 t line 299.
 (pdftex.def)             Requested size: 413.20515pt x 115.55426pt.
  [50] [51 <./FYP2/Chapter3/denormalization-example.png>]
-<FYP2/Chapter3/FYP2-Company-Normalized-ERD.png, id=2187, 909.3975pt x 583.42969
+<FYP2/Chapter3/FYP2-Company-Normalized-ERD.png, id=2170, 909.3975pt x 583.42969
 pt>
 File: FYP2/Chapter3/FYP2-Company-Normalized-ERD.png Graphic file (type png)
  <use FYP2/Chapter3/FYP2-Company-Normalized-ERD.png>
@@ -1793,7 +1793,7 @@ Package pdftex.def Info: FYP2/Chapter3/FYP2-Company-Normalized-ERD.png used on
 input line 334.
 (pdftex.def)             Requested size: 413.20515pt x 265.09592pt.
  [52]
-<FYP2/Chapter3/FYP2-Postcode-Normalized-ERD.png, id=2197, 852.18375pt x 469.755
+<FYP2/Chapter3/FYP2-Postcode-Normalized-ERD.png, id=2181, 852.18375pt x 469.755
 pt>
 File: FYP2/Chapter3/FYP2-Postcode-Normalized-ERD.png Graphic file (type png)
  <use FYP2/Chapter3/FYP2-Postcode-Normalized-ERD.png>
@@ -1801,7 +1801,7 @@ Package pdftex.def Info: FYP2/Chapter3/FYP2-Postcode-Normalized-ERD.png used on
  input line 345.
 (pdftex.def)             Requested size: 413.20515pt x 227.77356pt.
  [53 <./FYP2/Chapter3/FYP2-Company-Normalized-ERD.png (PNG copy)>]
-<FYP2/Chapter3/FYP2-Education-Normalized-ERD.png, id=2202, 725.71124pt x 397.48
+<FYP2/Chapter3/FYP2-Education-Normalized-ERD.png, id=2186, 725.71124pt x 397.48
 5pt>
 File: FYP2/Chapter3/FYP2-Education-Normalized-ERD.png Graphic file (type png)
  <use FYP2/Chapter3/FYP2-Education-Normalized-ERD.png>
@@ -1809,7 +1809,7 @@ Package pdftex.def Info: FYP2/Chapter3/FYP2-Education-Normalized-ERD.png used o
 n input line 356.
 (pdftex.def)             Requested size: 413.20515pt x 226.32619pt.
  [54 <./FYP2/Chapter3/FYP2-Postcode-Normalized-ERD.png (PNG copy)>]
-<FYP2/Chapter3/FYP2-data-cleaning-deployment.png, id=2207, 1216.545pt x 506.893
+<FYP2/Chapter3/FYP2-data-cleaning-deployment.png, id=2191, 1216.545pt x 506.893
 75pt>
 File: FYP2/Chapter3/FYP2-data-cleaning-deployment.png Graphic file (type png)
  <use FYP2/Chapter3/FYP2-data-cleaning-deployment.png>
@@ -1817,7 +1817,7 @@ Package pdftex.def Info: FYP2/Chapter3/FYP2-data-cleaning-deployment.png used o
 n input line 369.
 (pdftex.def)             Requested size: 413.20515pt x 172.1637pt.
  [55 <./FYP2/Chapter3/FYP2-Education-Normalized-ERD.png (PNG copy)>]
-<FYP2/Chapter3/FYP2-database-tuning-flowchart.png, id=2212, 446.66875pt x 416.5
+<FYP2/Chapter3/FYP2-database-tuning-flowchart.png, id=2196, 446.66875pt x 416.5
 5624pt>
 File: FYP2/Chapter3/FYP2-database-tuning-flowchart.png Graphic file (type png)
  <use FYP2/Chapter3/FYP2-database-tuning-flowchart.png>
@@ -1826,7 +1826,7 @@ on input line 384.
 (pdftex.def)             Requested size: 268.58083pt x 250.47594pt.
  [56 <./FYP2/Chapter3/FYP2-data-cleaning-deployment.png>] [57 <./FYP2/Chapter3/
 FYP2-database-tuning-flowchart.png>] [58]
-<FYP2/Chapter3/FYP2-data-migration-deployment.png, id=2232, 1466.47874pt x 791.
+<FYP2/Chapter3/FYP2-data-migration-deployment.png, id=2216, 1466.47874pt x 791.
 95876pt>
 File: FYP2/Chapter3/FYP2-data-migration-deployment.png Graphic file (type png)
  <use FYP2/Chapter3/FYP2-data-migration-deployment.png>
@@ -1845,14 +1845,14 @@ Chapter 4.
 ------------------------------------------------------------------------------
 [62
 
-] [63] [64] [65] <Figure/kanban.png, id=2262, 1479.5275pt x 581.17125pt>
+] [63] [64] [65] <Figure/kanban.png, id=2246, 1479.5275pt x 581.17125pt>
 File: Figure/kanban.png Graphic file (type png)
 
 <use Figure/kanban.png>
 Package pdftex.def Info: Figure/kanban.png used on input line 55.
 (pdftex.def)             Requested size: 413.20515pt x 162.31004pt.
  [66 <./Figure/kanban.png>] [67]
-<Figure/computer-specs.png, id=2271, 882.29625pt x 147.55125pt>
+<Figure/computer-specs.png, id=2255, 882.29625pt x 147.55125pt>
 File: Figure/computer-specs.png Graphic file (type png)
 
 <use Figure/computer-specs.png>
@@ -1866,7 +1866,7 @@ Chapter 5.
 ------------------------------------------------------------------------------
 [74
 
-] [75] [76] [77] <Figure/Gantt1.png, id=2375, 1341.01pt x 697.60625pt>
+] [75] [76] [77] <Figure/Gantt1.png, id=2359, 1341.01pt x 697.60625pt>
 File: Figure/Gantt1.png Graphic file (type png)
 
 <use Figure/Gantt1.png>
@@ -1877,7 +1877,7 @@ Package pdftex.def Info: Figure/Gantt1.png used on input line 75.
  <./Figure/Gantt1.png>] [79
 
 ]
-<Figure/Gantt2.png, id=2396, 1126.2075pt x 357.335pt>
+<Figure/Gantt2.png, id=2380, 1126.2075pt x 357.335pt>
 File: Figure/Gantt2.png Graphic file (type png)
  <use Figure/Gantt2.png>
 Package pdftex.def Info: Figure/Gantt2.png used on input line 101.
@@ -1887,62 +1887,61 @@ Package pdftex.def Info: Figure/Gantt2.png used on input line 101.
 
  <./Figure/Gantt2.png>] [81
 
-] [82] [83] [84]) (./Chapters/Chapter6.tex
-[85]
+] [82] [83]) (./Chapters/Chapter6.tex [84]
 Chapter 6.
 ------------------------------------------------------------------------------
  6 Results and Findings
 ------------------------------------------------------------------------------
-[86
+[85
 
-] [87] [88]) (./Chapters/Chapter7.tex [89]
+] [86] [87]) (./Chapters/Chapter7.tex [88]
 Chapter 7.
 ------------------------------------------------------------------------------
  7 Comparison Discussion and Recommendations
 ------------------------------------------------------------------------------
-[90
+[89
 
-] [91] [92] [93]) (./Chapters/Chapter8.tex [94]
+] [90] [91] [92]) (./Chapters/Chapter8.tex [93]
 Chapter 8.
 ------------------------------------------------------------------------------
  8 Conclusions
 ------------------------------------------------------------------------------
-[95
+[94
 
-] [96] [97] [98] [99] [100]) [101] (./main.bbl [102
+] [95] [96] [97] [98] [99]) [100] (./main.bbl [101
 
 
-] [103] [104] [105]
-[106] [107]
+] [102] [103] [104]
+[105] [106]
 Overfull \hbox (46.28644pt too wide) in paragraph at lines 525--532
 \OT1/cmtt/m/n/12 the-[]basics-[]of-[]using-[]the-[]sed-[]stream-[]editor-[]to-[
 ]manipulate-[]text-[]in-[]linux$[][]\OT1/cmr/m/n/12 . 
  []
 
-[108]
+[107]
 Overfull \hbox (2.56142pt too wide) in paragraph at lines 556--562
 \OT1/cmtt/m/n/12 What-[]is-[]data-[]redundancy-[]in-[]a-[]DBMS-[]What-[]is-[]a-
 []simple-[]explanation$[][]\OT1/cmr/m/n/12 . 
  []
 
-) [109] [110
+) [108] [109
 
 ] (./Appendices/AppendixA.tex
 Appendix A.
 ------------------------------------------------------------------------------
  A Infrastructure Setup and Installation
 ------------------------------------------------------------------------------
-[111
+[110
 
-] [112] [113] [114] [115]
-<Figure/AppendixA/eclipse-download-website.png, id=3104, 1194.4625pt x 642.4pt>
+] [111] [112] [113] [114]
+<Figure/AppendixA/eclipse-download-website.png, id=3072, 1194.4625pt x 642.4pt>
 File: Figure/AppendixA/eclipse-download-website.png Graphic file (type png)
 <use Figure/AppendixA/eclipse-download-website.png>
 Package pdftex.def Info: Figure/AppendixA/eclipse-download-website.png used on 
 input line 399.
 (pdftex.def)             Requested size: 330.56538pt x 177.7829pt.
 
-<Figure/AppendixA/goclipse-installation/goclipse-marketplace-1.png, id=3105, 19
+<Figure/AppendixA/goclipse-installation/goclipse-marketplace-1.png, id=3073, 19
 27.2pt x 1084.05pt>
 File: Figure/AppendixA/goclipse-installation/goclipse-marketplace-1.png Graphic
  file (type png)
@@ -1952,9 +1951,9 @@ Package pdftex.def Info: Figure/AppendixA/goclipse-installation/goclipse-market
 place-1.png used on input line 412.
 (pdftex.def)             Requested size: 330.56538pt x 185.94019pt.
 
-[116 <./Figure/AppendixA/eclipse-download-website.png>]
+[115 <./Figure/AppendixA/eclipse-download-website.png>]
 <Figure/AppendixA/goclipse-installation/goclipse-search-marketplace-2.png, id=3
-112, 620.3175pt x 888.31876pt>
+078, 620.3175pt x 888.31876pt>
 File: Figure/AppendixA/goclipse-installation/goclipse-search-marketplace-2.png 
 Graphic file (type png)
 
@@ -1963,9 +1962,9 @@ Package pdftex.def Info: Figure/AppendixA/goclipse-installation/goclipse-search
 -marketplace-2.png used on input line 423.
 (pdftex.def)             Requested size: 123.9628pt x 177.5115pt.
 
-[117 <./Figure/AppendixA/goclipse-installation/goclipse-marketplace-1.png>]
-<Figure/AppendixA/goclipse-installation/goclipse-open-perspective-3.png, id=312
-0, 570.13pt x 235.88126pt>
+[116 <./Figure/AppendixA/goclipse-installation/goclipse-marketplace-1.png>]
+<Figure/AppendixA/goclipse-installation/goclipse-open-perspective-3.png, id=308
+3, 570.13pt x 235.88126pt>
 File: Figure/AppendixA/goclipse-installation/goclipse-open-perspective-3.png Gr
 aphic file (type png)
 
@@ -1974,7 +1973,7 @@ Package pdftex.def Info: Figure/AppendixA/goclipse-installation/goclipse-open-p
 erspective-3.png used on input line 434.
 (pdftex.def)             Requested size: 206.60257pt x 85.47867pt.
 
-<Figure/AppendixA/goclipse-installation/goclipse-choose-4.png, id=3121, 428.601
+<Figure/AppendixA/goclipse-installation/goclipse-choose-4.png, id=3084, 428.601
 26pt x 456.70625pt>
 File: Figure/AppendixA/goclipse-installation/goclipse-choose-4.png Graphic file
  (type png)
@@ -1983,7 +1982,7 @@ File: Figure/AppendixA/goclipse-installation/goclipse-choose-4.png Graphic file
 Package pdftex.def Info: Figure/AppendixA/goclipse-installation/goclipse-choose
 -4.png used on input line 445.
 (pdftex.def)             Requested size: 330.56538pt x 352.2433pt.
- [118 <./Figure/AppendixA/goclipse-installation/goclipse-search-marketplace-2.p
+ [117 <./Figure/AppendixA/goclipse-installation/goclipse-search-marketplace-2.p
 ng> <./Figure/AppendixA/goclipse-installation/goclipse-open-perspective-3.png>]
 
 
@@ -1991,7 +1990,7 @@ LaTeX Warning: File `Figure/AppendixA/goclipse-installation/5- goclipse-setting
 .png' not found on input line 456.
 
 
-<Figure/AppendixA/goclipse-installation/5- goclipse-setting.png, id=3131, 867.2
+<Figure/AppendixA/goclipse-installation/5- goclipse-setting.png, id=3089, 867.2
 4pt x 553.06625pt>
 File: Figure/AppendixA/goclipse-installation/5- goclipse-setting.png Graphic fi
 le (type png)
@@ -2000,8 +1999,8 @@ le (type png)
 Package pdftex.def Info: Figure/AppendixA/goclipse-installation/5- goclipse-set
 ting.png used on input line 456.
 (pdftex.def)             Requested size: 330.56538pt x 210.80873pt.
- [119 <./Figure/AppendixA/goclipse-installation/goclipse-choose-4.png>]
-<Figure/AppendixA/goclipse-installation/6-goclipse-setting.png, id=3138, 854.19
+ [118 <./Figure/AppendixA/goclipse-installation/goclipse-choose-4.png>]
+<Figure/AppendixA/goclipse-installation/6-goclipse-setting.png, id=3095, 854.19
 125pt x 550.055pt>
 File: Figure/AppendixA/goclipse-installation/6-goclipse-setting.png Graphic fil
 e (type png)
@@ -2010,8 +2009,8 @@ e (type png)
 Package pdftex.def Info: Figure/AppendixA/goclipse-installation/6-goclipse-sett
 ing.png used on input line 467.
 (pdftex.def)             Requested size: 330.56538pt x 212.86713pt.
- [120 <./Figure/AppendixA/goclipse-installation/5- goclipse-setting.png>]
-<Figure/AppendixA/goclipse-installation/7-goclipse-success.png, id=3145, 1515.6
+ [119 <./Figure/AppendixA/goclipse-installation/5- goclipse-setting.png>]
+<Figure/AppendixA/goclipse-installation/7-goclipse-success.png, id=3100, 1515.6
 625pt x 915.42pt>
 File: Figure/AppendixA/goclipse-installation/7-goclipse-success.png Graphic fil
 e (type png)
@@ -2020,8 +2019,8 @@ e (type png)
 Package pdftex.def Info: Figure/AppendixA/goclipse-installation/7-goclipse-succ
 ess.png used on input line 478.
 (pdftex.def)             Requested size: 330.56538pt x 199.647pt.
- [121 <./Figure/AppendixA/goclipse-installation/6-goclipse-setting.png>]
-<Figure/AppendixA/rustdt-installation/1-rust-perspective.png, id=3152, 614.295p
+ [120 <./Figure/AppendixA/goclipse-installation/6-goclipse-setting.png>]
+<Figure/AppendixA/rustdt-installation/1-rust-perspective.png, id=3105, 614.295p
 t x 885.3075pt>
 File: Figure/AppendixA/rustdt-installation/1-rust-perspective.png Graphic file 
 (type png)
@@ -2030,32 +2029,39 @@ File: Figure/AppendixA/rustdt-installation/1-rust-perspective.png Graphic file
 Package pdftex.def Info: Figure/AppendixA/rustdt-installation/1-rust-perspectiv
 e.png used on input line 489.
 (pdftex.def)             Requested size: 247.92561pt x 357.30476pt.
- [122 <./Figure/AppendixA/goclipse-installation/7-goclipse-success.png>] [123 <
+ [121 <./Figure/AppendixA/goclipse-installation/7-goclipse-success.png>] [122 <
 ./Figure/AppendixA/rustdt-installation/1-rust-perspective.png>]) (./Appendices/
 AppendixB.tex
-[124]
+[123]
 Appendix B.
 ------------------------------------------------------------------------------
  B Data Validation
 ------------------------------------------------------------------------------
-[125
+[124
 
-] [126] [127] [128] [129]) (./Appendices/AppendixC.tex [130]
+] [125] [126] [127] [128]) (./Appendices/AppendixC.tex [129]
 Appendix C.
 ------------------------------------------------------------------------------
  C Golang programming for import CSV into PostgreSQL database
 ------------------------------------------------------------------------------
-[131
+[130
 
-] [132] [133] [134]) (./Appendices/AppendixD.tex [135]
+] [131] [132] [133]) (./Appendices/AppendixD.tex [134]
 Appendix D.
 ------------------------------------------------------------------------------
  D Sequential and concurrent programming with Golang on PostgreSQL database ret
 rieval.
 ------------------------------------------------------------------------------
-[136
+[135
 
 ]
+
+Package Fancyhdr Warning: \headheight is too small (20.0pt): 
+ Make it at least 27.18335pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[136]
 
 Package Fancyhdr Warning: \headheight is too small (20.0pt): 
  Make it at least 27.18335pt.
@@ -2076,28 +2082,28 @@ Package Fancyhdr Warning: \headheight is too small (20.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[139]
+[139]) (./Appendices/AppendixE.tex
 
 Package Fancyhdr Warning: \headheight is too small (20.0pt): 
  Make it at least 27.18335pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[140]) (./Appendices/AppendixE.tex
-
-Package Fancyhdr Warning: \headheight is too small (20.0pt): 
- Make it at least 27.18335pt.
- We now make it that large for the rest of the document.
- This may cause the page layout to be inconsistent, however.
-
-[141]
+[140]
 Appendix E.
 ------------------------------------------------------------------------------
  E Sequential and concurrent programming with Golang on reading CSV file
 ------------------------------------------------------------------------------
-[142
+[141
 
 ]
+
+Package Fancyhdr Warning: \headheight is too small (20.0pt): 
+ Make it at least 27.18335pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[142]
 
 Package Fancyhdr Warning: \headheight is too small (20.0pt): 
  Make it at least 27.18335pt.
@@ -2111,41 +2117,34 @@ Package Fancyhdr Warning: \headheight is too small (20.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[144]
+[144]) (./Appendices/AppendixF.tex
 
 Package Fancyhdr Warning: \headheight is too small (20.0pt): 
  Make it at least 27.18335pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[145]) (./Appendices/AppendixF.tex
-
-Package Fancyhdr Warning: \headheight is too small (20.0pt): 
- Make it at least 27.18335pt.
- We now make it that large for the rest of the document.
- This may cause the page layout to be inconsistent, however.
-
-[146]
+[145]
 Appendix F.
 ------------------------------------------------------------------------------
  F Result of Sequential and concurrent programming with Golang on process CSV
 ------------------------------------------------------------------------------
-[147
+[146
 
-]) (./Appendices/AppendixG.tex [148]
+]) (./Appendices/AppendixG.tex [147]
 Appendix G.
 ------------------------------------------------------------------------------
  G Result of Sequential and concurrent programming with Golang on process Postg
 reSQL database.
 ------------------------------------------------------------------------------
-[149
+[148
 
-]) (./Appendices/AppendixH.tex [150]
+]) (./Appendices/AppendixH.tex [149]
 Appendix H.
 ------------------------------------------------------------------------------
  H Result of import data from CSV file to PostgreSQL database with Golang
 ------------------------------------------------------------------------------
-[151
+[150
 
 ]) (./Appendices/AppendixI.tex
 
@@ -2154,25 +2153,25 @@ Package Fancyhdr Warning: \headheight is too small (20.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[152]
+[151]
 Appendix I.
 ------------------------------------------------------------------------------
  I Data Collection
 ------------------------------------------------------------------------------
-<Data-Dictionary/LEO.png, id=4830, 768.8725pt x 537.00626pt>
+<Data-Dictionary/LEO.png, id=4731, 768.8725pt x 537.00626pt>
 File: Data-Dictionary/LEO.png Graphic file (type png)
 
 <use Data-Dictionary/LEO.png>
 Package pdftex.def Info: Data-Dictionary/LEO.png used on input line 14.
 (pdftex.def)             Requested size: 413.20515pt x 288.60246pt.
- [153
+ [152
 
 ]
 Overfull \vbox (21.27435pt too high) has occurred while \output is active []
 
 
-[154 <./Data-Dictionary/LEO.png>]
-<Data-Dictionary/company-data-dictionary.png, id=4844, 564.1075pt x 647.41875pt
+[153 <./Data-Dictionary/LEO.png>]
+<Data-Dictionary/company-data-dictionary.png, id=4740, 564.1075pt x 647.41875pt
 >
 File: Data-Dictionary/company-data-dictionary.png Graphic file (type png)
  <use Data-Dictionary/company-data-dictionary.png>
@@ -2180,48 +2179,48 @@ Package pdftex.def Info: Data-Dictionary/company-data-dictionary.png used on in
 put line 23.
 (pdftex.def)             Requested size: 371.88211pt x 426.80374pt.
 
-<Data-Dictionary/NSPL-data-dictionary.png, id=4845, 406.51875pt x 652.4375pt>
+<Data-Dictionary/NSPL-data-dictionary.png, id=4741, 406.51875pt x 652.4375pt>
 File: Data-Dictionary/NSPL-data-dictionary.png Graphic file (type png)
 
 <use Data-Dictionary/NSPL-data-dictionary.png>
 Package pdftex.def Info: Data-Dictionary/NSPL-data-dictionary.png used on input
  line 32.
 (pdftex.def)             Requested size: 330.56538pt x 530.55215pt.
- [155 <./Data-Dictionary/company-data-dictionary.png>] [156]
+ [154 <./Data-Dictionary/company-data-dictionary.png>] [155]
 Overfull \vbox (4.94057pt too high) has occurred while \output is active []
 
 
-[157 <./Data-Dictionary/NSPL-data-dictionary.png>]) (./Appendices/AppendixJ.tex
+[156 <./Data-Dictionary/NSPL-data-dictionary.png>]) (./Appendices/AppendixJ.tex
 Appendix J.
 ------------------------------------------------------------------------------
  J Data Encoding
 ------------------------------------------------------------------------------
-[158
+[157
 
-] [159]) (./Appendices/AppendixK.tex [160]
+] [158]) (./Appendices/AppendixK.tex [159]
 Appendix K.
 ------------------------------------------------------------------------------
  K Data Transformation
 ------------------------------------------------------------------------------
-[161
+[160
 
-] [162] [163] [164] [165] [166] [167]) (./Appendices/AppendixL.tex
+] [161] [162] [163] [164] [165] [166]) (./Appendices/AppendixL.tex
 Appendix L.
 ------------------------------------------------------------------------------
  L Data Retrieval
 ------------------------------------------------------------------------------
-[168
+[167
 
-] [169] [170] [171] [172] [173] [174] [175] [176] [177] [178] [179]
-[180] [181] [182] [183] [184] [185] [186] [187] [188] [189] [190] [191]
-[192] [193] [194] [195] [196] [197]) (./Appendices/AppendixM.tex [198]
+] [168] [169] [170] [171] [172] [173] [174] [175] [176] [177] [178]
+[179] [180] [181] [182] [183] [184] [185] [186] [187] [188] [189] [190]
+[191] [192] [193] [194] [195] [196]) (./Appendices/AppendixM.tex [197]
 Appendix M.
 ------------------------------------------------------------------------------
  M Data Definition Language (DDL).
 ------------------------------------------------------------------------------
-[199
+[198
 
-] [200] [201] [202] [203] [204] [205] [206] [207] [208] [209])
+] [199] [200] [201] [202] [203] [204] [205] [206] [207] [208])
 (./Appendices/AppendixN.tex
 Appendix N.
 ------------------------------------------------------------------------------
@@ -2237,31 +2236,31 @@ Overfull \hbox (7.55458pt too wide) in paragraph at lines 40--41
 [][][][][] 
  []
 
-[210
+[209
 
-] [211] [212] [213] [214] [215]) (./Appendices/AppendixO.tex
+] [210] [211] [212] [213] [214]) (./Appendices/AppendixO.tex
 Appendix O.
 ------------------------------------------------------------------------------
  O Database Tuning
 ------------------------------------------------------------------------------
-[216
+[215
 
-] [217] [218] [219]) (./Appendices/AppendixP.tex [220]
+] [216] [217] [218]) (./Appendices/AppendixP.tex [219]
 Appendix P.
 ------------------------------------------------------------------------------
  P Data Migration
 ------------------------------------------------------------------------------
-[221
+[220
 
-] [222] [223] [224] [225] [226] [227] [228] [229] [230] [231] [232]
-[233] [234] [235] [236] [237] [238] [239]) (./Appendices/AppendixQ.tex [240]
+] [221] [222] [223] [224] [225] [226] [227] [228] [229] [230] [231]
+[232] [233] [234] [235] [236] [237] [238]) (./Appendices/AppendixQ.tex [239]
 Appendix Q.
 ------------------------------------------------------------------------------
  Q Data Retrieval Results.
 ------------------------------------------------------------------------------
-[241
+[240
 
-] [242] [243] [244] [245]) [246]
+] [241] [242] [243] [244]) [245]
 ------------------------------------------------------------------------------
  Bibliography
 ------------------------------------------------------------------------------
@@ -2270,778 +2269,37 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 383.
 (./main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 383.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 383.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 57EE77BD361FFCCE628DB911B57FBFDE;66761.
 
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: 33473C05565B472F8F254373E2AC37FB;67848
-(rerunfilecheck)             After:  6B88E44EA075F87D53BCAA04AE93CBCB;66761.
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 383.
  ) 
 Here is how much of TeX's memory you used:
- 38536 strings out of 493029
- 711054 string characters out of 6136235
- 1245724 words of memory out of 5000000
- 34274 multiletter control sequences out of 15000+600000
+ 38286 strings out of 493029
+ 707424 string characters out of 6136235
+ 1245721 words of memory out of 5000000
+ 34271 multiletter control sequences out of 15000+600000
  11993 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,13n,56p,1988b,1857s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{lstlisting.6456} has been referenced but does not
- exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.6441} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.6419} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.6399} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.6341} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.6114} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.6008} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.5733} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.5665} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.5538} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.5412} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.5389} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.5288} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.5203} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.5150} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.5110} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.4859} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.4832} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.4798} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.4761} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.4621} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.4436} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.4241} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.4119} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.4063} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.3990} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.3894} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.3857} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.3783} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.3731} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.3607} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.3507} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.3400} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.3366} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.3329} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.3286} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.3202} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.3169} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.3134} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.3092} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.3055} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.2981} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.2929} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.2820} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.2741} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.2698} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.2657} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.2615} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.2573} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.2500} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.2442} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.2419} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.2405} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.2359} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.2346} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.2212} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.2150} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.2104} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.1912} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.1747} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.1531} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.1348} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.1110} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.1090} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.1070} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.1050} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.988} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.943} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.928} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.900} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.888} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.862} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.785} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.624} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{lstlisting.393} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.2343} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.2341} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.2339} has been referenced but does n
-ot exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.783} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.781} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.779} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.777} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.775} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.773} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.771} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.769} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.766} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{table.caption.6682} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{table.caption.6680} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{table.caption.6677} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{table.caption.6674} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{table.caption.6671} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{table.caption.6668} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{table.caption.5108} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{table.caption.3891} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{table.caption.3089} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{table.caption.2209} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{table.caption.2147} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.6681} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.6679} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.6678} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.6676} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.6675} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.6673} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.6672} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.6670} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.6669} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.6667} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.6666} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.6665} has been referenced but does not exi
-st, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.6455} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.6440} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.6418} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.6398} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.6397} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6340} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6113} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.6112} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.6007} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.5732} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5731} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.5730} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5664} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5537} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5411} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.5410} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.5409} has been referenced but does not exi
-st, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.5388} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.5287} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.5202} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.5201} has been referenced but does not exi
-st, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5149} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.5148} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.5109} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.4858} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.4857} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.4856} has been referenced but does not exi
-st, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.4831} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.4797} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.4760} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.4759} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.4620} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.4435} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.4240} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.4239} has been referenced but does not exi
-st, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4118} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.4062} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3989} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3893} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.3892} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.3856} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.3782} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.3730} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.3729} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.3606} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.3506} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.3505} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3399} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3365} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3328} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3285} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.3284} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3201} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3168} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3133} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsubsection.3091} has been referenced but does no
-t exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.3090} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.3054} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.2980} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.2928} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.2927} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.2819} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.2740} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.2739} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.2738} has been referenced but does not exi
-st, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.2697} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.2656} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.2614} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.2613} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.2572} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.2499} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.2441} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.2440} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.2418} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.2417} has been referenced but does not exi
-st, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.2404} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.2358} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.2345} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.2344} has been referenced but does not exi
-st, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.2342} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.2340} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.2338} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.2337} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.2336} has been referenced but does not exi
-st, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.2211} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.2210} has been referenced but does not exi
-st, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.2208} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.2149} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.2148} has been referenced but does not exi
-st, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.2146} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.2103} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.2102} has been referenced but does not exi
-st, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.1911} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.1746} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.1745} has been referenced but does not exi
-st, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.1530} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.1347} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.1346} has been referenced but does not exi
-st, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.1109} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.1089} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.1069} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.1049} has been referenced but does not e
-xist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.1048} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.1047} has been referenced but does not exi
-st, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.987} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.942} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.941} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.899} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.861} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.857} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.856} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.784} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.782} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.780} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.778} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.776} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.774} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.772} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.770} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.768} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.767} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.765} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.623} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.392} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.391} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{section*.390} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.385} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.381} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.380} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.373} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.346} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{chapter.345} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.344} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.343} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{section.342} has been referenced but does not exist
-, replaced by a fixed one
-
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
-t8.pfb>
-Output written on main.pdf (267 pages, 2981072 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mtt8.pfb>
+Output written on main.pdf (266 pages, 2970087 bytes).
 PDF statistics:
- 11070 PDF objects out of 12825 (max. 8388607)
- 10635 compressed objects within 107 object streams
- 7185 named destinations out of 7423 (max. 500000)
- 2302 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 10755 PDF objects out of 12825 (max. 8388607)
+ 10324 compressed objects within 104 object streams
+ 6938 named destinations out of 7423 (max. 500000)
+ 2278 words of extra memory for PDF output out of 10000 (max. 10000000)
 

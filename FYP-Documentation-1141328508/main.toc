@@ -34,7 +34,7 @@
 \contentsline {section}{\numberline {2.10}Debugging tools}{25}{section.96}
 \contentsline {subsection}{\numberline {2.10.1}GDB Debugger}{26}{subsection.97}
 \contentsline {section}{\numberline {2.11}Eclipse for Parallel Application Developers Oxygen Release (4.7.0) IDE.}{26}{section.98}
-\contentsline {section}{\numberline {2.12}Chapter Summary}{27}{section.103}
+\contentsline {section}{\numberline {2.12}Chapter Summary}{28}{section.103}
 \contentsline {chapter}{\numberline {3}Project Design}{29}{chapter.104}
 \contentsline {section}{\numberline {3.1}Phase 1}{29}{section.105}
 \contentsline {subsection}{\numberline {3.1.1}Introduction}{29}{subsection.106}
@@ -103,162 +103,162 @@
 \contentsline {subsection}{\numberline {5.1.6}Milestone Deliverables}{81}{subsection.297}
 \contentsline {section}{\numberline {5.2}Planned Execution Activities}{81}{section.302}
 \contentsline {subsection}{\numberline {5.2.1}Phase 1}{81}{subsection.303}
-\contentsline {subsection}{\numberline {5.2.2}Phase 2}{83}{subsection.308}
-\contentsline {chapter}{\numberline {6}Results and Findings}{86}{chapter.316}
-\contentsline {section}{\numberline {6.1}Phase 1}{86}{section.317}
-\contentsline {section}{\numberline {6.2}Phase 2}{87}{section.322}
-\contentsline {chapter}{\numberline {7}Comparison Discussion and Recommendations}{90}{chapter.330}
-\contentsline {section}{\numberline {7.1}Problems Encountered \& Overcoming Them}{90}{section.331}
-\contentsline {subsection}{\numberline {7.1.1}Acquisition of free large datasets for data processing}{90}{subsection.332}
-\contentsline {subsection}{\numberline {7.1.2}Goclipse plugin compile error}{91}{subsection.333}
-\contentsline {subsection}{\numberline {7.1.3}Unclear and doubts on writing documentation}{91}{subsection.334}
-\contentsline {subsection}{\numberline {7.1.4}Difficulty on understand concurrent programming concepts}{92}{subsection.335}
-\contentsline {subsection}{\numberline {7.1.5}Difficulty on develop PG/pgSQL scripts on data migration.}{92}{subsection.336}
-\contentsline {subsection}{\numberline {7.1.6}Difficulty on perform database tuning.}{93}{subsection.337}
-\contentsline {subsection}{\numberline {7.1.7}Distributed Programming}{94}{subsection.341}
-\contentsline {chapter}{\numberline {8}Conclusions}{95}{chapter.342}
-\contentsline {section}{\numberline {8.1}Conclusions}{95}{section.343}
-\contentsline {section}{\numberline {8.2}Lessons Learned}{98}{section.372}
+\contentsline {subsection}{\numberline {5.2.2}Phase 2}{82}{subsection.308}
+\contentsline {chapter}{\numberline {6}Results and Findings}{85}{chapter.316}
+\contentsline {section}{\numberline {6.1}Phase 1}{85}{section.317}
+\contentsline {section}{\numberline {6.2}Phase 2}{86}{section.322}
+\contentsline {chapter}{\numberline {7}Comparison Discussion and Recommendations}{89}{chapter.330}
+\contentsline {section}{\numberline {7.1}Problems Encountered \& Overcoming Them}{89}{section.331}
+\contentsline {subsection}{\numberline {7.1.1}Acquisition of free large datasets for data processing}{89}{subsection.332}
+\contentsline {subsection}{\numberline {7.1.2}Goclipse plugin compile error}{90}{subsection.333}
+\contentsline {subsection}{\numberline {7.1.3}Unclear and doubts on writing documentation}{90}{subsection.334}
+\contentsline {subsection}{\numberline {7.1.4}Difficulty on understand concurrent programming concepts}{91}{subsection.335}
+\contentsline {subsection}{\numberline {7.1.5}Difficulty on develop PG/pgSQL scripts on data migration.}{91}{subsection.336}
+\contentsline {subsection}{\numberline {7.1.6}Difficulty on perform database tuning.}{92}{subsection.337}
+\contentsline {subsection}{\numberline {7.1.7}Distributed Programming}{93}{subsection.341}
+\contentsline {chapter}{\numberline {8}Conclusions}{94}{chapter.342}
+\contentsline {section}{\numberline {8.1}Conclusions}{94}{section.343}
+\contentsline {section}{\numberline {8.2}Lessons Learned}{97}{section.372}
 \contentsline {section}{\numberline {8.3}Recommendations for Future Work}{99}{section.379}
 \contentsline {subsection}{\numberline {8.3.1}Phase 1}{99}{subsection.380}
 \contentsline {subsection}{\numberline {8.3.2}Phase 2}{100}{subsection.384}
 \vspace {2em}
-\contentsline {chapter}{Appendices}{111}{section*.389}
-\contentsline {chapter}{\numberline {A}Infrastructure Setup and Installation}{111}{appendix.390}
-\contentsline {section}{\numberline {A.1}Linux command for Go compiler installation}{111}{section.391}
-\contentsline {section}{\numberline {A.2}Linux command for Rust compiler installation}{114}{section.622}
-\contentsline {section}{\numberline {A.3}Eclipse IDE installation}{116}{section.764}
-\contentsline {section}{\numberline {A.4}GoClipse plugin for Eclipse IDE installation}{117}{section.766}
-\contentsline {subsection}{\numberline {A.4.1}Eclipse Marketplace}{117}{subsection.767}
-\contentsline {subsection}{\numberline {A.4.2}Search Marketplace}{118}{subsection.769}
-\contentsline {subsection}{\numberline {A.4.3}Open Perspective}{118}{subsection.771}
-\contentsline {subsection}{\numberline {A.4.4}Choose Perspective}{119}{subsection.773}
-\contentsline {subsection}{\numberline {A.4.5}Set Go compiler and GOPATH}{120}{subsection.775}
-\contentsline {subsection}{\numberline {A.4.6}Set GOCODE, GURU, GODEF and GOFMT path}{121}{subsection.777}
-\contentsline {subsection}{\numberline {A.4.7}Test Go compilation in Eclipse IDE}{122}{subsection.779}
-\contentsline {section}{\numberline {A.5}RustDT plugin for Eclipse IDE installation}{123}{section.781}
-\contentsline {section}{\numberline {A.6}Linux command for PostgreSQL database installation}{124}{section.783}
-\contentsline {chapter}{\numberline {B}Data Validation}{125}{appendix.855}
-\contentsline {section}{\numberline {B.1}Introduction}{125}{section.856}
-\contentsline {section}{\numberline {B.2}Match number of commas with database columns}{126}{section.860}
-\contentsline {section}{\numberline {B.3}Identify correctness and suitability of data types}{127}{section.898}
-\contentsline {section}{\numberline {B.4}Identify row and column uniqueness in each raw data}{129}{section.940}
-\contentsline {subsection}{\numberline {B.4.1}Identify row uniqueness}{129}{subsection.941}
-\contentsline {subsection}{\numberline {B.4.2}Identify column uniqueness}{130}{subsection.986}
-\contentsline {chapter}{\numberline {C}Golang programming for import CSV into PostgreSQL database}{131}{appendix.1046}
-\contentsline {section}{\numberline {C.1}Introduction}{131}{section.1047}
-\contentsline {subsection}{\numberline {C.1.1}LEO table for data importation}{132}{subsection.1048}
-\contentsline {subsection}{\numberline {C.1.2}NSPL table for data importation}{132}{subsection.1068}
-\contentsline {subsection}{\numberline {C.1.3}LEO table for data importation}{132}{subsection.1088}
-\contentsline {subsection}{\numberline {C.1.4}Source code of Go program}{133}{subsection.1108}
-\contentsline {chapter}{\numberline {D}Sequential and concurrent programming with Golang on PostgreSQL database retrieval.}{136}{appendix.1345}
-\contentsline {section}{\numberline {D.1}Golang Sequential Program Source Code}{136}{section.1346}
-\contentsline {subsection}{\numberline {D.1.1}Golang Concurrent Program Source Code}{139}{subsection.1529}
-\contentsline {chapter}{\numberline {E}Sequential and concurrent programming with Golang on reading CSV file}{142}{appendix.1744}
-\contentsline {section}{\numberline {E.1}Golang Sequential Program Source Code}{142}{section.1745}
-\contentsline {subsection}{\numberline {E.1.1}Golang Concurrent Program Source Code}{144}{subsection.1910}
-\contentsline {chapter}{\numberline {F}Result of Sequential and concurrent programming with Golang on process CSV}{147}{appendix.2101}
-\contentsline {section}{\numberline {F.1}Linux command for Go program execution}{147}{section.2102}
-\contentsline {section}{\numberline {F.2}Result of Golang programming on process CSV}{148}{section.2145}
-\contentsline {chapter}{\numberline {G}Result of Sequential and concurrent programming with Golang on process PostgreSQL database.}{149}{appendix.2147}
-\contentsline {section}{\numberline {G.1}Linux command for Go program execution}{149}{section.2148}
-\contentsline {section}{\numberline {G.2}Result of Golang programming on process PostgreSQL database}{150}{section.2207}
-\contentsline {chapter}{\numberline {H}Result of import data from CSV file to PostgreSQL database with Golang}{151}{appendix.2209}
-\contentsline {section}{\numberline {H.1}Linux command for import data}{151}{section.2210}
-\contentsline {chapter}{\numberline {I}Data Collection}{153}{appendix.2335}
-\contentsline {section}{\numberline {I.1}Data Dictionary of Raw Datasets}{154}{section.2336}
-\contentsline {subsection}{\numberline {I.1.1}Phase 1 Longitudinal Education Outcomes (LEO) Data Dictionary}{154}{subsection.2337}
-\contentsline {subsection}{\numberline {I.1.2}Phase 1 Company Data Dictionary}{155}{subsection.2339}
-\contentsline {subsection}{\numberline {I.1.3}Phase 1 National Statistics Postcode Lookup (NSPL) Data Dictionary}{157}{subsection.2341}
-\contentsline {chapter}{\numberline {J}Data Encoding}{158}{appendix.2343}
-\contentsline {section}{\numberline {J.1}Dirty Records Found in Company Datasets.}{158}{section.2344}
-\contentsline {section}{\numberline {J.2}Data encoding with stream editor.}{159}{section.2357}
-\contentsline {section}{\numberline {J.3}View Records in Encoded Company Datasets}{160}{section.2403}
-\contentsline {chapter}{\numberline {K}Data Transformation}{161}{appendix.2416}
-\contentsline {section}{\numberline {K.1}Validate Line Counts in Original Datasets.}{161}{section.2417}
-\contentsline {section}{\numberline {K.2}PL/pgSQL's scripts for Data Transformation.}{162}{section.2439}
-\contentsline {subsection}{\numberline {K.2.1}NSPL data transformation script.}{162}{subsection.2440}
-\contentsline {subsection}{\numberline {K.2.2}Company data transformation script.}{163}{subsection.2498}
-\contentsline {subsection}{\numberline {K.2.3}LEO data transformation script.}{164}{subsection.2571}
-\contentsline {section}{\numberline {K.3}Data Transformation execution.}{165}{section.2612}
-\contentsline {subsection}{\numberline {K.3.1}NSPL data transformation execution.}{165}{subsection.2613}
-\contentsline {subsection}{\numberline {K.3.2}Company data transformation execution.}{166}{subsection.2655}
-\contentsline {subsection}{\numberline {K.3.3}LEO data transformation execution.}{167}{subsection.2696}
-\contentsline {chapter}{\numberline {L}Data Retrieval}{168}{appendix.2737}
-\contentsline {section}{\numberline {L.1}Go program for CSV file data retrieval.}{168}{section.2738}
-\contentsline {subsection}{\numberline {L.1.1}Go Sequential program source codes.}{168}{subsection.2739}
-\contentsline {subsection}{\numberline {L.1.2}Go Concurrent program source codes.}{170}{subsection.2818}
-\contentsline {section}{\numberline {L.2}Go program for PostgreSQL database retrieval with ORM.}{172}{section.2926}
-\contentsline {subsection}{\numberline {L.2.1}NSPL struct}{172}{subsection.2927}
-\contentsline {subsection}{\numberline {L.2.2}Company struct}{173}{subsection.2979}
-\contentsline {subsection}{\numberline {L.2.3}LEO struct}{174}{subsection.3053}
-\contentsline {subsection}{\numberline {L.2.4}Go sequential program source code}{175}{subsection.3089}
-\contentsline {subsubsection}{\numberline {L.2.4.1}Company data retrieval function}{175}{subsubsection.3090}
-\contentsline {subsubsection}{\numberline {L.2.4.2}NSPL data retrieval function}{176}{subsubsection.3132}
-\contentsline {subsubsection}{\numberline {L.2.4.3}LEO data retrieval function}{177}{subsubsection.3167}
-\contentsline {subsubsection}{\numberline {L.2.4.4}Main function}{178}{subsubsection.3200}
-\contentsline {subsection}{\numberline {L.2.5}Go concurrent program source code}{180}{subsection.3283}
-\contentsline {subsubsection}{\numberline {L.2.5.1}Company data retrieval function}{180}{subsubsection.3284}
-\contentsline {subsubsection}{\numberline {L.2.5.2}NSPL data retrieval function}{181}{subsubsection.3327}
-\contentsline {subsubsection}{\numberline {L.2.5.3}LEO data retrieval function}{182}{subsubsection.3364}
-\contentsline {subsubsection}{\numberline {L.2.5.4}Main function}{183}{subsubsection.3398}
-\contentsline {section}{\numberline {L.3}Rust program for CSV file data retrieval}{185}{section.3504}
-\contentsline {subsection}{\numberline {L.3.1}Rust Sequential program source codes.}{185}{subsection.3505}
-\contentsline {subsection}{\numberline {L.3.2}Rust Concurrent program source codes.}{187}{subsection.3605}
-\contentsline {section}{\numberline {L.4}Rust program for PostgreSQL database retrieval with ORM.}{189}{section.3728}
-\contentsline {subsection}{\numberline {L.4.1}NSPL struct}{189}{subsection.3729}
-\contentsline {subsection}{\numberline {L.4.2}Company struct}{190}{subsection.3781}
-\contentsline {subsection}{\numberline {L.4.3}LEO struct}{191}{subsection.3855}
-\contentsline {subsection}{\numberline {L.4.4}Rust program source code}{192}{subsection.3891}
-\contentsline {subsubsection}{\numberline {L.4.4.1}Company data retrieval function}{192}{subsubsection.3892}
-\contentsline {subsubsection}{\numberline {L.4.4.2}NSPL data retrieval function}{194}{subsubsection.3988}
-\contentsline {subsubsection}{\numberline {L.4.4.3}LEO data retrieval function}{196}{subsubsection.4061}
-\contentsline {subsubsection}{\numberline {L.4.4.4}Main function}{197}{subsubsection.4117}
-\contentsline {chapter}{\numberline {M}Data Definition Language (DDL).}{199}{appendix.4238}
-\contentsline {section}{\numberline {M.1}PL/pgSQL's DDL scripts for Postcode Normalized Table Creation.}{199}{section.4239}
-\contentsline {section}{\numberline {M.2}PL/pgSQL's DDL scripts for Company Normalized Table Creation.}{202}{section.4434}
-\contentsline {section}{\numberline {M.3}PL/pgSQL's DDL scripts for Education Normalized Table Creation.}{205}{section.4619}
-\contentsline {section}{\numberline {M.4}List of database relations}{207}{section.4758}
-\contentsline {subsection}{\numberline {M.4.1}List Relations of Postcode database}{207}{subsection.4759}
-\contentsline {subsection}{\numberline {M.4.2}List Relations of Company database}{208}{subsection.4796}
-\contentsline {subsection}{\numberline {M.4.3}List Relations of Education database}{209}{subsection.4830}
-\contentsline {chapter}{\numberline {N}Data Parser}{210}{appendix.4855}
-\contentsline {section}{\numberline {N.1}Go program based Data Cleaning Parser}{210}{section.4856}
-\contentsline {subsection}{\numberline {N.1.1}Function to clean and parse data}{210}{subsection.4857}
-\contentsline {subsection}{\numberline {N.1.2}Function to import cleaned data into PostgreSQL database.}{214}{subsection.5108}
-\contentsline {section}{\numberline {N.2}Data Consistency Verification}{215}{section.5147}
-\contentsline {subsection}{\numberline {N.2.1}Validate Company Data Completeness and Comformances}{215}{subsection.5148}
-\contentsline {chapter}{\numberline {O}Database Tuning}{216}{appendix.5200}
-\contentsline {section}{\numberline {O.1}Increase Max Concurrent Connection Limit}{216}{section.5201}
-\contentsline {section}{\numberline {O.2}Increase Shared Buffer utilized by PostgreSQL Database}{218}{section.5286}
-\contentsline {section}{\numberline {O.3}Increase maximum size of shared memory segment.}{220}{section.5387}
-\contentsline {chapter}{\numberline {P}Data Migration}{221}{appendix.5408}
-\contentsline {section}{\numberline {P.1}PL/pgSQL's DML Script for Data Migration.}{221}{section.5409}
-\contentsline {subsection}{\numberline {P.1.1}Script for Education Normalized Database Migration.}{221}{subsection.5410}
-\contentsline {subsection}{\numberline {P.1.2}Script for Postcode Normalized Database Migration.}{223}{subsection.5536}
-\contentsline {subsection}{\numberline {P.1.3}Script for Company Normalized Database Migration.}{224}{subsection.5663}
-\contentsline {section}{\numberline {P.2}Go programming language based data migration program.}{226}{section.5729}
-\contentsline {subsection}{\numberline {P.2.1}Postcode data migration program. }{226}{subsection.5730}
-\contentsline {subsubsection}{\numberline {P.2.1.1}Extract Normalized Table Key Field.}{226}{subsubsection.5731}
-\contentsline {subsubsection}{\numberline {P.2.1.2}Migrate data with Referencial Integrity.}{230}{subsubsection.6006}
-\contentsline {subsection}{\numberline {P.2.2}Company data migration program}{231}{subsection.6111}
-\contentsline {subsubsection}{\numberline {P.2.2.1}Extract Normalized Table Key Field.}{231}{subsubsection.6112}
-\contentsline {subsubsection}{\numberline {P.2.2.2}Migrate data with Referencial Integrity.}{234}{subsubsection.6339}
-\contentsline {section}{\numberline {P.3}List of database relation}{236}{section.6396}
-\contentsline {subsection}{\numberline {P.3.1}List Company Database Table Size}{236}{subsection.6397}
-\contentsline {subsection}{\numberline {P.3.2}List Postcode Database Table Size}{237}{subsection.6417}
-\contentsline {subsection}{\numberline {P.3.3}List Education Database Table Size}{237}{subsection.6439}
-\contentsline {section}{\numberline {P.4}Execution of Company Migration Program}{238}{section.6454}
-\contentsline {chapter}{\numberline {Q}Data Retrieval Results.}{241}{appendix.6664}
-\contentsline {section}{\numberline {Q.1}Result for Go program for CSV file data retrieval.}{241}{section.6665}
-\contentsline {subsection}{\numberline {Q.1.1}Go Sequential program vs Go Concurrent program.}{241}{subsection.6666}
-\contentsline {section}{\numberline {Q.2}Result for Rust program for CSV file data retrieval.}{242}{section.6668}
-\contentsline {subsection}{\numberline {Q.2.1}Rust Sequential program vs Rust Concurrent program.}{242}{subsection.6669}
-\contentsline {section}{\numberline {Q.3}Result for Go program for PostgreSQL data retrieval.}{243}{section.6671}
-\contentsline {subsection}{\numberline {Q.3.1}Go Sequential program vs Go Concurrent program.}{243}{subsection.6672}
-\contentsline {section}{\numberline {Q.4}Result for Rust program for PostgreSQL data retrieval.}{244}{section.6674}
-\contentsline {subsection}{\numberline {Q.4.1}Rust Sequential program vs Rust Concurrent program.}{244}{subsection.6675}
-\contentsline {section}{\numberline {Q.5}Comparison of concurrent programming languages performance.}{245}{section.6677}
-\contentsline {subsection}{\numberline {Q.5.1}Go CSV Concurrent program vs Rust CSV Concurrent program.}{245}{subsection.6678}
-\contentsline {subsection}{\numberline {Q.5.2}Go PostgreSQL Concurrent program vs Rust PostgreSQL Concurrent program.}{246}{subsection.6680}
+\contentsline {chapter}{Appendices}{110}{section*.389}
+\contentsline {chapter}{\numberline {A}Infrastructure Setup and Installation}{110}{appendix.390}
+\contentsline {section}{\numberline {A.1}Linux command for Go compiler installation}{110}{section.391}
+\contentsline {section}{\numberline {A.2}Linux command for Rust compiler installation}{113}{section.622}
+\contentsline {section}{\numberline {A.3}Eclipse IDE installation}{115}{section.764}
+\contentsline {section}{\numberline {A.4}GoClipse plugin for Eclipse IDE installation}{116}{section.766}
+\contentsline {subsection}{\numberline {A.4.1}Eclipse Marketplace}{116}{subsection.767}
+\contentsline {subsection}{\numberline {A.4.2}Search Marketplace}{117}{subsection.769}
+\contentsline {subsection}{\numberline {A.4.3}Open Perspective}{117}{subsection.771}
+\contentsline {subsection}{\numberline {A.4.4}Choose Perspective}{118}{subsection.773}
+\contentsline {subsection}{\numberline {A.4.5}Set Go compiler and GOPATH}{119}{subsection.775}
+\contentsline {subsection}{\numberline {A.4.6}Set GOCODE, GURU, GODEF and GOFMT path}{120}{subsection.777}
+\contentsline {subsection}{\numberline {A.4.7}Test Go compilation in Eclipse IDE}{121}{subsection.779}
+\contentsline {section}{\numberline {A.5}RustDT plugin for Eclipse IDE installation}{122}{section.781}
+\contentsline {section}{\numberline {A.6}Linux command for PostgreSQL database installation}{123}{section.783}
+\contentsline {chapter}{\numberline {B}Data Validation}{124}{appendix.855}
+\contentsline {section}{\numberline {B.1}Introduction}{124}{section.856}
+\contentsline {section}{\numberline {B.2}Match number of commas with database columns}{125}{section.860}
+\contentsline {section}{\numberline {B.3}Identify correctness and suitability of data types}{126}{section.898}
+\contentsline {section}{\numberline {B.4}Identify row and column uniqueness in each raw data}{128}{section.940}
+\contentsline {subsection}{\numberline {B.4.1}Identify row uniqueness}{128}{subsection.941}
+\contentsline {subsection}{\numberline {B.4.2}Identify column uniqueness}{129}{subsection.986}
+\contentsline {chapter}{\numberline {C}Golang programming for import CSV into PostgreSQL database}{130}{appendix.1046}
+\contentsline {section}{\numberline {C.1}Introduction}{130}{section.1047}
+\contentsline {subsection}{\numberline {C.1.1}LEO table for data importation}{131}{subsection.1048}
+\contentsline {subsection}{\numberline {C.1.2}NSPL table for data importation}{131}{subsection.1068}
+\contentsline {subsection}{\numberline {C.1.3}LEO table for data importation}{131}{subsection.1088}
+\contentsline {subsection}{\numberline {C.1.4}Source code of Go program}{132}{subsection.1108}
+\contentsline {chapter}{\numberline {D}Sequential and concurrent programming with Golang on PostgreSQL database retrieval.}{135}{appendix.1345}
+\contentsline {section}{\numberline {D.1}Golang Sequential Program Source Code}{135}{section.1346}
+\contentsline {subsection}{\numberline {D.1.1}Golang Concurrent Program Source Code}{138}{subsection.1529}
+\contentsline {chapter}{\numberline {E}Sequential and concurrent programming with Golang on reading CSV file}{141}{appendix.1744}
+\contentsline {section}{\numberline {E.1}Golang Sequential Program Source Code}{141}{section.1745}
+\contentsline {subsection}{\numberline {E.1.1}Golang Concurrent Program Source Code}{143}{subsection.1910}
+\contentsline {chapter}{\numberline {F}Result of Sequential and concurrent programming with Golang on process CSV}{146}{appendix.2101}
+\contentsline {section}{\numberline {F.1}Linux command for Go program execution}{146}{section.2102}
+\contentsline {section}{\numberline {F.2}Result of Golang programming on process CSV}{147}{section.2145}
+\contentsline {chapter}{\numberline {G}Result of Sequential and concurrent programming with Golang on process PostgreSQL database.}{148}{appendix.2147}
+\contentsline {section}{\numberline {G.1}Linux command for Go program execution}{148}{section.2148}
+\contentsline {section}{\numberline {G.2}Result of Golang programming on process PostgreSQL database}{149}{section.2207}
+\contentsline {chapter}{\numberline {H}Result of import data from CSV file to PostgreSQL database with Golang}{150}{appendix.2209}
+\contentsline {section}{\numberline {H.1}Linux command for import data}{150}{section.2210}
+\contentsline {chapter}{\numberline {I}Data Collection}{152}{appendix.2335}
+\contentsline {section}{\numberline {I.1}Data Dictionary of Raw Datasets}{153}{section.2336}
+\contentsline {subsection}{\numberline {I.1.1}Phase 1 Longitudinal Education Outcomes (LEO) Data Dictionary}{153}{subsection.2337}
+\contentsline {subsection}{\numberline {I.1.2}Phase 1 Company Data Dictionary}{154}{subsection.2339}
+\contentsline {subsection}{\numberline {I.1.3}Phase 1 National Statistics Postcode Lookup (NSPL) Data Dictionary}{156}{subsection.2341}
+\contentsline {chapter}{\numberline {J}Data Encoding}{157}{appendix.2343}
+\contentsline {section}{\numberline {J.1}Dirty Records Found in Company Datasets.}{157}{section.2344}
+\contentsline {section}{\numberline {J.2}Data encoding with stream editor.}{158}{section.2357}
+\contentsline {section}{\numberline {J.3}View Records in Encoded Company Datasets}{159}{section.2403}
+\contentsline {chapter}{\numberline {K}Data Transformation}{160}{appendix.2416}
+\contentsline {section}{\numberline {K.1}Validate Line Counts in Original Datasets.}{160}{section.2417}
+\contentsline {section}{\numberline {K.2}PL/pgSQL's scripts for Data Transformation.}{161}{section.2439}
+\contentsline {subsection}{\numberline {K.2.1}NSPL data transformation script.}{161}{subsection.2440}
+\contentsline {subsection}{\numberline {K.2.2}Company data transformation script.}{162}{subsection.2498}
+\contentsline {subsection}{\numberline {K.2.3}LEO data transformation script.}{163}{subsection.2571}
+\contentsline {section}{\numberline {K.3}Data Transformation execution.}{164}{section.2612}
+\contentsline {subsection}{\numberline {K.3.1}NSPL data transformation execution.}{164}{subsection.2613}
+\contentsline {subsection}{\numberline {K.3.2}Company data transformation execution.}{165}{subsection.2655}
+\contentsline {subsection}{\numberline {K.3.3}LEO data transformation execution.}{166}{subsection.2696}
+\contentsline {chapter}{\numberline {L}Data Retrieval}{167}{appendix.2737}
+\contentsline {section}{\numberline {L.1}Go program for CSV file data retrieval.}{167}{section.2738}
+\contentsline {subsection}{\numberline {L.1.1}Go Sequential program source codes.}{167}{subsection.2739}
+\contentsline {subsection}{\numberline {L.1.2}Go Concurrent program source codes.}{169}{subsection.2818}
+\contentsline {section}{\numberline {L.2}Go program for PostgreSQL database retrieval with ORM.}{171}{section.2926}
+\contentsline {subsection}{\numberline {L.2.1}NSPL struct}{171}{subsection.2927}
+\contentsline {subsection}{\numberline {L.2.2}Company struct}{172}{subsection.2979}
+\contentsline {subsection}{\numberline {L.2.3}LEO struct}{173}{subsection.3053}
+\contentsline {subsection}{\numberline {L.2.4}Go sequential program source code}{174}{subsection.3089}
+\contentsline {subsubsection}{\numberline {L.2.4.1}Company data retrieval function}{174}{subsubsection.3090}
+\contentsline {subsubsection}{\numberline {L.2.4.2}NSPL data retrieval function}{175}{subsubsection.3132}
+\contentsline {subsubsection}{\numberline {L.2.4.3}LEO data retrieval function}{176}{subsubsection.3167}
+\contentsline {subsubsection}{\numberline {L.2.4.4}Main function}{177}{subsubsection.3200}
+\contentsline {subsection}{\numberline {L.2.5}Go concurrent program source code}{179}{subsection.3283}
+\contentsline {subsubsection}{\numberline {L.2.5.1}Company data retrieval function}{179}{subsubsection.3284}
+\contentsline {subsubsection}{\numberline {L.2.5.2}NSPL data retrieval function}{180}{subsubsection.3327}
+\contentsline {subsubsection}{\numberline {L.2.5.3}LEO data retrieval function}{181}{subsubsection.3364}
+\contentsline {subsubsection}{\numberline {L.2.5.4}Main function}{182}{subsubsection.3398}
+\contentsline {section}{\numberline {L.3}Rust program for CSV file data retrieval}{184}{section.3504}
+\contentsline {subsection}{\numberline {L.3.1}Rust Sequential program source codes.}{184}{subsection.3505}
+\contentsline {subsection}{\numberline {L.3.2}Rust Concurrent program source codes.}{186}{subsection.3605}
+\contentsline {section}{\numberline {L.4}Rust program for PostgreSQL database retrieval with ORM.}{188}{section.3728}
+\contentsline {subsection}{\numberline {L.4.1}NSPL struct}{188}{subsection.3729}
+\contentsline {subsection}{\numberline {L.4.2}Company struct}{189}{subsection.3781}
+\contentsline {subsection}{\numberline {L.4.3}LEO struct}{190}{subsection.3855}
+\contentsline {subsection}{\numberline {L.4.4}Rust program source code}{191}{subsection.3891}
+\contentsline {subsubsection}{\numberline {L.4.4.1}Company data retrieval function}{191}{subsubsection.3892}
+\contentsline {subsubsection}{\numberline {L.4.4.2}NSPL data retrieval function}{193}{subsubsection.3988}
+\contentsline {subsubsection}{\numberline {L.4.4.3}LEO data retrieval function}{195}{subsubsection.4061}
+\contentsline {subsubsection}{\numberline {L.4.4.4}Main function}{196}{subsubsection.4117}
+\contentsline {chapter}{\numberline {M}Data Definition Language (DDL).}{198}{appendix.4238}
+\contentsline {section}{\numberline {M.1}PL/pgSQL's DDL scripts for Postcode Normalized Table Creation.}{198}{section.4239}
+\contentsline {section}{\numberline {M.2}PL/pgSQL's DDL scripts for Company Normalized Table Creation.}{201}{section.4434}
+\contentsline {section}{\numberline {M.3}PL/pgSQL's DDL scripts for Education Normalized Table Creation.}{204}{section.4619}
+\contentsline {section}{\numberline {M.4}List of database relations}{206}{section.4758}
+\contentsline {subsection}{\numberline {M.4.1}List Relations of Postcode database}{206}{subsection.4759}
+\contentsline {subsection}{\numberline {M.4.2}List Relations of Company database}{207}{subsection.4796}
+\contentsline {subsection}{\numberline {M.4.3}List Relations of Education database}{208}{subsection.4830}
+\contentsline {chapter}{\numberline {N}Data Parser}{209}{appendix.4855}
+\contentsline {section}{\numberline {N.1}Go program based Data Cleaning Parser}{209}{section.4856}
+\contentsline {subsection}{\numberline {N.1.1}Function to clean and parse data}{209}{subsection.4857}
+\contentsline {subsection}{\numberline {N.1.2}Function to import cleaned data into PostgreSQL database.}{213}{subsection.5108}
+\contentsline {section}{\numberline {N.2}Data Consistency Verification}{214}{section.5147}
+\contentsline {subsection}{\numberline {N.2.1}Validate Company Data Completeness and Comformances}{214}{subsection.5148}
+\contentsline {chapter}{\numberline {O}Database Tuning}{215}{appendix.5200}
+\contentsline {section}{\numberline {O.1}Increase Max Concurrent Connection Limit}{215}{section.5201}
+\contentsline {section}{\numberline {O.2}Increase Shared Buffer utilized by PostgreSQL Database}{217}{section.5286}
+\contentsline {section}{\numberline {O.3}Increase maximum size of shared memory segment.}{219}{section.5387}
+\contentsline {chapter}{\numberline {P}Data Migration}{220}{appendix.5408}
+\contentsline {section}{\numberline {P.1}PL/pgSQL's DML Script for Data Migration.}{220}{section.5409}
+\contentsline {subsection}{\numberline {P.1.1}Script for Education Normalized Database Migration.}{220}{subsection.5410}
+\contentsline {subsection}{\numberline {P.1.2}Script for Postcode Normalized Database Migration.}{222}{subsection.5536}
+\contentsline {subsection}{\numberline {P.1.3}Script for Company Normalized Database Migration.}{223}{subsection.5663}
+\contentsline {section}{\numberline {P.2}Go programming language based data migration program.}{225}{section.5729}
+\contentsline {subsection}{\numberline {P.2.1}Postcode data migration program. }{225}{subsection.5730}
+\contentsline {subsubsection}{\numberline {P.2.1.1}Extract Normalized Table Key Field.}{225}{subsubsection.5731}
+\contentsline {subsubsection}{\numberline {P.2.1.2}Migrate data with Referencial Integrity.}{229}{subsubsection.6006}
+\contentsline {subsection}{\numberline {P.2.2}Company data migration program}{230}{subsection.6111}
+\contentsline {subsubsection}{\numberline {P.2.2.1}Extract Normalized Table Key Field.}{230}{subsubsection.6112}
+\contentsline {subsubsection}{\numberline {P.2.2.2}Migrate data with Referencial Integrity.}{233}{subsubsection.6339}
+\contentsline {section}{\numberline {P.3}List of database relation}{235}{section.6396}
+\contentsline {subsection}{\numberline {P.3.1}List Company Database Table Size}{235}{subsection.6397}
+\contentsline {subsection}{\numberline {P.3.2}List Postcode Database Table Size}{236}{subsection.6416}
+\contentsline {subsection}{\numberline {P.3.3}List Education Database Table Size}{236}{subsection.6438}
+\contentsline {section}{\numberline {P.4}Execution of Company Migration Program}{237}{section.6453}
+\contentsline {chapter}{\numberline {Q}Data Retrieval Results.}{240}{appendix.6663}
+\contentsline {section}{\numberline {Q.1}Result for Go program for CSV file data retrieval.}{240}{section.6664}
+\contentsline {subsection}{\numberline {Q.1.1}Go Sequential program vs Go Concurrent program.}{240}{subsection.6665}
+\contentsline {section}{\numberline {Q.2}Result for Rust program for CSV file data retrieval.}{241}{section.6667}
+\contentsline {subsection}{\numberline {Q.2.1}Rust Sequential program vs Rust Concurrent program.}{241}{subsection.6668}
+\contentsline {section}{\numberline {Q.3}Result for Go program for PostgreSQL data retrieval.}{242}{section.6670}
+\contentsline {subsection}{\numberline {Q.3.1}Go Sequential program vs Go Concurrent program.}{242}{subsection.6671}
+\contentsline {section}{\numberline {Q.4}Result for Rust program for PostgreSQL data retrieval.}{243}{section.6673}
+\contentsline {subsection}{\numberline {Q.4.1}Rust Sequential program vs Rust Concurrent program.}{243}{subsection.6674}
+\contentsline {section}{\numberline {Q.5}Comparison of concurrent programming languages performance.}{244}{section.6676}
+\contentsline {subsection}{\numberline {Q.5.1}Go CSV Concurrent program vs Rust CSV Concurrent program.}{244}{subsection.6677}
+\contentsline {subsection}{\numberline {Q.5.2}Go PostgreSQL Concurrent program vs Rust PostgreSQL Concurrent program.}{245}{subsection.6679}
 \vspace {2em}

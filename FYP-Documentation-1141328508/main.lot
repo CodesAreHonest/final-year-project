@@ -13,25 +13,25 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {F.1}{\ignorespaces Result of Golang programming on process CSV raw data\relax }}{148}{table.caption.2146}
+\contentsline {table}{\numberline {F.1}{\ignorespaces Result of Golang programming on process CSV raw data\relax }}{147}{table.caption.2146}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {G.1}{\ignorespaces Result of Golang programming on PostgreSQL database\relax }}{150}{table.caption.2208}
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {table}{\numberline {G.1}{\ignorespaces Result of Golang programming on PostgreSQL database\relax }}{149}{table.caption.2208}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {L.1}{\ignorespaces Data type specification in Go programming language\relax }}{174}{table.caption.3088}
-\contentsline {table}{\numberline {L.2}{\ignorespaces Data type specification in Go programming language\relax }}{191}{table.caption.3890}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {N.1}{\ignorespaces Data repair on missing values.\relax }}{213}{table.caption.5107}
+\contentsline {table}{\numberline {L.1}{\ignorespaces Data type specification in Go programming language\relax }}{173}{table.caption.3088}
+\contentsline {table}{\numberline {L.2}{\ignorespaces Data type specification in Go programming language\relax }}{190}{table.caption.3890}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {N.1}{\ignorespaces Data repair on missing values.\relax }}{212}{table.caption.5107}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {Q.1}{\ignorespaces Phase 2 Go Sequential program vs Go Concurrent program.\relax }}{241}{table.caption.6667}
-\contentsline {table}{\numberline {Q.2}{\ignorespaces Phase 2 Rust Sequential program vs Rust Concurrent program.\relax }}{242}{table.caption.6670}
-\contentsline {table}{\numberline {Q.3}{\ignorespaces Phase 2 Go Sequential program vs Go Concurrent program.\relax }}{243}{table.caption.6673}
-\contentsline {table}{\numberline {Q.4}{\ignorespaces Phase 2 Rust Sequential program vs Rust Concurrent program.\relax }}{244}{table.caption.6676}
-\contentsline {table}{\numberline {Q.5}{\ignorespaces Phase 2 Go CSV Concurrent program vs Rust CSV Concurrent program.\relax }}{245}{table.caption.6679}
-\contentsline {table}{\numberline {Q.6}{\ignorespaces Phase 2 Go PostgreSQL Concurrent program vs Rust PostgreSQL Concurrent program.\relax }}{246}{table.caption.6681}
+\contentsline {table}{\numberline {Q.1}{\ignorespaces Phase 2 Go Sequential program vs Go Concurrent program.\relax }}{240}{table.caption.6666}
+\contentsline {table}{\numberline {Q.2}{\ignorespaces Phase 2 Rust Sequential program vs Rust Concurrent program.\relax }}{241}{table.caption.6669}
+\contentsline {table}{\numberline {Q.3}{\ignorespaces Phase 2 Go Sequential program vs Go Concurrent program.\relax }}{242}{table.caption.6672}
+\contentsline {table}{\numberline {Q.4}{\ignorespaces Phase 2 Rust Sequential program vs Rust Concurrent program.\relax }}{243}{table.caption.6675}
+\contentsline {table}{\numberline {Q.5}{\ignorespaces Phase 2 Go CSV Concurrent program vs Rust CSV Concurrent program.\relax }}{244}{table.caption.6678}
+\contentsline {table}{\numberline {Q.6}{\ignorespaces Phase 2 Go PostgreSQL Concurrent program vs Rust PostgreSQL Concurrent program.\relax }}{245}{table.caption.6680}
