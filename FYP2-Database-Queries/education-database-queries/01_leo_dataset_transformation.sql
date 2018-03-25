@@ -46,5 +46,4 @@ create table leo_rawdata (
 -- verify whether all data are inserted
 select count(*) from leo_rawdata;
 
--- list the structure of companydata table 
-\d+ leo_rawdata;
+

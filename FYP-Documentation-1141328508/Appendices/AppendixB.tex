@@ -53,7 +53,7 @@ The terminal will return an error and complains data could not insert into the t
 \linebreak
 
 \lstset{basicstyle=\ttfamily\tiny} 
-\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Identify correctness of data types}, label=commandline-02]
+\begin{lstlisting}[breaklines, frame=single, numbers=left, caption={Identify completeness in datasets.}, label=commandline-02]
 
 ========================================================================
 4. Add new column into tables and import data successfully
@@ -145,7 +145,7 @@ yinghua@yinghua:~$ psql fyp1;
 psql (9.5.8)
 Type "help" for help.
 
-fyp1#Data redundancy and duplication is an inevitable phenomenon found in million of data obtained from on-line sources. Unintentional duplication of records created from the data warehouse 's hard to be avoided. Therefore, the uniqueness of data has to be check in every row and columns for conduct data de-duplication in Phase 2.
+fyp1#
 
 ======================================================
 Step 2 - Verify duplicates row in company data tables
@@ -159,8 +159,8 @@ fyp1=# select (companydata.*)::text, count(*) from companydata group by companyd
 ======================================================
 Step 3 - Verify duplicates row in subject data tables
 ======================================================
-fyp1=# select (leo.*)::text, count(*) from leo group by leo.* having count(*) > 1; 
-  leo    | count 
+fyp1=# select (nspl.*)::text, count(*) from nspl group by nspl.* having count(*) > 1; 
+  nspl    | count 
 ---------+-------
 (0 rows)
 

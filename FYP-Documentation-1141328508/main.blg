@@ -45,45 +45,45 @@ Warning--empty journal in sliding-puzzle-game-with-go
 Warning--empty journal in rust-patina
 Warning--empty journal in separate-languages-with-categories
 Warning--empty publisher in intro-to-go
-You've used 75 entries,
+You've used 74 entries,
             2481 wiz_defined-function locations,
-            967 strings with 16851 characters,
-and the built_in function-call counts, 22667 in all, are:
-= -- 2196
-> -- 558
-< -- 81
-+ -- 313
-- -- 158
-* -- 1166
-:= -- 3664
-add.period$ -- 362
-call.type$ -- 75
-change.case$ -- 144
-chr.to.int$ -- 70
-cite$ -- 86
-duplicate$ -- 1352
-empty$ -- 2276
-format.name$ -- 242
-if$ -- 4926
+            961 strings with 16723 characters,
+and the built_in function-call counts, 22386 in all, are:
+= -- 2169
+> -- 551
+< -- 80
++ -- 309
+- -- 156
+* -- 1153
+:= -- 3616
+add.period$ -- 357
+call.type$ -- 74
+change.case$ -- 142
+chr.to.int$ -- 69
+cite$ -- 85
+duplicate$ -- 1334
+empty$ -- 2248
+format.name$ -- 239
+if$ -- 4866
 int.to.chr$ -- 6
-int.to.str$ -- 76
-missing$ -- 61
-newline$ -- 519
-num.names$ -- 222
-pop$ -- 603
+int.to.str$ -- 75
+missing$ -- 60
+newline$ -- 512
+num.names$ -- 219
+pop$ -- 596
 preamble$ -- 1
-purify$ -- 75
+purify$ -- 74
 quote$ -- 0
-skip$ -- 885
+skip$ -- 874
 stack$ -- 0
-substring$ -- 443
-swap$ -- 204
+substring$ -- 441
+swap$ -- 202
 text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 519
+type$ -- 512
 warning$ -- 10
-while$ -- 178
+while$ -- 176
 width$ -- 0
-write$ -- 1189
+write$ -- 1173
 (There were 26 warnings)

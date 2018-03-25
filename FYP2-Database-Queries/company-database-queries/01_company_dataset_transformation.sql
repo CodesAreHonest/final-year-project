@@ -1,3 +1,15 @@
+-- FILE: 00_yinghua_company_csv_db_migration.sql  
+-- DATE: Fri Jan 5 10:46 MYT 2018
+-- AUTHOR: Chai Ying Hua 
+-- VERSION: 1.0
+-- DATABASE: psql (PostgreSQL) 9.5.10
+-- DESCRIPTION:
+--
+--    1. Create companies table in company database
+--
+-- ========================================================
+
+-- drop the previous table 
 drop table company_rawdata; 
 
 -- create new table for the database 
@@ -58,3 +70,12 @@ create table company_rawdata (
 	ConfStmtNextDueDate 	varchar(20) default '3000-01-01',
 	ConfStmtLastMadeUpDate 	varchar(20) default '3000-01-01'
 );
+
+-- copy the content of csv into the table
+\copy company_rawdata from '/home/yinghua/Documents/FYP1/FYP-data/company-data/1.csv' with header csv;
+
+-- verify whether all data are inserted
+select count(*) from company_rawdata;
+
+
+

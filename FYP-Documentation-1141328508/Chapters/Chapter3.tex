@@ -27,8 +27,6 @@ The primary focus of Phase 1 is implement prototype to prove theoretical concept
 \item To ensure data set acquired from the website are free, consent and clean with Devil Advocation Test. 
 \item A program will be implemented in RUST and Go programming language as a proof-of-concept (POC) that CSV raw data is capable of importing into PostgreSQL database.
 \item A program will be implemented with Go programming language as POC that PostgreSQL database transaction can be sequential and concurrent.
-\item A program will be implemented with Go programming language as POC that reading CSV files can be sequential and concurrent.
-\item To ease the debugging and troubleshooting on concurrent and distributed development environment, LTTng tracing network and Eclipse Trace Compass will be installed to obtain a reading and outputs traces via Common Trace File (CTF) binary format. 
 
 \end{enumerate}
 
@@ -49,7 +47,7 @@ The characteristic of free, consent and licensed data sets acquired from UK gove
 		2.       & Basic Company Profile (Company)              &  55          & 3595702     & 667.5 MB		\\ \hline
 		3.       & National Statistics Postcode Lookup (NSPL)   &  35          & 1754882     & 4.2	 MB		\\ \hline
 	\end{tabulary}}
-	\caption{Result of Golang programming on process CSV raw data}
+	\caption{The detail of datasets obtained.}
 \end{table}
 
 The file format of all large dataset obtained are Comma Separated Values (CSV) format which the information is organized with one record as one line and each field is separated by comma (,). CSV format is used for data processing in this project because it is human readable and simple to be parse. It can be handle using PostgreSQL database and retrievable by programs. 
