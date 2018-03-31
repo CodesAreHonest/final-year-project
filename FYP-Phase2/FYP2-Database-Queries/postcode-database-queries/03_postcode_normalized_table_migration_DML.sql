@@ -1,4 +1,4 @@
--- File: 03_yinghua_insert_NSPL_table.sql
+-- File: 03_postcode_normalized_table_migration_DML.sql
 -- Date: Fri Jan 12 16:02 MYT 2018
 -- Author: Chai Ying Hua 
 -- Version: 1.0 

@@ -1,4 +1,4 @@
--- File: 02_yinghua_normalized_NSPL_DDL.sql
+-- File: 02_postcode_normalized_table_DDL.sql
 -- Date: Sat Dec 6 16:02 MYT 2017
 -- Author: Chai Ying Hua 
 -- Version: 1.0 
