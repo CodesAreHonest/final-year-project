@@ -86,7 +86,7 @@ FYP Phase2
 FYP Phase 2 is conducted in another semester to develop and implement the proposed idea of the final year project. The program files are stored in different repositories: 
 
 | No | Repositories       | Description | 
-| ---| ------------- |-------------|
+| ---| :-------------: |-------------|
 | 01 | [Data Encoding](https://github.com/CodesAreHonest/final-year-project/blob/master/FYP-Phase2/FYP2-appendix/data-encoding/01_company_data_encoding_runtime.txt)| The execution steps to perform text substitution line-by-line baed on the text patterns of regular expression provided in commands. Conversion of records or fields into specialized format. | 
 | 02 | [Education Data Queries](https://github.com/CodesAreHonest/education-data-queries)| The PL/pgSQL scripts are written for data transformation, normalization table creation and data migration of UK Education data with 32707 rows. | 
 | 03 | [Postcode Data Queries](https://github.com/CodesAreHonest/postcode-data-queries)| The PL/pgSQL scripts are written for data transformation, normalization table creation and data migration of UK Postcode data with 1754882 rows. | 
