@@ -32,15 +32,11 @@ Introduction
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Big datasets with total of 5865567 rows are obtained from **[UK Government Website](https://data.gov.uk)** with **data collection** and verify with **data validation** to inspect the quality and logical weakness in data contents. The specification of data are shown as follow: 
 
-| File Name        | Description | 
-| ------------- |:-------------:|
-| import-csv-psql.go        | Transform 300 rows of data in CSV from files into PostgreSQL database | 
-| sequential-psql.go        | Retrieve 300 rows of data **sequentially** from different tables contain in PostgreSQL database      | 
-| concurrent-psql.go        | Retrieve 300 rows of data **concurrently** from different tables contain in PostgreSQL database      | 
-| sequential-csv.go    | Retrieve 300 rows of data **sequentially** from different raw CSV datasets      | 
-| concurrent-csv.go    | Retrieve 300 rows of data **concurrently** from different raw CSV datasets      |
-
-
+| No  | Name of Datasets | Rows | Columns | Size | 
+| --- |----------------|:----:|:-------:|:-------:|
+| 01  | Education        | 21   | 32707   | 4.2 MB|
+| 02  | Company          | 55   | 3595702 | 1.8 GB |
+| 03  | Postcode         | 35   | 1754882 | 667.5 MB|
 
 The raw datasets in CSV format will be backup and import into PostgreSQL database with **data transformation**. The defects discovered such as inconsistency, incorrect and duplication in large datasets are eliminated with **data encoding**, **data normalization** and **data cleaning**. Ultimately, the unnormalized and unorganized data will be migrated into normalized table as new storage with **data migration** to establish excellent relational database management system freed from anomalies.  
 
@@ -89,9 +85,18 @@ FYP Phase2
 ---------
 FYP Phase 2 is conducted in another semester to develop and implement the proposed idea of the final year project. The program files are stored in different repositories: 
 
-| Repositories       | Description | 
-| ------------- |:-------------:|
-
+| No | Repositories       | Description | 
+| ---| :-------------: |:-------------:|
+| 01 | [Data Encoding](https://github.com/CodesAreHonest/final-year-project/blob/master/FYP-Phase2/FYP2-appendix/data-encoding/01_company_data_encoding_runtime.txt)| The execution steps to perform text substitution line-by-line baed on the text patterns of regular expression provided in commands. Conversion of records or fields into specialized format. | 
+| 02 | [Education Data Queries](https://github.com/CodesAreHonest/education-data-queries)| The PL/pgSQL scripts are written for data transformation, normalization table creation and data migration of UK Education data with 32707 rows. | 
+| 03 | [Postcode Data Queries](https://github.com/CodesAreHonest/postcode-data-queries)| The PL/pgSQL scripts are written for data transformation, normalization table creation and data migration of UK Postcode data with 1754882 rows. | 
+| 04 | [Company Data Queries](https://github.com/CodesAreHonest/company-data-queries)| The PL/pgSQL scripts are written for data transformation, normalization table creation and data migration of UK Postcode data with 3595702 rows. | 
+| 05 | [Go-Read-PSQL](https://github.com/CodesAreHonest/go-read-psql)| The Go program retrieve 5865567 of data with average of 36 columns from three different tables in PostgreSQL database with sequential and concurrent execution. | 
+| 06 | [Go-Read-CSV](https://github.com/CodesAreHonest/go-read-csv)| The Go program retrieve 5865567 of data with average of 36 columns from three different raw CSV files with sequential and concurrent execution. | 
+| 07 | [Rs-Read-PSQL](https://github.com/CodesAreHonest/rs-read-psql)| The Rust program retrieve 5865567 of data with average of 36 columns from three different tables in PostgreSQL database with sequential and concurrent execution. | 
+| 08 | [Rs-Read-CSV](https://github.com/CodesAreHonest/rs-read-csv) | The Rust program retrieve 5865567 of data with average of 36 columns from three different raw CSV files with sequential and concurrent execution. | 
+| 09 | [Go-Migrate-Postcode](https://github.com/CodesAreHonest/go-migrate-postcode.git) | The Go program migrate 1754882 rows from unnormalized postcode table to normalized table in PostgreSQL database. | 
+| 10 | [Go-Migrate-Postcode](https://github.com/CodesAreHonest/go-migrate-postcode.git) | The Go program migrate 3595702 rows from unnormalized company table to normalized table in PostgreSQL database. | 
 
 ***
 
