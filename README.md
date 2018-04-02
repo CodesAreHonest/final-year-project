@@ -13,10 +13,10 @@ Table Of Contents
   * [Introduction](#introduction)
   * [Getting Started](#getting-started) 
     * [Documentation](#documentation)
-    * [File Description](#file-description)
-  * [Highlight](#highlight)
-    * [Software Resources](#software-resources)
-    * [Performance Comparison Outcomes](performance-comparison-outcomes)
+  * [List of Programs](#list-of-programs)
+    * [FYP Phase 1](#FYP-Phase-1)
+    * [FYP Phase 2](#FYP-Phase-2)
+  * [Software Resources](#software-resources)
   * [About](#about) 
     * [Contributor](#contributor)
     * [Status](#status)
@@ -26,13 +26,15 @@ Table Of Contents
 Introduction
 ============
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The project focus on implementation and utilization of Go and Rust programming language on data processing cycle with PostgreSQL database as data storage. These languages’ paradigm, characteristic and focus are used to build program in data preparation, data retrieval, data processing and data storage.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The project focus on implementation and utilization of Go and Rust programming language on data processing cycle with PostgreSQL database as data storage. These languages’ paradigm, characteristic and focus are used to build program in data preparation, data retrieval, data processing and data storage.  The data process cycle is shown as below: 
+
+<p align="center"><img src="FYP-Phase2/FYP2-Documentation-1141328508/FYP2/Chapter3/FYP2-data-process-cycle-flowchart.png"/></p>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Big datasets are obtained from **[UK Government Website](https://data.gov.uk)** with **data collection** and verify with **data validation** to inspect the quality and logical weakness in data contents. The raw datasets in CSV format will be backup and import into PostgreSQL database with **data transformation**. The defects discovered such as inconsistency, incorrect and duplication in large datasets are eliminated with **data encoding**, **data normalization** and **data cleaning**. Ultimately, the unnormalized and unorganized data will be migrated into normalized table as new storage with **data migration** to establish excellent relational database management system freed from anomalies.  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Go and Rust programs are developed to support data processing activities such as **data transformation**, **data cleaning** and **data migration**. The processing execution’s performance of program developed from different concurrent programming language and programming style will be compared and discussed in detail.  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PL/pgSQL scripts will be developed to create database entity’s data structure, objects, schemas and perform data migration within PostgreSQL database. The lightweight scripts will execute multiple written query simultaneously to perform database creation, manipulation and control eﬃciently.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PL/pgSQL scripts will be developed to create database entity’s data structure, objects, schemas and perform **data migration** within PostgreSQL database. The lightweight scripts will execute multiple written query simultaneously to perform database creation, manipulation and control eﬃciently.  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The project successfully prove concurrent programming has better performance and throughput on data processing compare to sequential programming. Data duplication, data inconsistencies and data incompleteness had successfully eliminated to establish high data quality.
 
@@ -54,25 +56,34 @@ The documentation contains:-
 
 Download the document **[HERE](https://github.com/CodesAreHonest/final-year-project/blob/master/FYP-Phase2/FYP2-Documentation-1141328508/main.pdf)**
 
-File Description
------------------  
-FYP Phase 1 is conducted to demonstrate the proof-of-concept (POC) and prototype of the projects. The program files are stored in FYP-Phase1/src/FYP1 directory and tabulated in table below: 
+*** 
+
+List of programs
+================
+
+FYP Phase1
+----------
+FYP Phase 1 is conducted in one semester to demonstrate the proof-of-concept (POC) and prototype of the projects. The program files are stored in FYP-Phase1/src/FYP1 directory and tabulated in table below: 
 
 | File Name        | Description | 
 | ------------- |:-------------:|
-| import-csv-psql.go        | This program import 300 rows of data from different raw CSV datasets into PostgreSQL database | 
-| sequential-psql.go        | This program read 300 rows of data **sequentially** from different tables contain in PostgreSQL database      | 
-| concurrent-psql.go        | This program read 300 rows of data **concurrently** from different tables contain in PostgreSQL database      | 
-| sequential-csv.go    | This program read 300 rows of data **sequentially** from different raw CSV datasets contain in same node      | 
-| concurrent-csv.go    | This program read 300 rows of data **concurrently** from different raw CSV datasets contain in same node      | 
+| import-csv-psql.go        | Transform 300 rows of data in CSV from files into PostgreSQL database | 
+| sequential-psql.go        | Retrieve 300 rows of data **sequentially** from different tables contain in PostgreSQL database      | 
+| concurrent-psql.go        | Retrieve 300 rows of data **concurrently** from different tables contain in PostgreSQL database      | 
+| sequential-csv.go    | Retrieve 300 rows of data **sequentially** from different raw CSV datasets      | 
+| concurrent-csv.go    | Retrieve 300 rows of data **concurrently** from different raw CSV datasets      |
 
+FYP Phase2
+---------
+FYP Phase 2 is conducted in another semester to develop and implement the proposed idea of the final year project. The program files are stored in different repositories: 
 
-*** 
+| Repositories       | Description | 
+| ------------- |:-------------:|
 
-Highlight
-=========
+***
+
 Software Resources
-------------------
+==================
 1. Linux Ubuntu 16.04.3 LTS 64-bit.  
 2. Golang language compiler 1.8.3.  
 3. Rust language compiler 1.20.0.  
@@ -81,16 +92,17 @@ Software Resources
 6. TeXstudio 2.10.8.  
 7. Visual Paradigm 14.1 free edition for non-commercial use.  
 
-Data Processing Cycle
----------------------
-<p align="center"><img src="FYP-Phase-2/FYP2-Documentation-1141328508/FYP2/Chapter3/FYP2-data-process-cycle-flowchart.png"></p>
+*** 
 
-Program Description
--------------------
+About
+=====
 
+Contributor
+-----------
+- **Chai Ying Hua** 
 
 Status
-------
+-------
 This project is still developing and maintaining as final year project and extend to Phase 2 in Multimedia University. 
 
 
