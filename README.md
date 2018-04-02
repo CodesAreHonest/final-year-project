@@ -30,7 +30,19 @@ Introduction
 
 <p align="center"><img src="FYP-Phase2/FYP2-Documentation-1141328508/FYP2/Chapter3/FYP2-data-process-cycle-flowchart.png"/></p>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Big datasets with total of 5865567 rows are obtained from **[UK Government Website](https://data.gov.uk)** with **data collection** and verify with **data validation** to inspect the quality and logical weakness in data contents. The raw datasets in CSV format will be backup and import into PostgreSQL database with **data transformation**. The defects discovered such as inconsistency, incorrect and duplication in large datasets are eliminated with **data encoding**, **data normalization** and **data cleaning**. Ultimately, the unnormalized and unorganized data will be migrated into normalized table as new storage with **data migration** to establish excellent relational database management system freed from anomalies.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Big datasets with total of 5865567 rows are obtained from **[UK Government Website](https://data.gov.uk)** with **data collection** and verify with **data validation** to inspect the quality and logical weakness in data contents. The specification of data are shown as follow: 
+
+| File Name        | Description | 
+| ------------- |:-------------:|
+| import-csv-psql.go        | Transform 300 rows of data in CSV from files into PostgreSQL database | 
+| sequential-psql.go        | Retrieve 300 rows of data **sequentially** from different tables contain in PostgreSQL database      | 
+| concurrent-psql.go        | Retrieve 300 rows of data **concurrently** from different tables contain in PostgreSQL database      | 
+| sequential-csv.go    | Retrieve 300 rows of data **sequentially** from different raw CSV datasets      | 
+| concurrent-csv.go    | Retrieve 300 rows of data **concurrently** from different raw CSV datasets      |
+
+
+
+The raw datasets in CSV format will be backup and import into PostgreSQL database with **data transformation**. The defects discovered such as inconsistency, incorrect and duplication in large datasets are eliminated with **data encoding**, **data normalization** and **data cleaning**. Ultimately, the unnormalized and unorganized data will be migrated into normalized table as new storage with **data migration** to establish excellent relational database management system freed from anomalies.  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Go and Rust programs are developed to support data processing activities such as **data transformation**, **data cleaning** and **data migration**. The processing execution’s performance of program developed from different concurrent programming language and programming style will be compared and discussed in detail.  
 
@@ -80,6 +92,7 @@ FYP Phase 2 is conducted in another semester to develop and implement the propos
 | Repositories       | Description | 
 | ------------- |:-------------:|
 
+
 ***
 
 Software Resources
@@ -103,7 +116,7 @@ Contributor
 
 Status
 -------
-This project is still developing and maintaining as final year project and extend to Phase 2 in Multimedia University. 
+This project is submitted as Final Year Project to Multimedia University. 
 
 
 
