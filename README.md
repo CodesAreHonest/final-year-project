@@ -95,8 +95,8 @@ FYP Phase 2 is conducted in another semester to develop and implement the propos
 | 06 | [Go-Read-CSV](https://github.com/CodesAreHonest/go-read-csv)| The Go program retrieve 5865567 of data with average of 36 columns from three different raw CSV files with sequential and concurrent execution. | 
 | 07 | [Rs-Read-PSQL](https://github.com/CodesAreHonest/rs-read-psql)| The Rust program retrieve 5865567 of data with average of 36 columns from three different tables in PostgreSQL database with sequential and concurrent execution. | 
 | 08 | [Rs-Read-CSV](https://github.com/CodesAreHonest/rs-read-csv) | The Rust program retrieve 5865567 of data with average of 36 columns from three different raw CSV files with sequential and concurrent execution. | 
-| 09 | [Go-Migrate-Postcode](https://github.com/CodesAreHonest/go-migrate-postcode.git) | The Go program migrate 1754882 rows from unnormalized postcode table to normalized table in PostgreSQL database. | 
-| 10 | [Go-Migrate-Postcode](https://github.com/CodesAreHonest/go-migrate-postcode.git) | The Go program migrate 3595702 rows from unnormalized company table to normalized table in PostgreSQL database. | 
+| 09 | [Go-Migrate-Postcode](https://github.com/CodesAreHonest/go-migrate-postcode) | The Go program migrate 1754882 rows from unnormalized postcode table to normalized table in PostgreSQL database. | 
+| 10 | [Go-Migrate-Company](https://github.com/CodesAreHonest/go-migrate-company) | The Go program migrate 3595702 rows from unnormalized company table to normalized table in PostgreSQL database. | 
 
 ***
 
