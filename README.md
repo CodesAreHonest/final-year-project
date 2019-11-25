@@ -8,14 +8,14 @@ Go and Rust Benchmark
 Table Of Contents 
 =================
 
-  * [Final Year Project](#final-year-project)
+  * [Go and Rust Project](#go-and-rust-benchmark)
   * [Table Of Contents](#table-of-contents)
   * [Introduction](#introduction)
   * [Getting Started](#getting-started) 
     * [Documentation](#documentation)
   * [List of Programs](#list-of-programs)
-    * [FYP Phase 1](#FYP-Phase-1)
-    * [FYP Phase 2](#FYP-Phase-2)
+    * [Phase 1](#Phase-1)
+    * [Phase 2](#Phase-2)
   * [Software Resources](#software-resources)
   * [About](#about) 
     * [Contributor](#contributor)
@@ -69,7 +69,7 @@ Download the document **[HERE](https://github.com/CodesAreHonest/final-year-proj
 List of programs
 ================
 
-FYP Phase1
+Phase 1
 ----------
 FYP Phase 1 is conducted in one semester to demonstrate the proof-of-concept (POC) and prototype of the projects. The program files are stored in FYP-Phase1/src/FYP1 directory and tabulated in table below: 
 
@@ -81,7 +81,7 @@ FYP Phase 1 is conducted in one semester to demonstrate the proof-of-concept (PO
 | sequential-csv.go    | Retrieve 300 rows of data **sequentially** from different raw CSV datasets      | 
 | concurrent-csv.go    | Retrieve 300 rows of data **concurrently** from different raw CSV datasets      |
 
-FYP Phase2
+Phase 2
 ---------
 FYP Phase 2 is conducted in another semester to develop and implement the proposed idea of the final year project. The program files are stored in different repositories: 
 
