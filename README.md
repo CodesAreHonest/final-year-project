@@ -71,7 +71,7 @@ List of programs
 
 Phase 1
 ----------
-FYP Phase 1 is conducted in one semester to demonstrate the proof-of-concept (POC) and prototype of the projects. The program files are stored in FYP-Phase1/src/FYP1 directory and tabulated in table below: 
+Phase 1 is conducted in one semester to demonstrate the proof-of-concept (POC) and prototype of the projects. The program files are stored in FYP-Phase1/src/FYP1 directory and tabulated in table below: 
 
 | File Name        | Description | 
 | ------------- |:-------------:|
@@ -83,7 +83,7 @@ FYP Phase 1 is conducted in one semester to demonstrate the proof-of-concept (PO
 
 Phase 2
 ---------
-FYP Phase 2 is conducted in another semester to develop and implement the proposed idea of the final year project. The program files are stored in different repositories: 
+Phase 2 is conducted in another semester to develop and implement the proposed idea of the final year project. The program files are stored in different repositories: 
 
 | No | Repositories       | Description | 
 | ---| :-------------: |-------------|
