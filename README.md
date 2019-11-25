@@ -1,5 +1,5 @@
-Final Year Project
-==================
+Go and Rust Benchmark
+=====================
 
 > The project focus on utilize **concurrent programming concepts** of **Go and Rust programming language** on activities in Data Processing Cycles with **PostgreSQL database** as data storage. 
 
